@@ -11,28 +11,34 @@ import java.util.Date;
  *
  */
 public class Vente implements Serializable {
-	private int noVente;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer noVente;
 	private String nomArticle;
 	private String description;
 	private Date dateFinEncheres;
-	private int miseAPrix;
-	private int prixVente;
+	private Integer miseAPrix;
 	
+	
+	private Categorie categorie;
 	private Utilisateur vendeur;
-	private Utilisateur acheteur;
+	private Retrait retrait;
 	
-	public Vente(int noVente, String nomArticle, String description, Date dateFinEncheres, int miseAPrix,
-			int prixVente) {
-		this(nomArticle, description, dateFinEncheres, miseAPrix, prixVente);
+	
+	public Vente(Integer noVente, String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait) {
+		this(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait);
 		this.noVente = noVente;
 	}
 
-	public Vente(String nomArticle, String description, Date dateFinEncheres, int miseAPrix, int prixVente) {
+	public Vente(String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait) {
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateFinEncheres = dateFinEncheres;
 		this.miseAPrix = miseAPrix;
-		this.prixVente = prixVente;
+		this.vendeur = vendeur;
+		this.retrait = retrait;
 	}
 	
 	public Vente() {
@@ -50,7 +56,7 @@ public class Vente implements Serializable {
 	/**
 	 * @param noVente the noVente to set
 	 */
-	public void setNoVente(int noVente) {
+	public void setNoVente(Integer noVente) {
 		this.noVente = noVente;
 	}
 
@@ -106,22 +112,22 @@ public class Vente implements Serializable {
 	/**
 	 * @param miseAPrix the miseAPrix to set
 	 */
-	public void setMiseAPrix(int miseAPrix) {
+	public void setMiseAPrix(Integer miseAPrix) {
 		this.miseAPrix = miseAPrix;
 	}
 
 	/**
-	 * @return the prixVente
+	 * @return the categorie
 	 */
-	public int getPrixVente() {
-		return prixVente;
+	public Categorie getCategorie() {
+		return categorie;
 	}
 
 	/**
-	 * @param prixVente the prixVente to set
+	 * @param categorie the categorie to set
 	 */
-	public void setPrixVente(int prixVente) {
-		this.prixVente = prixVente;
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
 	}
 
 	/**
@@ -139,27 +145,24 @@ public class Vente implements Serializable {
 	}
 
 	/**
-	 * @return the acheteur
+	 * @return the retrait
 	 */
-	public Utilisateur getAcheteur() {
-		return acheteur;
+	public Retrait getRetrait() {
+		return retrait;
 	}
 
 	/**
-	 * @param acheteur the acheteur to set
+	 * @param retrait the retrait to set
 	 */
-	public void setAcheteur(Utilisateur acheteur) {
-		this.acheteur = acheteur;
+	public void setRetrait(Retrait retrait) {
+		this.retrait = retrait;
 	}
 
 	@Override
 	public String toString() {
 		return "Vente [noVente=" + noVente + ", nomArticle=" + nomArticle + ", description=" + description
-				+ ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente
+				+ ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix
 				+ "]";
 	}
-	
-	
-	
 	
 }
