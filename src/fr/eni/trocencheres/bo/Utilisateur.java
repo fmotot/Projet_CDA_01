@@ -5,14 +5,14 @@ import java.io.Serializable;
 public class Utilisateur implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private int noUtilisateur, telephone, codePostal, credit;
+	private Integer noUtilisateur, telephone, codePostal, credit;
 	private String pseudo, nom, prenom, email, rue, ville, motDePasse;
 	private boolean administrateur;
 
 	public Utilisateur() {
 	}
 
-	public Utilisateur(int noUtilisateur, int telephone, int codePostal, int credit, String pseudo, String nom,
+	public Utilisateur(Integer noUtilisateur, Integer telephone, Integer codePostal, Integer credit, String pseudo, String nom,
 			String prenom, String email, String rue, String ville, String motDePasse, boolean administrateur) {
 		this.noUtilisateur = noUtilisateur;
 		this.telephone = telephone;
@@ -28,7 +28,7 @@ public class Utilisateur implements Serializable {
 		this.administrateur = administrateur;
 	}
 
-	public Utilisateur(int telephone, int codePostal, int credit, String pseudo, String nom, String prenom,
+	public Utilisateur(Integer telephone, Integer codePostal, Integer credit, String pseudo, String nom, String prenom,
 			String email, String rue, String ville, String motDePasse, boolean administrateur) {
 		super();
 		this.telephone = telephone;
@@ -47,56 +47,56 @@ public class Utilisateur implements Serializable {
 	/**
 	 * @return the noUtilisateur
 	 */
-	public int getNoUtilisateur() {
+	public Integer getNoUtilisateur() {
 		return noUtilisateur;
 	}
 
 	/**
 	 * @param noUtilisateur the noUtilisateur to set
 	 */
-	public void setNoUtilisateur(int noUtilisateur) {
+	public void setNoUtilisateur(Integer noUtilisateur) {
 		this.noUtilisateur = noUtilisateur;
 	}
 
 	/**
 	 * @return the telephone
 	 */
-	public int getTelephone() {
+	public Integer getTelephone() {
 		return telephone;
 	}
 
 	/**
 	 * @param telephone the telephone to set
 	 */
-	public void setTelephone(int telephone) {
+	public void setTelephone(Integer telephone) {
 		this.telephone = telephone;
 	}
 
 	/**
 	 * @return the codePostal
 	 */
-	public int getCodePostal() {
+	public Integer getCodePostal() {
 		return codePostal;
 	}
 
 	/**
 	 * @param codePostal the codePostal to set
 	 */
-	public void setCodePostal(int codePostal) {
+	public void setCodePostal(Integer codePostal) {
 		this.codePostal = codePostal;
 	}
 
 	/**
 	 * @return the credit
 	 */
-	public int getCredit() {
+	public Integer getCredit() {
 		return credit;
 	}
 
 	/**
 	 * @param credit the credit to set
 	 */
-	public void setCredit(int credit) {
+	public void setCredit(Integer credit) {
 		this.credit = credit;
 	}
 
