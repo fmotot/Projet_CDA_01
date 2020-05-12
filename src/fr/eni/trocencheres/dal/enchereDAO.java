@@ -6,7 +6,7 @@ import fr.eni.trocencheres.bo.Enchere;
 import fr.eni.trocencheres.bo.Utilisateur;
 
 
-public interface enchereDAO extends DAO<Enchere> {
+public interface EnchereDAO extends DAO<Enchere> {
 	
 	public List<Enchere> getAllEncheresbyUtilisateur(Utilisateur utilisateur);
 	
