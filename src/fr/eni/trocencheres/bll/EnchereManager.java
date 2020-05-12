@@ -17,7 +17,7 @@ import fr.eni.trocencheres.bo.Vente;
  */
 public interface EnchereManager {
 	/**
-	 * ID 2001
+	 * ID 2001	Vendre un article
 	 * Crée une vente 
 	 * @param vente
 	 * @return
@@ -25,11 +25,19 @@ public interface EnchereManager {
 	 */
 	Vente creerVente(Vente vente) throws BusinessException;
 	
-	
+	/**
+	 * ID 2002	Annuler une vente
+	 * Annule la vente donner en paramètre
+	 * @param vente
+	 * @return		la même vente pour afficher une confirmation avec son nom ?
+	 * @throws BusinessException
+	 */
+	Vente annulerVente(Vente vente) throws BusinessException;
 	
 	
 	/**
-	 * ID 2003
+	 * ID 2003	Lister les ventes
+	 * ID 2009	Pagination
 	 * Effectue une recherche avec les critères suivants
 	 * @param isMesVentes		true si la recherche comprends mes ventes
 	 * @param isMesEncheres		true si la recherche comprends mes enchères
@@ -43,7 +51,7 @@ public interface EnchereManager {
 	List<Vente> listerVente(boolean isMesVentes, boolean isMesEncheres, boolean isMesAcquisitions, boolean isAutresEncheres, String recherche, Categorie categorie) throws BusinessException;
 	
 	/**
-	 * ID 2004
+	 * ID 2004	Faire une enchère
 	 * encherie sur une vente
 	 * @param acheteur		l'utilisateur enchérissant
 	 * @param vente			la vente sur laquelle l'utilisateur enchérit
@@ -53,8 +61,28 @@ public interface EnchereManager {
 	 */
 	Enchere encherir(Utilisateur acheteur, Vente vente, Integer mise) throws BusinessException;
 	
+	
 	/**
-	 * ID 2008
+	 * ID 2005	Remporter une vente
+	 * Ne concerne pas l'IHM
+	 */
+	
+	/**
+	 * ID 2006	Annuler une enchère
+	 * Annule l'enchere passée en paramètre
+	 * @param enchere
+	 * @return
+	 * @throws BusinessException
+	 */
+	Enchere annulerEnchere(Enchere enchere) throws BusinessException;
+	
+	/**
+	 * ID 2007	Photo pour la vente
+	 * doit féjà être pris en compte dans la création de la vente
+	 */
+	
+	/**
+	 * ID 2008	Afficher le détail d’une vente
 	 * Affiche les détails de la vente en paramètre
 	 * @param vente
 	 * @return
