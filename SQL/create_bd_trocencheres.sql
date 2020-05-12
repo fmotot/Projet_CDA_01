@@ -49,7 +49,12 @@ CREATE TABLE UTILISATEURS (
     credit           INTEGER NOT NULL,
     isActif			 bit NOT NULL DEFAULT 1,
     administrateur   bit NOT NULL 
+  
 );
+
+CREATE UNIQUE INDEX 'UX_pseudo' ON UTILISATEURS('pseudo');
+CREATE UNIQUE INDEX 'UX_email' ON UTILISATEURS('email');
+CREATE INDEX 'IX_telephone' ON UTILISATEURS('telephone');
 
 
 CREATE TABLE VENTES (
