@@ -7,6 +7,7 @@ public class Retrait implements Serializable {
 
 	String rue, ville;
 	Integer codePostal;
+	
 	public Retrait(String rue, String ville, Integer codePostal) {
 		this.rue = rue;
 		this.ville = ville;
