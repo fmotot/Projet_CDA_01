@@ -5,18 +5,19 @@ import java.io.Serializable;
 public class Categorie implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	int noCategorie;
+	Integer noCategorie;
 	String libelle;
 	
 	public Categorie() {
 	}
 	
-	public Categorie(int noCategorie, String libelle) {
-		this.noCategorie = noCategorie;
-		this.libelle = libelle;
-	}
 	public Categorie(String libelle) {
 		this.libelle = libelle;
+	}
+	
+	public Categorie(Integer noCategorie, String libelle) {
+		this(libelle);
+		this.noCategorie = noCategorie;
 	}
 
 	/**
@@ -29,7 +30,7 @@ public class Categorie implements Serializable {
 	/**
 	 * @param noCategorie the noCategorie to set
 	 */
-	public void setNoCategorie(int noCategorie) {
+	public void setNoCategorie(Integer noCategorie) {
 		this.noCategorie = noCategorie;
 	}
 

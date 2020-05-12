@@ -20,19 +20,17 @@ public class Vente implements Serializable {
 	private String description;
 	private Date dateFinEncheres;
 	private Integer miseAPrix;
+	private boolean retraitArticle;
 	
 	
 	private Categorie categorie;
 	private Utilisateur vendeur;
 	private Retrait retrait;
 	
-	
-	public Vente(Integer noVente, String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait) {
-		this(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait);
-		this.noVente = noVente;
+	public Vente() {
 	}
-
-	public Vente(String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait) {
+	
+	public Vente(String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle) {
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateFinEncheres = dateFinEncheres;
@@ -41,11 +39,11 @@ public class Vente implements Serializable {
 		this.retrait = retrait;
 	}
 	
-	public Vente() {
+	public Vente(Integer noVente, String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle) {
+		this(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, retraitArticle);
+		this.noVente = noVente;
 	}
 
-	
-	
 	/**
 	 * @return the noVente
 	 */
@@ -156,6 +154,20 @@ public class Vente implements Serializable {
 	 */
 	public void setRetrait(Retrait retrait) {
 		this.retrait = retrait;
+	}
+
+	/**
+	 * @return the retraitArticle
+	 */
+	public boolean isRetraitArticle() {
+		return retraitArticle;
+	}
+
+	/**
+	 * @param retraitArticle the retraitArticle to set
+	 */
+	public void setRetraitArticle(boolean retraitArticle) {
+		this.retraitArticle = retraitArticle;
 	}
 
 	@Override

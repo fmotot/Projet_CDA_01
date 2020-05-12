@@ -14,6 +14,25 @@ public class Enchere implements Serializable{
 	private Integer mise;
 	
 	/**
+	 * 
+	 */
+	public Enchere() {
+	}
+	
+	/**
+	 * La date est initialisé à l'instanciation (Dixit Jean)
+	 * @param acheteur
+	 * @param vente
+	 * @param mise
+	 */
+	public Enchere(Utilisateur acheteur, Vente vente, int mise) {
+		this.dateEnchere = new Date();
+		this.acheteur = acheteur;
+		this.vente = vente;
+		this.mise = mise;
+	}
+	
+	/**
 	 * @param dateEnchere
 	 * @param acheteur
 	 * @param vente
@@ -26,11 +45,9 @@ public class Enchere implements Serializable{
 		this.mise = mise;
 	}
 	
-	/**
-	 * 
-	 */
-	public Enchere() {
-	}
+	
+	
+	
 
 	/**
 	 * @return the dateEnchere
