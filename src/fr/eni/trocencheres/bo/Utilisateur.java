@@ -18,13 +18,14 @@ public class Utilisateur implements Serializable {
 	private String ville;
 	private String motDePasse;
 	
+	private boolean actif;
 	private boolean administrateur;
 
 	public Utilisateur() {
 	}
 
 	public Utilisateur(Integer telephone, String codePostal, Integer credit, String pseudo, String nom, String prenom,
-			String email, String rue, String ville, String motDePasse, boolean administrateur) {
+			String email, String rue, String ville, String motDePasse, boolean administrateur, boolean actif) {
 		this.telephone = telephone;
 		this.codePostal = codePostal;
 		this.credit = credit;
@@ -36,11 +37,12 @@ public class Utilisateur implements Serializable {
 		this.ville = ville;
 		this.motDePasse = motDePasse;
 		this.administrateur = administrateur;
+		this.actif = actif;
 	}
 
 	public Utilisateur(Integer noUtilisateur, Integer telephone, String codePostal, Integer credit, String pseudo, String nom,
-			String prenom, String email, String rue, String ville, String motDePasse, boolean administrateur) {
-		this(telephone, codePostal, credit, pseudo, nom, prenom, email, rue, ville, motDePasse, administrateur);
+			String prenom, String email, String rue, String ville, String motDePasse, boolean administrateur, boolean actif) {
+		this(telephone, codePostal, credit, pseudo, nom, prenom, email, rue, ville, motDePasse, administrateur, actif);
 		this.noUtilisateur = noUtilisateur;
 	}
 	
@@ -210,6 +212,20 @@ public class Utilisateur implements Serializable {
 	 */
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
+	}
+
+	/**
+	 * @return the actif
+	 */
+	public boolean isActif() {
+		return actif;
+	}
+
+	/**
+	 * @param actif the actif to set
+	 */
+	public void setActif(boolean actif) {
+		this.actif = actif;
 	}
 
 	@Override
