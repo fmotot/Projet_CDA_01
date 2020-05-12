@@ -16,21 +16,87 @@
 	crossorigin="anonymous">
 	
 <link rel="stylesheet" type="text/css" href="./css/style.css">
+<link rel="stylesheet" type="text/css" href="./css/creation.css">
 
 <title>TrocEncheres - Création de compte</title>
 </head>
 <body>
 
-	<h1 class="text-center mt-3">TrocEncheres.org</h1>
+	<h1>TrocEncheres.org</h1>
 
 	<div class="container">
 		
-		<div class="center-content justify-content-center">
+		<div class="center-content">
+		
+		<h2>Creer un compte</h2>
+		
+		<div class="form-group row justify-content-center">
+			<label for="inputPseudo" class="col-4 col-form-label-sm ">Pseudo :</label>
+			<div class="col-6">
+				<input type="text" class="form-control form-control-sm" id="inputPseudo">
+			</div>
+		</div>
+		<div class="form-group row justify-content-center">
+			<label for="inputNom" class="col-4 col-form-label-sm ">Nom :</label>
+			<div class="col-6">
+				<input type="text" class="form-control form-control-sm" id="inputNom">
+			</div>
+		</div>
+		<div class="form-group row justify-content-center">
+			<label for="inputPrenom" class="col-4 col-form-label-sm ">Prénom :</label>
+			<div class="col-6">
+				<input type="text" class="form-control form-control-sm" id="inputPrenom">
+			</div>
+		</div>
+		<div class="form-group row justify-content-center">
+			<label for="inputEmail" class="col-4 col-form-label-sm ">Email :</label>
+			<div class="col-6">
+				<input type="email" class="form-control form-control-sm" id="inputEmail">
+			</div>
+		</div>
+		<div class="form-group row justify-content-center">
+			<label for="inputTelephone" class="col-4 col-form-label-sm ">Téléphone :</label>
+			<div class="col-6">
+				<input type="text" class="form-control form-control-sm" id="inputTelephone">
+			</div>
+		</div>
+		<div class="form-group row justify-content-center">
+			<label for="inputRue" class="col-4 col-form-label-sm ">Rue :</label>
+			<div class="col-6">
+				<input type="text" class="form-control form-control-sm" id="inputRue">
+			</div>
+		</div>
+		<div class="form-group row justify-content-center">
+			<label for="inputCodePostal" class="col-4 col-form-label-sm ">Code postal :</label>
+			<div class="col-6">
+				<input type="text" class="form-control form-control-sm" id="inputCodePostal">
+			</div>
+		</div>
+		<div class="form-group row justify-content-center">
+			<label for="inputVille" class="col-4 col-form-label-sm ">Ville :</label>
+			<div class="col-6">
+				<input type="text" class="form-control form-control-sm" id="inputVille">
+			</div>
+		</div>
+		<div class="form-group row justify-content-center">
+			<label for="inputMotDePasse" class="col-4 col-form-label-sm ">Mot de passe :</label>
+			<div class="col-6">
+				<input type="password" class="form-control form-control-sm" id="inputMotDePasse">
+			</div>
+		</div>
+		<div class="form-group row justify-content-center">
+			<label for="inputConfirmation" class="col-4 col-form-label-sm ">Confirmation :</label>
+			<div class="col-6">
+				<input type="password" class="form-control form-control-sm" id="inputConfirmation">
+			</div>
+		</div>
+		
 			
-			<div class="row justify-content-center connexion text-center">
+			<div class="row justify-content-around connexion text-center">
 			
-				<div class="col-10 text-center">
-					<a class="btn btn-creation btn-primary" href="/ServletCreationCompte" role="button">Créer un compte</a>
+				<div class="col-10 ">
+					<div class="d-inline"><a class="btn btn-creation btn-primary" href="./ServletCreationCompte" role="button">Créer</a></div>
+					<div class="d-inline"><a class="btn btn-annulation btn-primary" href="./ServletSeConnecter" role="button">Annuler</a></div>
 				</div>
 				
 			</div>

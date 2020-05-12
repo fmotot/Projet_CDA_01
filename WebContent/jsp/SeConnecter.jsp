@@ -16,6 +16,7 @@
 	crossorigin="anonymous">
 	
 <link rel="stylesheet" type="text/css" href="./css/style.css">
+<link rel="stylesheet" type="text/css" href="./css/connexion.css">
 
 <title>TrocEncheres - Se connecter</title>
 </head>
@@ -59,7 +60,7 @@
 			<div class="row justify-content-center connexion text-center">
 			
 				<div class="col-10 text-center">
-					<a class="btn btn-creation btn-primary" href="/ServletCreationCompte" role="button">Créer un compte</a>
+					<a class="btn btn-creation btn-primary" href="./ServletCreationCompte" role="button">Créer un compte</a>
 				</div>
 				
 			</div>
