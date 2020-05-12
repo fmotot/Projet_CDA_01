@@ -52,12 +52,12 @@ VALUES ('2020-04-13 10:34:00',70,4,3);
 
 -- retrait article 1 numéro de vente 1
 
-INSERT INTO retraits (no_vente,rue,code_postal,ville,retrait_article)
+INSERT INTO retraits (no_vente,rue,code_postal,ville)
 VALUES(1,'3 bvd des huitres','35000','Bikini Bottom');
 
 -- retrait article 2 numéro de vente 2
 
-INSERT INTO retraits (no_vente,rue,code_postal,ville,retrait_article)
+INSERT INTO retraits (no_vente,rue,code_postal,ville)
 VALUES(2,'6 bvd des moules','35000','Bikini Bottom');
 
 
