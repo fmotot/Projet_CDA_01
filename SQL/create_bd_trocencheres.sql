@@ -47,6 +47,7 @@ CREATE TABLE UTILISATEURS (
     ville            VARCHAR(30) NOT NULL,
     mot_de_passe     VARCHAR(64) NOT NULL,
     credit           INTEGER NOT NULL,
+    isActif			 bit NOT NULL DEFAULT 1,
     administrateur   bit NOT NULL 
 );
 
