@@ -5,6 +5,7 @@ package fr.eni.trocencheres.bo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author fmoto
@@ -22,25 +23,27 @@ public class Vente implements Serializable {
 	private Integer miseAPrix;
 	private boolean retraitArticle;
 	
-	
 	private Categorie categorie;
 	private Utilisateur vendeur;
 	private Retrait retrait;
 	
+	private List<Enchere> listeEncheres; 
+	
 	public Vente() {
 	}
 	
-	public Vente(String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle) {
+	public Vente(String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, List<Enchere> listeEncheres) {
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateFinEncheres = dateFinEncheres;
 		this.miseAPrix = miseAPrix;
 		this.vendeur = vendeur;
 		this.retrait = retrait;
+		this.listeEncheres = listeEncheres;
 	}
 	
-	public Vente(Integer noVente, String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle) {
-		this(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, retraitArticle);
+	public Vente(Integer noVente, String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, List<Enchere> listeEncheres) {
+		this(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, retraitArticle, listeEncheres);
 		this.noVente = noVente;
 	}
 
@@ -170,6 +173,20 @@ public class Vente implements Serializable {
 		this.retraitArticle = retraitArticle;
 	}
 
+	/**
+	 * @return the listeEncheres
+	 */
+	public List<Enchere> getListeEncheres() {
+		return listeEncheres;
+	}
+
+	/**
+	 * @param listeEncheres the listeEncheres to set
+	 */
+	public void setListeEncheres(List<Enchere> listeEncheres) {
+		this.listeEncheres = listeEncheres;
+	}
+	
 	@Override
 	public String toString() {
 		return "Vente [noVente=" + noVente + ", nomArticle=" + nomArticle + ", description=" + description
