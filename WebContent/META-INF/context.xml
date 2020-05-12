@@ -3,7 +3,7 @@
 <Context>
     <Resource
         name="jdbc/pool_cnx"
-        driverClassName="com.mysql.jdbc.Driver"
+        driverClassName="com.mysql.cj.jdbc.Driver"
         type="javax.sql.DataSource"
 
         url="jdbc:mysql://localhost:3306/troc_encheres?serverTimezone=UTC"
