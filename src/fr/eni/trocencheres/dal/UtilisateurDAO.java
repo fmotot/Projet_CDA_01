@@ -10,4 +10,5 @@ public interface UtilisateurDAO extends DAO<Utilisateur> {
 	 *  
 	**/
 	public boolean isTelephoneExist(String telephone);
+	public Utilisateur selectByLogin(String login);
 }
