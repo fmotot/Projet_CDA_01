@@ -34,41 +34,41 @@
 				<div class="form-row">
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputPseudo">Pseudo :</label>
-						<input value="#" name="inputPseudo" type="text" class="form-control" id="inputPseudo">
+						<input value="${utilisateur.pseudo}" name="inputPseudo" type="text" class="form-control" id="inputPseudo">
 					</div>
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputNom">Nom :</label> 
-						<input value="#" name="inputNom" type="text" class="form-control" id="inputNom">
+						<input value="${utilisateur.nom}" name="inputNom" type="text" class="form-control" id="inputNom">
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputPrenom">Prenom :</label>
-						<input value="#" name="inputPrenom" type="text" class="form-control" id="inputPrenom">
+						<input value="${utilisateur.prenom}" name="inputPrenom" type="text" class="form-control" id="inputPrenom">
 					</div>
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputEmail">Email :</label> 
-						<input value="#" name="inputEmail" type="text" class="form-control" id="inputEmail">
+						<input value="${utilisateur.email}" name="inputEmail" type="text" class="form-control" id="inputEmail">
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputTelephone">Téléphone :</label>
-						<input value="#" name="inputTelephone" type="tel" class="form-control" id="inputTelephone">
+						<input value="${utilisateur.telephone}" name="inputTelephone" type="tel" class="form-control" id="inputTelephone">
 					</div>
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputRue">Rue :</label> 
-						<input value="#" name="inputRue" type="text" class="form-control" id="inputRue">
+						<input value="${utilisateur.rue}" name="inputRue" type="text" class="form-control" id="inputRue">
 					</div>
 				</div>	
 				<div class="form-row">
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputCodePostal">Code Postal :</label>
-						<input value="#" name="inputCodePostal" type="text" class="form-control" id="inputCodePostal">
+						<input value="${utilisateur.codePostal}" name="inputCodePostal" type="text" class="form-control" id="inputCodePostal">
 					</div>
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputVille">Ville :</label> 
-						<input value="#" name="inputVille" type="text" class="form-control" id="inputVille">
+						<input value="${utilisateur.ville}" name="inputVille" type="text" class="form-control" id="inputVille">
 					</div>
 				</div>	
 				<div class="form-row">
@@ -84,7 +84,7 @@
 				<div class="form-group row ">
    					<label for="staticCredit" class="col-1 col-form-label-sm my-auto">Crédit :</label>
     				<div class="col-1">
-      					<input value="#" type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="0">
+      					<input value="${utilisateur.credit}" type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="0">
     				</div>
  			    </div>
  			    
@@ -113,56 +113,56 @@
 				<div class="form-group row justify-content-center">
 				    <label for="inputPseudo" class="col-4 col-form-label-sm ">Pseudo :</label>
 				    <div class="col-6">
-				    	<input value="#" name="inputPseudo" type="text" class="form-control form-control-sm" id="inputPseudo">
+				    	<input value="${utilisateur.pseudo}" name="inputPseudo" type="text" class="form-control form-control-sm" id="inputPseudo">
 				    </div>
 				</div>
 				  	
 				<div class="form-group row justify-content-center ">
 					<label for="inputNom" class="col-4 col-form-label-sm">Nom :</label>
 					<div class="col-6">
-				    	<input value="#" name="inputNom" type="text" class="form-control form-control-sm" id="inputNom">
+				    	<input value="${utilisateur.nom}" name="inputNom" type="text" class="form-control form-control-sm" id="inputNom">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputPrenom" class="col-4 col-form-label-sm">Prénom :</label>
 					<div class="col-6">
-				    	<input value="#" name="inputPrenom" type="text" class="form-control form-control-sm" id="inputPrenom">
+				    	<input value="${utilisateur.prenom}" name="inputPrenom" type="text" class="form-control form-control-sm" id="inputPrenom">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputEmail" class="col-4 col-form-label-sm">Email :</label>
 					<div class="col-6">
-				    	<input value="#" name="inputEmail" type="text" class="form-control form-control-sm" id="inputEmail">
+				    	<input value="${utilisateur.email}" name="inputEmail" type="text" class="form-control form-control-sm" id="inputEmail">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputTelephone" class="col-4 col-form-label-sm">Téléphone :</label>
 					<div class="col-6">
-				    	<input value="#" name="inputTelephone" type="tel" class="form-control form-control-sm" id="inputTelephone">
+				    	<input value="${utilisateur.telephone}" name="inputTelephone" type="tel" class="form-control form-control-sm" id="inputTelephone">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputRue" class="col-4 col-form-label-sm">Rue :</label>
 					<div class="col-6">
-				    	<input value="#" name="inputRue" type="text" class="form-control form-control-sm" id="inputRue">
+				    	<input value="${utilisateur.rue}" name="inputRue" type="text" class="form-control form-control-sm" id="inputRue">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputCodePostal" class="col-4 col-form-label-sm">Code postal :</label>
 					<div class="col-6">
-				    	<input value="#" name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
+				    	<input value="${utilisateur.codePostal}" name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputVille" class="col-4 col-form-label-sm">Ville :</label>
 					<div class="col-6">
-				    	<input value="#" name="inputVille" type="text" class="form-control form-control-sm" id="inputVille">
+				    	<input value="${utilisateur.ville}" name="inputVille" type="text" class="form-control form-control-sm" id="inputVille">
 				   	</div>
 				</div>
 				
@@ -183,7 +183,7 @@
 				<div class="form-group row justify-content-center">
    					<label for="staticCredit" class="col-4 col-form-label-sm">Crédit :</label>
     				<div class="col-6">
-      					<input value="#" type="text" readonly class="form-control-plaintext" id="staticCredit">
+      					<input value="${utilisateur.credit}" type="text" readonly class="form-control-plaintext" id="staticCredit">
     				</div>
  			    </div>
  			    
