@@ -65,7 +65,7 @@ CREATE TABLE VENTES (
     prix_initial                  INTEGER, 
     no_utilisateur                INTEGER NOT NULL,
     no_categorie                  INTEGER NOT NULL,
-    retrait_article bit 	  NOT NULL DEFAULT 0
+    retrait_article bit 	      NOT NULL DEFAULT 0
 );
 
 
