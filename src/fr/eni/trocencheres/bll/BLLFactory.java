@@ -6,7 +6,7 @@ public abstract class BLLFactory {
 		return null;
 	}
 	
-	public static EnchereManager getEnchereManager() {
+	public static VenteManager getVenteManager() {
 		return null;
 	}
 	
