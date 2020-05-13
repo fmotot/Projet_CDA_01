@@ -25,12 +25,14 @@
 	<div class="container">
 
 		<h1>TrocEncheres.org</h1>
+		
+		<div class="UtilisateurConnecte">$pseudo est connecté</div>
 
 		<div class="row">
 			<ul>
-				<li>Vendre un article</li>
-				<li>Mon profil</li>
-				<li>Déconnexion</li>
+				<li><a href="">Vendre un article</a></li>
+				<li><a href="">Mon profil</a></li>
+				<li><a href="">Déconnexion</a></li>
 			</ul>
 		</div>
 
@@ -64,14 +66,14 @@
 			</div>
 		</div>
 
-		<div class="form-group row col-12">
-			<label class="my-auto col-4" for="inputState">Catégories</label> <select
-				id="inputState col" class="form-control col-8 my-auto">
+		<div class="form-group mt-3 row col-12">
+			<label class="my-auto col-4" for="inputCategories">Catégories</label> <select
+				id="inputCategories" class="form-control col-8 my-auto">
 				<option selected>Toutes</option>
 			</select>
 		</div>
 
-		<div class="input-group row col-10 mx-auto">
+		<div class="input-group mt-3 row col-10 mx-auto">
 			<div class="input-group-prepend">
 				<div class="input-group-text">0-</div>
 			</div>

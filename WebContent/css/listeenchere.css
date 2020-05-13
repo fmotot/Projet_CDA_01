@@ -19,6 +19,21 @@ a{
 	font-size:3vw;
 }
 
+ul{
+	list-style: none;
+}
+
+.UtilisateurConnecte{
+	position:absolute;
+	top:5px;
+	right:8%;
+	font-size: 3vw;
+}
+
+.form-group{
+	margin:0;
+}
+
 .btn-rechercher{
 	margin-top:16px;
 	width:100%;
