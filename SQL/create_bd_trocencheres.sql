@@ -45,10 +45,10 @@ CREATE TABLE UTILISATEURS (
     rue              VARCHAR(30) NOT NULL,
     code_postal      VARCHAR(10) NOT NULL,
     ville            VARCHAR(30) NOT NULL,
-    mot_de_passe     VARCHAR(64) NOT NULL,
+    mot_de_passe     CHAR(64) NOT NULL,
     credit           INTEGER NOT NULL,
     isActif			 bit NOT NULL DEFAULT 1,
-    administrateur   bit NOT NULL 
+    administrateur   bit NOT NULL DEFAULT 0,
   
 );
 
