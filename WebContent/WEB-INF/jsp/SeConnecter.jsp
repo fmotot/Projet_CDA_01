@@ -28,7 +28,7 @@
 		
 		<div class="center-content justify-content-center">
 	
-			<form>
+			<form action="./ServletSeConnecter" method="post">
 				<div class="form-group row justify-content-center">
 				    <label for="inputId" class="col-4 col-form-label-sm ">Identifiant :</label>
 				    <div class="col-6">
