@@ -86,7 +86,7 @@
 
 				<div class="col-10 ">
 					<div class="d-inline">
-						<a class="btn btn-creation btn-primary" role="button">Créer</a>
+						<button class="btn btn-creation btn-primary" type="submit">Créer</button>
 					</div>
 					<div class="d-inline">
 						<a class="btn btn-annulation btn-primary"
@@ -176,7 +176,7 @@
 
 				<div class="col-10 ">
 					<div class="d-inline">
-						<a class="btn btn-creation btn-primary" role="button">Créer</a>
+						<button class="btn btn-creation btn-primary" type="submit">Créer</button>
 					</div>
 					<div class="d-inline">
 						<a class="btn btn-annulation btn-primary"
