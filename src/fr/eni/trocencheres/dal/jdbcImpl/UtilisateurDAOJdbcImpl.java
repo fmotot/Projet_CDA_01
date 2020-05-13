@@ -65,7 +65,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	@Override
 	public Utilisateur insertOne(Utilisateur entity) throws BusinessException {
-		if(entity == null) {
+		if (entity == null) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
 			throw businessException;
@@ -105,9 +105,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	@Override
 	public Utilisateur updateOne(Utilisateur entity) throws BusinessException {
-		
-		
-		if(entity == null) {
+
+		if (entity == null) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_NULL);
 			throw businessException;
@@ -115,8 +114,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_UN_UTILISATEUR);
-
-			// code_postal,credit,email,mot_de_passe,nom,prenom,pseudo,rue,telephone,ville
 
 			pstmt.setString(1, entity.getCodePostal());
 			pstmt.setInt(2, entity.getCredit());
@@ -135,15 +132,17 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			System.out.println("erreur lors de l'insertion d'un utilisateur");
 			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_ECHEC);
+			throw businessException;
 		}
 
 		return entity;
 	}
 
 	@Override
-	public Utilisateur getOne(Utilisateur entity) {
+	public Utilisateur getOne(Utilisateur entity) throws BusinessException {
 		Utilisateur user = null;
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
@@ -171,10 +170,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 			}
 
-		} catch (SQLException e) {
-			System.out.println("erreur lors de la selection d'un utilisateur");
+		} catch (Exception e) {
 			e.printStackTrace();
-
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_UTILISATEUR_ECHEC);
+			throw businessException;
 		}
 
 		return user;
@@ -186,17 +186,17 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.DELETE_OBJET_NULL);
 			throw businessException;
-		}else {
-		
-			try {
-			Connection cnx = ConnectionProvider.getConnection();
-			PreparedStatement pstmt = cnx.prepareStatement(DELETE_UN_UTILISATEUR);
-			pstmt.setInt(1, entity.getNoUtilisateur());
+		} else {
 
-			pstmt.executeUpdate();
-			
-			
-			}catch (Exception e) {
+			try {
+				Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = cnx.prepareStatement(DELETE_UN_UTILISATEUR);
+				pstmt.setInt(1, entity.getNoUtilisateur());
+
+				pstmt.executeUpdate();
+
+			} catch (Exception e) {
+				e.printStackTrace();
 				BusinessException businessException = new BusinessException();
 				businessException.ajouterErreur(CodesResultatDAL.SUPPRESSION_UTILISATEUR_ERREUR);
 				throw businessException;
@@ -206,30 +206,32 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public boolean isTelephoneExist(String telephone) {
+	public boolean isTelephoneExist(String telephone) throws BusinessException {
 		Connection cnx;
-		boolean isTelephoneExist=false;
+		boolean isTelephoneExist = false;
 		try {
 			cnx = ConnectionProvider.getConnection();
 			PreparedStatement pstmt = cnx.prepareStatement(IS_TELEPHONE_EXIST);
 			pstmt.setString(1, telephone);
-			
+
 			ResultSet rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				isTelephoneExist = true;
 			}
-		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
+		} catch (Exception e) {
 			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.ECHEC_LECTURE_TELEPHONE);
+			throw businessException;
 		}
-		
+
 		return isTelephoneExist;
 	}
 
 	@Override
-	public Utilisateur selectByLogin(String login) {
+	public Utilisateur selectByLogin(String login) throws BusinessException {
 		Utilisateur user = null;
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
@@ -238,7 +240,13 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pstmt.setString(2, login);
 
 			ResultSet rs = pstmt.executeQuery();
-
+			if(!rs.next()) {
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.LOGIN_INVALID);
+				throw businessException;
+				
+			}else {
+				
 			while (rs.next()) {
 
 				user = new Utilisateur();
@@ -257,12 +265,17 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				user.setNoUtilisateur(rs.getInt("no_utilisateur"));
 
 			}
+			}
 
-		} catch (SQLException e) {
-			System.out.println("erreur lors de la selection d'un utilisateur");
+		} catch (Exception e) {
+			
 			e.printStackTrace();
-
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.ECHEC_LECTURE_BY_LOGIN);
+			throw businessException;
 		}
+		
+			
 
 		return user;
 	}

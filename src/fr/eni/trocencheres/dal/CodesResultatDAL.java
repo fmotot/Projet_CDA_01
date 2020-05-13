@@ -35,6 +35,31 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int UPDATE_OBJET_NULL = 10005;
 	
+	/**
+	 * Echec général quand tentative update un objet null 
+	 */
+	public static final int UPDATE_OBJET_ECHEC = 10006;
 	
+	/**
+	 * Echec de la lecture  d'un utilisateurs
+	 */
+	public static final int LECTURE_UTILISATEUR_ECHEC = 10007;
+	
+	
+	/**
+	 * Echec dans la recherche d'un numéro de téléphone
+	 */
+	public static final int ECHEC_LECTURE_TELEPHONE = 10008;
+	
+	/**
+	 * Echec dans la recherche par Login
+	 */
+	public static final int	ECHEC_LECTURE_BY_LOGIN = 10009;
+	
+	
+	/**
+	 * Le login n'a pas été trouvé
+	 */
+	public static final int	LOGIN_INVALID = 10010;
 	
 }
