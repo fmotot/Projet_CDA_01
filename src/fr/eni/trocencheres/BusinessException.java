@@ -3,58 +3,44 @@
  */
 package fr.eni.trocencheres;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author fmoto
  *
  */
 public class BusinessException extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
+	private List<Integer> listeCodesErreur;
+	
+	public BusinessException() {
+		super();
+		this.listeCodesErreur=new ArrayList<>();
+	}
+	
 	/**
 	 * 
+	 * @param code Code de l'erreur. 
+	 * Doit avoir un message associé dans un fichier properties.
 	 */
-	public BusinessException() {
-		// TODO Auto-generated constructor stub
+	public void ajouterErreur(int code)
+	{
+		if(!this.listeCodesErreur.contains(code))
+		{
+			this.listeCodesErreur.add(code);
+		}
 	}
-
-	/**
-	 * @param message
-	 */
-	public BusinessException(String message) {
-		super(message);
-		// TODO Auto-generated constructor stub
+	
+	public boolean hasErreurs()
+	{
+		return this.listeCodesErreur.size()>0;
 	}
-
-	/**
-	 * @param cause
-	 */
-	public BusinessException(Throwable cause) {
-		super(cause);
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @param message
-	 * @param cause
-	 */
-	public BusinessException(String message, Throwable cause) {
-		super(message, cause);
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @param message
-	 * @param cause
-	 * @param enableSuppression
-	 * @param writableStackTrace
-	 */
-	public BusinessException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-		// TODO Auto-generated constructor stub
+	
+	public List<Integer> getListeCodesErreur()
+	{
+		return this.listeCodesErreur;
 	}
 
 }
