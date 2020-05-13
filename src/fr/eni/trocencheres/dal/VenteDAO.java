@@ -24,7 +24,7 @@ public interface VenteDAO  extends DAO<Vente>{
 	 * @return					la liste des Vente
 	 * @throws BusinessException
 	 */
-	public List<Vente> getVentesFiltered(Utilisateur utilisateur,boolean isMesVentes, boolean isMesEncheres, boolean isMesAcquisitions, boolean isAutresEncheres, String recherche, Categorie categorie);
+	public List<Vente> getVentesFiltered(Utilisateur utilisateur,boolean isMesVentes, boolean isMesEncheres, boolean isMesAcquisitions, boolean isAutresEncheres, String recherche, Categorie categorie)throws BusinessException;
 	
 	
 	
