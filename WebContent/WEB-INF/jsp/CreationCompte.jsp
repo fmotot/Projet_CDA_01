@@ -81,6 +81,22 @@
 						<input name="inputConfirmation" type="password" class="form-control" id="inputConfirmation">
 					</div>
 				</div>
+				
+				<div class="row justify-content-around connexion text-center">
+
+				<div class="col-10 ">
+					<div class="d-inline">
+						<a class="btn btn-creation btn-primary"
+							href="./ServletMonProfil" role="button">Créer</a>
+					</div>
+					<div class="d-inline">
+						<a class="btn btn-annulation btn-primary"
+							href="./ServletSeConnecter" role="button">Annuler</a>
+					</div>
+				</div>
+
+			</div>
+			
 			</form>
 			
 			<!-- Formulaire pour mobile -->
@@ -157,9 +173,7 @@
 				   	</div>
 				</div>
 				
-			</form>
-
-			<div class="row justify-content-around connexion text-center">
+				<div class="row justify-content-around connexion text-center">
 
 				<div class="col-10 ">
 					<div class="d-inline">
@@ -173,6 +187,8 @@
 				</div>
 
 			</div>
+				
+			</form>
 
 		</div>
 
