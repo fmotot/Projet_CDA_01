@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bll.BLLFactory;
 import fr.eni.trocencheres.bll.UtilisateurManager;
+import fr.eni.trocencheres.bo.Utilisateur;
 
 @WebServlet("/ServletCreationCompte")
 public class ServletCreationCompte extends HttpServlet {
@@ -26,7 +28,8 @@ public class ServletCreationCompte extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		HttpSession session = request.getSession();
+		
 		String pseudo = request.getParameter("inputPseudo");
 		String nom = request.getParameter("inputNom");
 		String prenom = request.getParameter("inputPrenom");
@@ -38,15 +41,17 @@ public class ServletCreationCompte extends HttpServlet {
 		String motDePasse = request.getParameter("inputMotDePasse");
 		String confirmationMDP = request.getParameter("inputConfirmation");
 
-		UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager();
-		try {
-			utilisateurManager.creerCompteUtilisateur(telephone, codePostal, pseudo, nom, prenom, email, rue, ville,
-					motDePasse);
-			request.setAttribute("utilisateur", utilisateurManager);
-		} catch (BusinessException e) {
-			System.out.println("erreur creation compte");
-			e.printStackTrace();
-		}
+		//UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager();
+		//try {
+			// utilisateurManager.creerCompteUtilisateur(telephone, codePostal, pseudo, nom, prenom, email, rue, ville,	motDePasse);
+			Utilisateur utilisateur = new Utilisateur(telephone, codePostal, 100, pseudo, nom, prenom, email, rue, ville,motDePasse, true, true);
+			
+			// a remettre utilisateurManager
+			session.setAttribute("utilisateur", utilisateur);
+		//} catch (BusinessException e) {
+		//	System.out.println("erreur creation compte");
+		//	e.printStackTrace();
+		//}
 
 		if (motDePasse.equals(confirmationMDP)) {
 
@@ -61,5 +66,7 @@ public class ServletCreationCompte extends HttpServlet {
 		}
 
 	}
+
+	
 
 }

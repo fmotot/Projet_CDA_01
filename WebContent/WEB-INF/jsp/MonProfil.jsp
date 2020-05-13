@@ -74,11 +74,11 @@
 				<div class="form-row">
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputMotDePasse">Mot de passe :</label>
-						<input value="#" name="inputMotDePasse" type="password" class="form-control" id="inputMotDePasse">
+						<input name="inputMotDePasse" type="password" class="form-control" id="inputMotDePasse">
 					</div>
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputConfirmation">Confirmation :</label> 
-						<input value="#" name="inputConfirmation" type="password" class="form-control" id="inputConfirmation">
+						<input name="inputConfirmation" type="password" class="form-control" id="inputConfirmation">
 					</div>
 				</div>
 				<div class="form-group row ">
@@ -92,10 +92,10 @@
 				
 					<div class="col-10">
 						<div class="d-inline">
-							<button type="submit" value="enregistrer" class="btn btn-enregistrer btn-primary">Enregistrer</button>
+							<button type="submit" name="submit" value="enregistrer" class="btn btn-enregistrer btn-primary">Enregistrer</button>
 						</div>
 						<div class="d-inline">
-							<button type="submit" value="supprimer" class="btn btn-supprimer btn-primary">Supprimer</button>
+							<button type="submit" name="submit" value="supprimer" class="btn btn-supprimer btn-primary">Supprimer</button>
 						</div>
 						<div class="d-inline">
 							<a class="btn btn-retour btn-primary" href="./ServletMonProfil" role="button">Retour</a>
@@ -169,14 +169,14 @@
 				<div class="form-group row justify-content-center ">
 					<label for="inputMotDePasse" class="col-4 col-form-label-sm">Mot de passe :</label>
 					<div class="col-6">
-				    	<input value="#" name="inputMotDePasse" type="password" class="form-control form-control-sm" id="inputMotDePasse">
+				    	<input name="inputMotDePasse" type="password" class="form-control form-control-sm" id="inputMotDePasse">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputConfirmation" class="col-4 col-form-label-sm">Confirmation :</label>
 					<div class="col-6">
-				    	<input value="#" name="inputConfirmation" type="password" class="form-control form-control-sm" id="inputConfirmation">
+				    	<input name="inputConfirmation" type="password" class="form-control form-control-sm" id="inputConfirmation">
 				   	</div>
 				</div>
 				
@@ -191,13 +191,13 @@
 				
 					<div class="col-10">
 						<div class="d-inline">
-							<button type="submit" value="enregistrer" class="btn btn-enregistrer btn-primary">Enregistrer</button>
+							<button type="submit" name="submit" value="enregistrer" class="btn btn-enregistrer btn-primary">Enregistrer</button>
 						</div>
 						<div class="d-inline">
-							<button type="submit" value="supprimer" class="btn btn-supprimer btn-primary">Supprimer</button>
+							<button type="submit" name="submit" value="supprimer" class="btn btn-supprimer btn-primary">Supprimer</button>
 						</div>
 						<div class="d-inline">
-							<a class="btn btn-retour btn-primary" href="./ServletMonProfil" role="button">Retour</a>
+							<a class="btn btn-retour btn-primary" href="./ListeEnchereServlet" role="button">Retour</a>
 						</div>
 					</div>
 				
