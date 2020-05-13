@@ -35,8 +35,8 @@ public interface UtilisateurManager {
 	Utilisateur supprimerMonCompte(Utilisateur utilisateurConnecte) throws BusinessException;
 	
 	/**
-	 * ID : 1007
-	 * Affichage des information de l'utilisateur en fonction de son pseudo
+	 * ID 1007 : Afficher un profil
+	 *  Affichage des information de l'utilisateur en fonction de son pseudo
 	 * @param pseudo
 	 * @return l'utilisateur ayant le pseudo fourni
 	 * @throws BusinessException

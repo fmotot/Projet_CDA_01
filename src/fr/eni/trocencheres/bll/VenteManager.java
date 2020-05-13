@@ -15,7 +15,7 @@ import fr.eni.trocencheres.bo.Vente;
  * @author fmoto
  *
  */
-public interface EnchereManager {
+public interface VenteManager {
 	/**
 	 * ID 2001	Vendre un article
 	 * Crée une vente 
@@ -39,6 +39,7 @@ public interface EnchereManager {
 	 * ID 2003	Lister les ventes
 	 * ID 2009	Pagination
 	 * Effectue une recherche avec les critères suivants
+	 * @param utilisateur		L'utilisateur connecté
 	 * @param isMesVentes		true si la recherche comprends mes ventes
 	 * @param isMesEncheres		true si la recherche comprends mes enchères
 	 * @param isMesAcquisitions true si la recherche comprends mes acquisitions 
@@ -48,7 +49,7 @@ public interface EnchereManager {
 	 * @return					la liste des Vente
 	 * @throws BusinessException
 	 */
-	List<Vente> listerVente(boolean isMesVentes, boolean isMesEncheres, boolean isMesAcquisitions, boolean isAutresEncheres, String recherche, Categorie categorie) throws BusinessException;
+	List<Vente> listerVentes(Utilisateur utilisateur,boolean isMesVentes, boolean isMesEncheres, boolean isMesAcquisitions, boolean isAutresEncheres, String recherche, Categorie categorie) throws BusinessException;
 	
 	/**
 	 * ID 2004	Faire une enchère

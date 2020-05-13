@@ -5,45 +5,47 @@ import java.io.Serializable;
 public class Utilisateur implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Integer noUtilisateur, telephone, codePostal, credit;
-	private String pseudo, nom, prenom, email, rue, ville, motDePasse;
+	private Integer noUtilisateur;
+	private Integer telephone;
+	private Integer credit;
+	
+	private String codePostal;  
+	private String pseudo;
+	private String nom;
+	private String prenom;
+	private String email;
+	private String rue;
+	private String ville;
+	private String motDePasse;
+	
+	private boolean actif;
 	private boolean administrateur;
 
 	public Utilisateur() {
 	}
 
-	public Utilisateur(Integer noUtilisateur, Integer telephone, Integer codePostal, Integer credit, String pseudo, String nom,
-			String prenom, String email, String rue, String ville, String motDePasse, boolean administrateur) {
+	public Utilisateur(Integer telephone, String codePostal, Integer credit, String pseudo, String nom, String prenom,
+			String email, String rue, String ville, String motDePasse, boolean administrateur, boolean actif) {
+		this.telephone = telephone;
+		this.codePostal = codePostal;
+		this.credit = credit;
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.rue = rue;
+		this.ville = ville;
+		this.motDePasse = motDePasse;
+		this.administrateur = administrateur;
+		this.actif = actif;
+	}
+
+	public Utilisateur(Integer noUtilisateur, Integer telephone, String codePostal, Integer credit, String pseudo, String nom,
+			String prenom, String email, String rue, String ville, String motDePasse, boolean administrateur, boolean actif) {
+		this(telephone, codePostal, credit, pseudo, nom, prenom, email, rue, ville, motDePasse, administrateur, actif);
 		this.noUtilisateur = noUtilisateur;
-		this.telephone = telephone;
-		this.codePostal = codePostal;
-		this.credit = credit;
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.rue = rue;
-		this.ville = ville;
-		this.motDePasse = motDePasse;
-		this.administrateur = administrateur;
 	}
-
-	public Utilisateur(Integer telephone, Integer codePostal, Integer credit, String pseudo, String nom, String prenom,
-			String email, String rue, String ville, String motDePasse, boolean administrateur) {
-		super();
-		this.telephone = telephone;
-		this.codePostal = codePostal;
-		this.credit = credit;
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.rue = rue;
-		this.ville = ville;
-		this.motDePasse = motDePasse;
-		this.administrateur = administrateur;
-	}
-
+	
 	/**
 	 * @return the noUtilisateur
 	 */
@@ -75,14 +77,14 @@ public class Utilisateur implements Serializable {
 	/**
 	 * @return the codePostal
 	 */
-	public Integer getCodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
 
 	/**
 	 * @param codePostal the codePostal to set
 	 */
-	public void setCodePostal(Integer codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 
@@ -210,6 +212,20 @@ public class Utilisateur implements Serializable {
 	 */
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
+	}
+
+	/**
+	 * @return the actif
+	 */
+	public boolean isActif() {
+		return actif;
+	}
+
+	/**
+	 * @param actif the actif to set
+	 */
+	public void setActif(boolean actif) {
+		this.actif = actif;
 	}
 
 	@Override
