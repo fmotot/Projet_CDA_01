@@ -41,6 +41,8 @@
 		<h2>Filtres :</h2>
 
 		<div class="row">
+		
+		<form action="./ListeEnchereServlet" method="post">
 
 			<div class="col-12 col-lg-3">
 				<div class="form-group">
@@ -114,6 +116,8 @@
 			<div class="row col-10 d-lg-none mx-auto mt-3">
 				<button class="btn btn-rechercher btn-primary" type="submit">Rechercher</button>
 			</div>
+			
+		</form>
 
 		</div>
 
