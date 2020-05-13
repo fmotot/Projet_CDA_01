@@ -1,14 +1,14 @@
-INSERT INTO utilisateurs (administrateur,code_postal,credit,email,mot_de_passe,nom,prenom,pseudo,rue,telephone,ville)
-VALUES (0,35000,130,'bob.leponge@sea.shell','azerty','Leponge','Bob', 'boby','124 rue des Conques','06788888','Bikini Bottom');
+INSERT INTO utilisateurs (code_postal,credit,email,mot_de_passe,nom,prenom,pseudo,rue,telephone,ville)
+VALUES (35000,130,'bob.leponge@sea.shell','azerty','Leponge','Bob', 'boby','124 rue des Conques','06788888','Bikini Bottom');
 
-INSERT INTO utilisateurs (administrateur,code_postal,credit,email,mot_de_passe,nom,prenom,pseudo,rue,telephone,ville)
-VALUES (0,35000,100,'patrick.letoile@sea.shell','azerty','Letoile','patrick', 'patStar','120 rue des Conques','06788899','Bikini Bottom');
+INSERT INTO utilisateurs (code_postal,credit,email,mot_de_passe,nom,prenom,pseudo,rue,telephone,ville)
+VALUES (35000,100,'patrick.letoile@sea.shell','azerty','Letoile','patrick', 'patStar','120 rue des Conques','06788899','Bikini Bottom');
 
-INSERT INTO utilisateurs (administrateur,code_postal,credit,email,mot_de_passe,nom,prenom,pseudo,rue,telephone,ville)
-VALUES (0,35000,50,'carlo.tentacule@sea.shell','azerty','Tentacule','Carlo', 'Carl','121 rue des Conques','06788866','Bikini Bottom');
+INSERT INTO utilisateurs (code_postal,credit,email,mot_de_passe,nom,prenom,pseudo,rue,telephone,ville)
+VALUES (35000,50,'carlo.tentacule@sea.shell','azerty','Tentacule','Carlo', 'Carl','121 rue des Conques','06788866','Bikini Bottom');
 
-INSERT INTO utilisateurs (administrateur,code_postal,credit,email,mot_de_passe,nom,prenom,pseudo,rue,telephone,ville)
-VALUES (0,35000,30,'sandy.ecureuil@sea.shell','azerty','Ecureuil','Sandy', 'Dynuts','13 rue de la Noix','06788800','Bikini Bottom');
+INSERT INTO utilisateurs (code_postal,credit,email,mot_de_passe,nom,prenom,pseudo,rue,telephone,ville)
+VALUES (35000,30,'sandy.ecureuil@sea.shell','azerty','Ecureuil','Sandy', 'Dynuts','13 rue de la Noix','06788800','Bikini Bottom');
 ;
 
 INSERT INTO categories (libelle) VALUES ('BIJOUX');

@@ -23,7 +23,8 @@ public interface UtilisateurManager {
 	 * @return l'utilisateur
 	 * @param utilisateur
 	 */
-	Utilisateur creerCompteUtilisateur(Utilisateur utilisateur) throws BusinessException;
+	Utilisateur creerCompteUtilisateur(String telephone, String codePostal, String pseudo, String nom, String prenom,
+			String email, String rue, String ville, String motDePasse) throws BusinessException;
 
 	/**
 	 * ID 1005 : Supprimer mon compte
