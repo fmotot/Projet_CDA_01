@@ -6,7 +6,7 @@
         driverClassName="com.mysql.cj.jdbc.Driver"
         type="javax.sql.DataSource"
 
-        url="jdbc:mysql://localhost:3306/troc_encheres?serverTimezone=UTC"
+        url="jdbc:mysql://localhost:3308/troc_encheres?serverTimezone=UTC"
         username="JARF"
         password="jarf"
 
