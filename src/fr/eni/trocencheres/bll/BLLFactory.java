@@ -11,6 +11,6 @@ public abstract class BLLFactory {
 	}
 	
 	public static UtilisateurManager getUtilisateurManager() {
-		return null;
+		return new UtilisateurManagerImpl();
 	}
 }

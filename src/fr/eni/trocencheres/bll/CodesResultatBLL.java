@@ -8,13 +8,12 @@ public abstract class CodesResultatBLL {
 	/**
 	 * Echec mot de passe incorrect
 	 */
-	public static final int MOT_DE_PASSE_INCORRECT = 20000;
+	public static final int MOT_DE_PASSE_INCORRECT = 20001;
 	
 	/**
 	 * Echec lors de la sélection du type d'encodage
 	 */
 	public static final int ERREUR_SELECTION_ENCODAGE = 20002;
-
 	
 	/**
 	 * Echec téléphone déjà utilisé
@@ -80,7 +79,7 @@ public abstract class CodesResultatBLL {
 	/**
 	 * Echec pas un email
 	 */
-	public static final int REGLE_UTILISATEUR_EMAIL_PAS_EMAIL = 21013;
+	public static final int REGLE_UTILISATEUR_EMAIL_NON_VALIDE = 21013;
 	
 	/**
 	 * Echec rue obligatoire
