@@ -21,7 +21,7 @@ public class ServletSeConnecter extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/jsp/SeConnecter.jsp") ;
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/SeConnecter.jsp") ;
 	    requestDispatcher.forward(request, response) ;
 	}
 

@@ -20,18 +20,20 @@ label{
 	margin-bottom:5px;
 }
 
-.connexion{
-	margin-top:30px;
-}
 
-.btn-creation{
-	margin-right:50px;
-}
-
-.btn-creation,
-.btn-annulation{
+.btn-enregistrer,
+.btn-supprimer,
+.btn-retour{
 	font-size:3vw;
-	padding:10px 20px 10px 20px;
+	padding:10px 10px 10px 10px;
+}
+
+.btn-enregistrer{
+	margin-right:10px;
+}
+
+.btn-supprimer{
+	margin-right:10px;
 }
 
 @media (min-width: 1200px) { 
@@ -43,9 +45,9 @@ label{
 	}
 	
 	h2{
-	font-size:1.5vw;
-	text-align: center;
-	margin-bottom:30px;
+		font-size:1.5vw;
+		text-align: center;
+		margin-bottom:30px;
 	}
 	
 	label{
@@ -56,14 +58,19 @@ label{
 		margin-top:100px;
 	}
 	
-	.btn-creation{
+	.btn-enregistrer{
 	margin-right:100px;
 	}
 	
-	.btn-creation,
-	.btn-annulation{
+	.btn-supprimer{
+	margin-right:100px;
+	}
+	
+	.btn-enregistrer,
+	.btn-supprimer,
+	.btn-retour{
 	margin-top:50px;
-	padding:20px 80px 20px 80px;
+	padding:15px 40px 15px 40px;
 	font-size:.8vw;
 	}
 	

@@ -49,9 +49,10 @@
 						<button type="submit" class="btn btn-primary">Connexion</button>
 					</div>
 					
-					<div class="col-5">
-						<input class="form-check-input" type="checkbox" id="autoSizingCheck"> <label class="form-check-label" for="autoSizingCheck">Se souvenir de moi</label></br>
-					</div>
+					  <div class="custom-control custom-checkbox my-1 mr-sm-2">
+    					<input type="checkbox" class="custom-control-input" id="customControlInline">
+    					<label class="custom-control-label" for="customControlInline">Se souvenir de moi</label>
+ 					  </div>
 				
 				</div>
 				

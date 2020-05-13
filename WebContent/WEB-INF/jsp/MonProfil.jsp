@@ -16,9 +16,9 @@
 	crossorigin="anonymous">
 
 <link rel="stylesheet" type="text/css" href="./css/style.css">
-<link rel="stylesheet" type="text/css" href="./css/creation.css">
+<link rel="stylesheet" type="text/css" href="./css/monprofil.css">
 
-<title>TrocEncheres - Création de compte</title>
+<title>TrocEncheres - Mon Profil</title>
 </head>
 <body>
 
@@ -28,59 +28,65 @@
 
 		<div class="center-content">
 
-			<h2>Creer un compte</h2>
+			<h2>Mon Profil</h2>
 
 			<form class="d-none d-lg-block">
 				<div class="form-row">
-					<div class="form-group col-8 col-lg-6 mx-auto">
+					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputPseudo">Pseudo :</label>
 						<input name="inputPseudo" type="text" class="form-control" id="inputPseudo">
 					</div>
-					<div class="form-group col-8 col-lg-6 mx-auto">
+					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputNom">Nom :</label> 
 						<input name="inputNom" type="text" class="form-control" id="inputNom">
 					</div>
 				</div>
 				<div class="form-row">
-					<div class="form-group col-8 col-lg-6 mx-auto">
+					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputPrenom">Prenom :</label>
 						<input name="inputPrenom" type="text" class="form-control" id="inputPrenom">
 					</div>
-					<div class="form-group col-8 col-lg-6 mx-auto">
+					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputEmail">Email :</label> 
 						<input name="inputEmail" type="email" class="form-control" id="inputEmail">
 					</div>
 				</div>
 				<div class="form-row">
-					<div class="form-group col-8 col-lg-6 mx-auto">
+					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputTelephone">Téléphone :</label>
 						<input name="inputTelephone" type="tel" class="form-control" id="inputTelephone">
 					</div>
-					<div class="form-group col-8 col-lg-6 mx-auto">
+					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputRue">Rue :</label> 
 						<input name="inputRue" type="text" class="form-control" id="inputRue">
 					</div>
 				</div>	
 				<div class="form-row">
-					<div class="form-group col-8 col-lg-6 mx-auto">
+					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputCodePostal">Code Postal :</label>
 						<input name="inputCodePostal" type="text" class="form-control" id="inputCodePostal">
 					</div>
-					<div class="form-group col-8 col-lg-6 mx-auto">
+					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputVille">Ville :</label> 
 						<input name="inputVille" type="text" class="form-control" id="inputVille">
 					</div>
 				</div>	
 				<div class="form-row">
-					<div class="form-group col-8 col-lg-6 mx-auto">
+					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputMotDePasse">Mot de passe :</label>
 						<input name="inputMotDePasse" type="password" class="form-control" id="inputMotDePasse">
 					</div>
-					<div class="form-group col-8 col-lg-6 mx-auto">
+					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputConfirmation">Confirmation :</label> 
 						<input name="inputConfirmation" type="password" class="form-control" id="inputConfirmation">
 					</div>
 				</div>
+				<div class="form-group row ">
+   					<label for="staticEmail" class="col-1 col-form-label-sm my-auto">Crédit :</label>
+    				<div class="col-1">
+      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="0">
+    				</div>
+ 			    </div>
 			</form>
 			
 			<!-- Formulaire pour mobile -->
@@ -157,18 +163,26 @@
 				   	</div>
 				</div>
 				
+				<div class="form-group row justify-content-center">
+   					<label for="staticEmail" class="col-4 col-form-label-sm">Crédit :</label>
+    				<div class="col-6">
+      					<input type="text" readonly class="form-control-plaintext" id="staticCredit" value="0">
+    				</div>
+ 			    </div>
+				
 			</form>
 
 			<div class="row justify-content-around connexion text-center">
 
-				<div class="col-10 ">
+				<div class="col-10">
 					<div class="d-inline">
-						<a class="btn btn-creation btn-primary"
-							href="./ServletCreationCompte" role="button">Créer</a>
+						<a class="btn btn-enregistrer btn-primary" href="./ServletEnregistrerProfil" role="button">Enregistrer</a>
 					</div>
 					<div class="d-inline">
-						<a class="btn btn-annulation btn-primary"
-							href="./ServletSeConnecter" role="button">Annuler</a>
+						<a class="btn btn-supprimer btn-primary" href="./ServletSupprimerCompte" role="button">Supprimer</a>
+					</div>
+					<div class="d-inline">
+						<a class="btn btn-retour btn-primary" href="./ServletMonProfil" role="button">Retour</a>
 					</div>
 				</div>
 
