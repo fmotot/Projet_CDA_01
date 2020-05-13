@@ -82,7 +82,7 @@
 					</div>
 				</div>
 				<div class="form-group row ">
-   					<label for="staticEmail" class="col-1 col-form-label-sm my-auto">Crédit :</label>
+   					<label for="staticCredit" class="col-1 col-form-label-sm my-auto">Crédit :</label>
     				<div class="col-1">
       					<input value="#" type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="0">
     				</div>
@@ -181,7 +181,7 @@
 				</div>
 				
 				<div class="form-group row justify-content-center">
-   					<label for="staticEmail" class="col-4 col-form-label-sm">Crédit :</label>
+   					<label for="staticCredit" class="col-4 col-form-label-sm">Crédit :</label>
     				<div class="col-6">
       					<input value="#" type="text" readonly class="form-control-plaintext" id="staticCredit">
     				</div>

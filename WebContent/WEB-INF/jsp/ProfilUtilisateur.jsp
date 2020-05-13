@@ -31,51 +31,51 @@
 			<h2>$Utilisateur.pseudo</h2>
 
 				<div class="form-group row justify-content-center">
-   					<label for="staticEmail" class="col-4 col-lg-2 col-form-label-sm my-auto">Pseudo :</label>
+   					<label for="staticPseudo" class="col-4 col-lg-2 col-form-label-sm my-auto">Pseudo :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="Splanch">
+      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticPseudo" value="Splanch">
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticEmail" class="col-4 col-lg-2 col-form-label-sm my-auto">Nom :</label>
+   					<label for="staticNom" class="col-4 col-lg-2 col-form-label-sm my-auto">Nom :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="Rupin">
+      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticNom" value="Rupin">
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticEmail" class="col-4 col-lg-2 col-form-label-sm my-auto">Prénom :</label>
+   					<label for="staticPrenom" class="col-4 col-lg-2 col-form-label-sm my-auto">Prénom :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="Jean">
+      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticPrenom" value="Jean">
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
    					<label for="staticEmail" class="col-4 col-lg-2 col-form-label-sm my-auto">Email :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="jeanrupin@example.com">
+      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticEmail" value="jeanrupin@example.com">
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticEmail" class="col-4 col-lg-2 col-form-label-sm my-auto">Téléphone :</label>
+   					<label for="staticTelephone" class="col-4 col-lg-2 col-form-label-sm my-auto">Téléphone :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="0102030405">
+      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticTelephone" value="0102030405">
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticEmail" class="col-4 col-lg-2 col-form-label-sm my-auto">Rue :</label>
+   					<label for="staticRue" class="col-4 col-lg-2 col-form-label-sm my-auto">Rue :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="15 rue de l'eni">
+      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticRue" value="15 rue de l'eni">
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticEmail" class="col-4 col-lg-2 col-form-label-sm my-auto">Code postal :</label>
+   					<label for="staticCodePostal" class="col-4 col-lg-2 col-form-label-sm my-auto">Code postal :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="35000">
+      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticCodePostal" value="35000">
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticEmail" class="col-4 col-lg-2 col-form-label-sm my-auto">Ville :</label>
+   					<label for="staticVille" class="col-4 col-lg-2 col-form-label-sm my-auto">Ville :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="Rennes">
+      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticVille" value="Rennes">
     				</div>
  			    </div>
  			    
