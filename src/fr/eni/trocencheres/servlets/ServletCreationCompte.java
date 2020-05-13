@@ -44,7 +44,7 @@ public class ServletCreationCompte extends HttpServlet {
 			Utilisateur utilisateur = new Utilisateur(telephone, codePostal, credit, pseudo, nom, prenom, email, rue,
 					ville, motDePasse, administrateur, actif);
 			request.setAttribute("utilisateur", utilisateur);
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/test.jsp");
 			requestDispatcher.forward(request, response);
 		} else {
 			System.out.println("erreur");

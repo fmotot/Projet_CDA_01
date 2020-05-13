@@ -30,163 +30,180 @@
 
 			<h2>Mon Profil</h2>
 
-			<form class="d-none d-lg-block">
+			<form class="d-none d-lg-block" action="./ServletMonProfil" method="post">
 				<div class="form-row">
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputPseudo">Pseudo :</label>
-						<input name="inputPseudo" type="text" class="form-control" id="inputPseudo">
+						<input value="#" name="inputPseudo" type="text" class="form-control" id="inputPseudo">
 					</div>
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputNom">Nom :</label> 
-						<input name="inputNom" type="text" class="form-control" id="inputNom">
+						<input value="#" name="inputNom" type="text" class="form-control" id="inputNom">
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputPrenom">Prenom :</label>
-						<input name="inputPrenom" type="text" class="form-control" id="inputPrenom">
+						<input value="#" name="inputPrenom" type="text" class="form-control" id="inputPrenom">
 					</div>
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputEmail">Email :</label> 
-						<input name="inputEmail" type="email" class="form-control" id="inputEmail">
+						<input value="#" name="inputEmail" type="text" class="form-control" id="inputEmail">
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputTelephone">Téléphone :</label>
-						<input name="inputTelephone" type="tel" class="form-control" id="inputTelephone">
+						<input value="#" name="inputTelephone" type="tel" class="form-control" id="inputTelephone">
 					</div>
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputRue">Rue :</label> 
-						<input name="inputRue" type="text" class="form-control" id="inputRue">
+						<input value="#" name="inputRue" type="text" class="form-control" id="inputRue">
 					</div>
 				</div>	
 				<div class="form-row">
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputCodePostal">Code Postal :</label>
-						<input name="inputCodePostal" type="text" class="form-control" id="inputCodePostal">
+						<input value="#" name="inputCodePostal" type="text" class="form-control" id="inputCodePostal">
 					</div>
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputVille">Ville :</label> 
-						<input name="inputVille" type="text" class="form-control" id="inputVille">
+						<input value="#" name="inputVille" type="text" class="form-control" id="inputVille">
 					</div>
 				</div>	
 				<div class="form-row">
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputMotDePasse">Mot de passe :</label>
-						<input name="inputMotDePasse" type="password" class="form-control" id="inputMotDePasse">
+						<input value="#" name="inputMotDePasse" type="password" class="form-control" id="inputMotDePasse">
 					</div>
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputConfirmation">Confirmation :</label> 
-						<input name="inputConfirmation" type="password" class="form-control" id="inputConfirmation">
+						<input value="#" name="inputConfirmation" type="password" class="form-control" id="inputConfirmation">
 					</div>
 				</div>
 				<div class="form-group row ">
    					<label for="staticEmail" class="col-1 col-form-label-sm my-auto">Crédit :</label>
     				<div class="col-1">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="0">
+      					<input value="#" type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="0">
     				</div>
  			    </div>
+ 			    
+ 			    <div class="row justify-content-around connexion text-center">
+				
+					<div class="col-10">
+						<div class="d-inline">
+							<button type="submit" value="enregistrer" class="btn btn-enregistrer btn-primary">Enregistrer</button>
+						</div>
+						<div class="d-inline">
+							<button type="submit" value="supprimer" class="btn btn-supprimer btn-primary">Supprimer</button>
+						</div>
+						<div class="d-inline">
+							<a class="btn btn-retour btn-primary" href="./ServletMonProfil" role="button">Retour</a>
+						</div>
+					</div>
+				
+				</div>
+				
 			</form>
 			
 			<!-- Formulaire pour mobile -->
 			
-			<form class="d-lg-none">
+			<form class="d-lg-none" action="./ServletMonProfil" method="post">
 			
 				<div class="form-group row justify-content-center">
 				    <label for="inputPseudo" class="col-4 col-form-label-sm ">Pseudo :</label>
 				    <div class="col-6">
-				    	<input name="inputPseudo" type="text" class="form-control form-control-sm" id="inputPseudo">
+				    	<input value="#" name="inputPseudo" type="text" class="form-control form-control-sm" id="inputPseudo">
 				    </div>
 				</div>
 				  	
 				<div class="form-group row justify-content-center ">
 					<label for="inputNom" class="col-4 col-form-label-sm">Nom :</label>
 					<div class="col-6">
-				    	<input name="inputNom" type="text" class="form-control form-control-sm" id="inputNom">
+				    	<input value="#" name="inputNom" type="text" class="form-control form-control-sm" id="inputNom">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputPrenom" class="col-4 col-form-label-sm">Prénom :</label>
 					<div class="col-6">
-				    	<input name="inputPrenom" type="text" class="form-control form-control-sm" id="inputPrenom">
+				    	<input value="#" name="inputPrenom" type="text" class="form-control form-control-sm" id="inputPrenom">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputEmail" class="col-4 col-form-label-sm">Email :</label>
 					<div class="col-6">
-				    	<input name="inputEmail" type="email" class="form-control form-control-sm" id="inputEmail">
+				    	<input value="#" name="inputEmail" type="text" class="form-control form-control-sm" id="inputEmail">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputTelephone" class="col-4 col-form-label-sm">Téléphone :</label>
 					<div class="col-6">
-				    	<input name="inputTelephone" type="tel" class="form-control form-control-sm" id="inputTelephone">
+				    	<input value="#" name="inputTelephone" type="tel" class="form-control form-control-sm" id="inputTelephone">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputRue" class="col-4 col-form-label-sm">Rue :</label>
 					<div class="col-6">
-				    	<input name="inputRue" type="text" class="form-control form-control-sm" id="inputRue">
+				    	<input value="#" name="inputRue" type="text" class="form-control form-control-sm" id="inputRue">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputCodePostal" class="col-4 col-form-label-sm">Code postal :</label>
 					<div class="col-6">
-				    	<input name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
+				    	<input value="#" name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputVille" class="col-4 col-form-label-sm">Ville :</label>
 					<div class="col-6">
-				    	<input name="inputVille" type="text" class="form-control form-control-sm" id="inputVille">
+				    	<input value="#" name="inputVille" type="text" class="form-control form-control-sm" id="inputVille">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputMotDePasse" class="col-4 col-form-label-sm">Mot de passe :</label>
 					<div class="col-6">
-				    	<input name="inputMotDePasse" type="password" class="form-control form-control-sm" id="inputMotDePasse">
+				    	<input value="#" name="inputMotDePasse" type="password" class="form-control form-control-sm" id="inputMotDePasse">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center ">
 					<label for="inputConfirmation" class="col-4 col-form-label-sm">Confirmation :</label>
 					<div class="col-6">
-				    	<input name="inputConfirmation" type="password" class="form-control form-control-sm" id="inputConfirmation">
+				    	<input value="#" name="inputConfirmation" type="password" class="form-control form-control-sm" id="inputConfirmation">
 				   	</div>
 				</div>
 				
 				<div class="form-group row justify-content-center">
    					<label for="staticEmail" class="col-4 col-form-label-sm">Crédit :</label>
     				<div class="col-6">
-      					<input type="text" readonly class="form-control-plaintext" id="staticCredit" value="0">
+      					<input value="#" type="text" readonly class="form-control-plaintext" id="staticCredit">
     				</div>
  			    </div>
+ 			    
+ 			    <div class="row justify-content-around connexion text-center">
+				
+					<div class="col-10">
+						<div class="d-inline">
+							<button type="submit" value="enregistrer" class="btn btn-enregistrer btn-primary">Enregistrer</button>
+						</div>
+						<div class="d-inline">
+							<button type="submit" value="supprimer" class="btn btn-supprimer btn-primary">Supprimer</button>
+						</div>
+						<div class="d-inline">
+							<a class="btn btn-retour btn-primary" href="./ServletMonProfil" role="button">Retour</a>
+						</div>
+					</div>
+				
+				</div>
 				
 			</form>
-
-			<div class="row justify-content-around connexion text-center">
-
-				<div class="col-10">
-					<div class="d-inline">
-						<a class="btn btn-enregistrer btn-primary" href="./ServletEnregistrerProfil" role="button">Enregistrer</a>
-					</div>
-					<div class="d-inline">
-						<a class="btn btn-supprimer btn-primary" href="./ServletSupprimerCompte" role="button">Supprimer</a>
-					</div>
-					<div class="d-inline">
-						<a class="btn btn-retour btn-primary" href="./ServletMonProfil" role="button">Retour</a>
-					</div>
-				</div>
-
-			</div>
 
 		</div>
 
