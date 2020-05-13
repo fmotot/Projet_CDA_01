@@ -30,7 +30,7 @@
 
 			<h2>Creer un compte</h2>
 
-			<form class="d-none d-lg-block">
+			<form class="d-none d-lg-block" action="./ServletCreationCompte" method="post">
 				<div class="form-row">
 					<div class="form-group col-8 col-lg-6 mx-auto">
 						<label for="inputPseudo">Pseudo :</label>
@@ -101,7 +101,7 @@
 			
 			<!-- Formulaire pour mobile -->
 			
-			<form class="d-lg-none">
+			<form class="d-lg-none"  action="./ServletCreationCompte" method="post">
 			
 				<div class="form-group row justify-content-center">
 				    <label for="inputPseudo" class="col-4 col-form-label-sm ">Pseudo :</label>
