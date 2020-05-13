@@ -182,7 +182,7 @@
 						<a class="btn btn-supprimer btn-primary" href="./ServletSupprimerCompte" role="button">Supprimer</a>
 					</div>
 					<div class="d-inline">
-						<a class="btn btn-retour btn-primary" href="./ServletProfil" role="button">Retour</a>
+						<a class="btn btn-retour btn-primary" href="./ServletMonProfil" role="button">Retour</a>
 					</div>
 				</div>
 

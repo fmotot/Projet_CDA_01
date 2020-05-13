@@ -1,8 +1,9 @@
 @charset "ISO-8859-1";
 
 h1{
-	text-align: justify;
-	margin:15px 0 15px 30px;
+	text-align: center;
+	margin:15px 0 15px 0;
+	font-weight: 600;
 }
 
 h2{
@@ -19,9 +20,6 @@ label{
 	margin-bottom:5px;
 }
 
-.connexion{
-	margin-top:30px;
-}
 
 .btn-enregistrer,
 .btn-supprimer,
@@ -47,9 +45,9 @@ label{
 	}
 	
 	h2{
-	font-size:1.5vw;
-	text-align: center;
-	margin-bottom:30px;
+		font-size:1.5vw;
+		text-align: center;
+		margin-bottom:30px;
 	}
 	
 	label{

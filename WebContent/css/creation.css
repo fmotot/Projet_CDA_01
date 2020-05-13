@@ -1,8 +1,9 @@
 @charset "ISO-8859-1";
 
 h1{
-	text-align: justify;
-	margin:15px 0 15px 30px;
+	text-align: center;
+	margin:15px 0 15px 0;
+	font-weight: 600;
 }
 
 h2{
@@ -29,7 +30,8 @@ label{
 
 .btn-creation,
 .btn-annulation{
-	padding:15px 40px 15px 40px;
+	font-size:3vw;
+	padding:10px 20px 10px 20px;
 }
 
 @media (min-width: 1200px) { 
