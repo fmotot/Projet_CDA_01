@@ -76,7 +76,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		
 		// Validation du mot de passe si nouveau
 		boolean isPasswordToBeChanged = false;
-		if (utilisateurData.getMotDePasse() != null && !utilisateurData.getMotDePasse().equals(utilisateurSession.getMotDePasse())) {
+		if (utilisateurData.getMotDePasse() != null && !utilisateurData.getMotDePasse().equals("") && !utilisateurData.getMotDePasse().equals(utilisateurSession.getMotDePasse())) {
 			utilisateurSession.setMotDePasse(this.validerMotDePasse(utilisateurData.getMotDePasse(), businessException));
 			isPasswordToBeChanged = true;
 		}
