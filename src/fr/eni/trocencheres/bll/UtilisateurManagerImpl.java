@@ -157,7 +157,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		return motDePasse;
 	}
 
-	private String validerTelephone(String telephone, BusinessException businessException) {
+	private String validerTelephone(String telephone, BusinessException businessException) throws BusinessException {
 
 		if (telephone != null) {
 			telephone = telephone.trim();
