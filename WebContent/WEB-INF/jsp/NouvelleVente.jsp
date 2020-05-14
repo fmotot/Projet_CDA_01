@@ -18,7 +18,7 @@
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 <link rel="stylesheet" type="text/css" href="./css/detailvente.css">
 
-<title>TrocEncheres - Détail Vente</title>
+<title>TrocEncheres - Nouvelle vente</title>
 </head>
 <body>
 
@@ -87,7 +87,7 @@
 					<label for="staticVendeur"
 						class="col-5 col-lg-3 col-form-label-sm my-auto">Vendeur :</label>
 					<div class="col-6 col-lg-4">
-						<a href="./ProfilUtilsateurServlet?pseudo=${vente.vendeur.pseudo}">#</a>
+						<a href="./ProfilUtilsateurServlet/profil?pseudo=${vente.vendeur.pseudo}">#</a>
 					</div>
 				</div>
 
