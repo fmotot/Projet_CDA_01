@@ -64,6 +64,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT_UNE_CATEGORIE,PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			pstmt.setString(1, entity.getLibelle());
+			pstmt.executeUpdate();
 			
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
@@ -115,6 +116,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 			ResultSet rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
+				categorie= new Categorie();
 				categorie.setLibelle(rs.getString("libelle"));
 				categorie.setNoCategorie(rs.getInt("no_categorie"));
 			}
