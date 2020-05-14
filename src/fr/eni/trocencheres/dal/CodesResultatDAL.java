@@ -57,9 +57,6 @@ public abstract class CodesResultatDAL {
 	public static final int	ECHEC_LECTURE_BY_LOGIN = 10009;
 	
 	
-	/**
-	 * Le login n'a pas été trouvé
-	 */
-	public static final int	LOGIN_INVALID = 10010;
+
 	
 }
