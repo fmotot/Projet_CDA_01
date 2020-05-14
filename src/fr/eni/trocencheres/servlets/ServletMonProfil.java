@@ -53,7 +53,9 @@ public class ServletMonProfil extends HttpServlet {
 			// Verification au prealable que les champs MDP et Confirmation soit identiques
 			if ((request.getParameter("inputMotDePasse")).equals(request.getParameter("inputConfirmation"))) {
 				// Reaffectation des données dans l'utilisateur
+				System.out.println("remise des valeurs dans le new user");
 				utilisateurData.setPseudo(request.getParameter("inputPseudo"));
+				System.out.println(utilisateurData.getPseudo());
 				utilisateurData.setNom(request.getParameter("inputNom"));
 				utilisateurData.setPrenom(request.getParameter("inputPrenom"));
 				utilisateurData.setEmail(request.getParameter("inputEmail"));
