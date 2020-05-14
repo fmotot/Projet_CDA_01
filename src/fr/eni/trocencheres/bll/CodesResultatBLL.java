@@ -104,7 +104,7 @@ public abstract class CodesResultatBLL {
 	/**
 	 * Echec mot de passe trop court -8
 	 */
-	public static final int REGLE_UTILISATEUR_MOT_DE_PASSE_TROP_COURT = 0;
+	public static final int REGLE_UTILISATEUR_MOT_DE_PASSE_TROP_COURT = 21018;
 	
 	
 
