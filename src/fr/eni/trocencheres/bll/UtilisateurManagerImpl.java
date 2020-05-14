@@ -29,9 +29,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	@Override
 	public Utilisateur login(String login, String motDePasse) throws BusinessException {
 
-		System.out.println(login);
 		Utilisateur utilisateur = utilisateurDAO.selectByLogin(login);
-		
 
 		if (utilisateur == null) {
 			BusinessException businessException = new BusinessException();
@@ -78,8 +76,8 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		
 		// Validation du mot de passe si nouveau
 		boolean isPasswordToBeChanged = false;
-		if (!utilisateurData.getMotDePasse().equals(utilisateurSession.getMotDePasse())) {
-			utilisateurData.setMotDePasse(this.validerMotDePasse(utilisateurData.getMotDePasse(), businessException));
+		if (utilisateurData.getMotDePasse() != null && !utilisateurData.getMotDePasse().equals(utilisateurSession.getMotDePasse())) {
+			utilisateurSession.setMotDePasse(this.validerMotDePasse(utilisateurData.getMotDePasse(), businessException));
 			isPasswordToBeChanged = true;
 		}
 
@@ -157,7 +155,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	private String validerMotDePasse(String motDePasse, BusinessException businessException) {
 
 		if (motDePasse == null || motDePasse.length() < 8) {
-			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_PSEUDO_VIDE);
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_MOT_DE_PASSE_TROP_COURT);
 		} else {
 
 		}
