@@ -16,7 +16,7 @@
 	crossorigin="anonymous">
 
 <link rel="stylesheet" type="text/css" href="./css/style.css">
-<link rel="stylesheet" type="text/css" href="./css/detailvente.css">
+<link rel="stylesheet" type="text/css" href="./css/nouvellevente.css">
 
 <title>TrocEncheres - Nouvelle vente</title>
 </head>
@@ -35,34 +35,40 @@
 			</div>
 
 			<div class="content-vente col-12 col-lg-7">
-				<div class="d-none d-lg-block">
-					<h3>PC GAMER POUR TRAVAILLER</h3>
-				</div>
 
 				<form action="./NouvelleVenteServlet" method="post">
 
-					<div class="form-group row justify-content-center ">
+					<div class="form-group row ">
 						<label for="inputArticle" class="col-5 col-form-label-sm">Article
 							:</label>
-						<div class="col-7 col-lg-4">
+						<div class="col-7 col-lg-7">
 							<input value="" name="inputArticle" type="text"
 								class="form-control form-control-sm" id="inputArticle">
 						</div>
 					</div>
-					<div class="form-group row justify-content-center ">
-						<label for="inputDescription" class="col-5 col-form-label-sm">Description
-							:</label>
-						<div class="col-7 col-lg-4">
+					<div class="form-group row">
+						<label for="inputDescription" class="col-5 col-form-label-sm">Description:</label>
+						<div class="col-7 col-lg-7">
 							<textarea class="form-control" id="inputDescription" rows="3"></textarea>
 						</div>
 					</div>
+					
+					<div class="form-group row">
+    					<label for="selectCategories" class="col-5 col-form-label-sm">Catégories :</label>
+    					<div class="col-7 col-lg-7">
+	    					<select class="form-control form-control-sm" id="selectCategories">
+						    	<option>Maison</option>
+						    	<option>Catégorie 2</option>
+						    	<option>Catégorie 3</option>
+						    	<option>Catégorie 4</option>
+						    	<option>Catégorie 5</option>
+	    					</select>
+    					</div>
+  					</div>
 
 					<div class="form-group row">
-						<label class="col-5 my-auto" for="uploadImage">Photo de
-							l'article</label> <label class="btn btn-sm btn-primary my-auto"
-							for="my-file-selector"> <input id="my-file-selector"
-							type="file" class="d-none">Uploader
-						</label>
+						<label class="col-3 col-form-label-sm my-auto" for="uploadImage">Photo de l'article</label> <label class="btn btn-sm btn-primary my-auto"
+						for="my-file-selector"> <input id="my-file-selector" type="file" class="d-none">Uploader</label>
 					</div>
 
 					<div class="row col-12 mx-auto d-lg-none">
@@ -70,47 +76,53 @@
 					</div>
 
 					<div class="form-group row">
-						<label for="inputArticle" class="col-5 col-form-label-sm">Prix
-							initial :</label>
-						<div class="col-7 col-lg-4">
-							<input value="" name="inputArticle" type="text"
-								class="form-control form-control-sm" id="inputArticle"
-								placeholder="Crédit">
+						<label for="inputArticle" class="col-5 col-form-label-sm">Prix initial :</label>
+						<div class="col-7 col-lg-7">
+							<input value="#" name="inputArticle" type="text" class="form-control form-control-sm" id="inputArticle" placeholder="Crédit">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="inputArticle" class="col-5 col-form-label-sm">Fin
-							de l'enchère :</label>
-						<div class="col-7 col-lg-4">
-							<input type="date" name="bday" max="3000-12-31" min="1000-01-01"
-								class="form-control">
+						<label for="inputArticle" class="col-5 col-form-label-sm">Fin de l'enchère :</label>
+						<div class="col-7 col-lg-7">
+							<input value="#" type="date" name="bday" max="3000-12-31" min="1000-01-01" class="form-control">
 						</div>
 					</div>
-					<div class="form-group row">
-						<label for="staticRetrait"
-							class="col-5 col-lg-3 col-form-label-sm my-auto">Retrait
-							:</label>
-						<div class="col-6 col-lg-4">
-							<input type="text" readonly
-								class="form-control-plaintext my-auto" id="staticRetrait"
-								value="#">
+					
+					<fieldset class="border pr-2 pl-2">
+	   					<legend class="col-4 col-lg-3 my-auto">Retrait</legend>
+	   					<div class="form-group row justify-content-center ">
+							<label for="inputArticle" class="col-5 col-form-label-sm">Rue :</label>
+							<div class="col-7 col-lg-4">
+								<input value="#" name="inputArticle" type="text" class="form-control form-control-sm" id="inputArticle">
+							</div>
 						</div>
-					</div>
+						
+						<div class="form-group row justify-content-center ">
+							<label for="inputArticle" class="col-5 col-form-label-sm">Code Postal :</label>
+							<div class="col-7 col-lg-4">
+								<input value="#" name="inputArticle" type="text" class="form-control form-control-sm" id="inputArticle">
+							</div>
+						</div>
+						
+						<div class="form-group row justify-content-center ">
+							<label for="inputArticle" class="col-5 col-form-label-sm">Ville :</label>
+							<div class="col-7 col-lg-4">
+								<input value="#" name="inputArticle" type="text" class="form-control form-control-sm" id="inputArticle">
+							</div>
+						</div>
+					</fieldset>		
 
-					<div class="row justify-content-around connexion text-center mt-3">
+					<div class="row justify-content-around connexion text-center mt-3 mb-3">
 
 						<div class="col-12">
 							<div class="d-inline mr-2">
-								<button type="submit" name="submit" value="publier"
-									class="btn btn-primary">Publier</button>
+								<button type="submit" name="submit" value="publier" class="btn btn-primary">Publier</button>
 							</div>
 							<div class="d-inline mr-2">
-								<button type="submit" name="submit" value="enregistrer"
-									class="btn btn-primary">Enregistrer</button>
+								<button type="submit" name="submit" value="enregistrer" class="btn btn-primary">Enregistrer</button>
 							</div>
 							<div class="d-inline">
-								<a class="btn btn-retour btn-primary"
-									href="./NouvelleVenteServlet" role="button">Annuler</a>
+								<a class="btn btn-retour btn-primary" href="./NouvelleVenteServlet" role="button">Annuler</a>
 							</div>
 						</div>
 					</div>
