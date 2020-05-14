@@ -31,6 +31,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 
 		Utilisateur utilisateur = utilisateurDAO.selectByLogin(login);
 
+		
 		if (!utilisateur.getMotDePasse().equals(encryptMDP(motDePasse, utilisateur.getPseudo()))) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatBLL.MOT_DE_PASSE_INCORRECT);
@@ -53,7 +54,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	@Override
-	public Utilisateur modifierMonCompte(Utilisateur utilisateur) throws BusinessException {
+	public Utilisateur modifierMonCompte(Utilisateur utilisateur, boolean isNouveauMotDePasse) throws BusinessException {
 		// TODO Auto-generated method stub
 		BusinessException businessException = new BusinessException();
 		// Validation des éléments
