@@ -8,7 +8,7 @@ public abstract class CodesResultatBLL {
 	/**
 	 * Echec mot de passe incorrect
 	 */
-	public static final int LOGIN_MOT_DE_PASSE_INCORRECT = 20001;
+	public static final int MOT_DE_PASSE_INCORRECT = 20001;
 	
 	/**
 	 * Echec mot de passe incorrect

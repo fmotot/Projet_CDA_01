@@ -47,12 +47,12 @@ public interface UtilisateurManager {
 	/**
 	 * ID 1009 et 1003 : Modifier/Gérer mon profil
 	 * Modifie les informations d'un utilisateur déjà existant
-	 * @param utilisateur
-	 * @param isNouveauMotDePasse	true si l'utilisateur a changé son mot de passe
+	 * @param utilisateurSession		l'utilisateur en session
+	 * @param utilisateurData			l'utilisateur avec les données modifiées
 	 * @return l'utilisateur modifié
 	 * @throws BusinessException
 	 */
-	Utilisateur modifierMonCompte(Utilisateur utilisateur, boolean isNouveauMotDePasse) throws BusinessException;
+	Utilisateur modifierMonCompte(Utilisateur utilisateurSession, Utilisateur utilisateurData) throws BusinessException;
 		
 	
 }
