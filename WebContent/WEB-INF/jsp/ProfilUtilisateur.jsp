@@ -33,7 +33,7 @@
 				<div class="form-group row justify-content-center">
    					<label for="staticPseudo" class="col-4 col-lg-2 col-form-label-sm my-auto">Pseudo :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticPseudo" value="Splanch">
+      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticPseudo" value="${utilisateur. }">
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">

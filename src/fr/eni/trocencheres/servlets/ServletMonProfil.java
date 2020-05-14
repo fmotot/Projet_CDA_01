@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bll.BLLFactory;
 import fr.eni.trocencheres.bll.UtilisateurManager;
