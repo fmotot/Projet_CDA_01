@@ -30,7 +30,7 @@
 
 			<h2>Creer un compte</h2>
 
-			<form class="d-none d-lg-block">
+			<form class="d-none d-lg-block" action="./ServletCreationCompte" method="post">
 				<div class="form-row">
 					<div class="form-group col-8 col-lg-6 mx-auto">
 						<label for="inputPseudo">Pseudo :</label>
@@ -81,11 +81,26 @@
 						<input name="inputConfirmation" type="password" class="form-control" id="inputConfirmation">
 					</div>
 				</div>
+				
+				<div class="row justify-content-around connexion text-center">
+
+				<div class="col-10 ">
+					<div class="d-inline">
+						<button class="btn btn-creation btn-primary" type="submit">Créer</button>
+					</div>
+					<div class="d-inline">
+						<a class="btn btn-annulation btn-primary"
+							href="./ServletSeConnecter" role="button">Annuler</a>
+					</div>
+				</div>
+
+			</div>
+			
 			</form>
 			
 			<!-- Formulaire pour mobile -->
 			
-			<form class="d-lg-none">
+			<form class="d-lg-none"  action="./ServletCreationCompte" method="post">
 			
 				<div class="form-group row justify-content-center">
 				    <label for="inputPseudo" class="col-4 col-form-label-sm ">Pseudo :</label>
@@ -157,14 +172,11 @@
 				   	</div>
 				</div>
 				
-			</form>
-
-			<div class="row justify-content-around connexion text-center">
+				<div class="row justify-content-around connexion text-center">
 
 				<div class="col-10 ">
 					<div class="d-inline">
-						<a class="btn btn-creation btn-primary"
-							href="./ServletCreationCompte" role="button">Créer</a>
+						<button class="btn btn-creation btn-primary" type="submit">Créer</button>
 					</div>
 					<div class="d-inline">
 						<a class="btn btn-annulation btn-primary"
@@ -173,6 +185,8 @@
 				</div>
 
 			</div>
+				
+			</form>
 
 		</div>
 

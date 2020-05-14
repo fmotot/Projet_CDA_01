@@ -1,5 +1,11 @@
 @charset "ISO-8859-1";
 
+h1{
+	text-align: center;
+	margin:15px 0 15px 0;
+	font-weight: 600;
+}
+
 .center-content{
 	width: 90%;
 	height: 300px;

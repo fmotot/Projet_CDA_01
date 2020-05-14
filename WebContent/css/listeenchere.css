@@ -1,0 +1,36 @@
+@charset "ISO-8859-1";
+
+h1{
+	font-size: 5vw;
+	font-weight: 700;
+}
+
+h2{
+	font-size: 5vw;
+}
+
+p{
+	margin:0;
+	font-size:3vw;
+}
+
+a{
+	margin:0;
+	font-size:3vw;
+}
+
+.btn-rechercher{
+	margin-top:16px;
+	width:100%;
+	padding:20px 0 20px 0;
+}
+
+.jumbotron{
+	margin-top: 15px
+}
+
+.image{
+	width: 80px;
+	height: 100px;
+	background: black;
+}

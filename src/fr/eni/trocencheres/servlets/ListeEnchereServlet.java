@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ServletSeConnecter
+ * Servlet implementation class ListeEnchereServlet
  */
-@WebServlet("/ServletSeConnecter")
-public class ServletSeConnecter extends HttpServlet {
+@WebServlet("/ListeEnchereServlet")
+public class ListeEnchereServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -21,7 +21,7 @@ public class ServletSeConnecter extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/SeConnecter.jsp") ;
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp") ;
 	    requestDispatcher.forward(request, response) ;
 	}
 
@@ -29,6 +29,7 @@ public class ServletSeConnecter extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 
