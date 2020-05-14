@@ -29,7 +29,8 @@ public class ServletCreationCompte extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		
+
+		// Recuperation des données de la JSP
 		String pseudo = request.getParameter("inputPseudo");
 		String nom = request.getParameter("inputNom");
 		String prenom = request.getParameter("inputPrenom");
@@ -41,24 +42,28 @@ public class ServletCreationCompte extends HttpServlet {
 		String motDePasse = request.getParameter("inputMotDePasse");
 		String confirmationMDP = request.getParameter("inputConfirmation");
 
-		//UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager();
-		//try {
-			// utilisateurManager.creerCompteUtilisateur(telephone, codePostal, pseudo, nom, prenom, email, rue, ville,	motDePasse);
-			Utilisateur utilisateur = new Utilisateur(telephone, codePostal, 100, pseudo, nom, prenom, email, rue, ville,motDePasse, true, true);
-			
-			// a remettre utilisateurManager
-			session.setAttribute("utilisateur", utilisateur);
-		//} catch (BusinessException e) {
-		//	System.out.println("erreur creation compte");
-		//	e.printStackTrace();
-		//}
+		UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager();
 
+		// Verification du mot de passe et de sa confirmation
 		if (motDePasse.equals(confirmationMDP)) {
+			try {
+				// Creation de l'utilisateur en BDD
+				Utilisateur utilisateur = utilisateurManager.creerCompteUtilisateur(telephone, codePostal, pseudo, nom,
+						prenom, email, rue, ville, motDePasse);
+				// Mise de l'utilisateur en session
+				session.setAttribute("utilisateur", utilisateur);
+				// Renvoi sur JSP 
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
+				requestDispatcher.forward(request, response);
+			} catch (BusinessException e) {
+				// erreur a gérer si probleme lors de la creation
+				System.out.println("erreur creation compte");
+				e.printStackTrace();
+			}
 
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
-			requestDispatcher.forward(request, response);
 		} else {
-
+			// Si mot de passe et confirmation differents, retour sur la page de creation
+			// A determiner si doit etre pre-rempli avec les infos entrées precedemment
 			System.out.println("erreur de mot de passe");
 
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/CreationCompte.jsp");
@@ -66,7 +71,5 @@ public class ServletCreationCompte extends HttpServlet {
 		}
 
 	}
-
-	
 
 }
