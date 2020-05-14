@@ -8,7 +8,7 @@ public abstract class CodesResultatBLL {
 	/**
 	 * Echec mot de passe incorrect
 	 */
-	public static final int LOGIN_MOT_DE_PASSE_INCORRECT = 20001;
+	public static final int MOT_DE_PASSE_INCORRECT = 20001;
 	
 	/**
 	 * Echec mot de passe incorrect
@@ -100,6 +100,13 @@ public abstract class CodesResultatBLL {
 	 * Echec ville trop long +30
 	 */
 	public static final int REGLE_UTILISATEUR_VILLE_TROP_LONG = 21017;
+
+	/**
+	 * Echec mot de passe trop court -8
+	 */
+	public static final int REGLE_UTILISATEUR_MOT_DE_PASSE_TROP_COURT = 0;
+	
+	
 
 	
 	/**
