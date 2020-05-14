@@ -31,10 +31,14 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 
 		Utilisateur utilisateur = utilisateurDAO.selectByLogin(login);
 
-		
-		if (!utilisateur.getMotDePasse().equals(encryptMDP(motDePasse, utilisateur.getPseudo()))) {
+		if (utilisateur == null) {
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatBLL.MOT_DE_PASSE_INCORRECT);
+			businessException.ajouterErreur(CodesResultatBLL.LOGIN_MOT_DE_PASSE_INCORRECT);
+			throw businessException;
+		} 
+		else if (!utilisateur.getMotDePasse().equals(encryptMDP(motDePasse, utilisateur.getPseudo()))) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatBLL.LOGIN_INCORRECT);
 			throw businessException;
 		}
 
@@ -43,20 +47,19 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 
 	@Override
 	public Utilisateur supprimerMonCompte(Utilisateur utilisateurConnecte) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.utilisateurDAO.deleteOne(utilisateurConnecte);
 	}
 
 	@Override
 	public Utilisateur afficherUtilisateur(String pseudo) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.utilisateurDAO.selectByLogin(pseudo);
 	}
 
 	@Override
-	public Utilisateur modifierMonCompte(Utilisateur utilisateur, boolean isNouveauMotDePasse) throws BusinessException {
-		// TODO Auto-generated method stub
+	public Utilisateur modifierMonCompte(Utilisateur utilisateur, boolean isNouveauMotDePasse)
+			throws BusinessException {
 		BusinessException businessException = new BusinessException();
+		
 		// Validation des éléments
 		utilisateur.setTelephone(this.validerTelephone(utilisateur.getTelephone(), businessException));
 		utilisateur.setCodePostal(this.validerCodePostal(utilisateur.getCodePostal(), businessException));
@@ -66,20 +69,19 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		utilisateur.setEmail(this.validerEmail(utilisateur.getEmail(), businessException));
 		utilisateur.setRue(this.validerRue(utilisateur.getRue(), businessException));
 		utilisateur.setVille(this.validerVille(utilisateur.getVille(), businessException));
-		
-		// TODO vérifier comment on fait
-		// proposition : placeholder => si post non vide alors on doit modifier le mot de passe en base sinon on me renvoie l'ancien 
-		// faire avec 2 fonctions différentes ?
-		utilisateur.setMotDePasse(this.validerMotDePasse(utilisateur.getMotDePasse(), businessException));
+
+		// Validation du mot de passe si nouveau
+		if (isNouveauMotDePasse) {
+			utilisateur.setMotDePasse(this.validerMotDePasse(utilisateur.getMotDePasse(), businessException));
+		}
 
 		if (!businessException.hasErreurs()) {
-//			String hashMotDePasse = this.encryptMDP(motDePasse, utilisateur.getPseudo());
-			int credit = Integer.parseInt(Settings.getProperty("defaut_credit"));
-			boolean administrateur = Boolean.parseBoolean(Settings.getProperty("defaut_compte_administrateur"));
-			boolean actif = Boolean.parseBoolean(Settings.getProperty("defaut_compte_actif"));
+			// Cryptage du mot de passe si nouveau
+			if (isNouveauMotDePasse) {
+				utilisateur.setMotDePasse(this.encryptMDP(utilisateur.getMotDePasse(), utilisateur.getPseudo()));
+			}
 
-
-			this.utilisateurDAO.updateOne(utilisateur);
+			utilisateur = this.utilisateurDAO.updateOne(utilisateur);
 		} else {
 			throw businessException;
 		}
@@ -113,7 +115,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 			utilisateur = new Utilisateur(telephone, codePostal, credit, pseudo, nom, prenom, email, rue, ville,
 					hashMotDePasse, administrateur, actif);
 
-			this.utilisateurDAO.insertOne(utilisateur);
+			utilisateur = this.utilisateurDAO.insertOne(utilisateur);
 		} else {
 			throw businessException;
 		}
@@ -155,7 +157,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		return motDePasse;
 	}
 
-	private String validerTelephone(String telephone, BusinessException businessException) {
+	private String validerTelephone(String telephone, BusinessException businessException) throws BusinessException {
 
 		if (telephone != null) {
 			telephone = telephone.trim();
