@@ -33,12 +33,12 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 
 		if (utilisateur == null) {
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatBLL.LOGIN_MOT_DE_PASSE_INCORRECT);
+			businessException.ajouterErreur(CodesResultatBLL.LOGIN_INCORRECT);
 			throw businessException;
 		} 
-		else if (!utilisateur.getMotDePasse().equals(encryptMDP(motDePasse, utilisateur.getPseudo()))) {
+		else if (!utilisateur.getMotDePasse().equals(encryptMDP(motDePasse))) {
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatBLL.LOGIN_INCORRECT);
+			businessException.ajouterErreur(CodesResultatBLL.MOT_DE_PASSE_INCORRECT);
 			throw businessException;
 		}
 
@@ -56,37 +56,40 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	@Override
-	public Utilisateur modifierMonCompte(Utilisateur utilisateur, boolean isNouveauMotDePasse)
+	public Utilisateur modifierMonCompte(Utilisateur utilisateurSession, Utilisateur utilisateurData)
 			throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		
 		// Validation des éléments
-		utilisateur.setTelephone(this.validerTelephone(utilisateur.getTelephone(), businessException));
-		utilisateur.setCodePostal(this.validerCodePostal(utilisateur.getCodePostal(), businessException));
-		utilisateur.setPseudo(this.validerPseudo(utilisateur.getPseudo(), businessException));
-		utilisateur.setNom(this.validerNom(utilisateur.getNom(), businessException));
-		utilisateur.setPrenom(this.validerPrenom(utilisateur.getPrenom(), businessException));
-		utilisateur.setEmail(this.validerEmail(utilisateur.getEmail(), businessException));
-		utilisateur.setRue(this.validerRue(utilisateur.getRue(), businessException));
-		utilisateur.setVille(this.validerVille(utilisateur.getVille(), businessException));
+		utilisateurSession.setTelephone(this.validerTelephone(utilisateurData.getTelephone(), businessException));
+		utilisateurSession.setCodePostal(this.validerCodePostal(utilisateurData.getCodePostal(), businessException));
+		utilisateurSession.setPseudo(this.validerPseudo(utilisateurData.getPseudo(), businessException));
+		utilisateurSession.setNom(this.validerNom(utilisateurData.getNom(), businessException));
+		utilisateurSession.setPrenom(this.validerPrenom(utilisateurData.getPrenom(), businessException));
+		utilisateurSession.setEmail(this.validerEmail(utilisateurData.getEmail(), businessException));
+		utilisateurSession.setRue(this.validerRue(utilisateurData.getRue(), businessException));
+		utilisateurSession.setVille(this.validerVille(utilisateurData.getVille(), businessException));
 
+		
 		// Validation du mot de passe si nouveau
-		if (isNouveauMotDePasse) {
-			utilisateur.setMotDePasse(this.validerMotDePasse(utilisateur.getMotDePasse(), businessException));
+		boolean isPasswordToBeChanged = false;
+		if (!utilisateurData.getMotDePasse().equals(utilisateurSession.getMotDePasse())) {
+			utilisateurData.setMotDePasse(this.validerMotDePasse(utilisateurData.getMotDePasse(), businessException));
+			isPasswordToBeChanged = true;
 		}
 
 		if (!businessException.hasErreurs()) {
-			// Cryptage du mot de passe si nouveau
-			if (isNouveauMotDePasse) {
-				utilisateur.setMotDePasse(this.encryptMDP(utilisateur.getMotDePasse(), utilisateur.getPseudo()));
+			// Cryptage du mot de passe si nouveau ou si changement du Pseudo (pour salage)
+			if (isPasswordToBeChanged) {
+				utilisateurSession.setMotDePasse(this.encryptMDP(utilisateurSession.getMotDePasse()));
 			}
 
-			utilisateur = this.utilisateurDAO.updateOne(utilisateur);
+			utilisateurSession = this.utilisateurDAO.updateOne(utilisateurSession);
 		} else {
 			throw businessException;
 		}
 
-		return utilisateur;
+		return utilisateurSession;
 	}
 
 	@Override
@@ -107,7 +110,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		motDePasse = this.validerMotDePasse(motDePasse, businessException);
 
 		if (!businessException.hasErreurs()) {
-			String hashMotDePasse = this.encryptMDP(motDePasse, pseudo);
+			String hashMotDePasse = this.encryptMDP(motDePasse);
 			int credit = Integer.parseInt(Settings.getProperty("defaut_credit"));
 			boolean administrateur = Boolean.parseBoolean(Settings.getProperty("defaut_compte_administrateur"));
 			boolean actif = Boolean.parseBoolean(Settings.getProperty("defaut_compte_actif"));
@@ -123,7 +126,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		return utilisateur;
 	}
 
-	private String encryptMDP(String motDePasse, String pseudo) throws BusinessException {
+	private String encryptMDP(String motDePasse) throws BusinessException {
 		byte[] hash = null;
 		MessageDigest md;
 		try {
@@ -135,7 +138,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		}
 
 		// on salt avec le pseudo de l'utilisateur
-		md.update(pseudo.getBytes());
+		md.update(Settings.getProperty("constant_chiffrage").getBytes());
 		hash = md.digest(motDePasse.getBytes(StandardCharsets.UTF_8));
 
 		StringBuilder sb = new StringBuilder();
