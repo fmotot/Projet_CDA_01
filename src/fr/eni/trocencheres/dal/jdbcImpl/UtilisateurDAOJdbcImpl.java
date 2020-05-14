@@ -240,12 +240,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pstmt.setString(2, login);
 
 			ResultSet rs = pstmt.executeQuery();
-			if(!rs.next()) {
-				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(CodesResultatDAL.LOGIN_INVALID);
-				throw businessException;
-				
-			}else {
+
+			
+			
 				
 			while (rs.next()) {
 
@@ -265,7 +262,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				user.setNoUtilisateur(rs.getInt("no_utilisateur"));
 
 			}
-			}
+			
 
 		} catch (Exception e) {
 			
