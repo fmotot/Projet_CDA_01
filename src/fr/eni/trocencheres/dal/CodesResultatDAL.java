@@ -62,4 +62,20 @@ public abstract class CodesResultatDAL {
 	 */
 	public static final int	LOGIN_INVALID = 10010;
 	
+	
+	/**
+	 * Echec de la lecture categories
+	 */
+	public static final int LECTURE_CATEGORIES_ECHEC = 10011;
+	
+	
+	/**
+	 * Echec de la lecture d'une categorie
+	 */
+	public static final int LECTURE_CATEGORIE_ECHEC = 10012;
+	
+	/**
+	 * Echec lors de la suppresion d'une categorie
+	 */
+	public static final int SUPPRESSION_CATEGORIE_ECHEC = 10013;
 }

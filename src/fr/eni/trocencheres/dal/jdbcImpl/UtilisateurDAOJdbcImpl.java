@@ -73,7 +73,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT_UN_UTILISATEUR,
-					PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement.RETURN_GENERATED_KEYS);
 
 			// code_postal,credit,email,mot_de_passe,nom,prenom,pseudo,rue,telephone,ville
 			pstmt.setString(1, entity.getCodePostal());
