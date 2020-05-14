@@ -22,16 +22,16 @@ public class ProfilUtilisateurServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+				
 		UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager();
+		
 		try {
 			Utilisateur utilisateurChoisi = utilisateurManager.afficherUtilisateur(request.getParameter("pseudo"));
 			request.setAttribute("utilisateurChoisi", utilisateurChoisi);
+			
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
-		
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ProfilUtilisateur.jsp") ;
 	    requestDispatcher.forward(request, response) ;
