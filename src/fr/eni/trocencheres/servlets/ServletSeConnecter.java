@@ -32,6 +32,7 @@ public class ServletSeConnecter extends HttpServlet {
 		// Recuperation du login et mot de passe
 		String login = request.getParameter("inputId"); 
 		String motDePasse = request.getParameter("inputPassword"); 
+		System.out.println(login + motDePasse);
 		UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager(); 
 		
 		try { 
@@ -46,6 +47,7 @@ public class ServletSeConnecter extends HttpServlet {
 
 		} catch (BusinessException e) { 
 			System.out.println("utilisateur inexistant"); 
+			System.err.println(e.getListeCodesErreur());
 			// Renvoi sur la page de connexion si pas de concordance
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/SeConnecter.jsp"); 
 			requestDispatcher.forward(request, response); 

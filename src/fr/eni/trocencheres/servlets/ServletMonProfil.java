@@ -32,7 +32,7 @@ public class ServletMonProfil extends HttpServlet {
 		// Recuperation de l'utilisateur en session
 		Utilisateur utilisateurConnecte = (Utilisateur) session.getAttribute("utilisateur");
 		UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager();
-		boolean isNouveauMotDePasse = false;
+		Utilisateur utilisateurData = new Utilisateur();
 		// si clique sur le bouton supprimer
 		if (request.getParameter("submit").equals("supprimer")) {
 			try {
@@ -53,21 +53,15 @@ public class ServletMonProfil extends HttpServlet {
 			// Verification au prealable que les champs MDP et Confirmation soit identiques
 			if ((request.getParameter("inputMotDePasse")).equals(request.getParameter("inputConfirmation"))) {
 				// Reaffectation des données dans l'utilisateur
-				utilisateurConnecte.setPseudo(request.getParameter("inputPseudo"));
-				utilisateurConnecte.setPseudo(request.getParameter("inputNom"));
-				utilisateurConnecte.setPrenom(request.getParameter("inputPrenom"));
-				utilisateurConnecte.setEmail(request.getParameter("inputEmail"));
-				utilisateurConnecte.setTelephone(request.getParameter("inputTelephone"));
-				utilisateurConnecte.setRue(request.getParameter("inputRue"));
-				utilisateurConnecte.setCodePostal(request.getParameter("inputCodePostal"));
-				utilisateurConnecte.setVille(request.getParameter("inputVille"));
-				// Verification si le MDP est un nouveau ou pas si non renseigné
-				if (request.getParameter("inputMotDePasse") == null) {
-					isNouveauMotDePasse = false;
-				} else {
-					isNouveauMotDePasse = true;
-					utilisateurConnecte.setMotDePasse(request.getParameter("inputMotDePasse"));
-				}
+				utilisateurData.setPseudo(request.getParameter("inputPseudo"));
+				utilisateurData.setNom(request.getParameter("inputNom"));
+				utilisateurData.setPrenom(request.getParameter("inputPrenom"));
+				utilisateurData.setEmail(request.getParameter("inputEmail"));
+				utilisateurData.setTelephone(request.getParameter("inputTelephone"));
+				utilisateurData.setRue(request.getParameter("inputRue"));
+				utilisateurData.setCodePostal(request.getParameter("inputCodePostal"));
+				utilisateurData.setVille(request.getParameter("inputVille"));
+				utilisateurData.setMotDePasse(request.getParameter("inputMotDePasse"));
 			} else {
 				// Si mot de passe et confirmation differents, retour sur la page de profil
 				System.out.println("erreur de mot de passe");
@@ -77,16 +71,17 @@ public class ServletMonProfil extends HttpServlet {
 			}
 
 		}
-		try	{
+		try {
 			// Mise a jour de l'utilisateur en BDD et recuperation de l'utilisateur mis a jour
-			Utilisateur utilisateurUpdate = utilisateurManager.modifierMonCompte(utilisateurConnecte,
-					isNouveauMotDePasse);
+			Utilisateur utilisateurUpdate = utilisateurManager.modifierMonCompte(utilisateurConnecte, utilisateurData);
+
 			// Affectation de l'utilisateur mis a jour en session
 			session.setAttribute("utilisateur", utilisateurUpdate);
 			// renvoi sur la JSP
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (BusinessException e) {
+			System.err.println(e.getListeCodesErreur());
 			// erreur a gérer si probleme lors de l'update
 			e.printStackTrace();
 		}

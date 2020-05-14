@@ -27,22 +27,10 @@ public class ProfilUtilisateurServlet extends HttpServlet {
 		UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager();
 		try {
 			Utilisateur utilisateurChoisi = utilisateurManager.afficherUtilisateur(request.getParameter("pseudo"));
+			request.setAttribute("utilisateurChoisi", utilisateurChoisi);
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ProfilUtilisateur.jsp") ;

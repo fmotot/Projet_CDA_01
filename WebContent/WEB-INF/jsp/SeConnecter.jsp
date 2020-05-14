@@ -32,14 +32,14 @@
 				<div class="form-group row justify-content-center">
 				    <label for="inputId" class="col-4 col-form-label-sm ">Identifiant :</label>
 				    <div class="col-6">
-				    	<input type="text" class="form-control form-control-sm" id="inputId">
+				    	<input type="text" class="form-control form-control-sm" name="inputId" id="inputId">
 				    </div>
 				</div>
 				  	
 				<div class="form-group row justify-content-center ">
 					<label for="inputPassword" class="col-4 col-form-label-sm">Mot de passe :</label>
 					<div class="col-6">
-				    	<input type="password" class="form-control form-control-sm" id="inputPassword">
+				    	<input type="password" class="form-control form-control-sm" name="inputPassword" id="inputPassword">
 				   	</div>
 				</div>
 				

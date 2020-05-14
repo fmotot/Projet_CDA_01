@@ -58,7 +58,10 @@ public class ServletCreationCompte extends HttpServlet {
 			} catch (BusinessException e) {
 				// erreur a gérer si probleme lors de la creation
 				System.out.println("erreur creation compte");
+				System.err.println(e.getListeCodesErreur());
 				e.printStackTrace();
+				
+
 			}
 
 		} else {

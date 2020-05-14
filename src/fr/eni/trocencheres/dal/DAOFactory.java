@@ -1,5 +1,6 @@
 package fr.eni.trocencheres.dal;
 
+import fr.eni.trocencheres.dal.jdbcImpl.UtilisateurDAOJdbcImpl;
 
 public abstract class DAOFactory {
 
@@ -12,7 +13,7 @@ public abstract class DAOFactory {
 	}
 	
 	public static UtilisateurDAO getUtilisateurDAO() {
-		return null;
+		return new UtilisateurDAOJdbcImpl();
 	}
 	
 	public static VenteDAO getVenteDAO() {

@@ -48,7 +48,7 @@
 					</div>
 					<div class="form-group col-lg-6 mx-auto">
 						<label for="inputEmail">Email :</label> 
-						<input value="${utilisateur.email}" name="inputEmail" type="text" class="form-control" id="inputEmail">
+						<input value="${utilisateur.email}" name="inputEmail" type="email" class="form-control" id="inputEmail">
 					</div>
 				</div>
 				<div class="form-row">
@@ -134,7 +134,7 @@
 				<div class="form-group row justify-content-center ">
 					<label for="inputEmail" class="col-4 col-form-label-sm">Email :</label>
 					<div class="col-6">
-				    	<input value="${utilisateur.email}" name="inputEmail" type="text" class="form-control form-control-sm" id="inputEmail">
+				    	<input value="${utilisateur.email}" name="inputEmail" type="email" class="form-control form-control-sm" id="inputEmail">
 				   	</div>
 				</div>
 				

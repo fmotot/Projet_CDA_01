@@ -29,7 +29,9 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	@Override
 	public Utilisateur login(String login, String motDePasse) throws BusinessException {
 
+		System.out.println(login);
 		Utilisateur utilisateur = utilisateurDAO.selectByLogin(login);
+		
 
 		if (utilisateur == null) {
 			BusinessException businessException = new BusinessException();
