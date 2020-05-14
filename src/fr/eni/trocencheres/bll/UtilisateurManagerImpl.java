@@ -63,7 +63,6 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		BusinessException businessException = new BusinessException();
 		
 		// Validation des éléments
-		utilisateurSession.setTelephone(this.validerTelephone(utilisateurData.getTelephone(), businessException));
 		utilisateurSession.setCodePostal(this.validerCodePostal(utilisateurData.getCodePostal(), businessException));
 		utilisateurSession.setPseudo(this.validerPseudo(utilisateurData.getPseudo(), businessException));
 		utilisateurSession.setNom(this.validerNom(utilisateurData.getNom(), businessException));
@@ -72,6 +71,10 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		utilisateurSession.setRue(this.validerRue(utilisateurData.getRue(), businessException));
 		utilisateurSession.setVille(this.validerVille(utilisateurData.getVille(), businessException));
 
+		// test du téléphone si changer uniquement
+		if (!utilisateurData.getTelephone().equals(utilisateurSession.getTelephone())) {
+			utilisateurSession.setTelephone(this.validerTelephone(utilisateurData.getTelephone(), businessException));
+		}
 		
 		// Validation du mot de passe si nouveau
 		boolean isPasswordToBeChanged = false;
