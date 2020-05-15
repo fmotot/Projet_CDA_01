@@ -73,10 +73,20 @@ public class VenteManagerImpl implements VenteManager {
 
 	@Override
 	public Enchere encherir(Utilisateur acheteur, Vente vente, Integer mise) throws BusinessException {
-		// TODO Auto-generated method stub
+		BusinessException businessException = new BusinessException();
+		Enchere enchere = null;
+		
+		acheteur = this.validerUtilisateur(acheteur, businessException);
+		vente = this.validerVente(vente, businessException);
+		
 		// refuser une enchère plus basse que l'enchère la plus haute en cours
-		return null;
+		if (mise <= vente.getMaxEnchere().getMise()) {
+			
+		}
+		
+		return enchere;
 	}
+
 
 	@Override
 	public List<Vente> terminerVentes() throws BusinessException {
@@ -199,6 +209,14 @@ public class VenteManagerImpl implements VenteManager {
 		return enchere;
 	}
 
+	private Vente validerVente(Vente vente, BusinessException businessException) {
+		if (vente == null) {
+			businessException.ajouterErreur(CodesResultatBLL.VENTE_INCONNUE);
+		}
+		
+		return vente;
+	}
+	
 	private Retrait validerRetrait(String rue, String ville, String codePostal, BusinessException businessException) {
 		Retrait retrait = null;
 		
