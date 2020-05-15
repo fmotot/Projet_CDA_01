@@ -8,7 +8,6 @@ import java.util.List;
 
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bo.Categorie;
-import fr.eni.trocencheres.bo.Enchere;
 import fr.eni.trocencheres.bo.Utilisateur;
 import fr.eni.trocencheres.bo.Vente;
 import fr.eni.trocencheres.dal.CodesResultatDAL;
@@ -17,7 +16,23 @@ import fr.eni.trocencheres.dal.VenteDAO;
 
 public class VenteDAOJdbcImpl implements VenteDAO {
 
-	private static String SELECT_ALL_VENTES = "SELECT * FROM VENTES INNER JOIN encheres ON ventes.no_vente = encheres.no_vente INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = encheres.no_utilisateur LEFT JOIN retraits ON retraits.no_vente = ventes.no_vente";	
+	private static String SELECT_ALL_VENTES = "SELECT * FROM VENTES INNER JOIN encheres ON ventes.no_vente = encheres.no_vente INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = encheres.no_utilisateur LEFT JOIN retraits ON retraits.no_vente = ventes.no_vente";
+	private static String INSERT_UNE_VENTE = "";
+	private static String UPDATE_UNE_VENTE ="";
+	private static String SELECT_UNE_VENTE="";
+	private static String DELETE_UNE_VENTE="";
+	
+	
+//	SELECT * FROM VENTES 
+//	INNER JOIN utilisateurs as u
+//    ON u.no_utilisateur = ventes.no_utilisateur 
+//	INNER JOIN encheres 
+//    ON ventes.no_vente = encheres.no_vente
+//    INNER JOIN utilisateurs
+//    ON utilisateurs.no_utilisateur = encheres.no_utilisateur 
+//    LEFT JOIN retraits
+//    ON retraits.no_vente = ventes.no_vente;
+	
 	@Override
 	public List<Vente> getAll() throws BusinessException {
 		List<Vente> listesVentes = new ArrayList<Vente>();
