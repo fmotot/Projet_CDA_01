@@ -8,6 +8,13 @@
 -- Ensuite  : Créer une base de donnée troc_encheres (conserver ce nom)
 -- Insérer le script suivant d'un seul coup. 
 
+DROP TABLE IF EXISTS ENCHERES;
+DROP TABLE IF EXISTS RETRAITS;
+DROP TABLE IF EXISTS VENTES;
+DROP TABLE IF EXISTS UTILISATEURS;
+DROP TABLE IF EXISTS CATEGORIES;
+
+
 
 CREATE TABLE CATEGORIES (
     no_categorie   INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -48,13 +55,13 @@ CREATE TABLE UTILISATEURS (
     mot_de_passe     CHAR(64) NOT NULL,
     credit           INTEGER NOT NULL,
     isActif			 bit NOT NULL DEFAULT 1,
-    administrateur   bit NOT NULL DEFAULT 0,
+    administrateur   bit NOT NULL DEFAULT 0
   
 );
 
-CREATE UNIQUE INDEX 'UX_pseudo' ON UTILISATEURS('pseudo');
-CREATE UNIQUE INDEX 'UX_email' ON UTILISATEURS('email');
-CREATE INDEX 'IX_telephone' ON UTILISATEURS('telephone');
+CREATE UNIQUE INDEX UX_pseudo ON UTILISATEURS(pseudo);
+CREATE UNIQUE INDEX UX_email ON UTILISATEURS(email);
+CREATE INDEX IX_telephone ON UTILISATEURS(telephone);
 
 
 CREATE TABLE VENTES (
