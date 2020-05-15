@@ -25,6 +25,7 @@
 	<div class="row">
 		<div class="col-12 col-lg-7 my-auto">
 			<h1>TrocEncheres.org</h1>
+			<%@ include file="Alerte.jspf" %>
 		</div>
 
 		<div class="col-12 col-lg-5 my-auto">

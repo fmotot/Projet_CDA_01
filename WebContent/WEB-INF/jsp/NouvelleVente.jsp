@@ -23,6 +23,8 @@
 <body>
 
 	<h1>TrocEncheres.org</h1>
+	
+	<%@ include file="Alerte.jspf" %>
 
 	<h2 class="text-center">Nouvelle vente</h2>
 
