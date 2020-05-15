@@ -1,6 +1,7 @@
 package fr.eni.trocencheres.dal.jdbcImpl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -77,7 +78,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			Connection cnx = ConnectionProvider.getConnection();
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT_UNE_ENCHERE);
 
-			pstmt.setDate(1, new java.sql.Date(entity.getDateEnchere().getTime()));
+			pstmt.setDate(1, ( java.sql.Date.valueOf(entity.getDateEnchere().toLocalDate())));
 			pstmt.setInt(2, entity.getMise());
 			pstmt.setInt(3, entity.getAcheteur().getNoUtilisateur());
 			pstmt.setInt(4, entity.getVente().getNoVente());
@@ -108,7 +109,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			Connection cnx = ConnectionProvider.getConnection();
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_UNE_ENCHERE);
 			
-			pstmt.setDate(1, new java.sql.Date(entity.getDateEnchere().getTime()));
+			pstmt.setDate(1,java.sql.Date.valueOf(entity.getDateEnchere().toLocalDate()));
 			pstmt.setInt(2, entity.getMise());
 			pstmt.setInt(3, entity.getAcheteur().getNoUtilisateur());
 			pstmt.setInt(4, entity.getVente().getNoVente());
