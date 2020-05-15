@@ -3,6 +3,7 @@
  */
 package fr.eni.trocencheres.bll;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -30,10 +31,18 @@ public class VenteManagerImpl implements VenteManager {
 	}
 
 	@Override
-	public Vente creerVente(String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix,
+	public Vente creerVente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix,
 			Utilisateur vendeur, String rue, String ville, Integer codePostal) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		BusinessException businessException = new BusinessException();
+		Vente vente = null;
+		
+		nomArticle = this.validerNomArticle(nomArticle, businessException);
+		description = this.validerDescription(description, businessException);
+		
+		
+		
+		
+		return vente;
 	}
 
 	@Override

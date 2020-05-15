@@ -3,13 +3,12 @@
  */
 package fr.eni.trocencheres.bll;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bo.Categorie;
 import fr.eni.trocencheres.bo.Enchere;
-import fr.eni.trocencheres.bo.Retrait;
 import fr.eni.trocencheres.bo.Utilisateur;
 import fr.eni.trocencheres.bo.Vente;
 
@@ -32,7 +31,7 @@ public interface VenteManager {
 	 * @return		la vente créée
 	 * @throws BusinessException
 	 */
-	Vente creerVente(String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, String rue, String ville, Integer codePostal) throws BusinessException;
+	Vente creerVente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, String rue, String ville, Integer codePostal) throws BusinessException;
 	
 	/**
 	 * ID 2002	Annuler une vente
