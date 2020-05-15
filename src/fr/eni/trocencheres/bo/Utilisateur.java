@@ -236,5 +236,15 @@ public class Utilisateur implements Serializable {
 				+ administrateur + "]";
 	}
 
+	@Override
+	public boolean equals(Object object) {
+		boolean equal = false;
+		
+		if (object instanceof Utilisateur && ((Utilisateur)object).getNoUtilisateur() == this.getNoUtilisateur()) {
+			equal = true;
+		}
+		
+		return equal;
+	}
 	
 }
