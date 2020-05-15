@@ -153,7 +153,6 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	private String validerMotDePasse(String motDePasse, BusinessException businessException) {
-
 		if (motDePasse == null || motDePasse.length() < 8) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_MOT_DE_PASSE_TROP_COURT);
 		} else {

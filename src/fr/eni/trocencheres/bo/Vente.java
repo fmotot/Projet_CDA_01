@@ -22,17 +22,18 @@ public class Vente implements Serializable {
 	private Date dateFinEncheres;
 	private Integer miseAPrix;
 	private boolean retraitArticle;
-	
+
 	private Categorie categorie;
 	private Utilisateur vendeur;
 	private Retrait retrait;
-	
-	private List<Enchere> listeEncheres; 
-	
+
+	private List<Enchere> listeEncheres;
+
 	public Vente() {
 	}
-	
-	public Vente(String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, List<Enchere> listeEncheres) {
+
+	public Vente(String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur,
+			Retrait retrait, boolean retraitArticle, List<Enchere> listeEncheres) {
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateFinEncheres = dateFinEncheres;
@@ -41,8 +42,9 @@ public class Vente implements Serializable {
 		this.retrait = retrait;
 		this.listeEncheres = listeEncheres;
 	}
-	
-	public Vente(Integer noVente, String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, List<Enchere> listeEncheres) {
+
+	public Vente(Integer noVente, String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix,
+			Utilisateur vendeur, Retrait retrait, boolean retraitArticle, List<Enchere> listeEncheres) {
 		this(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, retraitArticle, listeEncheres);
 		this.noVente = noVente;
 	}
@@ -186,12 +188,32 @@ public class Vente implements Serializable {
 	public void setListeEncheres(List<Enchere> listeEncheres) {
 		this.listeEncheres = listeEncheres;
 	}
+
+	public Enchere getMaxEnchere() {
+
+		// si requete ORDER BY DESC
+		Enchere derniereEnchere = this.listeEncheres.get(0);
+
+		return derniereEnchere;
+	}
+
+	public Integer getClassement(Utilisateur utilisateurConnecte) {
+		Integer classement = 0;
+		// avec une requete SQL en DESC
+		for (Enchere enchere : this.listeEncheres) {
+			if (enchere.getAcheteur().equals(utilisateurConnecte)) {
+				classement = listeEncheres.indexOf(enchere);
+				break;
+			}
+		}
+		return classement;
+	}
+
 	
 	@Override
 	public String toString() {
 		return "Vente [noVente=" + noVente + ", nomArticle=" + nomArticle + ", description=" + description
-				+ ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix
-				+ "]";
+				+ ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix + "]";
 	}
-	
+
 }
