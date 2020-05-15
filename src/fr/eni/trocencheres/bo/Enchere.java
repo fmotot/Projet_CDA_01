@@ -1,14 +1,15 @@
 package fr.eni.trocencheres.bo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class Enchere implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Date dateEnchere;
+	private LocalDateTime dateEnchere;
 	private Utilisateur acheteur;
 	private Vente vente;
 	private Integer mise;
@@ -26,7 +27,7 @@ public class Enchere implements Serializable{
 	 * @param mise
 	 */
 	public Enchere(Utilisateur acheteur, Vente vente, int mise) {
-		this.dateEnchere = new Date();
+		this.dateEnchere = LocalDateTime.now(ZoneId.of("Europe/Paris"));;
 		this.acheteur = acheteur;
 		this.vente = vente;
 		this.mise = mise;
@@ -38,7 +39,7 @@ public class Enchere implements Serializable{
 	 * @param vente
 	 * @param mise
 	 */
-	public Enchere(Date dateEnchere, Utilisateur acheteur, Vente vente, int mise) {
+	public Enchere(LocalDateTime dateEnchere, Utilisateur acheteur, Vente vente, int mise) {
 		this.dateEnchere = dateEnchere;
 		this.acheteur = acheteur;
 		this.vente = vente;
@@ -52,13 +53,13 @@ public class Enchere implements Serializable{
 	/**
 	 * @return the dateEnchere
 	 */
-	public Date getDateEnchere() {
+	public LocalDateTime getDateEnchere() {
 		return dateEnchere;
 	}
 	/**
 	 * @param dateEnchere the dateEnchere to set
 	 */
-	public void setDateEnchere(Date dateEnchere) {
+	public void setDateEnchere(LocalDateTime dateEnchere) {
 		this.dateEnchere = dateEnchere;
 	}
 	/**

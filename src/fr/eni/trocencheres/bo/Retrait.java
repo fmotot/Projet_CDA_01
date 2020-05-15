@@ -5,14 +5,15 @@ import java.io.Serializable;
 public class Retrait implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	String rue, ville;
-	Integer codePostal;
+	String rue;
+	String ville;
+	String codePostal;
 	
 
 	public Retrait() {
 	}
 	
-	public Retrait(String rue, String ville, Integer codePostal) {
+	public Retrait(String rue, String ville, String codePostal) {
 		this.rue = rue;
 		this.ville = ville;
 		this.codePostal = codePostal;
@@ -50,14 +51,14 @@ public class Retrait implements Serializable {
 	/**
 	 * @return the codePostal
 	 */
-	public Integer getCodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
 	
 	/**
 	 * @param codePostal the codePostal to set
 	 */
-	public void setCodePostal(Integer codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 	
