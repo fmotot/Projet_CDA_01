@@ -1,0 +1,5 @@
+<div class="container mt-5 text-center">
+	<div class="alert alert-danger" role="alert">
+  		Alerte : 10001 Ceci est un exemple
+	</div>
+</div>
