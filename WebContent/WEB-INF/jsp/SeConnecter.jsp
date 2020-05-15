@@ -23,8 +23,6 @@
 <body>
 
 	<h1>TrocEncheres.org</h1>
-	
-	<%@ include file="Alerte.jspf" %>
 
 	<div class="container">
 		
