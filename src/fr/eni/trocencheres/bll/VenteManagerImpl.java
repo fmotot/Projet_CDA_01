@@ -3,8 +3,10 @@
  */
 package fr.eni.trocencheres.bll;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import fr.eni.trocencheres.BusinessException;
@@ -32,15 +34,25 @@ public class VenteManagerImpl implements VenteManager {
 
 	@Override
 	public Vente creerVente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix,
-			Utilisateur vendeur, String rue, String ville, Integer codePostal) throws BusinessException {
+			Utilisateur vendeur, String rue, String ville, String codePostal) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		Vente vente = null;
 		
 		nomArticle = this.validerNomArticle(nomArticle, businessException);
 		description = this.validerDescription(description, businessException);
+		dateFinEncheres = this.validerDateFinEnchere(dateFinEncheres, businessException);
+		miseAPrix = this.validerPrixInitial(miseAPrix, businessException);
+		vendeur = this.validerUtilisateur(vendeur, businessException);
+		Retrait retrait = this.validerRetrait(rue, ville, codePostal, businessException);
 		
-		
-		
+		if (!businessException.hasErreurs()) {
+			vente = new Vente(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, false, null);
+			
+			vente = this.venteDAO.insertOne(vente);
+		}
+		else {
+			throw businessException;
+		}
 		
 		return vente;
 	}
@@ -146,17 +158,17 @@ public class VenteManagerImpl implements VenteManager {
 		return description;
 	}
 
-	private Date validerDateFinEnchere(Date dateFinEnchere, BusinessException businessException) {
-		if (dateFinEnchere == null) {
+	private LocalDateTime validerDateFinEnchere(LocalDateTime dateFinEncheres, BusinessException businessException) {
+		if (dateFinEncheres == null) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_VENTE_DATE_FIN_ENCHERE_VIDE);
 		} else {
-			// TODO si date inférieur à aujourd'hui erreur
-			if (dateFinEnchere.before(new Date())) {
+			// si date inférieur à aujourd'hui erreur
+			if (dateFinEncheres.isBefore(LocalDateTime.of(LocalDate.now(ZoneId.of("Europe/Paris")),LocalTime.MIDNIGHT))) {
 				businessException.ajouterErreur(CodesResultatBLL.REGLE_VENTE_DATE_FIN_ENCHERE_IMPOSSIBLE);
 			}
 		}
 
-		return dateFinEnchere;
+		return dateFinEncheres;
 	}
 
 	private Integer validerPrixInitial(Integer prixInitial, BusinessException businessException) {

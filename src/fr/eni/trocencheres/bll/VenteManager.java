@@ -31,7 +31,7 @@ public interface VenteManager {
 	 * @return		la vente créée
 	 * @throws BusinessException
 	 */
-	Vente creerVente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, String rue, String ville, Integer codePostal) throws BusinessException;
+	Vente creerVente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, String rue, String ville, String codePostal) throws BusinessException;
 	
 	/**
 	 * ID 2002	Annuler une vente
