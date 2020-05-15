@@ -8,7 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import fr.eni.trocencheres.BusinessException;
+import fr.eni.trocencheres.bll.BLLFactory;
+import fr.eni.trocencheres.bll.UtilisateurManager;
 import fr.eni.trocencheres.bo.Utilisateur;
 
 @WebServlet("/ServletCreationCompte")
@@ -24,30 +28,47 @@ public class ServletCreationCompte extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();
+
+		// Recuperation des données de la JSP
 		String pseudo = request.getParameter("inputPseudo");
 		String nom = request.getParameter("inputNom");
 		String prenom = request.getParameter("inputPrenom");
 		String email = request.getParameter("inputEmail");
-		Integer telephone = Integer.parseInt(request.getParameter("inputTelephone"));
+		String telephone = request.getParameter("inputTelephone");
 		String rue = request.getParameter("inputRue");
 		String codePostal = request.getParameter("inputCodePostal");
 		String ville = request.getParameter("inputVille");
 		String motDePasse = request.getParameter("inputMotDePasse");
 		String confirmationMDP = request.getParameter("inputConfirmation");
-		Integer credit = 100;
-		boolean administrateur = false;
-		boolean actif = true;
 
-		
+		UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager();
+
+		// Verification du mot de passe et de sa confirmation
 		if (motDePasse.equals(confirmationMDP)) {
-			Utilisateur utilisateur = new Utilisateur(telephone, codePostal, credit, pseudo, nom, prenom, email, rue,
-					ville, motDePasse, administrateur, actif);
-			request.setAttribute("utilisateur", utilisateur);
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/test.jsp");
-			requestDispatcher.forward(request, response);
+			try {
+				// Creation de l'utilisateur en BDD
+				Utilisateur utilisateur = utilisateurManager.creerCompteUtilisateur(telephone, codePostal, pseudo, nom,
+						prenom, email, rue, ville, motDePasse);
+				// Mise de l'utilisateur en session
+				session.setAttribute("utilisateur", utilisateur);
+				// Renvoi sur JSP 
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
+				requestDispatcher.forward(request, response);
+			} catch (BusinessException e) {
+				// erreur a gérer si probleme lors de la creation
+				System.out.println("erreur creation compte");
+				System.err.println(e.getListeCodesErreur());
+				e.printStackTrace();
+				
+
+			}
+
 		} else {
-			System.out.println("erreur");
+			// Si mot de passe et confirmation differents, retour sur la page de creation
+			// A determiner si doit etre pre-rempli avec les infos entrées precedemment
+			System.out.println("erreur de mot de passe");
+
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/CreationCompte.jsp");
 			requestDispatcher.forward(request, response);
 		}
