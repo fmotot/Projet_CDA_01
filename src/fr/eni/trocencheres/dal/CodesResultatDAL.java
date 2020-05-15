@@ -36,7 +36,7 @@ public abstract class CodesResultatDAL {
 	public static final int UPDATE_OBJET_NULL = 10005;
 	
 	/**
-	 * Echec général quand tentative update un objet null 
+	 * Echec général quand erreur non gérée lors de la mise à jour d'un objet  
 	 */
 	public static final int UPDATE_OBJET_ECHEC = 10006;
 	
@@ -78,4 +78,16 @@ public abstract class CodesResultatDAL {
 	 * Echec lors de la suppresion d'une categorie
 	 */
 	public static final int SUPPRESSION_CATEGORIE_ECHEC = 10013;
+	
+	/**
+	 * Echec de la lecture d'une enchere
+	 */
+	public static final int LECTURE_ENCHERE_ECHEC = 10014;
+	
+	/**
+	 * Echec lors de la suppresion d'une categorie
+	 */
+	public static final int SUPPRESSION_ENCHERE_ECHEC = 10015;
+	
+	
 }

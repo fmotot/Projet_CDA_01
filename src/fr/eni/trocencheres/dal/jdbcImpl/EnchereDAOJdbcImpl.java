@@ -99,20 +99,95 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	@Override
 	public Enchere updateOne(Enchere entity) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		if (entity == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_NULL);
+			throw businessException;
+		}
+		try {
+			Connection cnx = ConnectionProvider.getConnection();
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_UNE_ENCHERE);
+			
+			pstmt.setDate(1, new java.sql.Date(entity.getDateEnchere().getTime()));
+			pstmt.setInt(2, entity.getMise());
+			pstmt.setInt(3, entity.getAcheteur().getNoUtilisateur());
+			pstmt.setInt(4, entity.getVente().getNoVente());
+			
+			pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_ECHEC);
+			throw businessException;
+		}
+		
+		return entity;
 	}
 
 	@Override
 	public Enchere getOne(Enchere entity) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		Enchere enchere = null;
+		UtilisateurDAO utilisateurDAO = DAOFactory.getUtilisateurDAO();
+		VenteDAO venteDAO = DAOFactory.getVenteDAO();
+		try {
+		Connection cnx = ConnectionProvider.getConnection();
+		PreparedStatement pstmt = cnx.prepareStatement(SELECT_UNE_ENCHERE);
+		pstmt.setInt(1, entity.getAcheteur().getNoUtilisateur());
+		pstmt.setInt(2, entity.getVente().getNoVente());
+
+		ResultSet rs = pstmt.executeQuery();
+		
+		while (rs.next()) {
+			enchere = new Enchere();
+			
+
+			Utilisateur acheteur = new Utilisateur();
+			acheteur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+			acheteur = utilisateurDAO.getOne(acheteur);
+			enchere.setAcheteur(acheteur);
+
+			Vente vente = new Vente();
+			vente.setNoVente(rs.getInt("no_vente"));
+			vente = venteDAO.getOne(vente);
+			enchere.setVente(vente);
+
+			enchere.setDateEnchere(rs.getDate("date_enchere"));
+			enchere.setMise(rs.getInt("mise"));
+		}
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+		BusinessException businessException = new BusinessException();
+		businessException.ajouterErreur(CodesResultatDAL.LECTURE_ENCHERE_ECHEC);
+		throw businessException;
+	}
+		
+		return enchere;
 	}
 
 	@Override
 	public Enchere deleteOne(Enchere entity) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		if (entity == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_OBJET_NULL);
+			throw businessException;
+		}
+		try {
+			Connection cnx = ConnectionProvider.getConnection();
+			PreparedStatement pstmt = cnx.prepareStatement(DELETE_UNE_ENCHERE);
+			pstmt.setInt(1, entity.getAcheteur().getNoUtilisateur());
+			pstmt.setInt(2, entity.getVente().getNoVente());
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SUPPRESSION_ENCHERE_ECHEC);
+			throw businessException;
+		}
+		
+		return entity;
 	}
 
 }
