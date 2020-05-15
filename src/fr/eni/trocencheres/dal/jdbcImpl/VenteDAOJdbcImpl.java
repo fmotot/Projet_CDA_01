@@ -17,7 +17,7 @@ import fr.eni.trocencheres.dal.VenteDAO;
 
 public class VenteDAOJdbcImpl implements VenteDAO {
 
-	private static String SELECT_ALL_VENTES = "SELECT * FROM VENTES INNER JOIN encheres ON ventes.no_vente = encheres.no_vente ORDER BY VENTES.date_fin_encheres ASC; ";	
+	private static String SELECT_ALL_VENTES = "SELECT * FROM VENTES INNER JOIN encheres ON ventes.no_vente = encheres.no_vente INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = encheres.no_utilisateur LEFT JOIN retraits ON retraits.no_vente = ventes.no_vente";	
 	@Override
 	public List<Vente> getAll() throws BusinessException {
 		List<Vente> listesVentes = new ArrayList<Vente>();

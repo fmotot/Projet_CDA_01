@@ -50,7 +50,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				vente = venteDAO.getOne(vente);
 				enchere.setVente(vente);
 
-				enchere.setDateEnchere(rs.getDate("date_enchere"));
+				enchere.setDateEnchere( new java.sql.Timestamp(rs.getDate("date_enchere").getTime()).toLocalDateTime());
 				enchere.setMise(rs.getInt("mise"));
 
 				listeEnchere.add(enchere);
@@ -153,7 +153,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			vente = venteDAO.getOne(vente);
 			enchere.setVente(vente);
 
-			enchere.setDateEnchere(rs.getDate("date_enchere"));
+			enchere.setDateEnchere(new java.sql.Timestamp(rs.getDate("date_enchere").getTime()).toLocalDateTime());
 			enchere.setMise(rs.getInt("mise"));
 		}
 		
