@@ -5,6 +5,10 @@ package fr.eni.trocencheres.bll;
  */
 public abstract class CodesResultatBLL {
 	
+	
+	
+	// Codes résultat pour les Utilisateurs
+	
 	/**
 	 * Echec mot de passe incorrect
 	 */
@@ -109,7 +113,90 @@ public abstract class CodesResultatBLL {
 	/**
 	 * Echec mot de passe trop court -8
 	 */
-	public static final int REGLE_UTILISATEUR_MOT_DE_PASSE_TROP_COURT = 0;
+	public static final int REGLE_UTILISATEUR_MOT_DE_PASSE_TROP_COURT = 21018;
+
 	
 	
+	
+	// Codes résultat pour les Ventes 
+
+	/**
+	 * Echec du numéro de vente
+	 */
+	public static final int VENTE_INCONNUE = 23001;
+
+	/**
+	 * Echec suppresion de l'enchère refusée
+	 */
+	public static final int ENCHERE_SUPPRESSION_REFUSEE = 23002;
+
+	/**
+	 * Echec utilisateur inconnu
+	 */
+	public static final int UTILISATEUR_INCONNU = 23003;
+
+	/**
+	 * Echec enchère inconnu
+	 */
+	public static final int ENCHERE_INCONNUE = 23004;
+
+	/**
+	 * Echec nom d'article obligatoire
+	 */
+	public static final int REGLE_VENTE_NOM_ARTICLE_VIDE = 23005;
+
+	/**
+	 * Echec nom d'article trop long +30
+	 */
+	public static final int REGLE_VENTE_NOM_ARTICLE_TROP_LONG = 23006;
+
+	/**
+	 * Echec description obligatoire
+	 */
+	public static final int REGLE_VENTE_DESCRIPTION_VIDE = 23007;
+
+	/**
+	 * Echec description trop long +300
+	 */
+	public static final int REGLE_VENTE_DESCRIPTION_TROP_LONG = 23008;
+
+	/**
+	 * Echec date de fin d'enchère obligatoire
+	 */
+	public static final int REGLE_VENTE_DATE_FIN_ENCHERE_VIDE = 23009;
+
+	/**
+	 * Echec date de fin d'enchère forcément ultérieur à la date du jour
+	 */
+	public static final int REGLE_VENTE_DATE_FIN_ENCHERE_IMPOSSIBLE = 23010;
+
+	/**
+	 * Echec prix initial obligatoire
+	 */
+	public static final int REGLE_VENTE_PRIX_INITIAL_VIDE = 23011;
+
+	/**
+	 * Echec le prix ne peux pas être négatif
+	 */
+	public static final int REGLE_VENTE_PRIX_INITIAL_NEGATIF = 23012;
+
+	/**
+	 * Echec tous les champs du retrait doivent être rempli si le retrait ce fait ailleurs qu'au domicile
+	 */
+	public static final int REGLE_RETRAIT_INCOMPLET = 23014;
+
+	/**
+	 * Echec rue trop long +30
+	 */
+	public static final int REGLE_RETRAIT_RUE_TROP_LONG = 23015;
+
+	/**
+	 * Echec ville trop long +30
+	 */
+	public static final int REGLE_RETRAIT_VILLE_TROP_LONG = 23016;
+
+	/**
+	 * Echec code postal trop long +30
+	 */
+	public static final int REGLE_RETRAIT_CODE_POSTAL_TROP_LONG = 23017;
 }
