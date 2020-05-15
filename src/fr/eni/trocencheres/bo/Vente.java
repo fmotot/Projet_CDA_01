@@ -4,7 +4,7 @@
 package fr.eni.trocencheres.bo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -19,7 +19,7 @@ public class Vente implements Serializable {
 	private Integer noVente;
 	private String nomArticle;
 	private String description;
-	private Date dateFinEncheres;
+	private LocalDateTime dateFinEncheres;
 	private Integer miseAPrix;
 	private boolean retraitArticle;
 	
@@ -32,7 +32,7 @@ public class Vente implements Serializable {
 	public Vente() {
 	}
 	
-	public Vente(String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, List<Enchere> listeEncheres) {
+	public Vente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, List<Enchere> listeEncheres) {
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateFinEncheres = dateFinEncheres;
@@ -42,7 +42,7 @@ public class Vente implements Serializable {
 		this.listeEncheres = listeEncheres;
 	}
 	
-	public Vente(Integer noVente, String nomArticle, String description, Date dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, List<Enchere> listeEncheres) {
+	public Vente(Integer noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, List<Enchere> listeEncheres) {
 		this(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, retraitArticle, listeEncheres);
 		this.noVente = noVente;
 	}
@@ -92,14 +92,14 @@ public class Vente implements Serializable {
 	/**
 	 * @return the dateFinEncheres
 	 */
-	public Date getDateFinEncheres() {
+	public LocalDateTime getDateFinEncheres() {
 		return dateFinEncheres;
 	}
 
 	/**
 	 * @param dateFinEncheres the dateFinEncheres to set
 	 */
-	public void setDateFinEncheres(Date dateFinEncheres) {
+	public void setDateFinEncheres(LocalDateTime dateFinEncheres) {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 
@@ -194,4 +194,14 @@ public class Vente implements Serializable {
 				+ "]";
 	}
 	
+	@Override
+	public boolean equals(Object object) {
+		boolean equal = false;
+		
+		if (object instanceof Vente && ((Vente)object).getNoVente() == this.getNoVente()) {
+			equal = true;
+		}
+		
+		return equal;
+	}
 }
