@@ -86,7 +86,7 @@
 					<div class="form-group row">
 						<label for="inputArticle" class="col-5 col-form-label-sm">Fin de l'enchère :</label>
 						<div class="col-7 col-lg-7">
-							<input value="#" type="date" name="bday" max="3000-12-31" min="1000-01-01" class="form-control">
+							<input value="#" type="date" name="bday" max="3000-12-31" min="1000-01-01" class="form-control form-control-sm">
 						</div>
 					</div>
 					
