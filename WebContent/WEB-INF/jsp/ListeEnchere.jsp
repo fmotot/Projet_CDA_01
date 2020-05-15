@@ -138,7 +138,7 @@
 							</div>
 
 							<div class="col-8 ml-3">
-								<a href="#">${vente.nomArticle}</a><a href="#"> En cours</a>
+								<a href="./DetailVenteServlet?vente=${vente}">${vente.nomArticle}</a><a href="a remplir avec la servlet vente gagné"> En cours</a>
 								<p>Prix : ${vente.maxEnchere} points  ${vente.classement != 0 ? 'Classement :' vente.classement : ''} </p>
 								<p>Fin de l'enchère : ${vente.dateFinEncheres}</p>
 								<p>Retrait : ${vente.retrait.rue}</p>
