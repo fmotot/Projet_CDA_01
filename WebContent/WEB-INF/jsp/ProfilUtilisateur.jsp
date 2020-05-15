@@ -33,51 +33,51 @@
 			<h2>${utilisateurChoisi.pseudo}</h2>
 
 				<div class="form-group row justify-content-center">
-   					<label for="staticPseudo" class="col-4 col-lg-2 col-form-label-sm my-auto">Pseudo :</label>
+   					<label for="staticPseudo" class="col-4 col-lg-2">Pseudo :</label>
     				<div class="col-6 col-lg-4">
-      					<p>${utilisateurChoisi.pseudo}"</p>
+      					<p>${utilisateurChoisi.pseudo}</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticNom" class="col-4 col-lg-2 col-form-label-sm my-auto">Nom :</label>
+   					<label for="staticNom" class="col-4 col-lg-2 ">Nom :</label>
     				<div class="col-6 col-lg-4">
-      					<p>${utilisateurChoisi.nom}"</p>
+      					<p>${utilisateurChoisi.nom}</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticPrenom" class="col-4 col-lg-2 col-form-label-sm my-auto">Prénom :</label>
+   					<label for="staticPrenom" class="col-4 col-lg-2">Prénom :</label>
     				<div class="col-6 col-lg-4">
-      				<p>${utilisateurChoisi.prenom}"</p>
+      				<p>${utilisateurChoisi.prenom}</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticEmail" class="col-4 col-lg-2 col-form-label-sm my-auto">Email :</label>
+   					<label for="staticEmail" class="col-4 col-lg-2">Email :</label>
     				<div class="col-6 col-lg-4">
-      					<p>${utilisateurChoisi.email}"</p>
+      					<p>${utilisateurChoisi.email}</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticTelephone" class="col-4 col-lg-2 col-form-label-sm my-auto">Téléphone :</label>
+   					<label for="staticTelephone" class="col-4 col-lg-2">Téléphone :</label>
     				<div class="col-6 col-lg-4">
-      					<p>${utilisateurChoisi.telephone}"</p>
+      					<p>${utilisateurChoisi.telephone}</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticRue" class="col-4 col-lg-2 col-form-label-sm my-auto">Rue :</label>
+   					<label for="staticRue" class="col-4 col-lg-2">Rue :</label>
     				<div class="col-6 col-lg-4">
-      					<p>${utilisateurChoisi.rue}"</p>
+      					<p>${utilisateurChoisi.rue}</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticCodePostal" class="col-4 col-lg-2 col-form-label-sm my-auto">Code postal :</label>
+   					<label for="staticCodePostal" class="col-4 col-lg-2">Code postal :</label>
     				<div class="col-6 col-lg-4">
-      					<p>${utilisateurChoisi.codePostal}"</p>
+      					<p>${utilisateurChoisi.codePostal}</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticVille" class="col-4 col-lg-2 col-form-label-sm my-auto">Ville :</label>
+   					<label for="staticVille" class="col-4 col-lg-2">Ville :</label>
     				<div class="col-6 col-lg-4">
-      					<p>${utilisateurChoisi.ville}"</p>
+      					<p>${utilisateurChoisi.ville}</p>
     				</div>
  			    </div>
  			    

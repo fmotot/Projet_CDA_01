@@ -14,12 +14,8 @@ h2{
 	margin-bottom:30px;
 }
 
-label{
-	font-weight: 700;
-}
-
-#staticCredit {
-	font-size:3vw;
+label, p{
+	font-size:4vw;
 }
 
 .btn-retour{
@@ -42,12 +38,8 @@ label{
 		margin-bottom:30px;
 	}
 	
-	label{
-		font-weight: 700;
-	}
-
-	#staticCredit {
-		font-size:1vw;
+	label, p{
+		font-size:.8vw;
 	}
 	
 	.center-content{

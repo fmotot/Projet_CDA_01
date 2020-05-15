@@ -12,8 +12,8 @@ h2{
 	margin-bottom:30px;
 }
 
-label{
-	font-size:3vw;
+label, p{
+	font-size:4vw;
 }
 
 .form-group{
@@ -50,7 +50,7 @@ label{
 		margin-bottom:30px;
 	}
 	
-	label{
+	label, p{
 		font-size:.8vw;
 	}
 	
