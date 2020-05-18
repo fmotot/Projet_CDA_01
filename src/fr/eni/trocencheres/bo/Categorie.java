@@ -18,6 +18,10 @@ public class Categorie implements Serializable {
 	public Categorie(String libelle) {
 		this.libelle = libelle;
 	}
+		
+	public Categorie(Integer noCategorie) {
+		this.noCategorie = noCategorie;
+	}
 	
 	public Categorie(Integer noCategorie, String libelle) {
 		this(libelle);

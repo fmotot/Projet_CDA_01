@@ -3,6 +3,7 @@ package fr.eni.trocencheres.servlets;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bll.BLLFactory;
 import fr.eni.trocencheres.bll.VenteManager;
+import fr.eni.trocencheres.bo.Categorie;
 import fr.eni.trocencheres.bo.Utilisateur;
 
 /**
@@ -30,6 +32,11 @@ public class NouvelleVenteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		CategorieManager categorieManager = BLLFactory.getCategorieManager();
+		
+		List<Categorie> listeCategorie = categorieManager.getListeCategorie;
+		request.setAttribute("listeCategorie", listeCategorie);
+		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/NouvelleVente.jsp");
 		requestDispatcher.forward(request, response);
 	}
@@ -52,9 +59,11 @@ public class NouvelleVenteServlet extends HttpServlet {
 			String ville = request.getParameter("inputCodePostal");
 			String codePostal = request.getParameter("inputVille");
 			// une fois categorie rajoutée a la fonction en BLL
-			String categorie = request.getParameter("selectCategories");
+			Integer noCategorie = Integer.parseInt(request.getParameter("selectCategories"));
+			Categorie categorie = new Categorie(noCategorie);
 			
-			venteManager.creerVente(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, rue, ville, codePostal);
+			
+			venteManager.creerVente(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, rue, ville, codePostal, categorie);
 			
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
