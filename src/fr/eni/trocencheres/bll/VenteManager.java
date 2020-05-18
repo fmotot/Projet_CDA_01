@@ -66,17 +66,16 @@ public interface VenteManager {
 	 * @param acheteur		l'utilisateur enchérissant
 	 * @param vente			la vente sur laquelle l'utilisateur enchérit
 	 * @param mise			la mise de l'utilisateur 
-	 * @return				l'enchère crée
+	 * @return				la vente sur laquelle l'enchère est créé
 	 * @throws BusinessException
 	 */
-	Enchere encherir(Utilisateur acheteur, Vente vente, Integer mise) throws BusinessException;
+	Vente encherir(Utilisateur acheteur, Vente vente, Integer mise) throws BusinessException;
 	
 	
 	/**
 	 * ID 2005	Remporter une vente
 	 * Ne concerne pas l'IHM
 	 */
-	List<Vente> terminerVentes() throws BusinessException;
 	
 	/**
 	 * ID 2006	Annuler une enchère
