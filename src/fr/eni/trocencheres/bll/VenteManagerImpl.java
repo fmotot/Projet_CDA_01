@@ -34,7 +34,7 @@ public class VenteManagerImpl implements VenteManager {
 
 	@Override
 	public Vente creerVente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix,
-			Utilisateur vendeur, String rue, String ville, String codePostal) throws BusinessException {
+			Utilisateur vendeur, String rue, String ville, String codePostal, Categorie categorie) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		Vente vente = null;
 		
@@ -44,9 +44,10 @@ public class VenteManagerImpl implements VenteManager {
 		miseAPrix = this.validerPrixInitial(miseAPrix, businessException);
 		vendeur = this.validerUtilisateur(vendeur, businessException);
 		Retrait retrait = this.validerRetrait(rue, ville, codePostal, businessException);
+		categorie = this.validerCategorie(categorie, businessException);
 		
 		if (!businessException.hasErreurs()) {
-			vente = new Vente(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, false, null);
+			vente = new Vente(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, false, categorie, null);
 			
 			vente = this.venteDAO.insertOne(vente);
 		}
@@ -341,6 +342,14 @@ public class VenteManagerImpl implements VenteManager {
 		}
 
 		return retrait;
+	}
+	
+	private Categorie validerCategorie(Categorie categorie, BusinessException businessException) {
+		if (categorie == null) {
+			businessException.ajouterErreur(CodesResultatBLL.CATEGORIE_INCONNUE);
+		}
+		
+		return categorie;
 	}
 
 }
