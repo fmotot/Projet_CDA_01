@@ -14,7 +14,11 @@ import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bll.BLLFactory;
 import fr.eni.trocencheres.bll.UtilisateurManager;
 import fr.eni.trocencheres.bo.Utilisateur; 
- 
+/**
+ * 
+ * @author Macorigh Rudy
+ *
+ */
 @WebServlet("/ServletSeConnecter") 
 public class ServletSeConnecter extends HttpServlet { 
 	private static final long serialVersionUID = 1L; 

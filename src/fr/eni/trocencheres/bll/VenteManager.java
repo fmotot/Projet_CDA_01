@@ -84,7 +84,7 @@ public interface VenteManager {
 	 * @return
 	 * @throws BusinessException
 	 */
-	Enchere annulerEnchere(Enchere enchere, Utilisateur utilisateurSession) throws BusinessException;
+	Vente annulerEnchere(Vente vente, Utilisateur utilisateurSession) throws BusinessException;
 	
 	/**
 	 * ID 2007	Photo pour la vente

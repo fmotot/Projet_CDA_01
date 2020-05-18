@@ -5,11 +5,12 @@ package fr.eni.trocencheres.bo;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author fmoto
- *
+ *	@author Macorigh Rudy // getMaxEnchere // getClassement
  */
 public class Vente implements Serializable {
 	/**
@@ -30,9 +31,11 @@ public class Vente implements Serializable {
 	private List<Enchere> listeEncheres;
 
 	public Vente() {
+		listeEncheres = new ArrayList<Enchere>();
 	}
 	
 	public Vente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, List<Enchere> listeEncheres) {
+		this();
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateFinEncheres = dateFinEncheres;
@@ -177,14 +180,19 @@ public class Vente implements Serializable {
 	 * @return the listeEncheres
 	 */
 	public List<Enchere> getListeEncheres() {
-		return listeEncheres;
+		List<Enchere> result = new ArrayList<Enchere>();
+		
+		for (Enchere enchere : this.listeEncheres) {
+			result.add(enchere);
+		}
+		
+		return result;
 	}
 
-	/**
-	 * @param listeEncheres the listeEncheres to set
-	 */
-	public void setListeEncheres(List<Enchere> listeEncheres) {
-		this.listeEncheres = listeEncheres;
+	public void addEnchere(Enchere enchere) {
+		if (this.equals(enchere.getVente())){
+			this.listeEncheres.add(enchere);
+		}
 	}
 
 	public Enchere getMaxEnchere() {

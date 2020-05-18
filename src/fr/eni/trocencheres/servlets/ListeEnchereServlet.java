@@ -17,7 +17,11 @@ import fr.eni.trocencheres.bll.VenteManager;
 import fr.eni.trocencheres.bo.Categorie;
 import fr.eni.trocencheres.bo.Utilisateur;
 import fr.eni.trocencheres.bo.Vente;
-
+/**
+ * 
+ * @author Macorigh Rudy
+ *
+ */
 
 @WebServlet("/ListeEnchereServlet")
 public class ListeEnchereServlet extends HttpServlet {
