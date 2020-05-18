@@ -6,26 +6,29 @@ html {
 }
 
 body {
-  	margin-bottom: 40px;
+  	margin-bottom: 20vw;
 }
-	
-.footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	padding:10px;
+
+header{
 	background-color: #007bff;
-	color: white;
+	color : white;
+	padding:12px;
 }
 
 h1{
-	text-align: center;
-	margin:15px 0 15px 0;
-	font-weight: 600;
+	font-size: 6vw;
+	margin: 0;
 }
 
 h2{
 	font-size: 5vw;
+}
+
+.logo a , .logo a:hover{
+	color: white;
+	text-decoration: none;
+	font-size: 6vw;
+	font-weight: 600;
 }
 
 label, p, h3{
@@ -41,12 +44,26 @@ ul{
 	list-style: none;
 }
 
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding:10px;
+	background-color: #007bff;
+	color: white;
+}
+
+.container-fluid{
+	padding: 0;
+}
+
 @media (min-width: 1200px) { 
 
 	h1{
 		font-size:2.5vw;
 		text-align:justify;
 		margin-left:120px;
+		line-height: 0;
 	}
 	
 	h2{
@@ -64,23 +81,20 @@ ul{
 	}
 	
 	li{
-		display:inline;
-		color:white;
-		margin-right:16px;
+	display:inline;
+	color:white;
+	margin-right:16px;
 	}
 	
 	.logo a , .logo a:hover{
 		color: white;
 		text-decoration: none;
+		font-size: 2.5vw;
 	}
 	
 	.menu a , .menu a:hover{
 		color:white;
 		font-size: .8vw;
-	}
-	
-	.container-fluid{
-		padding:0;
 	}
 	
 	header{

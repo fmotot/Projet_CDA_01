@@ -82,8 +82,6 @@
 						</select>
 					</div>
 				</div>
-				
-				<div class="col-lg-2 my-auto utilisateur-connecte">$Utilisateur est connectée</div>
 
 				<!--	Recherche pour le mobile	-->
 				<div class="col-12 d-lg-none">

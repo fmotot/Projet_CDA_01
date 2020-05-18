@@ -38,14 +38,5 @@
 		width: 100px;
 		height: 120px;
 		background: black;
-	}
-	
-	.utilisateur-connecte{
-		background-color: #007bff;
-		padding:30px 15px 30px 15px;
-		text-align: center;
-		color:white;
-		font-weight: 600;
-	}
-	
+	}	
 }
