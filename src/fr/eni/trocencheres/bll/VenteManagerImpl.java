@@ -173,15 +173,27 @@ public class VenteManagerImpl implements VenteManager {
 		return venteTerminees;
 	}
 
+	// TODO remplacer Enchere par Vente dans les paramètres
+	
 	@Override
-	public Enchere annulerEnchere(Enchere enchere, Utilisateur utilisateurSession) throws BusinessException {
+	public Vente annulerEnchere(Vente vente, Utilisateur utilisateurSession) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 
 		utilisateurSession = this.validerUtilisateur(utilisateurSession, businessException);
-		enchere = this.validerEnchere(enchere, businessException);
-
+		vente = this.validerVente(vente, businessException);
+		
+		
 		if (!businessException.hasErreurs()) {
-			if (enchere.getAcheteur().equals(utilisateurSession)) {
+			
+			Enchere enchere = null; 
+			for (Enchere e : vente.getListeEncheres()) {
+				if (e.getAcheteur().equals(utilisateurSession)) {
+					enchere = e;
+					break;
+				}
+			}
+			
+			if (enchere != null) {
 				
 				// créditer l'utilisateur
 				enchere.getAcheteur().setCredit(enchere.getAcheteur().getCredit() + enchere.getMise());
@@ -197,7 +209,7 @@ public class VenteManagerImpl implements VenteManager {
 			throw businessException;
 		}
 
-		return enchere;
+		return vente;
 	}
 
 	@Override
