@@ -6,7 +6,11 @@ import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bo.Categorie;
 import fr.eni.trocencheres.dal.DAOFactory;
 import fr.eni.trocencheres.dal.CategorieDAO;
-
+/**
+ * 
+ * @author fmoto
+ *
+ */
 public class CategorieManagerImpl implements CategorieManager {
 
 	private CategorieDAO categorieDAO;

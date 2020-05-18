@@ -1,5 +1,10 @@
 package fr.eni.trocencheres.bll;
 
+/**
+ * 
+ * @author fmoto
+ *
+ */
 public abstract class BLLFactory {
 
 	public static AdministrationManager getAdministrationManager() {
