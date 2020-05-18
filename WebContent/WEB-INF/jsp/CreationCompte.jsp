@@ -22,7 +22,9 @@
 </head>
 <body>
 
-	<h1>TrocEncheres.org</h1>
+	<%@ include file="Header.jspf" %>
+	
+	<%@ include file="Alerte.jspf" %>
 
 	<div class="container">
 
@@ -89,8 +91,7 @@
 						<button class="btn btn-creation btn-primary" type="submit">Créer</button>
 					</div>
 					<div class="d-inline">
-						<a class="btn btn-annulation btn-primary"
-							href="./ServletSeConnecter" role="button">Annuler</a>
+						<a class="btn btn-annulation btn-primary" href="./ServletSeConnecter" role="button">Annuler</a>
 					</div>
 				</div>
 
@@ -191,6 +192,8 @@
 		</div>
 
 	</div>
+	
+	<%@ include file="Footer.jspf" %>
 
 
 	<!-- Optional JavaScript -->

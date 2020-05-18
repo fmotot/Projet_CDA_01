@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -22,7 +22,9 @@
 </head>
 <body>
 
-	<h1>TrocEncheres.org</h1>
+	<%@ include file="Header.jspf" %>
+	
+	<%@ include file="Alerte.jspf" %>
 
 	<h2 class="text-center">Nouvelle vente</h2>
 
@@ -56,12 +58,10 @@
 					<div class="form-group row">
     					<label for="selectCategories" class="col-5 col-form-label-sm">Catégories :</label>
     					<div class="col-7 col-lg-7">
-	    					<select class="form-control form-control-sm" id="selectCategories">
-						    	<option>Maison</option>
-						    	<option>Catégorie 2</option>
-						    	<option>Catégorie 3</option>
-						    	<option>Catégorie 4</option>
-						    	<option>Catégorie 5</option>
+	    					<select class="form-control form-control-sm" name="selectCategories" id="selectCategories">
+	    					<c:forEach var="categorie" items="${listeCategorie}">>
+						    	<option value="${categorie.noCategorie}">${categorie.libelle}</option>
+						    	</c:forEach>
 	    					</select>
     					</div>
   					</div>
@@ -76,38 +76,38 @@
 					</div>
 
 					<div class="form-group row">
-						<label for="inputArticle" class="col-5 col-form-label-sm">Prix initial :</label>
+						<label for="inputPrixDeBase" class="col-5 col-form-label-sm">Prix initial :</label>
 						<div class="col-7 col-lg-7">
-							<input value="#" name="inputArticle" type="text" class="form-control form-control-sm" id="inputArticle" placeholder="Crédit">
+							<input value="${utilisateur.credit}" name="inputPrixDeBase" type="number" class="form-control form-control-sm" id="inputPrixDeBase" placeholder="Crédit">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="inputArticle" class="col-5 col-form-label-sm">Fin de l'enchère :</label>
+						<label for="inputFinEnchere" class="col-5 col-form-label-sm">Fin de l'enchère :</label>
 						<div class="col-7 col-lg-7">
-							<input value="#" type="date" name="bday" max="3000-12-31" min="1000-01-01" class="form-control">
+							<input value="#" type="date" name="inputFinEnchere" id="inputFinEnchere" max="3000-12-31" min="1000-01-01" class="form-control form-control-sm">
 						</div>
 					</div>
 					
 					<fieldset class="border pr-2 pl-2">
 	   					<legend class="col-4 col-lg-3 my-auto">Retrait</legend>
 	   					<div class="form-group row justify-content-center ">
-							<label for="inputArticle" class="col-5 col-form-label-sm">Rue :</label>
+							<label for="inputRue" class="col-5 col-form-label-sm">Rue :</label>
 							<div class="col-7 col-lg-4">
-								<input value="#" name="inputArticle" type="text" class="form-control form-control-sm" id="inputArticle">
+								<input value="#" name="inputRue" type="text" class="form-control form-control-sm" id="inputRue">
 							</div>
 						</div>
 						
 						<div class="form-group row justify-content-center ">
-							<label for="inputArticle" class="col-5 col-form-label-sm">Code Postal :</label>
+							<label for="inputCodePostal" class="col-5 col-form-label-sm">Code Postal :</label>
 							<div class="col-7 col-lg-4">
-								<input value="#" name="inputArticle" type="text" class="form-control form-control-sm" id="inputArticle">
+								<input value="#" name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
 							</div>
 						</div>
 						
 						<div class="form-group row justify-content-center ">
-							<label for="inputArticle" class="col-5 col-form-label-sm">Ville :</label>
+							<label for="inputVille" class="col-5 col-form-label-sm">Ville :</label>
 							<div class="col-7 col-lg-4">
-								<input value="#" name="inputArticle" type="text" class="form-control form-control-sm" id="inputArticle">
+								<input value="#" name="inputVille" type="text" class="form-control form-control-sm" id="inputVille">
 							</div>
 						</div>
 					</fieldset>		
@@ -122,7 +122,7 @@
 								<button type="submit" name="submit" value="enregistrer" class="btn btn-primary">Enregistrer</button>
 							</div>
 							<div class="d-inline">
-								<a class="btn btn-retour btn-primary" href="./NouvelleVenteServlet" role="button">Annuler</a>
+								<a class="btn btn-retour btn-primary" href="./ListeEnchereServlet" role="button">Annuler</a>
 							</div>
 						</div>
 					</div>
@@ -130,6 +130,8 @@
 			</div>
 		</div>
 	</div>
+	
+	<%@ include file="Footer.jspf" %>
 
 
 	<!-- Optional JavaScript -->

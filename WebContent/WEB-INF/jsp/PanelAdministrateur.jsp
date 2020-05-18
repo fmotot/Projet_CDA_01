@@ -16,9 +16,9 @@
 	crossorigin="anonymous">
 	
 <link rel="stylesheet" type="text/css" href="./css/style.css">
-<link rel="stylesheet" type="text/css" href="./css/connexion.css">
+<link rel="stylesheet" type="text/css" href="./css/administrateur.css">
 
-<title>TrocEncheres - Se connecter</title>
+<title>TrocEncheres - Panel Administrateur</title>
 </head>
 <body>
 
@@ -31,40 +31,24 @@
 		<div class="center-content justify-content-center">
 	
 			<form action="./ServletSeConnecter" method="post">
-				<div class="form-group row justify-content-center">
-				    <label for="inputId" class="col-4 col-form-label-sm ">Identifiant :</label>
-				    <div class="col-6">
-				    	<input type="text" class="form-control form-control-sm" value="${!empty login? login : ''}" name="inputId" id="inputId">
-				    </div>
-				</div>
-				  	
-				<div class="form-group row justify-content-center ">
-					<label for="inputPassword" class="col-4 col-form-label-sm">Mot de passe :</label>
-					<div class="col-6">
-				    	<input type="password" class="form-control form-control-sm" name="inputPassword" id="inputPassword">
-				   	</div>
-				</div>
-				
-				<div class="row justify-content-center connexion mb-5 text-center">
-				
-					<div class="col-5">
-						<button type="submit" class="btn btn-primary">Connexion</button>
-					</div>
-					
-					  <div class="custom-control custom-checkbox my-1 mr-sm-2">
-    					<input type="checkbox" class="custom-control-input" name="souvenir" id="souvenir">
-    					<label class="custom-control-label" for="souvenir">Se souvenir de moi</label>
- 					  </div>
-				
-				</div>
-				
+				<div class="form-group">
+    				<label for="exampleFormControlSelect1">Example select</label>
+				    <select class="form-control" id="exampleFormControlSelect1">
+				      <option>Utilisateur</option>
+				    </select>
+  				</div>
 			</form>
 			
-			<div class="row justify-content-center connexion text-center">
-			
-				<div class="col-10 text-center">
-					<a class="btn btn-creation btn-primary" href="./ServletCreationCompte" role="button">Créer un compte</a>
-				</div>
+			<div class="row justify-content-around connexion text-center">
+				
+					<div class="col-10">
+						<div class="d-inline">
+							<button type="submit" name="submit" value="enregistrer" class="btn btn-enregistrer btn-primary">Désactiver</button>
+						</div>
+						<div class="d-inline">
+							<button type="submit" name="submit" value="supprimer" class="btn btn-supprimer btn-primary">Supprimer</button>
+						</div>
+					</div>
 				
 			</div>
 		
@@ -73,6 +57,7 @@
 	</div>
 	
 	<%@ include file="Footer.jspf" %>
+
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

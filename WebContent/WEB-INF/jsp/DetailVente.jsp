@@ -22,7 +22,9 @@
 </head>
 <body>
 
-	<h1>TrocEncheres.org</h1>
+	<%@ include file="Header.jspf" %>
+	
+	<%@ include file="Alerte.jspf" %>
 
 	<h2 class="text-center">enchere.etat</h2>
 	<h2 class="text-center">${ !empty enchere.etat ? enchere.etat : '' }</h2>
@@ -45,40 +47,33 @@
 					<h3>${vente.nomArticle}</h3>
 				</div>
 
-				<div class="d-none d-lg-block">
 					<div class="form-group row">
-						<label for="staticMeilleureOffre"
-							class="col-5 col-lg-3 col-form-label-sm my-auto">Description :</label>
+						<label for="staticMeilleureOffre" class="col-5 col-lg-3">Description :</label>
 						<div class="col-6 col-lg-9">
 							<p>${vente.description}</p>
 						</div>
 					</div>
-				</div>
 
 				<div class="form-group row">
-					<label for="staticMeilleureOffre"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Meilleure offre :</label>
+					<label for="staticMeilleureOffre" class="col-5 col-lg-3 ">Meilleure offre :</label>
 					<div class="col-6 col-lg-9">
-						<p>${vente.maxEnchere} par ${vente.vendeur}</p>
+						<p>${vente.maxEnchere} de ${vente.vendeur}</p>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="staticMiseAPrix"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Mise à Prix :</label>
+					<label for="staticMiseAPrix" class="col-5 col-lg-3">Mise à Prix :</label>
 					<div class="col-6 col-lg-4">
 						<p> ${vente.miseAPrix} </p>		
 				</div>
 				</div>
 				<div class="form-group row">
-					<label for="staticFinEnchere"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Fin de l'enchère :</label>
+					<label for="staticFinEnchere" class="col-5 col-lg-3">Fin de l'enchère :</label>
 					<div class="col-6 col-lg-4">
 						<p>${vente.dateFinEncheres}</p>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="staticRetrait"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Retrait :</label>
+					<label for="staticRetrait" class="col-5 col-lg-3">Retrait :</label>
 					<div class="col-6 col-lg-4">
 						<p>${vente.retrait.rue}<p>
 						<p>${vente.retrait.codePostal} ${vente.retrait.ville}<p>
@@ -86,8 +81,7 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="staticVendeur"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Vendeur :</label>
+					<label for="staticVendeur" class="col-5 col-lg-3 ">Vendeur :</label>
 					<div class="col-6 col-lg-4">
 						<a href="./ProfilUtilsateurServlet?pseudo=${vente.vendeur.pseudo}">${vente.vendeur.pseudo}</a>
 					</div>
@@ -96,7 +90,7 @@
 				<form action="./DetailVenteServlet" method="post">
 
 					<div class="form-group row">
-						<label for="inputMaProposition" class="col-5 col-lg-3 col-form-label-sm">Ma proposition :</label>
+						<label for="inputMaProposition" class="col-5 col-lg-3 my-auto">Ma proposition :</label>
 						<div class="col-3 col-lg-4">
 							<input type="text" class="form-control" name="inputMaProposition" id="inputMaProposition">
 						</div>
@@ -124,6 +118,8 @@
 		</div>
 
 	</div>
+	
+	<%@ include file="Footer.jspf" %>
 
 
 	<!-- Optional JavaScript -->

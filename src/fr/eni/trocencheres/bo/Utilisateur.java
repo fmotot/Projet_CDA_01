@@ -1,10 +1,9 @@
 package fr.eni.trocencheres.bo;
 
 import java.io.Serializable;
-
 /**
  * 
- * @author fmoto
+ * @author Macorigh Rudy
  *
  */
 public class Utilisateur implements Serializable {
