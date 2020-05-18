@@ -2,6 +2,11 @@ package fr.eni.trocencheres.bo;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author fmoto
+ *
+ */
 public class Utilisateur implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
