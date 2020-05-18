@@ -199,4 +199,14 @@ public abstract class CodesResultatBLL {
 	 * Echec code postal trop long +30
 	 */
 	public static final int REGLE_RETRAIT_CODE_POSTAL_TROP_LONG = 23017;
+
+	/**
+	 * Echec mise trop basse
+	 */
+	public static final int ENCHERE_MISE_REFUSEE = 23018;
+
+	/**
+	 * Echec Annulation refusée, le vendeur ne correspond pas
+	 */
+	public static final int VENTE_ANNULATION_REFUSEE = 23019;
 }

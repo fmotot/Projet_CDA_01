@@ -31,7 +31,7 @@ public interface VenteManager {
 	 * @return		la vente créée
 	 * @throws BusinessException
 	 */
-	Vente creerVente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, String rue, String ville, Integer codePostal) throws BusinessException;
+	Vente creerVente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, String rue, String ville, String codePostal) throws BusinessException;
 	
 	/**
 	 * ID 2002	Annuler une vente
@@ -66,17 +66,16 @@ public interface VenteManager {
 	 * @param acheteur		l'utilisateur enchérissant
 	 * @param vente			la vente sur laquelle l'utilisateur enchérit
 	 * @param mise			la mise de l'utilisateur 
-	 * @return				l'enchère crée
+	 * @return				la vente sur laquelle l'enchère est créé
 	 * @throws BusinessException
 	 */
-	Enchere encherir(Utilisateur acheteur, Vente vente, Integer mise) throws BusinessException;
+	Vente encherir(Utilisateur acheteur, Vente vente, Integer mise) throws BusinessException;
 	
 	
 	/**
 	 * ID 2005	Remporter une vente
 	 * Ne concerne pas l'IHM
 	 */
-	List<Vente> terminerVentes() throws BusinessException;
 	
 	/**
 	 * ID 2006	Annuler une enchère
@@ -85,7 +84,7 @@ public interface VenteManager {
 	 * @return
 	 * @throws BusinessException
 	 */
-	Enchere annulerEnchere(Enchere enchere, Utilisateur utilisateurSession) throws BusinessException;
+	Vente annulerEnchere(Vente vente, Utilisateur utilisateurSession) throws BusinessException;
 	
 	/**
 	 * ID 2007	Photo pour la vente
