@@ -22,7 +22,7 @@
 </head>
 <body>
 
-	<h1>TrocEncheres.org</h1>
+	<%@ include file="Header.jspf" %>
 	
 	<%@ include file="Alerte.jspf" %>
 
@@ -55,7 +55,7 @@
 				</div>
 				<div class="form-row">
 					<div class="form-group col-lg-6 mx-auto">
-						<label for="inputTelephone">Téléphone :</label>
+						<label for="inputTelephone">Tï¿½lï¿½phone :</label>
 						<input value="${utilisateur.telephone}" name="inputTelephone" type="tel" class="form-control" id="inputTelephone">
 					</div>
 					<div class="form-group col-lg-6 mx-auto">
@@ -84,7 +84,7 @@
 					</div>
 				</div>
 				<div class="form-group row ">
-   					<label for="staticCredit" class="col-1 col-form-label-sm my-auto">Crédit :</label>
+   					<label for="staticCredit" class="col-1 col-form-label-sm my-auto">Crï¿½dit :</label>
     				<div class="col-1">
       					<input value="${utilisateur.credit}" type="text" readonly class="form-control-plaintext my-auto" id="staticCredit" value="0">
     				</div>
@@ -127,7 +127,7 @@
 				</div>
 				
 				<div class="form-group row justify-content-center ">
-					<label for="inputPrenom" class="col-4 col-form-label-sm">Prénom :</label>
+					<label for="inputPrenom" class="col-4 col-form-label-sm">Prï¿½nom :</label>
 					<div class="col-6">
 				    	<input value="${utilisateur.prenom}" name="inputPrenom" type="text" class="form-control form-control-sm" id="inputPrenom">
 				   	</div>
@@ -141,7 +141,7 @@
 				</div>
 				
 				<div class="form-group row justify-content-center ">
-					<label for="inputTelephone" class="col-4 col-form-label-sm">Téléphone :</label>
+					<label for="inputTelephone" class="col-4 col-form-label-sm">Tï¿½lï¿½phone :</label>
 					<div class="col-6">
 				    	<input value="${utilisateur.telephone}" name="inputTelephone" type="tel" class="form-control form-control-sm" id="inputTelephone">
 				   	</div>
@@ -183,7 +183,7 @@
 				</div>
 				
 				<div class="form-group row justify-content-center">
-   					<label for="staticCredit" class="col-4 col-form-label-sm">Crédit :</label>
+   					<label for="staticCredit" class="col-4 col-form-label-sm">Crï¿½dit :</label>
     				<div class="col-6">
       					<input value="${utilisateur.credit}" type="text" readonly class="form-control-plaintext" id="staticCredit">
     				</div>
@@ -210,6 +210,8 @@
 		</div>
 
 	</div>
+	
+	<%@ include file="Footer.jspf" %>
 
 
 	<!-- Optional JavaScript -->

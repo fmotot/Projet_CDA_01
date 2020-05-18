@@ -22,7 +22,7 @@
 </head>
 <body>
 
-	<h1>TrocEncheres.org</h1>
+	<%@ include file="Header.jspf" %>
 	
 	<%@ include file="Alerte.jspf" %>
 
@@ -118,6 +118,8 @@
 		</div>
 
 	</div>
+	
+	<%@ include file="Footer.jspf" %>
 
 
 	<!-- Optional JavaScript -->

@@ -24,7 +24,7 @@
 
 	<div class="row">
 		<div class="col-12 col-lg-7 my-auto">
-			<h1>TrocEncheres.org</h1>
+			<%@ include file="Header.jspf" %>
 			<%@ include file="Alerte.jspf" %>
 		</div>
 
@@ -173,6 +173,8 @@
 		</div>
 
 	</div>
+	
+	<%@ include file="Footer.jspf" %>
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
