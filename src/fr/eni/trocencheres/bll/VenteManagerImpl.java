@@ -158,8 +158,6 @@ public class VenteManagerImpl implements VenteManager {
 				if (!enchere.equals(vente.getMaxEnchere())) {
 					enchere.getAcheteur().setCredit(enchere.getAcheteur().getCredit() + enchere.getMise());
 
-					// TODO TRANSACTIONS supprimer enchère et update utilisateur lié
-					
 					enchere = enchereDAO.deleteOne(enchere);
 				}
 			}
@@ -168,8 +166,6 @@ public class VenteManagerImpl implements VenteManager {
 		return venteTerminees;
 	}
 
-	// TODO remplacer Enchere par Vente dans les paramètres
-	
 	@Override
 	public Vente annulerEnchere(Vente vente, Utilisateur utilisateurSession) throws BusinessException {
 		BusinessException businessException = new BusinessException();
@@ -192,8 +188,6 @@ public class VenteManagerImpl implements VenteManager {
 				
 				// créditer l'utilisateur
 				enchere.getAcheteur().setCredit(enchere.getAcheteur().getCredit() + enchere.getMise());
-				
-				// TODO TRANSACTIONS supprimer enchère et update utilisateur lié
 				
 				enchere = enchereDAO.deleteOne(enchere);
 			} else {
