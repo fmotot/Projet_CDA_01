@@ -1,0 +1,49 @@
+@charset "ISO-8859-1";
+
+.form-group{
+	margin-bottom:5px;
+}
+
+.btn-enregistrer,
+.btn-supprimer,
+.btn-retour{
+	font-size:3vw;
+	padding:10px 10px 10px 10px;
+}
+
+.btn-enregistrer{
+	margin-right:10px;
+}
+
+.btn-supprimer{
+	margin-right:10px;
+}
+
+@media (min-width: 1200px) { 
+	
+	.center-content{
+		margin-top:100px;
+	}
+	
+	.btn-enregistrer{
+	margin-right:100px;
+	}
+	
+	.btn-supprimer{
+	margin-right:100px;
+	}
+	
+	.btn-enregistrer,
+	.btn-supprimer,
+	.btn-retour{
+	margin-top:50px;
+	padding:15px 40px 15px 40px;
+	font-size:.8vw;
+	}
+	
+	.form-control{
+		width:80%;
+	}
+	
+}
+
