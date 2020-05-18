@@ -64,6 +64,23 @@ public class ServletMonProfil extends HttpServlet {
 				utilisateurData.setCodePostal(request.getParameter("inputCodePostal"));
 				utilisateurData.setVille(request.getParameter("inputVille"));
 				utilisateurData.setMotDePasse(request.getParameter("inputMotDePasse"));
+
+				try {
+					// Mise a jour de l'utilisateur en BDD et recuperation de l'utilisateur mis a
+					// jour
+					Utilisateur utilisateurUpdate = utilisateurManager.modifierMonCompte(utilisateurConnecte,
+							utilisateurData);
+
+					// Affectation de l'utilisateur mis a jour en session
+					session.setAttribute("utilisateur", utilisateurUpdate);
+					// renvoi sur la JSP
+					RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
+					requestDispatcher.forward(request, response);
+				} catch (BusinessException e) {
+					System.err.println(e.getListeCodesErreur());
+					// erreur a gérer si probleme lors de l'update
+					e.printStackTrace();
+				}
 			} else {
 				// Si mot de passe et confirmation differents, retour sur la page de profil
 				System.out.println("erreur de mot de passe");
@@ -72,20 +89,6 @@ public class ServletMonProfil extends HttpServlet {
 				requestDispatcher.forward(request, response);
 			}
 
-		}
-		try {
-			// Mise a jour de l'utilisateur en BDD et recuperation de l'utilisateur mis a jour
-			Utilisateur utilisateurUpdate = utilisateurManager.modifierMonCompte(utilisateurConnecte, utilisateurData);
-
-			// Affectation de l'utilisateur mis a jour en session
-			session.setAttribute("utilisateur", utilisateurUpdate);
-			// renvoi sur la JSP
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
-			requestDispatcher.forward(request, response);
-		} catch (BusinessException e) {
-			System.err.println(e.getListeCodesErreur());
-			// erreur a gérer si probleme lors de l'update
-			e.printStackTrace();
 		}
 
 	}

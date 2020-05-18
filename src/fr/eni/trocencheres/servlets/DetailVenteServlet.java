@@ -9,28 +9,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class DetailVenteServlet
- */
+import fr.eni.trocencheres.bo.Vente;
+
+
 @WebServlet("/DetailVenteServlet")
 public class DetailVenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		Vente vente = (Vente) request.getAttribute("vente");
+		
+		
+		request.setAttribute("vente", vente);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/DetailVente.jsp") ;
 	    requestDispatcher.forward(request, response) ;
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		doGet(request, response);
+		Integer proposition = (Integer) request.getAttribute("inputMaProposition");
+		
+		
 	}
 
 }

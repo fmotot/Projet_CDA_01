@@ -33,49 +33,49 @@
 				<div class="form-group row justify-content-center">
    					<label for="staticPseudo" class="col-4 col-lg-2 col-form-label-sm my-auto">Pseudo :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticPseudo" value="${utilisateurChoisi.pseudo}">
+      					<p>${utilisateurChoisi.pseudo}"</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
    					<label for="staticNom" class="col-4 col-lg-2 col-form-label-sm my-auto">Nom :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticNom" value="${utilisateurChoisi.nom}">
+      					<p>${utilisateurChoisi.nom}"</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
    					<label for="staticPrenom" class="col-4 col-lg-2 col-form-label-sm my-auto">Prénom :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticPrenom" value="${utilisateurChoisi.prenom}">
+      				<p>${utilisateurChoisi.prenom}"</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
    					<label for="staticEmail" class="col-4 col-lg-2 col-form-label-sm my-auto">Email :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticEmail" value="${utilisateurChoisi.email}">
+      					<p>${utilisateurChoisi.email}"</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
    					<label for="staticTelephone" class="col-4 col-lg-2 col-form-label-sm my-auto">Téléphone :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticTelephone" value="${utilisateurChoisi.telephone}">
+      					<p>${utilisateurChoisi.telephone}"</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
    					<label for="staticRue" class="col-4 col-lg-2 col-form-label-sm my-auto">Rue :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticRue" value="${utilisateurChoisi.rue}">
+      					<p>${utilisateurChoisi.rue}"</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
    					<label for="staticCodePostal" class="col-4 col-lg-2 col-form-label-sm my-auto">Code postal :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticCodePostal" value="${utilisateurChoisi.codePostal}">
+      					<p>${utilisateurChoisi.codePostal}"</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
    					<label for="staticVille" class="col-4 col-lg-2 col-form-label-sm my-auto">Ville :</label>
     				<div class="col-6 col-lg-4">
-      					<input type="text" readonly class="form-control-plaintext my-auto" id="staticVille" value="${utilisateurChoisi.ville}">
+      					<p>${utilisateurChoisi.ville}"</p>
     				</div>
  			    </div>
  			    
