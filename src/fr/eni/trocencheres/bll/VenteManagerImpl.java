@@ -111,8 +111,6 @@ public class VenteManagerImpl implements VenteManager {
 			if (mise > vente.getMaxEnchere().getMise()) {
 				enchere = new Enchere(acheteur, vente, mise);
 				
-				// TODO TRANSACTIONS Gérer les débits crédits utilisateur : transactions nécessaires
-				
 				// update si Enchere existante dans la liste
 				if (vente.getListeEncheres().contains(enchere)) {
 					// récupération ancienne enchère pour en connaître le montant
@@ -121,8 +119,6 @@ public class VenteManagerImpl implements VenteManager {
 					// MAJ des points utilisateur
 					acheteur.setCredit(acheteur.getCredit() - mise + oldEnchere.getMise());
 					
-					// TODO TRANSACTIONS la requète doit update l'enchère et update l'utilisateur lié 
-					
 					enchere = enchereDAO.updateOne(enchere);
 				}
 				// sinon insert
@@ -130,8 +126,6 @@ public class VenteManagerImpl implements VenteManager {
 					
 					// MAJ des points utilisateur
 					acheteur.setCredit(acheteur.getCredit() - mise);
-					
-					// TODO TRANSACTIONS la requète doit insert l'enchère et update l'utilisateur lié 
 					
 					enchere = enchereDAO.insertOne(enchere);
 				}
@@ -155,6 +149,7 @@ public class VenteManagerImpl implements VenteManager {
 		// SELECT * FROM VENTE WHERE dateFinEnchere = hier
 		
 		LocalDateTime hier = LocalDateTime.of(LocalDate.now(ZoneId.of("Europe/Paris")).minusDays(1),LocalTime.MIDNIGHT);
+		LocalDateTime aujourdhui = LocalDateTime.of(LocalDate.now(ZoneId.of("Europe/Paris")),LocalTime.MIDNIGHT);
 		List<Vente> venteTerminees = venteDAO.getAll();
 		
 		// pour toutes les ventes terminées, supprimer les enchères dont qui ne sont pas la dernière et recréditer l'utilisateur lié
