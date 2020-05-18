@@ -26,6 +26,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static String SELECT_UNE_ENCHERE = "SELECT * FROM encheres WHERE no_utilisateur=? AND no_vente=?";
 	private static String DELETE_UNE_ENCHERE = "DELETE FROM encheres WHERE no_utilisateur=? AND no_vente=?";
 
+	
+	
 	@Override
 	public List<Enchere> getAll() throws BusinessException {
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
