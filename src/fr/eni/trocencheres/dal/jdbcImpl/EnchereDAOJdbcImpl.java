@@ -78,7 +78,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		// Doit insérer l'enchère et mettre à jour l'utilisateur lié
 
 		if (entity == null) {
-
 			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
 			throw businessException;
 		}
@@ -222,21 +221,49 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 
 	@Override
 	public Enchere deleteOne(Enchere entity) throws BusinessException {
+		BusinessException businessException = new BusinessException();
+		Connection cnx = null;
+		
+		// Doit supprimer l'enchère et mettre à jour l'utilisateur lié
+		
 		if (entity == null) {
-			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.DELETE_OBJET_NULL);
 			throw businessException;
 		}
+		
 		try {
-			Connection cnx = ConnectionProvider.getConnection();
+			cnx = ConnectionProvider.getConnection();
+			cnx.setAutoCommit(false);
+			
+			// suppression de l'enchère
 			PreparedStatement pstmt = cnx.prepareStatement(DELETE_UNE_ENCHERE);
+			
 			pstmt.setInt(1, entity.getAcheteur().getNoUtilisateur());
 			pstmt.setInt(2, entity.getVente().getNoVente());
 
 			pstmt.executeUpdate();
+			
+			// update du crédit de l'utilisateur
+			pstmt = cnx.prepareStatement(UPDATE_CREDIT_UTILISATEUR);
+
+			pstmt.setInt(1, entity.getAcheteur().getCredit());
+			pstmt.setInt(2, entity.getAcheteur().getNoUtilisateur());
+
+			pstmt.executeUpdate();
+
+			cnx.commit();
 		} catch (Exception e) {
+			
+			try {
+				cnx.rollback();
+			} catch (SQLException e1) {
+
+				e1.printStackTrace();
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				throw businessException;
+			}
+			
 			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.SUPPRESSION_ENCHERE_ECHEC);
 			throw businessException;
 		}
@@ -245,3 +272,28 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
