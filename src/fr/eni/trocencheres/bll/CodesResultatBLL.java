@@ -209,4 +209,9 @@ public abstract class CodesResultatBLL {
 	 * Echec Annulation refusée, le vendeur ne correspond pas
 	 */
 	public static final int VENTE_ANNULATION_REFUSEE = 23019;
+
+	/**
+	 * Echec categorie inconnue
+	 */
+	public static final int CATEGORIE_INCONNUE = 23020;
 }

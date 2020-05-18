@@ -34,7 +34,7 @@ public class Vente implements Serializable {
 		listeEncheres = new ArrayList<Enchere>();
 	}
 	
-	public Vente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, List<Enchere> listeEncheres) {
+	public Vente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, Categorie categorie, List<Enchere> listeEncheres) {
 		this();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -45,8 +45,8 @@ public class Vente implements Serializable {
 		this.listeEncheres = listeEncheres;
 	}
 	
-	public Vente(Integer noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, List<Enchere> listeEncheres) {
-		this(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, retraitArticle, listeEncheres);
+	public Vente(Integer noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, Categorie categorie, List<Enchere> listeEncheres) {
+		this(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, retraitArticle, categorie, listeEncheres);
 		this.noVente = noVente;
 	}
 
