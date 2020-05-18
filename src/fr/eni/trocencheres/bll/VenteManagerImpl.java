@@ -59,29 +59,118 @@ public class VenteManagerImpl implements VenteManager {
 
 	@Override
 	public Vente annulerVente(Vente vente, Utilisateur utilisateurSession) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		BusinessException businessException = new BusinessException();
+		
+		utilisateurSession = this.validerUtilisateur(utilisateurSession, businessException);
+		vente = this.validerVente(vente, businessException);
+		
+		if (!businessException.hasErreurs()) {
+			
+			if (utilisateurSession.equals(vente.getVendeur())) {
+				// créditer les comptes utilisateurs des mises
+				for (Enchere enchere : vente.getListeEncheres()) {
+					enchere.getAcheteur().setCredit(enchere.getAcheteur().getCredit() + enchere.getMise());
+				}			
+				
+				// TODO TRANSACTIONS pour annuler une vente il faut supprimer la vente de la BDD ainsi que les enchères qui la concernent et mettre à jour les utilisateurs liés
+				
+				vente = venteDAO.deleteOne(vente);
+			}
+			else {
+				businessException.ajouterErreur(CodesResultatBLL.VENTE_ANNULATION_REFUSEE);
+				throw businessException;
+			}
+		}
+		else {
+			throw businessException;
+		}
+		
+		return vente;
 	}
 
 	@Override
 	public List<Vente> listerVentes(Utilisateur utilisateur, boolean isMesVentes, boolean isMesEncheres,
 			boolean isMesAcquisitions, boolean isAutresEncheres, String recherche, Categorie categorie)
 			throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return venteDAO.getVentesFiltered(utilisateur, isMesVentes, isMesEncheres, isMesAcquisitions, isAutresEncheres, recherche, categorie);
 	}
 
 	@Override
-	public Enchere encherir(Utilisateur acheteur, Vente vente, Integer mise) throws BusinessException {
-		// TODO Auto-generated method stub
-		// refuser une enchère plus basse que l'enchère la plus haute en cours
-		return null;
+	public Vente encherir(Utilisateur acheteur, Vente vente, Integer mise) throws BusinessException {
+		BusinessException businessException = new BusinessException();
+		Enchere enchere = null;
+		
+		acheteur = this.validerUtilisateur(acheteur, businessException);
+		vente = this.validerVente(vente, businessException);
+		
+		if (!businessException.hasErreurs()) {
+			// refuser une enchère plus basse que l'enchère la plus haute en cours
+			if (mise > vente.getMaxEnchere().getMise()) {
+				enchere = new Enchere(acheteur, vente, mise);
+				
+				// TODO TRANSACTIONS Gérer les débits crédits utilisateur : transactions nécessaires
+				
+				// update si Enchere existante dans la liste
+				if (vente.getListeEncheres().contains(enchere)) {
+					// récupération ancienne enchère pour en connaître le montant
+					Enchere oldEnchere = enchereDAO.getOne(enchere);
+					
+					// MAJ des points utilisateur
+					acheteur.setCredit(acheteur.getCredit() - mise + oldEnchere.getMise());
+					
+					// TODO TRANSACTIONS la requète doit update l'enchère et update l'utilisateur lié 
+					
+					enchere = enchereDAO.updateOne(enchere);
+				}
+				// sinon insert
+				else {
+					
+					// MAJ des points utilisateur
+					acheteur.setCredit(acheteur.getCredit() - mise);
+					
+					// TODO TRANSACTIONS la requète doit insert l'enchère et update l'utilisateur lié 
+					
+					enchere = enchereDAO.insertOne(enchere);
+				}
+				vente = venteDAO.getOne(vente);
+			}
+			else {
+				businessException.ajouterErreur(CodesResultatBLL.ENCHERE_MISE_REFUSEE);
+				throw businessException;
+			}
+		}
+		else {
+			throw businessException;
+		}
+		
+		return vente;
 	}
 
-	@Override
 	public List<Vente> terminerVentes() throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+
+		// TODO NOUVEAU SELECT lister toutes les ventes dont la date dépasse la date du jour
+		// SELECT * FROM VENTE WHERE dateFinEnchere = hier
+		
+		LocalDateTime hier = LocalDateTime.of(LocalDate.now(ZoneId.of("Europe/Paris")).minusDays(1),LocalTime.MIDNIGHT);
+		List<Vente> venteTerminees = venteDAO.getAll();
+		
+		// pour toutes les ventes terminées, supprimer les enchères dont qui ne sont pas la dernière et recréditer l'utilisateur lié
+		for (Vente vente : venteTerminees) {
+			for (Enchere enchere : vente.getListeEncheres()) {
+				if (!enchere.equals(vente.getMaxEnchere())) {
+					enchere.getAcheteur().setCredit(enchere.getAcheteur().getCredit() + enchere.getMise());
+
+					// TODO TRANSACTIONS supprimer enchère et update utilisateur lié
+					
+					enchere = enchereDAO.deleteOne(enchere);
+				}
+			}
+		}
+		
+		return venteTerminees;
 	}
 
 	@Override
@@ -92,9 +181,14 @@ public class VenteManagerImpl implements VenteManager {
 		enchere = this.validerEnchere(enchere, businessException);
 
 		if (!businessException.hasErreurs()) {
-			if (enchere.getAcheteur() == utilisateurSession) {
-				enchere = enchereDAO.deleteOne(enchere);
+			if (enchere.getAcheteur().equals(utilisateurSession)) {
+				
 				// créditer l'utilisateur
+				enchere.getAcheteur().setCredit(enchere.getAcheteur().getCredit() + enchere.getMise());
+				
+				// TODO TRANSACTIONS supprimer enchère et update utilisateur lié
+				
+				enchere = enchereDAO.deleteOne(enchere);
 			} else {
 				businessException.ajouterErreur(CodesResultatBLL.ENCHERE_SUPPRESSION_REFUSEE);
 				throw businessException;
@@ -199,6 +293,14 @@ public class VenteManagerImpl implements VenteManager {
 		return enchere;
 	}
 
+	private Vente validerVente(Vente vente, BusinessException businessException) {
+		if (vente == null) {
+			businessException.ajouterErreur(CodesResultatBLL.VENTE_INCONNUE);
+		}
+		
+		return vente;
+	}
+	
 	private Retrait validerRetrait(String rue, String ville, String codePostal, BusinessException businessException) {
 		Retrait retrait = null;
 		
