@@ -8,7 +8,6 @@ import java.util.List;
 
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bo.Categorie;
-import fr.eni.trocencheres.bo.Enchere;
 import fr.eni.trocencheres.bo.Utilisateur;
 import fr.eni.trocencheres.bo.Vente;
 

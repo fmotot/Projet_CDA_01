@@ -90,7 +90,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			// insertion de l'enchère
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT_UNE_ENCHERE);
 
-			pstmt.setDate(1, (java.sql.Date.valueOf(entity.getDateEnchere().toLocalDate())));
+			pstmt.setTimestamp(1, java.sql.Timestamp.valueOf(entity.getDateEnchere()));
 			pstmt.setInt(2, entity.getMise());
 			pstmt.setInt(3, entity.getAcheteur().getNoUtilisateur());
 			pstmt.setInt(4, entity.getVente().getNoVente());
@@ -143,7 +143,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			// update de l'enchère
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_UNE_ENCHERE);
 
-			pstmt.setDate(1, java.sql.Date.valueOf(entity.getDateEnchere().toLocalDate()));
+			pstmt.setTimestamp(1, java.sql.Timestamp.valueOf(entity.getDateEnchere()));
 			pstmt.setInt(2, entity.getMise());
 			pstmt.setInt(3, entity.getAcheteur().getNoUtilisateur());
 			pstmt.setInt(4, entity.getVente().getNoVente());
@@ -252,7 +252,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			pstmt.executeUpdate();
 
 			cnx.commit();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			
 			try {
 				cnx.rollback();

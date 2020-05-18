@@ -25,6 +25,12 @@ public class Enchere implements Serializable{
 	public Enchere() {
 	}
 	
+	@Override
+	public String toString() {
+		return "Enchere [dateEnchere=" + dateEnchere + ", acheteur=" + acheteur.getNoUtilisateur() + ", vente=" + vente.getNoVente() + ", mise=" + mise
+				+ "]";
+	}
+
 	/**
 	 * La date est initialisé à l'instanciation (Dixit Jean)
 	 * @param acheteur
@@ -121,7 +127,6 @@ public class Enchere implements Serializable{
 				&& this.getVente().getNoVente() == ((Enchere)object).getVente().getNoVente()) {
 			equal = true;
 		}
-
 		
 		return equal;
 	}
