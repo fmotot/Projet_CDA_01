@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -59,11 +59,9 @@
     					<label for="selectCategories" class="col-5 col-form-label-sm">Catégories :</label>
     					<div class="col-7 col-lg-7">
 	    					<select class="form-control form-control-sm" name="selectCategories" id="selectCategories">
-						    	<option>Maison</option>
-						    	<option>Catégorie 2</option>
-						    	<option>Catégorie 3</option>
-						    	<option>Catégorie 4</option>
-						    	<option>Catégorie 5</option>
+	    					<c:forEach var="categorie" items="${listeCategorie}">>
+						    	<option value="${categorie.noCategorie}">${categorie.libelle}</option>
+						    	</c:forEach>
 	    					</select>
     					</div>
   					</div>
@@ -80,7 +78,7 @@
 					<div class="form-group row">
 						<label for="inputPrixDeBase" class="col-5 col-form-label-sm">Prix initial :</label>
 						<div class="col-7 col-lg-7">
-							<input value="#" name="inputPrixDeBase" type="number" class="form-control form-control-sm" id="inputPrixDeBase" placeholder="Crédit">
+							<input value="${utilisateur.credit}" name="inputPrixDeBase" type="number" class="form-control form-control-sm" id="inputPrixDeBase" placeholder="Crédit">
 						</div>
 					</div>
 					<div class="form-group row">
