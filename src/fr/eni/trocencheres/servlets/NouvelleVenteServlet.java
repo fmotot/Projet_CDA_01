@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bll.BLLFactory;
+import fr.eni.trocencheres.bll.CategorieManager;
 import fr.eni.trocencheres.bll.VenteManager;
 import fr.eni.trocencheres.bo.Categorie;
 import fr.eni.trocencheres.bo.Utilisateur;
@@ -34,7 +35,13 @@ public class NouvelleVenteServlet extends HttpServlet {
 
 		CategorieManager categorieManager = BLLFactory.getCategorieManager();
 		
-		List<Categorie> listeCategorie = categorieManager.getListeCategorie;
+		List<Categorie> listeCategorie = null;
+		try {
+			listeCategorie = categorieManager.getListeCategorie();
+		} catch (BusinessException e) {
+			System.err.println(e.getListeCodesErreur());
+			e.printStackTrace();
+		}
 		request.setAttribute("listeCategorie", listeCategorie);
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/NouvelleVente.jsp");

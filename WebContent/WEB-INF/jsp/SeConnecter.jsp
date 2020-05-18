@@ -34,7 +34,7 @@
 				<div class="form-group row justify-content-center">
 				    <label for="inputId" class="col-4 col-form-label-sm ">Identifiant :</label>
 				    <div class="col-6">
-				    	<input type="text" class="form-control form-control-sm" name="inputId" id="inputId">
+				    	<input type="text" class="form-control form-control-sm" value="${!empty login? login : ''}" name="inputId" id="inputId">
 				    </div>
 				</div>
 				  	
@@ -52,8 +52,8 @@
 					</div>
 					
 					  <div class="custom-control custom-checkbox my-1 mr-sm-2">
-    					<input type="checkbox" class="custom-control-input" id="customControlInline">
-    					<label class="custom-control-label" for="customControlInline">Se souvenir de moi</label>
+    					<input type="checkbox" class="custom-control-input" name="souvenir" id="souvenir">
+    					<label class="custom-control-label" for="souvenir">Se souvenir de moi</label>
  					  </div>
 				
 				</div>

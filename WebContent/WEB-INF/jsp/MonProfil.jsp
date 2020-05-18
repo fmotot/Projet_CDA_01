@@ -100,7 +100,7 @@
 							<button type="submit" name="submit" value="supprimer" class="btn btn-supprimer btn-primary">Supprimer</button>
 						</div>
 						<div class="d-inline">
-							<a class="btn btn-retour btn-primary" href="./ServletMonProfil" role="button">Retour</a>
+							<a class="btn btn-retour btn-primary" href="./ServletSeConnecter" role="button">Retour</a>
 						</div>
 					</div>
 				
