@@ -39,23 +39,14 @@
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
-   					<label for="staticRue" class="col-4 col-lg-2">Rue :</label>
+   					<label for="staticRue" class="col-4 col-lg-2">Adresse :</label>
     				<div class="col-6 col-lg-4">
       					<p>${utilisateurChoisi.rue}</p>
-    				</div>
- 			    </div>
- 			    <div class="form-group row justify-content-center">
-   					<label for="staticCodePostal" class="col-4 col-lg-2">Code postal :</label>
-    				<div class="col-6 col-lg-4">
       					<p>${utilisateurChoisi.codePostal}</p>
-    				</div>
- 			    </div>
- 			    <div class="form-group row justify-content-center">
-   					<label for="staticVille" class="col-4 col-lg-2">Ville :</label>
-    				<div class="col-6 col-lg-4">
       					<p>${utilisateurChoisi.ville}</p>
     				</div>
  			    </div>
+
  			    <div class="form-group row justify-content-center">
    					<label for="staticTelephone" class="col-4 col-lg-2">Téléphone :</label>
     				<div class="col-6 col-lg-4">
