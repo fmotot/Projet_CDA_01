@@ -3,8 +3,11 @@ package fr.eni.trocencheres.dal.jdbcImpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bo.Categorie;
@@ -28,9 +31,9 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			"    LEFT JOIN retraits" + 
 			"    ON retraits.no_vente = ventes.no_vente " + 
 			"    LEFT JOIN categories as c " + 
-			"    ON c.no_categorie= ventes.no_categorie " + 
-			"    ORDER BY ventes.no_vente,  encheres.mise DESC";
-	
+			"    ON c.no_categorie= ventes.no_categorie " 
+			;
+	private static String ORDER_BY_VENTE_ENCHERE_DESC = "    ORDER BY ventes.no_vente,  encheres.mise DESC";
 	private static String INSERT_UNE_VENTE = "";
 	private static String UPDATE_UNE_VENTE ="";
 	private static String SELECT_UNE_VENTE="";
@@ -44,7 +47,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		List<Vente> listeVentes = new ArrayList<Vente>();
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
-			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL_VENTES);
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL_VENTES + ORDER_BY_VENTE_ENCHERE_DESC);
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -194,11 +197,70 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	@Override
 	public List<Vente> getVentesFiltered(Utilisateur utilisateur, boolean isMesVentes, boolean isMesEncheres,boolean isMesAcquisitions, boolean isAutresEncheres, String recherche, Categorie categorie)
 			throws BusinessException {
-		
+		List<Vente> listeVentesFiltre = new ArrayList<Vente>();
 		StringBuffer sb = new StringBuffer();
+		Connection cnx;
+		Set<Integer> NoVentesFiltered =  new HashSet<Integer>();
+		try {
+			cnx = ConnectionProvider.getConnection();
+			ResultSet rs= null;
+			
+			
+			if(isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
+				sb.append(SELECT_ALL_VENTES);
+				
+			}else {
+				PreparedStatement ps = null;
+				if(isMesVentes) {
+					ps = cnx.prepareStatement("SELECT no_vente FROM ventes WHERE no_utilisateur = ?");
+					ps.setInt(1, utilisateur.getNoUtilisateur());
+					rs = ps.executeQuery();
+					while(rs.next()) {
+						NoVentesFiltered.add(rs.getInt(1));
+					}
+				}
+				
+				if(isMesEncheres) {
+					ps = cnx.prepareStatement("SELECT no_vente FROM encheres WHERE no_utilisateur = ?");
+					ps.setInt(1, utilisateur.getNoUtilisateur());
+					rs = ps.executeQuery();
+					while(rs.next()) {
+						NoVentesFiltered.add(rs.getInt(1));
+					}
+				}
+				
+				// Si siMesEncherse = False . 
+				//
+				if(isMesAcquisitions &&  !isMesEncheres) {
+					ps = cnx.prepareStatement("SELECT no_vente FROM encheres WHERE no_utilisateur = ?");
+					ps.setInt(1, utilisateur.getNoUtilisateur());
+					rs = ps.executeQuery();
+					while(rs.next()) {
+						NoVentesFiltered.add(rs.getInt(1));
+					}
+				}
+				
+				
+			}
+			
+			
+			
+			
+			
+			
+				
+			sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
+			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
 		
 		
-		return null;
+		
+		return listeVentesFiltre;
 	}
 
 }
