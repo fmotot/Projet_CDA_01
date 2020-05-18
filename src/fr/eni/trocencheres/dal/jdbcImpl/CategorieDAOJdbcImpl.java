@@ -98,7 +98,10 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 			pstmt.executeUpdate();
 			
 		}catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_ECHEC);
+			throw businessException;
 		}
 		
 		
