@@ -16,7 +16,7 @@
 	crossorigin="anonymous">
 	
 <link rel="stylesheet" type="text/css" href="./css/style.css">
-<link rel="stylesheet" type="text/css" href="./css/connexion.css">
+<link rel="stylesheet" type="text/css" href="./css/administrateur.css">
 
 <title>TrocEncheres - Panel Administrateur</title>
 </head>
@@ -31,12 +31,25 @@
 		<div class="center-content justify-content-center">
 	
 			<form action="./ServletSeConnecter" method="post">
-				<div class="form"></div>
+				<div class="form-group">
+    				<label for="exampleFormControlSelect1">Example select</label>
+				    <select class="form-control" id="exampleFormControlSelect1">
+				      <option>Utilisateur</option>
+				    </select>
+  				</div>
 			</form>
 			
-			<div class="col-10 ">
-					<a class="btn btn-creation btn-primary" href="./ServletPanelAdministration" role="button">Désactiver</a>
-					<a class="btn btn-creation btn-primary" href="./ServletPanelAdministration" role="button">Supprimer</a>
+			<div class="row justify-content-around connexion text-center">
+				
+					<div class="col-10">
+						<div class="d-inline">
+							<button type="submit" name="submit" value="enregistrer" class="btn btn-enregistrer btn-primary">Désactiver</button>
+						</div>
+						<div class="d-inline">
+							<button type="submit" name="submit" value="supprimer" class="btn btn-supprimer btn-primary">Supprimer</button>
+						</div>
+					</div>
+				
 			</div>
 		
 		</div>

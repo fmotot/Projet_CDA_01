@@ -1,5 +1,16 @@
 <div class="container-fluid">
 	<header>
-		<h1>TrocEncheres.org</h1>
+		<div class="row">
+			<div class="col-4 logo">
+				<h1><a href="./ListeEnchereServlet">TrocEncheres.org</a></h1>
+			</div>
+			<div class="col-8 my-auto text-right menu">
+				<ul>
+					<li><a href="">Vendre un article</a></li>
+					<li><a href="">Mon profil</a></li>
+					<li><a href="">Déconnexion</a></li>
+				</ul>
+			</div>
+		</div>
 	</header>
 </div>

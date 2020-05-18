@@ -22,28 +22,21 @@
 </head>
 <body>
 
-	<div class="row">
-		<div class="col-12 col-lg-7 my-auto">
-			<%@ include file="Header.jspf" %>
-			<%@ include file="Alerte.jspf" %>
-		</div>
-
-		<div class="col-12 col-lg-5 my-auto">
-			<ul>
-				<li><a href="">Vendre un article</a></li>
-				<li><a href="">Mon profil</a></li>
-				<li><a href="">Déconnexion</a></li>
-			</ul>
-		</div>
-	</div>
+		<%@ include file="Header.jspf" %>
+			
+		<%@ include file="Alerte.jspf" %>
 
 	<div id="liste-enchere" class="container">
 
 		<h2>Filtres :</h2>
-
+		
 		<div class="row">
+		
+		<div class="col-lg-12">
 
 			<form action="./ListeEnchereServlet" method="post">
+
+			<div class="row">
 
 				<div class="col-12 col-lg-3">
 					<div class="form-group">
@@ -55,43 +48,36 @@
 					</div>
 					<div class="form-group">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox"
-								name="mesEncheres" id="gridCheck"> <label
-								class="form-check-label" for="gridCheck">Mes enchères en
-								cours</label>
+							<input class="form-check-input" type="checkbox"name="mesEncheres" id="gridCheck"> 
+							<label class="form-check-label" for="gridCheck">Mes enchères en cours</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox"
-								name="mesAcquisitions" id="gridCheck"> <label
-								class="form-check-label" for="gridCheck">Mes
-								acquisitions</label>
+							<input class="form-check-input" type="checkbox" name="mesAcquisitions" id="gridCheck">
+							<label class="form-check-label" for="gridCheck">Mes acquisitions</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox"
-								name="autresEncheres" id="gridCheck"> <label
-								class="form-check-label" for="gridCheck">Autres enchères</label>
+							<input class="form-check-input" type="checkbox" name="autresEncheres" id="gridCheck"> 
+							<label class="form-check-label" for="gridCheck">Autres enchères</label>
 						</div>
 					</div>
 				</div>
 
-				<!-- 	Recherche pour le desktop	 -->
-				<div class="col-12 col-lg-8 d-none d-lg-block mx-auto my-auto">
+				<!-- 	Recherche pour le desktop -->
+				<div class="col-12 col-lg-9 d-none d-lg-block mx-auto my-auto">
 					<div class="input-group row col-10 col-lg-8 mb-3">
 						<div class="input-group-prepend">
 							<div class="input-group-text">0-</div>
 						</div>
-						<input type="text" class="form-control" id="inlineFormInputGroup"
-							name="recherche" placeholder="Le nom de l'article contient">
+						<input type="text" class="form-control" id="inlineFormInputGroup" name="recherche" placeholder="Le nom de l'article contient">
 					</div>
 
 					<div class="form-group row col-12 col-lg-8">
-						<label class="col-4 col-lg-3 my-auto" for="inputCategories">Catégories
-							:</label> <select id="inputCategories" name="categorie"
-							class="form-control col-8 col-lg-9">
+						<label class="col-4 col-lg-4 my-auto" for="inputCategories">Catégories :</label> 
+						<select id="inputCategories" name="categorie" class="form-control col-8 col-lg-8">
 							<option selected>Toutes</option>
 						</select>
 					</div>
@@ -115,6 +101,8 @@
 							name="recherche" placeholder="Le nom de l'article contient">
 					</div>
 				</div>
+				
+			</div>
 
 				<div class="row col-lg-4 d-none d-lg-block mt-3">
 					<button class="btn btn-rechercher btn-primary" type="submit">Rechercher</button>
@@ -125,31 +113,32 @@
 				</div>
 
 			</form>
-
+			
+			</div>
+			
 		</div>
 
 		<div class="container">
 
 			<div class="row">
-				<c:forEach var="vente" items="${listeVente}">
-					<div class="jumbotron col-12 col-lg-5 mx-auto">
-						<div class="row">
-							<div class="col-3 ">
-								<div class="image"></div>
-							</div>
+<%-- 				<c:forEach var="vente" items="${listeVente}"> --%>
+<!-- 					<div class="jumbotron col-12 col-lg-5 mx-auto"> -->
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col-3 "> -->
+<!-- 								<div class="image"></div> -->
+<!-- 							</div> -->
 
-							<div class="col-8 ml-3">
-								<a href="./DetailVenteServlet?vente=${vente}">${vente.nomArticle}</a><a href="a remplir avec la servlet vente gagné"> En cours</a>
-								<p>Prix : ${vente.maxEnchere} points  ${vente.classement != 0 ? 'Classement :' vente.classement : ''} </p>
-								<p>Fin de l'enchère : ${vente.dateFinEncheres}</p>
-								<p>Retrait : ${vente.retrait.rue}</p>
-								<p>Retrait : ${vente.retrait.codePostal} ${vente.retrait.ville}</p>
-								<p>Vendeur : ${vente.vendeur.pseudo}</p>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-				
+<!-- 							<div class="col-8 ml-3"> -->
+<%-- 								<a href="./DetailVenteServlet?vente=${vente}">${vente.nomArticle}</a><a href="a remplir avec la servlet vente gagné"> En cours</a> --%>
+<%-- 								<p>Prix : ${vente.maxEnchere} points  ${vente.classement != 0 ? 'Classement :' vente.classement : ''} </p> --%>
+<%-- 								<p>Fin de l'enchère : ${vente.dateFinEncheres}</p> --%>
+<%-- 								<p>Retrait : ${vente.retrait.rue}</p> --%>
+<%-- 								<p>Retrait : ${vente.retrait.codePostal} ${vente.retrait.ville}</p> --%>
+<%-- 								<p>Vendeur : ${vente.vendeur.pseudo}</p> --%>
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<%-- 				</c:forEach> --%>
 				
 				<div class="jumbotron col-12 col-lg-5 mx-auto">
 					<div class="row">
