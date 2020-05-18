@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class PanelAdministrateurServlet
+ * 
+ * @author Macorigh Rudy
+ *
  */
 @WebServlet("/PanelAdministrateurServlet")
 public class PanelAdministrateurServlet extends HttpServlet {

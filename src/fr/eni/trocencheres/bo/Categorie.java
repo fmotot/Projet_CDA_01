@@ -1,7 +1,11 @@
 package fr.eni.trocencheres.bo;
 
 import java.io.Serializable;
-
+/**
+ * 
+ * @author Macorigh Rudy
+ *
+ */
 public class Categorie implements Serializable {
 	private static final long serialVersionUID = 1L;
 

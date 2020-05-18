@@ -12,7 +12,11 @@ import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bll.BLLFactory;
 import fr.eni.trocencheres.bll.UtilisateurManager;
 import fr.eni.trocencheres.bo.Utilisateur;
-
+/**
+ * 
+ * @author Macorigh Rudy
+ *
+ */
 
 @WebServlet("/ProfilUtilisateurServlet")
 public class ProfilUtilisateurServlet extends HttpServlet {

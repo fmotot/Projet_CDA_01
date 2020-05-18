@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * @author fmoto
- *
+ *	@author Macorigh Rudy // getMaxEnchere // getClassement
  */
 public class Vente implements Serializable {
 	/**
