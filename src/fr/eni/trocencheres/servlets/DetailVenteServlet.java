@@ -48,7 +48,12 @@ public class DetailVenteServlet extends HttpServlet {
 			VenteManager venteManager = BLLFactory.getVenteManager();
 			
 			//annulation de l'enchere
-			venteManager.annulerEnchere(vente, utilisateur);
+			try {
+				venteManager.annulerEnchere(vente, utilisateur);
+			} catch (BusinessException e) {
+				System.err.println(e.getListeCodesErreur());
+				e.printStackTrace();
+			}
 			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchereServlet.jsp");
 			requestDispatcher.forward(request, response);
