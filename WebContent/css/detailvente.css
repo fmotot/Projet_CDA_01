@@ -1,0 +1,67 @@
+@charset "ISO-8859-1";
+
+h1{
+	font-size: 5vw;
+	font-weight: 700;
+}
+
+h2{
+	font-size: 5vw;
+}
+
+h3{
+	font-size: 4vw;
+}
+
+p{
+	margin:0;
+	font-size:3vw;
+}
+
+a{
+	margin:0;
+	font-size:3vw;
+}
+
+.image{
+	width: 100%;
+	height: 150px;
+	background: black;
+}
+
+@media (min-width: 1200px) { 
+
+	h1{
+		font-size:2vw;
+		text-align: justify;
+		margin:80px 0 0 200px;
+	}
+	
+	h2{
+		font-size:1.5vw;
+		margin-bottom:30px;
+	}
+	
+	h3{
+		font-size: 1vw;
+	}	
+	
+	a{
+		font-size: 1vw;
+	}
+	
+	.image{
+		width: 100%;
+		height: 300px;
+		background: black;
+	}
+	
+	.content-vente{
+		margin-left:32px;
+	}
+	
+	.btn-back{
+		padding: 15px 30px 15px 30px;
+	}
+	
+}

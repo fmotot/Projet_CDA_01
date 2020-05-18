@@ -6,7 +6,7 @@ public class Utilisateur implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer noUtilisateur;
-	private Integer telephone;
+	private String telephone;
 	private Integer credit;
 	
 	private String codePostal;  
@@ -24,7 +24,7 @@ public class Utilisateur implements Serializable {
 	public Utilisateur() {
 	}
 
-	public Utilisateur(Integer telephone, String codePostal, Integer credit, String pseudo, String nom, String prenom,
+	public Utilisateur(String telephone, String codePostal, Integer credit, String pseudo, String nom, String prenom,
 			String email, String rue, String ville, String motDePasse, boolean administrateur, boolean actif) {
 		this.telephone = telephone;
 		this.codePostal = codePostal;
@@ -40,7 +40,7 @@ public class Utilisateur implements Serializable {
 		this.actif = actif;
 	}
 
-	public Utilisateur(Integer noUtilisateur, Integer telephone, String codePostal, Integer credit, String pseudo, String nom,
+	public Utilisateur(Integer noUtilisateur, String telephone, String codePostal, Integer credit, String pseudo, String nom,
 			String prenom, String email, String rue, String ville, String motDePasse, boolean administrateur, boolean actif) {
 		this(telephone, codePostal, credit, pseudo, nom, prenom, email, rue, ville, motDePasse, administrateur, actif);
 		this.noUtilisateur = noUtilisateur;
@@ -63,14 +63,14 @@ public class Utilisateur implements Serializable {
 	/**
 	 * @return the telephone
 	 */
-	public Integer getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
 	/**
 	 * @param telephone the telephone to set
 	 */
-	public void setTelephone(Integer telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
