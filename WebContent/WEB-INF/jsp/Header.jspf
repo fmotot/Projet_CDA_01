@@ -4,11 +4,11 @@
 			<div class="col-4 logo">
 				<h1><a href="./ListeEnchereServlet">TrocEncheres.org</a></h1>
 			</div>
-			<div class="col-8 my-auto text-right menu">
+			<div class="col-8 my-auto text-right menu d-none d-lg-block">
 				<ul>
-					<li><a href="">Vendre un article</a></li>
-					<li><a href="">Mon profil</a></li>
-					<li><a href="">Déconnexion</a></li>
+					<li><a href="./NouvelleVenteServlet">Vendre un article</a></li>
+					<li><a href="./ServletMonProfil">Mon profil</a></li>
+					<li><a href="./ServletDeconnexion">Déconnexion</a></li>
 				</ul>
 			</div>
 		</div>

@@ -66,26 +66,28 @@
 					</div>
 				</div>
 
-				<!-- 	Recherche pour le desktop -->
-				<div class="col-12 col-lg-9 d-none d-lg-block mx-auto my-auto">
-					<div class="input-group row col-10 col-lg-8 mb-3">
+				<!--	Recherche pour le desktop	-->
+				<div class="col-lg-7 d-none d-lg-block my-auto">
+				
+					<div class="input-group row col-lg-11 mb-3">
 						<div class="input-group-prepend">
 							<div class="input-group-text">0-</div>
 						</div>
 						<input type="text" class="form-control" id="inlineFormInputGroup" name="recherche" placeholder="Le nom de l'article contient">
 					</div>
-
-					<div class="form-group row col-12 col-lg-8">
-						<label class="col-4 col-lg-4 my-auto" for="inputCategories">Catégories :</label> 
-						<select id="inputCategories" name="categorie" class="form-control col-8 col-lg-8">
+					<div class="form-group row col-lg-11">
+						<label class="col-lg-4 my-auto" for="inputCategories">Catégories :</label> 
+						<select id="inputCategories" name="categorie" class="form-control col-lg-8">
 							<option selected>Toutes</option>
 						</select>
 					</div>
 				</div>
+				
+				<div class="col-lg-2 my-auto utilisateur-connecte">$Utilisateur est connectée</div>
 
-				<!-- 	Recherche pour le mobile	 -->
-				<div class="col-12 col-lg-6 d-lg-none">
-					<div class="form-group mt-3 row col-12 col-lg-6">
+				<!--	Recherche pour le mobile	-->
+				<div class="col-12 d-lg-none">
+					<div class="form-group mt-3 row col-12">
 						<label class="my-auto col-4" for="inputCategories">Catégories</label>
 						<select id="inputCategories" name="categorie"
 							class="form-control col-8 my-auto">
@@ -93,12 +95,11 @@
 						</select>
 					</div>
 
-					<div class="input-group mt-3 row col-10 mx-auto">
+					<div class="input-group mt-3 row col-12 mx-auto">
 						<div class="input-group-prepend">
 							<div class="input-group-text">0-</div>
 						</div>
-						<input type="text" class="form-control" id="inlineFormInputGroup"
-							name="recherche" placeholder="Le nom de l'article contient">
+						<input type="text" class="form-control" id="inlineFormInputGroup" name="recherche" placeholder="Le nom de l'article contient">
 					</div>
 				</div>
 				
@@ -157,10 +158,10 @@
 						</div>
 					</div>
 				</div>
+				
 			</div>
 
 		</div>
-
 	</div>
 	
 	<%@ include file="Footer.jspf" %>
