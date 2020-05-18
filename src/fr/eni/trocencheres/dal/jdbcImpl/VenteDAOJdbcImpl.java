@@ -19,29 +19,38 @@ import fr.eni.trocencheres.dal.CodesResultatDAL;
 import fr.eni.trocencheres.dal.ConnectionProvider;
 import fr.eni.trocencheres.dal.VenteDAO;
 
+/**
+ * 
+ * @author jean getAll, getVentesFiltered
+ * @author fmoto xxxOne
+ *
+ */
 public class VenteDAOJdbcImpl implements VenteDAO {
 
-	private static String SELECT_ALL_VENTES = "SELECT ventes.no_vente,ventes.nom_article,ventes.description,ventes.date_fin_encheres,prix_initial,ventes.no_utilisateur AS vendeur, ventes.no_categorie,c.libelle, ventes.retrait_article,u.pseudo AS pseudo_vendeur,u.nom AS nom_vendeur,u.prenom AS prenom_vendeur, u.email AS email_vendeur,u.telephone AS tel_vendeur, u.rue AS rue_vendeur, u.code_postal AS cp_vendeur, u.ville AS ville_vendeur,u.mot_de_passe AS mdp_vendeur, u.credit AS credit_vendeur,u.isActif AS isActif_vendeur, u.administrateur AS admin_vendeur, encheres.date_enchere, encheres.no_utilisateur AS acheteur,encheres.mise,t.pseudo AS pseudo_acheteur, t.nom AS nom_acheteur, t.prenom AS prenom_acheteur, t.email AS email_acheteur, t.telephone AS tel_acheteur,t.rue AS rue_acheteur, t.code_postal AS cp_acheteur,t.ville AS ville_acheteur,t.mot_de_passe AS mdp_acheteur,t.credit AS credit_acheteur, t.isActif AS isActif_acheteur, t.administrateur AS admin_acheteur,retraits.no_vente AS no_vente_rtr, retraits.rue AS rue_rtr, retraits.code_postal AS cp_rtr,retraits.ville AS ville_rtr FROM VENTES " + 
-			"	INNER JOIN utilisateurs as u" + 
-			"    ON u.no_utilisateur = ventes.no_utilisateur " + 
-			"	 LEFT JOIN encheres " + 
-			"    ON ventes.no_vente = encheres.no_vente " + 
-			"    LEFT JOIN utilisateurs as t " + 
-			"    ON t.no_utilisateur = encheres.no_utilisateur " + 
-			"    LEFT JOIN retraits" + 
-			"    ON retraits.no_vente = ventes.no_vente " + 
-			"    LEFT JOIN categories as c " + 
-			"    ON c.no_categorie= ventes.no_categorie " 
-			;
+	private static String SELECT_ALL_VENTES = "SELECT ventes.no_vente,ventes.nom_article,ventes.description,ventes.date_fin_encheres,prix_initial,ventes.no_utilisateur AS vendeur, ventes.no_categorie,c.libelle, ventes.retrait_article,u.pseudo AS pseudo_vendeur,u.nom AS nom_vendeur,u.prenom AS prenom_vendeur, u.email AS email_vendeur,u.telephone AS tel_vendeur, u.rue AS rue_vendeur, u.code_postal AS cp_vendeur, u.ville AS ville_vendeur,u.mot_de_passe AS mdp_vendeur, u.credit AS credit_vendeur,u.isActif AS isActif_vendeur, u.administrateur AS admin_vendeur, encheres.date_enchere, encheres.no_utilisateur AS acheteur,encheres.mise,t.pseudo AS pseudo_acheteur, t.nom AS nom_acheteur, t.prenom AS prenom_acheteur, t.email AS email_acheteur, t.telephone AS tel_acheteur,t.rue AS rue_acheteur, t.code_postal AS cp_acheteur,t.ville AS ville_acheteur,t.mot_de_passe AS mdp_acheteur,t.credit AS credit_acheteur, t.isActif AS isActif_acheteur, t.administrateur AS admin_acheteur,retraits.no_vente AS no_vente_rtr, retraits.rue AS rue_rtr, retraits.code_postal AS cp_rtr,retraits.ville AS ville_rtr FROM VENTES "
+			+ "	INNER JOIN utilisateurs as u" + "    ON u.no_utilisateur = ventes.no_utilisateur "
+			+ "	 LEFT JOIN encheres " + "    ON ventes.no_vente = encheres.no_vente "
+			+ "    LEFT JOIN utilisateurs as t " + "    ON t.no_utilisateur = encheres.no_utilisateur "
+			+ "    LEFT JOIN retraits" + "    ON retraits.no_vente = ventes.no_vente "
+			+ "    LEFT JOIN categories as c " + "    ON c.no_categorie= ventes.no_categorie ";
 	private static String ORDER_BY_VENTE_ENCHERE_DESC = "    ORDER BY ventes.no_vente,  encheres.mise DESC";
-	private static String INSERT_UNE_VENTE = "";
-	private static String UPDATE_UNE_VENTE ="";
-	private static String SELECT_UNE_VENTE="";
-	private static String DELETE_UNE_VENTE="";
-	
-	
-   
-	
+
+	private static String INSERT_UNE_VENTE = "INSERT INTO ventes (nom_article, description, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?);";
+	private static String UPDATE_UNE_VENTE = "UPDATE ventes SET nom_article=?, description=?, date_fin_encheres=?, prix_initial=?, no_categories=? WHERE no_categorie=?;";
+	private static String SELECT_UNE_VENTE = "SELECT ventes.no_vente,ventes.nom_article,ventes.description,ventes.date_fin_encheres,prix_initial,ventes.no_utilisateur AS vendeur, ventes.no_categorie,c.libelle, ventes.retrait_article,u.pseudo AS pseudo_vendeur,u.nom AS nom_vendeur,u.prenom AS prenom_vendeur, u.email AS email_vendeur,u.telephone AS tel_vendeur, u.rue AS rue_vendeur, u.code_postal AS cp_vendeur, u.ville AS ville_vendeur,u.mot_de_passe AS mdp_vendeur, u.credit AS credit_vendeur,u.isActif AS isActif_vendeur, u.administrateur AS admin_vendeur, encheres.date_enchere, encheres.no_utilisateur AS acheteur,encheres.mise,t.pseudo AS pseudo_acheteur, t.nom AS nom_acheteur, t.prenom AS prenom_acheteur, t.email AS email_acheteur, t.telephone AS tel_acheteur,t.rue AS rue_acheteur, t.code_postal AS cp_acheteur,t.ville AS ville_acheteur,t.mot_de_passe AS mdp_acheteur,t.credit AS credit_acheteur, t.isActif AS isActif_acheteur, t.administrateur AS admin_acheteur,retraits.no_vente AS no_vente_rtr, retraits.rue AS rue_rtr, retraits.code_postal AS cp_rtr,retraits.ville AS ville_rtr FROM VENTES "
+			+ "	INNER JOIN utilisateurs as u" + "    ON u.no_utilisateur = ventes.no_utilisateur "
+			+ "	 LEFT JOIN encheres " + "    ON ventes.no_vente = encheres.no_vente "
+			+ "    LEFT JOIN utilisateurs as t " + "    ON t.no_utilisateur = encheres.no_utilisateur "
+			+ "    LEFT JOIN retraits" + "    ON retraits.no_vente = ventes.no_vente "
+			+ "    LEFT JOIN categories as c " + "    ON c.no_categorie= ventes.no_categorie "
+			+ " WHERE ventes.no_vente=?;";
+	private static String DELETE_UNE_VENTE = "";
+
+	private static String SELECT_UN_RETRAIT = "SELECT no_vente, rue, code_postal, ville FROM retraits WHERE no_vente=?;";
+	private static String INSERT_UN_RETRAIT = "INSERT INTO retraits (no_vente, rue, code_postal, ville) VALUES (?,?,?,?);";
+	private static String UPDATE_UN_RETRAIT = "UPDATE retrairs SET rue=?, code_postal=?, ville=? WHERE no_vente=?;";
+	private static String DELETE_UN_RETRAIT = "DELETE FROM retraits WHERE no_vente=?;";
+
 	@Override
 	public List<Vente> getAll() throws BusinessException {
 		List<Vente> listeVentes = new ArrayList<Vente>();
@@ -51,9 +60,10 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				
-				if(listeVentes.isEmpty() || listeVentes.get(listeVentes.size()-1).getNoVente()!= rs.getInt("no_vente") ) {
-					
+
+				if (listeVentes.isEmpty()
+						|| listeVentes.get(listeVentes.size() - 1).getNoVente() != rs.getInt("no_vente")) {
+
 					// Creation nouvelle objet vente
 					Vente vente = new Vente();
 					vente.setNoVente(rs.getInt("no_vente"));
@@ -61,8 +71,9 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 					vente.setDescription(rs.getString("description"));
 					vente.setMiseAPrix(rs.getInt("prix_initial"));
 					vente.setRetraitArticle(rs.getBoolean("retrait_article"));
-					vente.setDateFinEncheres(new java.sql.Timestamp(rs.getDate("date_fin_encheres").getTime()).toLocalDateTime());
-					
+					vente.setDateFinEncheres(
+							new java.sql.Timestamp(rs.getDate("date_fin_encheres").getTime()).toLocalDateTime());
+
 					// creation et set du vendeur
 					Utilisateur vendeur = new Utilisateur();
 					vendeur.setAdministrateur(rs.getBoolean("admin_vendeur"));
@@ -80,55 +91,53 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 					vendeur.setActif(rs.getBoolean("isActif_vendeur"));
 
 					vente.setVendeur(vendeur);
-					
+
 					Categorie categorie = new Categorie();
 					categorie.setLibelle(rs.getString("libelle"));
 					categorie.setNoCategorie(rs.getInt("no_categorie"));
-					
+
 					vente.setCategorie(categorie);
-					
-					if (rs.getString("rue_rtr")!= null && rs.getInt("no_vente_rtr")== vente.getNoVente()) {
+
+					if (rs.getString("rue_rtr") != null && rs.getInt("no_vente_rtr") == vente.getNoVente()) {
 						Retrait retrait = new Retrait();
 						retrait.setRue(rs.getString("rue_rtr"));
 						retrait.setCodePostal(rs.getString("cp_rtr"));
 						retrait.setVille(rs.getString("ville_rtr"));
-						
+
 						vente.setRetrait(retrait);
 					}
-										
-					
-					
-					
-					//Creation enchère + addEnchere() s'il y en a : 
-					if(rs.getDate("date_enchere")!=null) {
-						
-					Enchere enchere = new Enchere();
-					Utilisateur acheteur = new Utilisateur();
-					acheteur.setAdministrateur(rs.getBoolean("admin_acheteur"));
-					acheteur.setCodePostal(rs.getString("cp_acheteur"));
-					acheteur.setPseudo(rs.getString("pseudo_acheteur"));
-					acheteur.setNom(rs.getString("nom_acheteur"));
-					acheteur.setPrenom(rs.getString("prenom_acheteur"));
-					acheteur.setEmail(rs.getString("email_acheteur"));
-					acheteur.setTelephone(rs.getString("tel_acheteur"));
-					acheteur.setCredit(rs.getInt("credit_acheteur"));
-					acheteur.setMotDePasse(rs.getString("mdp_acheteur"));
-					acheteur.setRue(rs.getString("rue_acheteur"));
-					acheteur.setVille(rs.getString("ville_acheteur"));
-					acheteur.setNoUtilisateur(rs.getInt("vendeur"));
-					acheteur.setActif(rs.getBoolean("isActif_acheteur"));
-					
-					enchere.setAcheteur(acheteur);
-					enchere.setDateEnchere(new java.sql.Timestamp(rs.getDate("date_enchere").getTime()).toLocalDateTime());
-					enchere.setMise(rs.getInt("mise"));
-					enchere.setVente(vente);			
+
+					// Creation enchère + addEnchere() s'il y en a :
+					if (rs.getDate("date_enchere") != null) {
+
+						Enchere enchere = new Enchere();
+						Utilisateur acheteur = new Utilisateur();
+						acheteur.setAdministrateur(rs.getBoolean("admin_acheteur"));
+						acheteur.setCodePostal(rs.getString("cp_acheteur"));
+						acheteur.setPseudo(rs.getString("pseudo_acheteur"));
+						acheteur.setNom(rs.getString("nom_acheteur"));
+						acheteur.setPrenom(rs.getString("prenom_acheteur"));
+						acheteur.setEmail(rs.getString("email_acheteur"));
+						acheteur.setTelephone(rs.getString("tel_acheteur"));
+						acheteur.setCredit(rs.getInt("credit_acheteur"));
+						acheteur.setMotDePasse(rs.getString("mdp_acheteur"));
+						acheteur.setRue(rs.getString("rue_acheteur"));
+						acheteur.setVille(rs.getString("ville_acheteur"));
+						acheteur.setNoUtilisateur(rs.getInt("vendeur"));
+						acheteur.setActif(rs.getBoolean("isActif_acheteur"));
+
+						enchere.setAcheteur(acheteur);
+						enchere.setDateEnchere(
+								new java.sql.Timestamp(rs.getDate("date_enchere").getTime()).toLocalDateTime());
+						enchere.setMise(rs.getInt("mise"));
+						enchere.setVente(vente);
 					}
-					
-				
+
 					listeVentes.add(vente);
-					
-				}else {
-					//creation d'unne nouvelle enchère et ajout à la liste d'enchère du dernier objet vente
+
+				} else {
+					// creation d'unne nouvelle enchère et ajout à la liste d'enchère du dernier
+					// objet vente
 					Enchere enchere = new Enchere();
 					Utilisateur acheteur = new Utilisateur();
 					acheteur.setAdministrateur(rs.getBoolean("admin_acheteur"));
@@ -144,15 +153,15 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 					acheteur.setVille(rs.getString("ville_acheteur"));
 					acheteur.setNoUtilisateur(rs.getInt("vendeur"));
 					acheteur.setActif(rs.getBoolean("isActif_acheteur"));
-					
+
 					enchere.setAcheteur(acheteur);
-					enchere.setDateEnchere(new java.sql.Timestamp(rs.getDate("date_enchere").getTime()).toLocalDateTime());
+					enchere.setDateEnchere(
+							new java.sql.Timestamp(rs.getDate("date_enchere").getTime()).toLocalDateTime());
 					enchere.setMise(rs.getInt("mise"));
-					enchere.setVente(listeVentes.get(listeVentes.size()-1));
-					
-					
+					enchere.setVente(listeVentes.get(listeVentes.size() - 1));
+
 				}
-				
+
 			}
 
 		} catch (Exception e) {
@@ -162,24 +171,264 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			throw businessException;
 		}
 
-		
-		
 		return listeVentes;
 	}
 
 	@Override
 	public Vente insertOne(Vente entity) throws BusinessException {
-		return null;
+		BusinessException businessException = new BusinessException();
+		Connection cnx = null;
+
+		if (entity == null) {
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			throw businessException;
+		}
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			cnx.setAutoCommit(false);
+			// insertion de la vente
+			PreparedStatement pstmt = cnx.prepareStatement(INSERT_UNE_VENTE, PreparedStatement.RETURN_GENERATED_KEYS);
+
+			pstmt.setString(1, entity.getNomArticle());
+			pstmt.setString(2, entity.getDescription());
+			pstmt.setDate(3, java.sql.Date.valueOf(entity.getDateFinEncheres().toLocalDate()));
+			pstmt.setInt(4, entity.getMiseAPrix());
+			pstmt.setInt(5, entity.getVendeur().getNoUtilisateur());
+			pstmt.setInt(6, entity.getCategorie().getNoCategorie());
+
+			pstmt.executeUpdate();
+
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				entity.setNoVente(rs.getInt(1));
+			}
+
+			// insertion du retrait si nécessaire
+			if (entity.getRetrait() != null) {
+				pstmt = cnx.prepareStatement(INSERT_UN_RETRAIT);
+
+				pstmt.setInt(1, entity.getNoVente());
+				pstmt.setString(2, entity.getRetrait().getRue());
+				pstmt.setString(3, entity.getRetrait().getCodePostal());
+				pstmt.setString(4, entity.getRetrait().getVille());
+
+				pstmt.executeUpdate();
+			}
+
+			cnx.commit();
+		} catch (Exception e) {
+
+			try {
+				cnx.rollback();
+			} catch (SQLException e1) {
+
+				e1.printStackTrace();
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				throw businessException;
+			}
+
+			e.printStackTrace();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			throw businessException;
+		}
+
+		return entity;
 	}
 
 	@Override
 	public Vente updateOne(Vente entity) throws BusinessException {
-		return null;
+		BusinessException businessException = new BusinessException();
+		Connection cnx = null;
+
+		if (entity == null) {
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			throw businessException;
+		}
+
+		try {
+			cnx = ConnectionProvider.getConnection();
+			cnx.setAutoCommit(false);
+
+			// Update de la vente
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_UNE_VENTE);
+
+			pstmt.setString(1, entity.getNomArticle());
+			pstmt.setString(2, entity.getDescription());
+			pstmt.setDate(3, java.sql.Date.valueOf(entity.getDateFinEncheres().toLocalDate()));
+			pstmt.setInt(4, entity.getMiseAPrix());
+			pstmt.setInt(5, entity.getVendeur().getNoUtilisateur());
+			pstmt.setInt(6, entity.getCategorie().getNoCategorie());
+
+			pstmt.executeUpdate();
+
+			// On vérifie si un retrait existe déjà pour savoir si on doit insert/update ou
+			// delete
+			pstmt = cnx.prepareStatement(SELECT_UN_RETRAIT);
+
+			pstmt.setInt(1, entity.getNoVente());
+
+			ResultSet rs = pstmt.executeQuery();
+
+			Retrait retrait = null;
+			while (rs.next()) {
+				retrait = new Retrait();
+
+				retrait.setCodePostal(rs.getString("code_postal"));
+				retrait.setRue(rs.getString("rue"));
+				retrait.setVille(rs.getString("ville"));
+			}
+
+			// si un retrait a été indiqué
+			if (entity.getRetrait() != null) {
+				// s'il n'y avait pas de retrait avant on l'ajoute
+				if (retrait == null) {
+					pstmt = cnx.prepareStatement(INSERT_UN_RETRAIT);
+
+					pstmt.setInt(1, entity.getNoVente());
+					pstmt.setString(2, entity.getRetrait().getRue());
+					pstmt.setString(3, entity.getRetrait().getCodePostal());
+					pstmt.setString(4, entity.getRetrait().getVille());
+
+					pstmt.executeUpdate();
+				}
+				// s'il y avait déjà un retrait on le met à jour
+				else {
+					pstmt = cnx.prepareStatement(UPDATE_UN_RETRAIT);
+
+					pstmt.setString(1, entity.getRetrait().getRue());
+					pstmt.setString(2, entity.getRetrait().getCodePostal());
+					pstmt.setString(3, entity.getRetrait().getVille());
+					pstmt.setInt(4, entity.getNoVente());
+
+					pstmt.executeUpdate();
+				}
+			}
+			// si aucun retrait n'est indiqué
+			else {
+				// s'il y avait un retrait avant, on le supprime
+				if (retrait != null) {
+					pstmt = cnx.prepareStatement(DELETE_UN_RETRAIT);
+
+					pstmt.setInt(1, entity.getNoVente());
+
+					pstmt.executeUpdate();
+				}
+			}
+
+			cnx.commit();
+		} catch (Exception e) {
+
+			try {
+				cnx.rollback();
+			} catch (SQLException e1) {
+
+				e1.printStackTrace();
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				throw businessException;
+			}
+
+			e.printStackTrace();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			throw businessException;
+		}
+
+		return entity;
 	}
 
 	@Override
 	public Vente getOne(Vente entity) throws BusinessException {
-		return null;
+		Vente vente = null;
+
+		try {
+			Connection cnx = ConnectionProvider.getConnection();
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_UNE_VENTE);
+			pstmt.setInt(1, entity.getNoVente());
+
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				// Creation nouvelle objet vente
+				vente = new Vente();
+				vente.setNoVente(rs.getInt("no_vente"));
+				vente.setNomArticle(rs.getString("nom_article"));
+				vente.setDescription(rs.getString("description"));
+				vente.setMiseAPrix(rs.getInt("prix_initial"));
+				vente.setRetraitArticle(rs.getBoolean("retrait_article"));
+				vente.setDateFinEncheres(
+						new java.sql.Timestamp(rs.getDate("date_fin_encheres").getTime()).toLocalDateTime());
+
+				// creation et set du vendeur
+				Utilisateur vendeur = new Utilisateur();
+				vendeur.setAdministrateur(rs.getBoolean("admin_vendeur"));
+				vendeur.setCodePostal(rs.getString("cp_vendeur"));
+				vendeur.setPseudo(rs.getString("pseudo_vendeur"));
+				vendeur.setNom(rs.getString("nom_vendeur"));
+				vendeur.setPrenom(rs.getString("prenom_vendeur"));
+				vendeur.setEmail(rs.getString("email_vendeur"));
+				vendeur.setTelephone(rs.getString("tel_vendeur"));
+				vendeur.setCredit(rs.getInt("credit_vendeur"));
+				vendeur.setMotDePasse(rs.getString("mdp_vendeur"));
+				vendeur.setRue(rs.getString("rue_vendeur"));
+				vendeur.setVille(rs.getString("ville_vendeur"));
+				vendeur.setNoUtilisateur(rs.getInt("vendeur"));
+				vendeur.setActif(rs.getBoolean("isActif_vendeur"));
+
+				vente.setVendeur(vendeur);
+
+				Categorie categorie = new Categorie();
+				categorie.setLibelle(rs.getString("libelle"));
+				categorie.setNoCategorie(rs.getInt("no_categorie"));
+
+				vente.setCategorie(categorie);
+
+				if (rs.getString("rue_rtr") != null && rs.getInt("no_vente_rtr") == vente.getNoVente()) {
+					Retrait retrait = new Retrait();
+					retrait.setRue(rs.getString("rue_rtr"));
+					retrait.setCodePostal(rs.getString("cp_rtr"));
+					retrait.setVille(rs.getString("ville_rtr"));
+
+					vente.setRetrait(retrait);
+				}
+
+				// Creation enchère + addEnchere() s'il y en a :
+				if (rs.getDate("date_enchere") != null) {
+
+					Enchere enchere = new Enchere();
+					Utilisateur acheteur = new Utilisateur();
+					acheteur.setAdministrateur(rs.getBoolean("admin_acheteur"));
+					acheteur.setCodePostal(rs.getString("cp_acheteur"));
+					acheteur.setPseudo(rs.getString("pseudo_acheteur"));
+					acheteur.setNom(rs.getString("nom_acheteur"));
+					acheteur.setPrenom(rs.getString("prenom_acheteur"));
+					acheteur.setEmail(rs.getString("email_acheteur"));
+					acheteur.setTelephone(rs.getString("tel_acheteur"));
+					acheteur.setCredit(rs.getInt("credit_acheteur"));
+					acheteur.setMotDePasse(rs.getString("mdp_acheteur"));
+					acheteur.setRue(rs.getString("rue_acheteur"));
+					acheteur.setVille(rs.getString("ville_acheteur"));
+					acheteur.setNoUtilisateur(rs.getInt("vendeur"));
+					acheteur.setActif(rs.getBoolean("isActif_acheteur"));
+
+					enchere.setAcheteur(acheteur);
+					enchere.setDateEnchere(
+							new java.sql.Timestamp(rs.getDate("date_enchere").getTime()).toLocalDateTime());
+					enchere.setMise(rs.getInt("mise"));
+
+					enchere.setVente(vente);
+				}
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_CATEGORIES_ECHEC);
+			throw businessException;
+		}
+
+		return vente;
 	}
 
 	@Override
@@ -187,79 +436,66 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		return null;
 	}
 
-	
-
 //Si tout coché : getALL
 //Si mes enchère en cours   : GET ALL ENCHERE WHERE no_utilisateur = acheteur  > liste des ventes GETALL where  no_vente = .. AND no_vente=... && date enchère non terminée.
 //Si mes acquisition : get ALL ventes where date_fin inférieur à aujourd'hui  + ajouter à la liste si 1er acheteur dans la liste = no_utilisateur.
 //Autre enchère : get all enchere  where  acheteur != no_utilisateur > GET ALL where vendeur not no_utilisateur  ou 
-	
+
 	@Override
-	public List<Vente> getVentesFiltered(Utilisateur utilisateur, boolean isMesVentes, boolean isMesEncheres,boolean isMesAcquisitions, boolean isAutresEncheres, String recherche, Categorie categorie)
+	public List<Vente> getVentesFiltered(Utilisateur utilisateur, boolean isMesVentes, boolean isMesEncheres,
+			boolean isMesAcquisitions, boolean isAutresEncheres, String recherche, Categorie categorie)
 			throws BusinessException {
 		List<Vente> listeVentesFiltre = new ArrayList<Vente>();
 		StringBuffer sb = new StringBuffer();
 		Connection cnx;
-		Set<Integer> NoVentesFiltered =  new HashSet<Integer>();
+		Set<Integer> NoVentesFiltered = new HashSet<Integer>();
 		try {
 			cnx = ConnectionProvider.getConnection();
-			ResultSet rs= null;
-			
-			
-			if(isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
+			ResultSet rs = null;
+
+			if (isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
 				sb.append(SELECT_ALL_VENTES);
-				
-			}else {
+
+			} else {
 				PreparedStatement ps = null;
-				if(isMesVentes) {
+				if (isMesVentes) {
 					ps = cnx.prepareStatement("SELECT no_vente FROM ventes WHERE no_utilisateur = ?");
 					ps.setInt(1, utilisateur.getNoUtilisateur());
 					rs = ps.executeQuery();
-					while(rs.next()) {
+					while (rs.next()) {
 						NoVentesFiltered.add(rs.getInt(1));
 					}
 				}
-				
-				if(isMesEncheres) {
+
+				if (isMesEncheres) {
 					ps = cnx.prepareStatement("SELECT no_vente FROM encheres WHERE no_utilisateur = ?");
 					ps.setInt(1, utilisateur.getNoUtilisateur());
 					rs = ps.executeQuery();
-					while(rs.next()) {
+					while (rs.next()) {
 						NoVentesFiltered.add(rs.getInt(1));
 					}
 				}
-				
-				// Si siMesEncherse = False . 
+
+				// Si siMesEncherse = False .
 				//
-				if(isMesAcquisitions &&  !isMesEncheres) {
+				if (isMesAcquisitions && !isMesEncheres) {
 					ps = cnx.prepareStatement("SELECT no_vente FROM encheres WHERE no_utilisateur = ?");
 					ps.setInt(1, utilisateur.getNoUtilisateur());
 					rs = ps.executeQuery();
-					while(rs.next()) {
+					while (rs.next()) {
 						NoVentesFiltered.add(rs.getInt(1));
 					}
 				}
-				
-				
+
 			}
-			
-			
-			
-			
-			
-			
-				
+
 			sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
 			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	
-		
-		
-		
+
 		return listeVentesFiltre;
 	}
 
