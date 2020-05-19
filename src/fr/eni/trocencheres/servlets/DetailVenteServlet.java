@@ -50,6 +50,7 @@ public class DetailVenteServlet extends HttpServlet {
 		List<Enchere> listeEnchere = vente.getListeEncheres();
 		if (listeEnchere != null) {
 			Enchere derniereEnchere = listeEnchere.get(0);
+			System.out.println(listeEnchere);
 			request.setAttribute("enchere", derniereEnchere);
 		}
 				
