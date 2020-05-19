@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -134,11 +135,30 @@
 
 							<div class="col-8 ml-3">
 								<a href="./DetailVenteServlet?noVente=${vente.noVente} ">${vente.nomArticle}</a><a href="a remplir avec la servlet vente gagné"> En cours</a>
-								<p>Prix : ${!empty vente.maxEnchere.mise ? vente.maxEnchere.mise : vente.miseAPrix} points  ${vente.classement != 0 ? 'Classement : ' + vente.classement : ''} </p>
-								<p>Fin de l'enchère : ${vente.dateFinEncheres}</p>
+								<p>Prix : ${!empty vente.maxEnchere.mise ? vente.maxEnchere.mise : vente.miseAPrix} points 
+								<c:choose>
+								<c:when test="${vente.classement != 0 }">
+								Classement : ${vente.classement} </p>
+								</c:when>
+								<c:otherwise>
+								</p>
+								</c:otherwise>
+								</c:choose>
+																
+								<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
+								<p>Fin de l'enchère : <fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
+								
 								<p>Retrait : ${vente.retrait.rue}</p>
-								<p>Retrait : ${vente.retrait.codePostal} ${vente.retrait.ville}</p>
+								<p>			 ${vente.retrait.codePostal} ${vente.retrait.ville}</p>
+								<p>
+								<c:choose>
+								<c:when test="${vente.vendeur.pseudo != utilisateur.pseudo}">
+								<p>Vendeur :<a href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}"> ${vente.vendeur.pseudo}</a></p>
+								</c:when>
+								<c:otherwise>
 								<p>Vendeur : ${vente.vendeur.pseudo}</p>
+								</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>

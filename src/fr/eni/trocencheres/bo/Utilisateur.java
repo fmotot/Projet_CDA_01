@@ -245,7 +245,7 @@ public class Utilisateur implements Serializable {
 	public boolean equals(Object object) {
 		boolean equal = false;
 		
-		if (object instanceof Utilisateur && ((Utilisateur)object).getNoUtilisateur() == this.getNoUtilisateur()) {
+		if (object instanceof Utilisateur && ((Utilisateur)object).getNoUtilisateur().equals(this.getNoUtilisateur())) {
 			equal = true;
 		}
 		
