@@ -213,8 +213,9 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			}
 
 			String strVentesAAfficher = String.join(",", NoVentesFiltered);
-			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
 			sb.append(SELECT_ALL_VENTES);
+			
+			
 			if (isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
 			if(recherche != null || categorie != null) {
 				sb.append(" WHERE ");
@@ -227,13 +228,16 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 				}
 				
 				if(categorie!=null) {
-					sb.append("ventes.no_categorie = "+ categorie.getNoCategorie());
+					sb.append(" ventes.no_categorie = "+ categorie.getNoCategorie());
 				}
 			}
-		
+			sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
+			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
 			}else {
+				
 				sb.append(" WHERE ventes.no_vente IN (?) ");
-				pstmt.setString(1, strVentesAAfficher);
+				
 			if(recherche != null) {
 				sb.append(" AND ventes.description LIKE '%"+recherche+"%'");
 			}
@@ -241,14 +245,13 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			if(categorie!=null) {
 				sb.append(" AND ventes.no_categorie = "+ categorie.getNoCategorie());
 			}
-			}
-			
 			
 			sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
-			
-			
+			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
+			pstmt.setString(1, strVentesAAfficher);
 			rs = pstmt.executeQuery();
-
+			}
+			
 			listeVentesFiltre = listerVentes(rs);
 
 		} catch (Exception e) {
