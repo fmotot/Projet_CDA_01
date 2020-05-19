@@ -216,6 +216,16 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			String strVentesAAfficher = String.join(",", NoVentesFiltered);
 			sb.append(SELECT_ALL_VENTES);
 			sb.append(" WHERE no_vente IN (?) ");
+			
+			if(recherche != null) {
+				sb.append(" AND ventes.description LIKE '%recherche%");
+			}
+			
+			if(categorie!=null) {
+				sb.append(" AND ventes.no_categorie = "+ categorie.getNoCategorie());
+			}
+			
+			
 			sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
 			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
 			pstmt.setString(1, strVentesAAfficher);
