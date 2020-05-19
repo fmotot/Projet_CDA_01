@@ -43,6 +43,7 @@ public class Vente implements Serializable {
 		this.vendeur = vendeur;
 		this.retrait = retrait;
 		this.listeEncheres = listeEncheres;
+		this.categorie = categorie;
 	}
 	
 	public Vente(Integer noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, Categorie categorie, List<Enchere> listeEncheres) {

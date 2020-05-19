@@ -9,26 +9,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.trocencheres.BusinessException;
+import fr.eni.trocencheres.bll.BLLFactory;
+import fr.eni.trocencheres.bll.UtilisateurManager;
+import fr.eni.trocencheres.bo.Utilisateur;
+
 /**
- * Servlet implementation class ProfilRetraitServlet
+ * 
+ * @author Macorigh Rudy
+ *
  */
 @WebServlet("/ProfilRetraitServlet")
 public class ProfilRetraitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager();
+
+		try {
+			Utilisateur utilisateurChoisi = utilisateurManager.afficherUtilisateur(request.getParameter("pseudo"));
+			request.setAttribute("utilisateurChoisi", utilisateurChoisi);
+
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ProfilRetrait.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
