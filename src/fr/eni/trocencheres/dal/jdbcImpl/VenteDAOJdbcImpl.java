@@ -103,7 +103,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			ResultSet rs = null;
 
 			if (isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
-				sb.append(SELECT_ALL_VENTES);
+				
 
 			} else {
 				PreparedStatement ps = null;
