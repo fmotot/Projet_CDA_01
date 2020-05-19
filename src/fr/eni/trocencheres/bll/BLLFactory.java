@@ -12,7 +12,7 @@ public abstract class BLLFactory {
 	}
 	
 	public static VenteManager getVenteManager() {
-		return null;
+		return new VenteManagerImpl();
 	}
 	
 	public static UtilisateurManager getUtilisateurManager() {
