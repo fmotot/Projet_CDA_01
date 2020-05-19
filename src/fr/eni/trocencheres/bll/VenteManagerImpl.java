@@ -75,8 +75,7 @@ public class VenteManagerImpl implements VenteManager {
 					enchere.getAcheteur().setCredit(enchere.getAcheteur().getCredit() + enchere.getMise());
 				}			
 				
-				// TODO TRANSACTIONS pour annuler une vente il faut supprimer la vente de la BDD ainsi que les enchères qui la concernent et mettre à jour les utilisateurs liés
-				
+				// pour annuler une vente il faut supprimer la vente de la BDD ainsi que les enchères qui la concernent et mettre à jour les utilisateurs liés
 				vente = venteDAO.deleteOne(vente);
 			}
 			else {
@@ -112,10 +111,11 @@ public class VenteManagerImpl implements VenteManager {
 			if (mise > vente.getMaxEnchere().getMise()) {
 				enchere = new Enchere(acheteur, vente, mise);
 				
+				// récupération ancienne enchère pour en connaître le montant ou vérif si existante
+				Enchere oldEnchere = enchereDAO.getOne(enchere);
+				
 				// update si Enchere existante dans la liste
-				if (vente.getListeEncheres().contains(enchere)) {
-					// récupération ancienne enchère pour en connaître le montant
-					Enchere oldEnchere = enchereDAO.getOne(enchere);
+				if (oldEnchere != null) {
 					
 					// MAJ des points utilisateur
 					acheteur.setCredit(acheteur.getCredit() - mise + oldEnchere.getMise());
@@ -150,7 +150,6 @@ public class VenteManagerImpl implements VenteManager {
 		// SELECT * FROM VENTE WHERE dateFinEnchere = hier
 		
 		LocalDateTime hier = LocalDateTime.of(LocalDate.now(ZoneId.of("Europe/Paris")).minusDays(1),LocalTime.MIDNIGHT);
-		LocalDateTime aujourdhui = LocalDateTime.of(LocalDate.now(ZoneId.of("Europe/Paris")),LocalTime.MIDNIGHT);
 		List<Vente> venteTerminees = venteDAO.getAll();
 		
 		// pour toutes les ventes terminées, supprimer les enchères dont qui ne sont pas la dernière et recréditer l'utilisateur lié
