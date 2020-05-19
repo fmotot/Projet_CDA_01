@@ -29,7 +29,7 @@
 	<%@ include file="Alerte.jspf" %>
 
 	<h2 class="text-center">enchere.etat</h2>
-	<h2 class="text-center">${ !empty enchere.etat ? enchere.etat : '' }</h2>
+	<h2 class="text-center"> En cours ou terminé a ajouter</h2>
 
 	<div class="container">
 
@@ -59,7 +59,7 @@
 				<div class="form-group row">
 					<label for="staticMeilleureOffre" class="col-5 col-lg-3 ">Meilleure offre :</label>
 					<div class="col-6 col-lg-9">
-						<p>${vente.maxEnchere} de ${vente.vendeur}</p>
+						<p>${enchere.mise} de ${enchere.acheteur.pseudo}</p>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -85,11 +85,11 @@
 				<div class="form-group row">
 					<label for="staticVendeur" class="col-5 col-lg-3 ">Vendeur :</label>
 					<div class="col-6 col-lg-4">
-						<a href="./ProfilUtilsateurServlet?pseudo=${vente.vendeur.pseudo}">${vente.vendeur.pseudo}</a>
+						<a href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}">${vente.vendeur.pseudo}</a>
 					</div>
 				</div>
 
-				<form action="./DetailVenteServlet" method="post">
+				<form action="./DetailVenteServlet?noVente=${vente.noVente}" method="post">
 
 					<div class="form-group row">
 						<label for="inputMaProposition" class="col-5 col-lg-3 my-auto">Ma proposition :</label>

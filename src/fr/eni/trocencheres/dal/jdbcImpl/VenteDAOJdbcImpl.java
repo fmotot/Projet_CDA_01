@@ -217,7 +217,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			
 			
 			if (isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
-<<<<<<< Updated upstream
+
 			if(recherche != null || categorie != null) {
 				sb.append(" WHERE ");
 				if(recherche != null) {

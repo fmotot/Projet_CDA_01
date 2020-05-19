@@ -201,9 +201,13 @@ public class Vente implements Serializable {
 	public Enchere getMaxEnchere() {
 
 		// si requete ORDER BY DESC
-		Enchere derniereEnchere = this.listeEncheres.get(0);
-
-		return derniereEnchere;
+		if (!listeEncheres.isEmpty()) {
+			Enchere derniereEnchere = this.listeEncheres.get(0);
+			return derniereEnchere;
+		} else {
+			return null;
+		}
+		
 	}
 
 	public Integer getClassement() {
