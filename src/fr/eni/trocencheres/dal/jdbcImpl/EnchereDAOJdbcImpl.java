@@ -19,7 +19,11 @@ import fr.eni.trocencheres.dal.DAOFactory;
 import fr.eni.trocencheres.dal.EnchereDAO;
 import fr.eni.trocencheres.dal.UtilisateurDAO;
 import fr.eni.trocencheres.dal.VenteDAO;
-
+/**
+ * 
+ * @author Jean
+ *
+ */
 public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private static String SELECT_ALL_ENCHERES = "SELECT * FROM encheres";
 	private static String INSERT_UNE_ENCHERE = "INSERT INTO encheres (date_enchere,mise,no_utilisateur,no_vente) VALUES (?,?,?,?) ";

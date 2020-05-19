@@ -81,7 +81,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.LECTURE_CATEGORIES_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_VENTES_ECHEC);
 			throw businessException;
 
 		}
@@ -103,7 +103,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			ResultSet rs = null;
 
 			if (isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
-				sb.append(SELECT_ALL_VENTES);
+				
 
 			} else {
 				PreparedStatement ps = null;
@@ -216,6 +216,16 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			String strVentesAAfficher = String.join(",", NoVentesFiltered);
 			sb.append(SELECT_ALL_VENTES);
 			sb.append(" WHERE no_vente IN (?) ");
+			
+			if(recherche != null) {
+				sb.append(" AND ventes.description LIKE '%recherche%");
+			}
+			
+			if(categorie!=null) {
+				sb.append(" AND ventes.no_categorie = "+ categorie.getNoCategorie());
+			}
+			
+			
 			sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
 			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
 			pstmt.setString(1, strVentesAAfficher);
@@ -223,9 +233,11 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 
 			listeVentesFiltre = listerVentes(rs);
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_VENTES_ECHEC);
+			throw businessException;
 		}
 
 		return listeVentesFiltre;
@@ -342,7 +354,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.LECTURE_CATEGORIES_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_VENTES_ECHEC);
 			throw businessException;
 		}
 
@@ -417,7 +429,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		Connection cnx = null;
 
 		if (entity == null) {
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_NULL);
 			throw businessException;
 		}
 
@@ -499,12 +511,12 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			} catch (SQLException e1) {
 
 				e1.printStackTrace();
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_ECHEC);
 				throw businessException;
 			}
 
 			e.printStackTrace();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_ECHEC);
 			throw businessException;
 		}
 
@@ -599,7 +611,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.LECTURE_CATEGORIES_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_VENTE_ECHEC);
 			throw businessException;
 		}
 
@@ -649,13 +661,13 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			
 			cnx.commit();
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			try {
 				cnx.rollback();
-			} catch (SQLException e1) {
+			} catch (Exception e1) {
 
 				e1.printStackTrace();
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				businessException.ajouterErreur(CodesResultatDAL.ROLLBACK_ENCHERE_ECHEC);
 				throw businessException;
 			}
 			
@@ -788,7 +800,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.LECTURE_CATEGORIES_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_VENTES_ECHEC);
 			throw businessException;
 		}
 
