@@ -1,8 +1,10 @@
 package fr.eni.trocencheres.servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -34,7 +36,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		CategorieManager categorieManager = BLLFactory.getCategorieManager();
-		
+
 		List<Categorie> listeCategorie = null;
 		try {
 			listeCategorie = categorieManager.getListeCategorie();
@@ -43,35 +45,41 @@ public class NouvelleVenteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("listeCategorie", listeCategorie);
-		
+
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/NouvelleVente.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		HttpSession session = request.getSession();
-		
-		VenteManager venteManager = BLLFactory.getVenteManager();
-		DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+		HttpSession session = request.getSession();
+
+		VenteManager venteManager = BLLFactory.getVenteManager();
+		DateTimeFormatter DATEFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			
 		try {
 			Utilisateur vendeur = (Utilisateur) session.getAttribute("utilisateur");
 			String nomArticle = request.getParameter("inputArticle");
 			String description = request.getParameter("inputDescription");
-			LocalDateTime dateFinEncheres = LocalDateTime.parse(request.getParameter("inputFinEnchere"), formatDate);
+			// Transformation de la String date html en LocalDate puis LocalDateTime
+			LocalDate ld = LocalDate.parse(request.getParameter("inputFinEnchere"), DATEFORMATTER);
+			LocalDateTime dateFinEncheres = LocalDateTime.of(ld, LocalDateTime.now().toLocalTime());
+
 			Integer miseAPrix = Integer.parseInt(request.getParameter("inputPrixDeBase"));
 			String rue = request.getParameter("inputRue");
 			String ville = request.getParameter("inputCodePostal");
 			String codePostal = request.getParameter("inputVille");
-			// une fois categorie rajoutée a la fonction en BLL
 			Integer noCategorie = Integer.parseInt(request.getParameter("selectCategories"));
+
 			Categorie categorie = new Categorie(noCategorie);
 			
+			System.out.println(nomArticle + " " + description + " " + dateFinEncheres + " " + miseAPrix + " " + vendeur
+				+ " " + rue + " " + ville + " " + codePostal + " " + categorie);
 			
+
 			venteManager.creerVente(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, rue, ville, codePostal, categorie);
-			
+
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
