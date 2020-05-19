@@ -3,6 +3,11 @@ package fr.eni.trocencheres.bll;
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bo.Utilisateur;
 
+/**
+ * 
+ * @author fmoto
+ *
+ */
 public interface UtilisateurManager {
 
 	/**

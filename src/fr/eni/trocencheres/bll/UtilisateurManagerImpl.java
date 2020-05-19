@@ -55,40 +55,49 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	@Override
-	public Utilisateur modifierMonCompte(Utilisateur utilisateurSession, Utilisateur utilisateurData, String confirmationMDP)
-			throws BusinessException {
+	public Utilisateur modifierMonCompte(Utilisateur utilisateurSession, Utilisateur utilisateurData, String confirmationMDP) throws BusinessException {
 		BusinessException businessException = new BusinessException();
-
+		Utilisateur utilisateurUpdate = new Utilisateur();
+		
 		// Validation des éléments
-		utilisateurSession.setCodePostal(this.validerCodePostal(utilisateurData.getCodePostal(), businessException));
-		utilisateurSession.setPseudo(this.validerPseudo(utilisateurData.getPseudo(), businessException));
-		utilisateurSession.setNom(this.validerNom(utilisateurData.getNom(), businessException));
-		utilisateurSession.setPrenom(this.validerPrenom(utilisateurData.getPrenom(), businessException));
-		utilisateurSession.setEmail(this.validerEmail(utilisateurData.getEmail(), businessException));
-		utilisateurSession.setRue(this.validerRue(utilisateurData.getRue(), businessException));
-		utilisateurSession.setVille(this.validerVille(utilisateurData.getVille(), businessException));
+		utilisateurUpdate.setNoUtilisateur(utilisateurSession.getNoUtilisateur());
+		utilisateurUpdate.setCredit(utilisateurSession.getCredit());
+		utilisateurUpdate.setAdministrateur(utilisateurSession.isAdministrateur());
+		utilisateurUpdate.setActif(utilisateurSession.isActif());
+		
+		utilisateurUpdate.setCodePostal(this.validerCodePostal(utilisateurData.getCodePostal(), businessException));
+		utilisateurUpdate.setPseudo(this.validerPseudo(utilisateurData.getPseudo(), businessException));
+		utilisateurUpdate.setNom(this.validerNom(utilisateurData.getNom(), businessException));
+		utilisateurUpdate.setPrenom(this.validerPrenom(utilisateurData.getPrenom(), businessException));
+		utilisateurUpdate.setEmail(this.validerEmail(utilisateurData.getEmail(), businessException));
+		utilisateurUpdate.setRue(this.validerRue(utilisateurData.getRue(), businessException));
+		utilisateurUpdate.setVille(this.validerVille(utilisateurData.getVille(), businessException));
 
-		// test du téléphone si changer uniquement
+		// test du téléphone si changé uniquement
 		if (!utilisateurData.getTelephone().equals(utilisateurSession.getTelephone())) {
-			utilisateurSession.setTelephone(this.validerTelephone(utilisateurData.getTelephone(), businessException));
+			utilisateurUpdate.setTelephone(this.validerTelephone(utilisateurData.getTelephone(), businessException));
+		}
+		else {
+			utilisateurUpdate.setTelephone(utilisateurSession.getTelephone());
 		}
 
 		// Validation du mot de passe si nouveau
 		boolean isPasswordToBeChanged = false;
-		if (utilisateurData.getMotDePasse() != null && !utilisateurData.getMotDePasse().equals("")
-				&& !utilisateurData.getMotDePasse().equals(utilisateurSession.getMotDePasse())) {
-			utilisateurSession
-					.setMotDePasse(this.validerMotDePasse(utilisateurData.getMotDePasse(), confirmationMDP, businessException));
+		if (utilisateurData.getMotDePasse() != null && !utilisateurData.getMotDePasse().equals("") && !utilisateurData.getMotDePasse().equals(utilisateurSession.getMotDePasse())) {
+			utilisateurUpdate.setMotDePasse(this.validerMotDePasse(utilisateurData.getMotDePasse(), confirmationMDP, businessException));
 			isPasswordToBeChanged = true;
 		}
 
 		if (!businessException.hasErreurs()) {
 			// Cryptage du mot de passe si nouveau ou si changement du Pseudo (pour salage)
 			if (isPasswordToBeChanged) {
-				utilisateurSession.setMotDePasse(this.encryptMDP(utilisateurSession.getMotDePasse()));
+				utilisateurUpdate.setMotDePasse(this.encryptMDP(utilisateurData.getMotDePasse()));
+			}
+			else {
+				utilisateurUpdate.setMotDePasse(utilisateurSession.getMotDePasse());
 			}
 
-			utilisateurSession = this.utilisateurDAO.updateOne(utilisateurSession);
+			utilisateurSession = this.utilisateurDAO.updateOne(utilisateurUpdate);
 		} else {
 			throw businessException;
 		}
@@ -98,20 +107,23 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 
 	@Override
 	public Utilisateur creerCompteUtilisateur(String telephone, String codePostal, String pseudo, String nom,
-			String prenom, String email, String rue, String ville, String motDePasse, String confirmationMDP) throws BusinessException {
+			String prenom, String email, String rue, String ville, String motDePasse, String confirmationMDP)
+			throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		Utilisateur utilisateur = null;
 
 		// Validation des éléments
 		telephone = this.validerTelephone(telephone, businessException);
 		codePostal = this.validerCodePostal(codePostal, businessException);
+		// doit tester l'unicité
 		pseudo = this.validerPseudo(pseudo, businessException);
 		nom = this.validerNom(nom, businessException);
 		prenom = this.validerPrenom(prenom, businessException);
+		// doit tester l'unicité
 		email = this.validerEmail(email, businessException);
 		rue = this.validerRue(rue, businessException);
 		ville = this.validerVille(ville, businessException);
-		
+
 		motDePasse = this.validerMotDePasse(motDePasse, confirmationMDP, businessException);
 
 		if (!businessException.hasErreurs()) {
@@ -157,12 +169,11 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	private String validerMotDePasse(String motDePasse, String confirmationMDP, BusinessException businessException) {
 		if (motDePasse == null) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_MOT_DE_PASSE_TROP_COURT);
-		}
-		else if (motDePasse.length() < 8) {
-				businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_MOT_DE_PASSE_TROP_COURT);
-		}
-		 else if (!motDePasse.equals(confirmationMDP)) {
-			 businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_MOT_DE_PASSE_CONFIRMATION_NE_CORRESPONDENT_PAS);
+		} else if (motDePasse.length() < 8) {
+			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_MOT_DE_PASSE_TROP_COURT);
+		} else if (!motDePasse.equals(confirmationMDP)) {
+			businessException
+					.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_MOT_DE_PASSE_CONFIRMATION_NE_CORRESPONDENT_PAS);
 		}
 
 		return motDePasse;
@@ -178,8 +189,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 				} else if (telephone.length() > 15) {
 					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_TELEPHONE_TROP_LONG);
 				}
-			}
-			else {
+			} else {
 				telephone = null;
 			}
 		}
@@ -266,7 +276,6 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		} else {
 			email = email.trim();
 			if (email.length() > 50) {
-
 				businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_EMAIL_TROP_LONG);
 			} else {
 				String regex = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
