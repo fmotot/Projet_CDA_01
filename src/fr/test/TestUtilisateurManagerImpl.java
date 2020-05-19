@@ -18,7 +18,7 @@ public class TestUtilisateurManagerImpl {
 		Utilisateur utilisateur4 = null;
 		
 		try {
-			utilisateur = utilisateurManager.creerCompteUtilisateur("01 23 45 67 89", "35000", "monPseudo", "bob", "TheSponge", "bob@sponge.fr", "34 la rue", "la grande ville", "123456");
+			utilisateur = utilisateurManager.creerCompteUtilisateur("01 23 45 67 89", "35000", "monPseudo", "bob", "TheSponge", "bob@sponge.fr", "34 la rue", "la grande ville", "123456", null);
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -29,7 +29,7 @@ public class TestUtilisateurManagerImpl {
 		
 		
 		try {
-			utilisateur2 = utilisateurManager.creerCompteUtilisateur("01 23 45 67 88", "35000", "monPseudo", null, "TheSponge", "bob@sponge.fr", "34 la rue", "la grande ville", "123456");
+			utilisateur2 = utilisateurManager.creerCompteUtilisateur("01 23 45 67 88", "35000", "monPseudo", null, "TheSponge", "bob@sponge.fr", "34 la rue", "la grande ville", "123456", null);
 		} catch (BusinessException e) {
 			System.err.println("nom vide");
 			System.err.println(e.getListeCodesErreur());
@@ -37,7 +37,7 @@ public class TestUtilisateurManagerImpl {
 		System.out.println(utilisateur2);
 		
 		try {
-			utilisateur2 = utilisateurManager.creerCompteUtilisateur("01 23 45 67 889", "35000", "monPseudo", "", "TheSponge", "bob@sponge.fr", "34 la rue", "la grande ville", "123456");
+			utilisateur2 = utilisateurManager.creerCompteUtilisateur("01 23 45 67 889", "35000", "monPseudo", "", "TheSponge", "bob@sponge.fr", "34 la rue", "la grande ville", "123456", null);
 		} catch (BusinessException e) {
 			System.err.println("nom vide");
 			System.err.println(e.getListeCodesErreur());
@@ -45,7 +45,7 @@ public class TestUtilisateurManagerImpl {
 		System.out.println(utilisateur2);
 		
 		try {
-			utilisateur2 = utilisateurManager.creerCompteUtilisateur("01 23 45 67 889", "35000555555555555", null, "bob", "TheSponge", "bob@sponge.fr", "34 la rue", "la grande ville", "123456");
+			utilisateur2 = utilisateurManager.creerCompteUtilisateur("01 23 45 67 889", "35000555555555555", null, "bob", "TheSponge", "bob@sponge.fr", "34 la rue", "la grande ville", "123456", null);
 		} catch (BusinessException e) {
 			System.err.println("pseudo vide");
 			System.err.println(e.getListeCodesErreur());
@@ -53,7 +53,7 @@ public class TestUtilisateurManagerImpl {
 		System.out.println(utilisateur2);
 		
 		try {
-			utilisateur2 = utilisateurManager.creerCompteUtilisateur("01 23 45 67 89", "35000", "moi", "moi", "moi", "moi@moche.et.mechant", "34 la rue", "la grande ville", "123456");
+			utilisateur2 = utilisateurManager.creerCompteUtilisateur("01 23 45 67 89", "35000", "moi", "moi", "moi", "moi@moche.et.mechant", "34 la rue", "la grande ville", "123456", null);
 		} catch (BusinessException e) {
 			System.err.println("email pas bon");
 			System.err.println(e.getListeCodesErreur());
@@ -61,7 +61,7 @@ public class TestUtilisateurManagerImpl {
 		System.out.println(utilisateur2);
 		
 		try {
-			utilisateur2 = utilisateurManager.creerCompteUtilisateur("01 23 45 67 88", "35000", "moi", "moi", "moi", "moi@moche.et.mechant.gru", "34 la rue", "la grande ville", "123456");
+			utilisateur2 = utilisateurManager.creerCompteUtilisateur("01 23 45 67 88", "35000", "moi", "moi", "moi", "moi@moche.et.mechant.gru", "34 la rue", "la grande ville", "123456", null);
 		} catch (BusinessException e) {
 			System.err.println("email pas bon");
 			System.err.println(e.getListeCodesErreur());
