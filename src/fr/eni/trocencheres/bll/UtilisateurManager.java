@@ -3,6 +3,11 @@ package fr.eni.trocencheres.bll;
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bo.Utilisateur;
 
+/**
+ * 
+ * @author fmoto
+ *
+ */
 public interface UtilisateurManager {
 
 	/**
@@ -24,7 +29,7 @@ public interface UtilisateurManager {
 	 * @param utilisateur
 	 */
 	Utilisateur creerCompteUtilisateur(String telephone, String codePostal, String pseudo, String nom, String prenom,
-			String email, String rue, String ville, String motDePasse) throws BusinessException;
+			String email, String rue, String ville, String motDePasse, String confirmationMDP) throws BusinessException;
 
 	/**
 	 * ID 1005 : Supprimer mon compte
@@ -52,7 +57,7 @@ public interface UtilisateurManager {
 	 * @return l'utilisateur modifié
 	 * @throws BusinessException
 	 */
-	Utilisateur modifierMonCompte(Utilisateur utilisateurSession, Utilisateur utilisateurData) throws BusinessException;
+	Utilisateur modifierMonCompte(Utilisateur utilisateurSession, Utilisateur utilisateurData, String confirmationMDP) throws BusinessException;
 		
 	
 }

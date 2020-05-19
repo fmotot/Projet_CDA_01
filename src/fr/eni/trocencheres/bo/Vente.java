@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @author fmoto
- *	@author Macorigh Rudy // getMaxEnchere // getClassement
+ * @author Macorigh Rudy // getMaxEnchere // set et getClassement
  */
 public class Vente implements Serializable {
 	/**
@@ -28,13 +28,17 @@ public class Vente implements Serializable {
 	private Utilisateur vendeur;
 	private Retrait retrait;
 
+	private Integer classement;
+
 	private List<Enchere> listeEncheres;
 
 	public Vente() {
 		listeEncheres = new ArrayList<Enchere>();
 	}
-	
-	public Vente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, Categorie categorie, List<Enchere> listeEncheres) {
+
+	public Vente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix,
+			Utilisateur vendeur, Retrait retrait, boolean retraitArticle, Categorie categorie,
+			List<Enchere> listeEncheres) {
 		this();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -45,9 +49,12 @@ public class Vente implements Serializable {
 		this.listeEncheres = listeEncheres;
 		this.categorie = categorie;
 	}
-	
-	public Vente(Integer noVente, String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, Categorie categorie, List<Enchere> listeEncheres) {
-		this(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, retraitArticle, categorie, listeEncheres);
+
+	public Vente(Integer noVente, String nomArticle, String description, LocalDateTime dateFinEncheres,
+			Integer miseAPrix, Utilisateur vendeur, Retrait retrait, boolean retraitArticle, Categorie categorie,
+			List<Enchere> listeEncheres) {
+		this(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, retraitArticle, categorie,
+				listeEncheres);
 		this.noVente = noVente;
 	}
 
@@ -181,17 +188,19 @@ public class Vente implements Serializable {
 	 * @return the listeEncheres
 	 */
 	public List<Enchere> getListeEncheres() {
-		List<Enchere> result = new ArrayList<Enchere>();
-		
-		for (Enchere enchere : this.listeEncheres) {
-			result.add(enchere);
+		List<Enchere> result = null;
+		if (this.listeEncheres != null) {
+			result = new ArrayList<Enchere>();
+			for (Enchere enchere : this.listeEncheres) {
+				result.add(enchere);
+			}
 		}
-		
+
 		return result;
 	}
 
 	public void addEnchere(Enchere enchere) {
-		if (this.equals(enchere.getVente())){
+		if (this.equals(enchere.getVente())) {
 			this.listeEncheres.add(enchere);
 		}
 	}
@@ -199,12 +208,20 @@ public class Vente implements Serializable {
 	public Enchere getMaxEnchere() {
 
 		// si requete ORDER BY DESC
-		Enchere derniereEnchere = this.listeEncheres.get(0);
+		if (!listeEncheres.isEmpty()) {
+			Enchere derniereEnchere = this.listeEncheres.get(0);
+			return derniereEnchere;
+		} else {
+			return null;
+		}
 
-		return derniereEnchere;
 	}
 
-	public Integer getClassement(Utilisateur utilisateurConnecte) {
+	public Integer getClassement() {
+		return classement;
+	}
+
+	public void setClassement(Utilisateur utilisateurConnecte) {
 		Integer classement = 0;
 		// avec une requete SQL en DESC
 		for (Enchere enchere : this.listeEncheres) {
@@ -213,24 +230,23 @@ public class Vente implements Serializable {
 				break;
 			}
 		}
-		return classement;
+		this.classement = classement;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Vente [noVente=" + noVente + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix + "]";
 	}
-	
+
 	@Override
 	public boolean equals(Object object) {
 		boolean equal = false;
-		
-		if (object instanceof Vente && ((Vente)object).getNoVente() == this.getNoVente()) {
+
+		if (object instanceof Vente && ((Vente) object).getNoVente() == this.getNoVente()) {
 			equal = true;
 		}
-		
+
 		return equal;
 	}
 }

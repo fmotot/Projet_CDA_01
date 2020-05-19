@@ -1,3 +1,5 @@
+<!-- Antony / code -->
+<!-- Rudy / EL  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -26,9 +28,7 @@
 	
 	<%@ include file="Alerte.jspf" %>
 
-	<h2 class="text-center">Nouvelle vente</h2>
-
-	<div class="container">
+	<div class="container mt-3">
 
 		<div class="row">
 
@@ -37,6 +37,8 @@
 			</div>
 
 			<div class="content-vente col-12 col-lg-7">
+			
+				<h2 class="text-center mb-3">Nouvelle vente</h2>
 
 				<form action="./NouvelleVenteServlet" method="post">
 
@@ -119,7 +121,7 @@
 								<button type="submit" name="submit" value="publier" class="btn btn-primary">Publier</button>
 							</div>
 							<div class="d-inline mr-2">
-								<button type="submit" name="submit" value="enregistrer" class="btn btn-primary">Enregistrer</button>
+								<button type="submit" name="submit" value="enregistrer" class="btn btn-secondary " disabled>Enregistrer</button>
 							</div>
 							<div class="d-inline">
 								<a class="btn btn-retour btn-primary" href="./ListeEnchereServlet" role="button">Annuler</a>

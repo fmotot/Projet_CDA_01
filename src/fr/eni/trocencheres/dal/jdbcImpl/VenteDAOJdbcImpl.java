@@ -103,8 +103,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			ResultSet rs = null;
 
 			if (isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
-				sb.append(SELECT_ALL_VENTES);
-
+				
 			} else {
 				PreparedStatement ps = null;
 				if (isMesVentes) {
@@ -215,22 +214,45 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 
 			String strVentesAAfficher = String.join(",", NoVentesFiltered);
 			sb.append(SELECT_ALL_VENTES);
-			sb.append(" WHERE no_vente IN (?) ");
 			
+			
+			if (isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
+
+			if(recherche != null || categorie != null) {
+				sb.append(" WHERE ");
+				if(recherche != null) {
+					sb.append(" ventes.description LIKE '%"+recherche+"%'");
+				}
+				
+				if(recherche != null && categorie != null) {
+					sb.append(" AND ");
+				}
+				
+				if(categorie!=null) {
+					sb.append(" ventes.no_categorie = "+ categorie.getNoCategorie());
+				}
+			}
+			sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
+			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
+			rs = pstmt.executeQuery();
+			}else {
+				
+				sb.append(" WHERE ventes.no_vente IN (?) ");
+				
 			if(recherche != null) {
-				sb.append(" AND ventes.description LIKE '%recherche%");
+				sb.append(" AND ventes.description LIKE '%"+recherche+"%'");
 			}
 			
 			if(categorie!=null) {
 				sb.append(" AND ventes.no_categorie = "+ categorie.getNoCategorie());
 			}
 			
-			
 			sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
 			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
 			pstmt.setString(1, strVentesAAfficher);
 			rs = pstmt.executeQuery();
-
+			}
+			
 			listeVentesFiltre = listerVentes(rs);
 
 		} catch (Exception e) {
@@ -535,7 +557,8 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
+				
+				if(vente == null ) {
 				// Creation nouvelle objet vente
 				vente = new Vente();
 				vente.setNoVente(rs.getInt("no_vente"));
@@ -605,7 +628,33 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 
 					enchere.setVente(vente);
 				}
+				}else {
+					if (rs.getDate("date_enchere") != null) {
 
+						Enchere enchere = new Enchere();
+						Utilisateur acheteur = new Utilisateur();
+						acheteur.setAdministrateur(rs.getBoolean("admin_acheteur"));
+						acheteur.setCodePostal(rs.getString("cp_acheteur"));
+						acheteur.setPseudo(rs.getString("pseudo_acheteur"));
+						acheteur.setNom(rs.getString("nom_acheteur"));
+						acheteur.setPrenom(rs.getString("prenom_acheteur"));
+						acheteur.setEmail(rs.getString("email_acheteur"));
+						acheteur.setTelephone(rs.getString("tel_acheteur"));
+						acheteur.setCredit(rs.getInt("credit_acheteur"));
+						acheteur.setMotDePasse(rs.getString("mdp_acheteur"));
+						acheteur.setRue(rs.getString("rue_acheteur"));
+						acheteur.setVille(rs.getString("ville_acheteur"));
+						acheteur.setNoUtilisateur(rs.getInt("acheteur"));
+						acheteur.setActif(rs.getBoolean("isActif_acheteur"));
+
+						enchere.setAcheteur(acheteur);
+						enchere.setDateEnchere(
+								new java.sql.Timestamp(rs.getDate("date_enchere").getTime()).toLocalDateTime());
+						enchere.setMise(rs.getInt("mise"));
+
+						enchere.setVente(vente);
+				}
+				}
 			}
 
 		} catch (Exception e) {

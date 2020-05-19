@@ -1,6 +1,7 @@
 package fr.eni.trocencheres.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +20,7 @@ import fr.eni.trocencheres.bo.Utilisateur;
 /**
  * 
  * @author Macorigh Rudy
+ * @author fmoto Modifications pour gestion erreurs
  *
  */
 @WebServlet("/ServletSeConnecter")
@@ -73,6 +75,11 @@ public class ServletSeConnecter extends HttpServlet {
 		} catch (BusinessException e) {
 			System.out.println("utilisateur inexistant");
 			System.err.println(e.getListeCodesErreur());
+			List<Integer> listeCodesErreur = e.getListeCodesErreur();
+			if(listeCodesErreur.size()>0)
+			{
+				request.setAttribute("listeCodesErreur",listeCodesErreur);
+			}
 			// Renvoi sur la page de connexion si pas de concordance
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/SeConnecter.jsp");
 			requestDispatcher.forward(request, response);

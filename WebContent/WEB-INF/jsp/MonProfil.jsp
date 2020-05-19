@@ -1,5 +1,9 @@
+<!-- Antony / code -->
+<!-- Rudy / EL  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="fr.eni.trocencheres.messages.LecteurMessages" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!doctype html>
 <html lang="fr">
@@ -30,7 +34,7 @@
 
 		<div class="center-content">
 
-			<h2>Mon Profil</h2>
+			<h2 class="text-center mt-5 mb-5">Mon Profil</h2>
 			
 			<form class="" action="./ServletMonProfil" method="post">
 			

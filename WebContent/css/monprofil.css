@@ -1,9 +1,11 @@
+/* Antony */
+
 @charset "ISO-8859-1";
 
 .btn-enregistrer,
 .btn-supprimer,
 .btn-retour{
-	font-size:3vw;
+	font-size:12px;
 	padding:10px 10px 10px 10px;
 }
 
@@ -25,24 +27,20 @@ label{
 
 @media (min-width: 1200px) { 
 	
-	.center-content{
-		margin-top:100px;
-	}
-	
 	.btn-enregistrer{
-	margin-right:100px;
+		margin-right:100px;
 	}
 	
 	.btn-supprimer{
-	margin-right:100px;
+		margin-right:100px;
 	}
 	
 	.btn-enregistrer,
 	.btn-supprimer,
 	.btn-retour{
-	margin-top:50px;
-	padding:15px 40px 15px 40px;
-	font-size:.8vw;
+		margin-top:50px;
+		font-size:16px;
+		padding:15px 40px 15px 40px;
 	}
 	
 	.form-control{

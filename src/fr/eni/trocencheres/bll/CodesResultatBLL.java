@@ -2,6 +2,8 @@ package fr.eni.trocencheres.bll;
 
 /**
  * Les codes disponibles sont entre 20000 et 29999
+ * @author fmoto
+ *
  */
 public abstract class CodesResultatBLL {
 	
@@ -110,6 +112,12 @@ public abstract class CodesResultatBLL {
 	 */
 	public static final int REGLE_UTILISATEUR_MOT_DE_PASSE_TROP_COURT = 21018;
 	
+	/**
+	 * Echec les mots de passe et la confirmation ne correspondent pas
+	 */
+	public static final int REGLE_UTILISATEUR_MOT_DE_PASSE_CONFIRMATION_NE_CORRESPONDENT_PAS = 21019;
+
+	
 	
 	/**
 	 * Echec lors de la selection de l'encodage
@@ -215,4 +223,6 @@ public abstract class CodesResultatBLL {
 	 * Echec categorie inconnue
 	 */
 	public static final int CATEGORIE_INCONNUE = 23020;
+
+	
 }
