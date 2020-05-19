@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ page import="fr.eni.trocencheres.messages.LecteurMessages" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -37,55 +38,55 @@
 				<div class="form-group row justify-content-center">
 				    <label for="inputPseudo" class="col-4 col-lg-2 col-form-label-sm ">Pseudo :</label>
 				    <div class="col-6 col-lg-3">
-				    	<input name="inputPseudo" type="text" class="form-control form-control-sm" id="inputPseudo">
+				    	<input name="inputPseudo" type="text" class="form-control form-control-sm" id="inputPseudo" value="${pseudo}">
 				    </div>
 				    <label for="inputNom" class="col-4 col-lg-2 col-form-label-sm ">Nom :</label>
 				    <div class="col-6 col-lg-3">
-				    	<input name="inputNom" type="text" class="form-control form-control-sm" id="inputNom">
+				    	<input name="inputNom" type="text" class="form-control form-control-sm" id="inputNom" value="${nom}">
 				    </div>
 				</div>
 				
 				<div class="form-group row justify-content-center">
 				    <label for="inputPrenom" class="col-4 col-lg-2 col-form-label-sm ">Prénom :</label>
 				    <div class="col-6 col-lg-3">
-				    	<input name="inputPrenom" type="text" class="form-control form-control-sm" id="inputPrenom">
+				    	<input name="inputPrenom" type="text" class="form-control form-control-sm" id="inputPrenom" value="${prenom}">
 				    </div>
 				    <label for="inputEmail" class="col-4 col-lg-2 col-form-label-sm ">Email :</label>
 				    <div class="col-6 col-lg-3">
-				    	<input name="inputEmail" type="email" class="form-control form-control-sm" id="inputEmail">
+				    	<input name="inputEmail" type="email" class="form-control form-control-sm" id="inputEmail" value="${email}">
 				    </div>
 				</div>
 				
 				<div class="form-group row justify-content-center">
 				    <label for="inputTelephone" class="col-4 col-lg-2 col-form-label-sm ">Téléphone :</label>
 				    <div class="col-6 col-lg-3">
-				    	<input name="inputTelephone" type="text" class="form-control form-control-sm" id="inputTelephone">
+				    	<input name="inputTelephone" type="text" class="form-control form-control-sm" id="inputTelephone" value="${telephone}">
 				    </div>
 				    <label for="inputRue" class="col-4 col-lg-2 col-form-label-sm ">Rue :</label>
 				    <div class="col-6 col-lg-3">
-				    	<input name="inputRue" type="text" class="form-control form-control-sm" id="inputRue">
+				    	<input name="inputRue" type="text" class="form-control form-control-sm" id="inputRue" value="${rue}">
 				    </div>
 				</div>
 				
 				<div class="form-group row justify-content-center">
 				    <label for="inputCodePostal" class="col-4 col-lg-2 col-form-label-sm ">Code postal :</label>
 				    <div class="col-6 col-lg-3">
-				    	<input name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
+				    	<input name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal" value="${codePostal}">
 				    </div>
 				    <label for="inputVille" class="col-4 col-lg-2 col-form-label-sm ">Ville :</label>
 				    <div class="col-6 col-lg-3">
-				    	<input name="inputVille" type="text" class="form-control form-control-sm" id="inputVille">
+				    	<input name="inputVille" type="text" class="form-control form-control-sm" id="inputVille" value="${ville}">
 				    </div>
 				</div>
 				
 				<div class="form-group row justify-content-center">
 				    <label for="inputMotDePasse" class="col-4 col-lg-2 col-form-label-sm ">Mot de passe :</label>
 				    <div class="col-6 col-lg-3">
-				    	<input name="inputMotDePasse" type="password" class="form-control form-control-sm" id="inputMotDePasse">
+				    	<input name="inputMotDePasse" type="password" class="form-control form-control-sm" id="inputMotDePasse" value="${motDePasse}">
 				    </div>
 				    <label for="inputConfirmation" class="col-4 col-lg-2 col-form-label-sm ">Confirmation :</label>
 				    <div class="col-6 col-lg-3">
-				    	<input name="inputConfirmation" type="password" class="form-control form-control-sm" id="inputConfirmation">
+				    	<input name="inputConfirmation" type="password" class="form-control form-control-sm" id="inputConfirmation" value="${confirmationMDP}">
 				    </div>
 				</div>
 				

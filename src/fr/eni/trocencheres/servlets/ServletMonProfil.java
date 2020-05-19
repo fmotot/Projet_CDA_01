@@ -1,6 +1,7 @@
 package fr.eni.trocencheres.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bll.BLLFactory;
 import fr.eni.trocencheres.bll.UtilisateurManager;
 import fr.eni.trocencheres.bo.Utilisateur;
+
 /**
  * 
  * @author Macorigh Rudy
@@ -53,42 +55,39 @@ public class ServletMonProfil extends HttpServlet {
 			}
 		}
 		// si clique sur le bouton enregistrer
-		if (request.getParameter("submit").equals("enregistrer")) {
-			// Verification au prealable que les champs MDP et Confirmation soit identiques
-			if ((request.getParameter("inputMotDePasse")).equals(request.getParameter("inputConfirmation"))) {
-				// Reaffectation des données dans l'utilisateur
-				System.out.println("remise des valeurs dans le new user");
-				utilisateurData.setPseudo(request.getParameter("inputPseudo"));
-				System.out.println(utilisateurData.getPseudo());
-				utilisateurData.setNom(request.getParameter("inputNom"));
-				utilisateurData.setPrenom(request.getParameter("inputPrenom"));
-				utilisateurData.setEmail(request.getParameter("inputEmail"));
-				utilisateurData.setTelephone(request.getParameter("inputTelephone"));
-				utilisateurData.setRue(request.getParameter("inputRue"));
-				utilisateurData.setCodePostal(request.getParameter("inputCodePostal"));
-				utilisateurData.setVille(request.getParameter("inputVille"));
-				utilisateurData.setMotDePasse(request.getParameter("inputMotDePasse"));
+		if ((request.getParameter("inputMotDePasse")).equals(request.getParameter("inputConfirmation"))) {
+			// Reaffectation des données dans l'utilisateur
+			System.out.println("remise des valeurs dans le new user");
+			utilisateurData.setPseudo(request.getParameter("inputPseudo"));
+			System.out.println(utilisateurData.getPseudo());
+			utilisateurData.setNom(request.getParameter("inputNom"));
+			utilisateurData.setPrenom(request.getParameter("inputPrenom"));
+			utilisateurData.setEmail(request.getParameter("inputEmail"));
+			utilisateurData.setTelephone(request.getParameter("inputTelephone"));
+			utilisateurData.setRue(request.getParameter("inputRue"));
+			utilisateurData.setCodePostal(request.getParameter("inputCodePostal"));
+			utilisateurData.setVille(request.getParameter("inputVille"));
+			utilisateurData.setMotDePasse(request.getParameter("inputMotDePasse"));
 
-				try {
-					// Mise a jour de l'utilisateur en BDD et recuperation de l'utilisateur mis a
-					// jour
-					Utilisateur utilisateurUpdate = utilisateurManager.modifierMonCompte(utilisateurConnecte,
-							utilisateurData);
+			try {
+				// Mise a jour de l'utilisateur en BDD et recuperation de l'utilisateur mis a
+				// jour
+				Utilisateur utilisateurUpdate = utilisateurManager.modifierMonCompte(utilisateurConnecte,
+						utilisateurData, request.getParameter("inputConfirmation"));
 
-					// Affectation de l'utilisateur mis a jour en session
-					session.setAttribute("utilisateur", utilisateurUpdate);
-					// renvoi sur la JSP
-					RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
-					requestDispatcher.forward(request, response);
-				} catch (BusinessException e) {
-					System.err.println(e.getListeCodesErreur());
-					// erreur a gérer si probleme lors de l'update
-					e.printStackTrace();
+				// Affectation de l'utilisateur mis a jour en session
+				session.setAttribute("utilisateur", utilisateurUpdate);
+				// renvoi sur la JSP
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
+				requestDispatcher.forward(request, response);
+			} catch (BusinessException e) {
+				System.err.println(e.getListeCodesErreur());
+				List<Integer> listeCodesErreur = e.getListeCodesErreur();
+				if (listeCodesErreur.size() > 0) {
+					request.setAttribute("listeCodesErreur", listeCodesErreur);
 				}
-			} else {
-				// Si mot de passe et confirmation differents, retour sur la page de profil
-				System.out.println("erreur de mot de passe");
-
+				// erreur a gérer si probleme lors de l'update
+				e.printStackTrace();
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
 				requestDispatcher.forward(request, response);
 			}

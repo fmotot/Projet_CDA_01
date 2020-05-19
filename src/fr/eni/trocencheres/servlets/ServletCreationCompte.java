@@ -1,6 +1,7 @@
 package fr.eni.trocencheres.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,9 +15,11 @@ import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bll.BLLFactory;
 import fr.eni.trocencheres.bll.UtilisateurManager;
 import fr.eni.trocencheres.bo.Utilisateur;
+
 /**
  * 
  * @author Macorigh Rudy
+ * @author fmoto modifications 
  *
  */
 @WebServlet("/ServletCreationCompte")
@@ -48,35 +51,42 @@ public class ServletCreationCompte extends HttpServlet {
 
 		UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager();
 
-		// Verification du mot de passe et de sa confirmation
-		if (motDePasse.equals(confirmationMDP)) {
-			try {
-				// Creation de l'utilisateur en BDD
-				Utilisateur utilisateur = utilisateurManager.creerCompteUtilisateur(telephone, codePostal, pseudo, nom,
-						prenom, email, rue, ville, motDePasse);
-				// Mise de l'utilisateur en session
-				session.setAttribute("utilisateur", utilisateur);
-				// Renvoi sur JSP 
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
-				requestDispatcher.forward(request, response);
-			} catch (BusinessException e) {
-				// erreur a gérer si probleme lors de la creation
-				System.out.println("erreur creation compte");
-				System.err.println(e.getListeCodesErreur());
-				e.printStackTrace();
-				
+		try {
+			// Creation de l'utilisateur en BDD
+			Utilisateur utilisateur = utilisateurManager.creerCompteUtilisateur(telephone, codePostal, pseudo, nom,
+					prenom, email, rue, ville, motDePasse, confirmationMDP);
+			// Mise de l'utilisateur en session
+			session.setAttribute("utilisateur", utilisateur);
+			// Renvoi sur JSP
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
+			requestDispatcher.forward(request, response);
+		} catch (BusinessException e) {
+			// erreur a gérer si probleme lors de la creation
+			System.out.println("erreur creation compte");
+			List<Integer> listeCodesErreur = e.getListeCodesErreur();
+			System.err.println(e.getListeCodesErreur());
+			e.printStackTrace();
 
+			// Affectation des variables à renvoyer
+			request.setAttribute("pseudo", pseudo);
+			request.setAttribute("nom", nom);
+			request.setAttribute("prenom", prenom);
+			request.setAttribute("email", email);
+			request.setAttribute("telephone", telephone);
+			request.setAttribute("rue", rue);
+			request.setAttribute("codePostal", codePostal);
+			request.setAttribute("ville", ville);
+			request.setAttribute("motDePasse", motDePasse);
+			request.setAttribute("confirmationMDP", confirmationMDP);
+
+			if(listeCodesErreur.size()>0)
+			{
+				request.setAttribute("listeCodesErreur",listeCodesErreur);
 			}
-
-		} else {
-			// Si mot de passe et confirmation differents, retour sur la page de creation
-			// A determiner si doit etre pre-rempli avec les infos entrées precedemment
-			System.out.println("erreur de mot de passe");
 
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/CreationCompte.jsp");
 			requestDispatcher.forward(request, response);
+
 		}
-
 	}
-
 }
