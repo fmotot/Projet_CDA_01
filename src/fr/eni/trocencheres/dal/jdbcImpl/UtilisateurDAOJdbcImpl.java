@@ -12,7 +12,11 @@ import fr.eni.trocencheres.bo.Utilisateur;
 import fr.eni.trocencheres.dal.CodesResultatDAL;
 import fr.eni.trocencheres.dal.ConnectionProvider;
 import fr.eni.trocencheres.dal.UtilisateurDAO;
-
+/**
+ * 
+ * @author Jean
+ *
+ */
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	private static String SELECT_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";

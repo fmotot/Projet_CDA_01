@@ -2,7 +2,11 @@ package fr.eni.trocencheres.dal;
 
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bo.Utilisateur;
-
+/**
+ * 
+ * @author jeanr
+ *
+ */
 public interface UtilisateurDAO extends DAO<Utilisateur> {
 
 	/**

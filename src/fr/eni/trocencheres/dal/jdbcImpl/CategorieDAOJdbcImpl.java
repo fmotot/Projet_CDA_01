@@ -11,7 +11,11 @@ import fr.eni.trocencheres.bo.Categorie;
 import fr.eni.trocencheres.dal.CategorieDAO;
 import fr.eni.trocencheres.dal.CodesResultatDAL;
 import fr.eni.trocencheres.dal.ConnectionProvider;
-
+/**
+ * 
+ * @author Jean
+ *
+ */
 public class CategorieDAOJdbcImpl implements CategorieDAO{
 	
 	private static String SELECT_ALL_CATEGORIES="SELECT * FROM categories";

@@ -7,7 +7,11 @@ import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bo.Categorie;
 import fr.eni.trocencheres.bo.Utilisateur;
 import fr.eni.trocencheres.bo.Vente;
-
+/**
+ * 
+ * @author jeanr
+ *
+ */
 public interface VenteDAO  extends DAO<Vente>{
 
 	

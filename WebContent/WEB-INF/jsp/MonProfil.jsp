@@ -70,7 +70,7 @@
 				<div class="form-group row justify-content-center">
 				    <label for="inputCodePostal" class="col-4 col-lg-2 col-form-label-sm ">Code postal :</label>
 				    <div class="col-6 col-lg-3">
-				    	<input value="${utilisateur.CodePostal}" name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
+				    	<input value="${utilisateur.codePostal}" name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
 				    </div>
 				    <label for="inputVille" class="col-4 col-lg-2 col-form-label-sm ">Ville :</label>
 				    <div class="col-6 col-lg-3">
@@ -81,11 +81,11 @@
 				<div class="form-group row justify-content-center">
 				    <label for="inputMotDePasse" class="col-4 col-lg-2 col-form-label-sm ">Mot de passe :</label>
 				    <div class="col-6 col-lg-3">
-				    	<input value="${utilisateur.motDePasse}" name="inputMotDePasse" type="password" class="form-control form-control-sm" id="inputMotDePasse">
+				    	<input value="" name="inputMotDePasse" type="password" class="form-control form-control-sm" id="inputMotDePasse">
 				    </div>
 				    <label for="inputConfirmation" class="col-4 col-lg-2 col-form-label-sm ">Confirmation :</label>
 				    <div class="col-6 col-lg-3">
-				    	<input value="${utilisateur.confirmation}" name="inputConfirmation" type="password" class="form-control form-control-sm" id="inputConfirmation">
+				    	<input value="" name="inputConfirmation" type="password" class="form-control form-control-sm" id="inputConfirmation">
 				    </div>
 				</div>
 				

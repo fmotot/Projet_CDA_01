@@ -120,24 +120,24 @@
 		<div class="container">
 
 			<div class="row">
-<%-- 				<c:forEach var="vente" items="${listeVente}"> --%>
-<!-- 					<div class="jumbotron col-12 col-lg-5 mx-auto"> -->
-<!-- 						<div class="row"> -->
-<!-- 							<div class="col-3 "> -->
-<!-- 								<div class="image"></div> -->
-<!-- 							</div> -->
+				<c:forEach var="vente" items="${listeVente}">
+					<div class="jumbotron col-12 col-lg-5 mx-auto">
+						<div class="row">
+							<div class="col-3 ">
+								<div class="image"></div>
+							</div>
 
-<!-- 							<div class="col-8 ml-3"> -->
-<%-- 								<a href="./DetailVenteServlet?vente=${vente}">${vente.nomArticle}</a><a href="a remplir avec la servlet vente gagné"> En cours</a> --%>
-<%-- 								<p>Prix : ${vente.maxEnchere} points  ${vente.classement != 0 ? 'Classement :' vente.classement : ''} </p> --%>
-<%-- 								<p>Fin de l'enchère : ${vente.dateFinEncheres}</p> --%>
-<%-- 								<p>Retrait : ${vente.retrait.rue}</p> --%>
-<%-- 								<p>Retrait : ${vente.retrait.codePostal} ${vente.retrait.ville}</p> --%>
-<%-- 								<p>Vendeur : ${vente.vendeur.pseudo}</p> --%>
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<%-- 				</c:forEach> --%>
+							<div class="col-8 ml-3">
+								<a href="./DetailVenteServlet?vente=${vente}">${vente.nomArticle}</a><a href="a remplir avec la servlet vente gagné"> En cours</a>
+								<p>Prix : ${vente.maxEnchere} points  ${vente.classement != 0 ? 'Classement : ' + vente.classement : ''} </p>
+								<p>Fin de l'enchère : ${vente.dateFinEncheres}</p>
+								<p>Retrait : ${vente.retrait.rue}</p>
+								<p>Retrait : ${vente.retrait.codePostal} ${vente.retrait.ville}</p>
+								<p>Vendeur : ${vente.vendeur.pseudo}</p>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
 				
 				<div class="jumbotron col-12 col-lg-5 mx-auto">
 					<div class="row">
