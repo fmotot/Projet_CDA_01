@@ -50,32 +50,32 @@
 
 					<div class="form-group row">
 						<label for="staticMeilleureOffre" class="col-5 col-lg-3 label-bold">Description :</label>
-						<div class="col-6 col-lg-9 my-auto">
+						<div class="col-6 col-lg-9">
 							<p>${vente.description}</p>
 						</div>
 					</div>
 
 				<div class="form-group row">
 					<label for="staticMeilleureOffre" class="col-5 col-lg-3 label-bold">Meilleure offre :</label>
-					<div class="col-6 col-lg-9 my-auto">
+					<div class="col-6 col-lg-9">
 						<p>${enchere.mise} de ${enchere.acheteur.pseudo}</p>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="staticMiseAPrix" class="col-5 col-lg-3 label-bold">Mise à Prix :</label>
-					<div class="col-6 col-lg-4 my-auto">
+					<div class="col-6 col-lg-4">
 						<p> ${vente.miseAPrix} </p>		
 				</div>
 				</div>
 				<div class="form-group row">
 					<label for="staticFinEnchere" class="col-5 col-lg-3 label-bold">Fin de l'enchère :</label>
-					<div class="col-6 col-lg-4 my-auto">
+					<div class="col-6 col-lg-4">
 						<p>${vente.dateFinEncheres}</p>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="staticRetrait" class="col-5 col-lg-3 label-bold">Retrait :</label>
-					<div class="col-6 col-lg-4 my-auto">
+					<div class="col-6 col-lg-4">
 						<p>${vente.retrait.rue}<p>
 						<p>${vente.retrait.codePostal} ${vente.retrait.ville}<p>
 						
@@ -83,7 +83,7 @@
 				</div>
 				<div class="form-group row">
 					<label for="staticVendeur" class="col-5 col-lg-3 label-bold">Vendeur :</label>
-					<div class="col-6 col-lg-4 my-auto">
+					<div class="col-6 col-lg-4">
 						<a href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}">${vente.vendeur.pseudo}</a>
 					</div>
 				</div>
