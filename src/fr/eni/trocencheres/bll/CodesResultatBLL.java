@@ -19,10 +19,6 @@ public abstract class CodesResultatBLL {
 	 */
 	public static final int LOGIN_INCORRECT = 20002;
 	
-	/**
-	 * Echec lors de la sélection du type d'encodage
-	 */
-	public static final int ERREUR_SELECTION_ENCODAGE = 22002;
 	
 	/**
 	 * Echec téléphone déjà utilisé
@@ -40,7 +36,7 @@ public abstract class CodesResultatBLL {
 	public static final int REGLE_UTILISATEUR_CODE_POSTAL_VIDE = 21003;
 
 	/**
-	 * Echec code postal trop long
+	 * Echec code postal trop long +10
 	 */
 	public static final int REGLE_UTILISATEUR_CODE_POSTAL_TROP_LONG = 21004;
 
@@ -63,7 +59,6 @@ public abstract class CodesResultatBLL {
 	 * Echec nom trop long +30
 	 */
 	public static final int REGLE_UTILISATEUR_NOM_TROP_LONG = 21008;
-	
 	
 	/**
 	 * Echec prenom obligatoire

@@ -44,11 +44,14 @@ public class VenteManagerImpl implements VenteManager {
 		miseAPrix = this.validerPrixInitial(miseAPrix, businessException);
 		vendeur = this.validerUtilisateur(vendeur, businessException);
 		Retrait retrait = this.validerRetrait(rue, ville, codePostal, businessException);
-		categorie = this.validerCategorie(categorie, businessException);
 		
+		System.out.println(categorie);
+		
+		categorie = this.validerCategorie(categorie, businessException);
+		System.out.println(categorie);
 		if (!businessException.hasErreurs()) {
 			vente = new Vente(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, false, categorie, null);
-			
+			System.out.println(vente.getCategorie());
 			vente = this.venteDAO.insertOne(vente);
 		}
 		else {
