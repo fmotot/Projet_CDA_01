@@ -215,7 +215,9 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			String strVentesAAfficher = String.join(",", NoVentesFiltered);
 			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
 			sb.append(SELECT_ALL_VENTES);
+
 			if (isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
+<<<<<<< Updated upstream
 			if(recherche != null || categorie != null) {
 				sb.append(" WHERE ");
 				if(recherche != null) {
@@ -231,6 +233,9 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 				}
 			}
 		
+=======
+						
+>>>>>>> Stashed changes
 			}else {
 				sb.append(" WHERE ventes.no_vente IN (?) ");
 				pstmt.setString(1, strVentesAAfficher);

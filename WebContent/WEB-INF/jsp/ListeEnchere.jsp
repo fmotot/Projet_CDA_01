@@ -78,7 +78,10 @@
 					<div class="form-group row col-lg-11">
 						<label class="col-lg-4 my-auto" for="inputCategories">Catégories :</label> 
 						<select id="inputCategories" name="categorie" class="form-control col-lg-8">
-							<option selected>Toutes</option>
+							<option value="toutes">Toutes</option>
+							<c:forEach var="categorie" items="${listeCategorie}">>
+						    	<option value="${categorie.noCategorie}">${categorie.libelle}</option>
+						    	</c:forEach>
 						</select>
 					</div>
 				</div>
@@ -89,7 +92,7 @@
 						<label class="my-auto col-4" for="inputCategories">Catégories</label>
 						<select id="inputCategories" name="categorie"
 							class="form-control col-8 my-auto">
-							<option selected>Toutes</option>
+							<option selected>truite</option>
 						</select>
 					</div>
 
@@ -120,7 +123,7 @@
 		<div class="container">
 
 			<div class="row">
-				<c:forEach var="vente" items="${listeVente}">
+				<c:forEach var="vente" items="${listeVentes}">
 					<div class="jumbotron col-12 col-lg-5 mx-auto">
 						<div class="row">
 							<div class="col-3 ">
@@ -129,7 +132,7 @@
 
 							<div class="col-8 ml-3">
 								<a href="./DetailVenteServlet?vente=${vente}">${vente.nomArticle}</a><a href="a remplir avec la servlet vente gagné"> En cours</a>
-								<p>Prix : ${vente.maxEnchere} points  ${vente.classement != 0 ? 'Classement : ' + vente.classement : ''} </p>
+								<p>Prix : ${vente.maxEnchere.mise} points  ${vente.classement != 0 ? 'Classement : ' + vente.classement : ''} </p>
 								<p>Fin de l'enchère : ${vente.dateFinEncheres}</p>
 								<p>Retrait : ${vente.retrait.rue}</p>
 								<p>Retrait : ${vente.retrait.codePostal} ${vente.retrait.ville}</p>
@@ -138,25 +141,6 @@
 						</div>
 					</div>
 				</c:forEach>
-				
-				<div class="jumbotron col-12 col-lg-5 mx-auto">
-					<div class="row">
-						<div class="col-3">
-							<div class="image"></div>
-						</div>
-
-						<div class="col-8 ml-3">
-							<a href="#">PC Gamer pour travailler</a><a href="#"> En cours</a>
-							<p>Prix : $points Classement : $1</p>
-							<p>Fin de l'enchère : $date</p>
-							<p>Retrait : $adresse</p>
-							<p>
-								Vendeur : <a></a>$pseudo
-							</p>
-						</div>
-					</div>
-				</div>
-				
 			</div>
 
 		</div>

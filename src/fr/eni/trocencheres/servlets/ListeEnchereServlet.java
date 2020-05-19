@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bll.BLLFactory;
+import fr.eni.trocencheres.bll.CategorieManager;
 import fr.eni.trocencheres.bll.VenteManager;
 import fr.eni.trocencheres.bo.Categorie;
 import fr.eni.trocencheres.bo.Utilisateur;
@@ -29,7 +30,17 @@ public class ListeEnchereServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		CategorieManager categorieManager = BLLFactory.getCategorieManager();
 
+		List<Categorie> listeCategorie = null;
+		try {
+			listeCategorie = categorieManager.getListeCategorie();
+		} catch (BusinessException e) {
+			System.err.println(e.getListeCodesErreur());
+			e.printStackTrace();
+		}
+		request.setAttribute("listeCategorie", listeCategorie);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp") ;
 	    requestDispatcher.forward(request, response) ;
 	}
@@ -74,12 +85,25 @@ public class ListeEnchereServlet extends HttpServlet {
 		
 		// requete de la recherche dans la textbox
 		recherche = request.getParameter("recherche");
-		// requete la categorie dans la droplist et crée une categorie pour l'ajoutée au constructeur de la fonction
-		categorie = new Categorie(request.getParameter("categorie"));
+		if (recherche.equals("")) {
+			recherche = null;
+		}
 		
+		// requete la categorie dans la droplist et crée une categorie pour l'ajoutée au constructeur de la fonction
+		if (request.getParameter("categorie").equals("toutes")) {
+			categorie = null;
+		} else {
+		categorie = new Categorie(Integer.parseInt(request.getParameter("categorie")));
+		}
 		try {
 			// recupere la liste des ventes associée a la recherche utilisateur
+			System.out.println(categorie);
 			listeDeVentes = venteManager.listerVentes(utilisateurConnecte, isMesVentes, isMesEncheres, isMesAcquisitions, isAutresEncheres, recherche, categorie);
+			System.out.println(listeDeVentes);
+			for (Vente vente : listeDeVentes) {
+				vente.setClassement(utilisateurConnecte);
+			}
+			
 			request.setAttribute("listeVentes", listeDeVentes);
 						
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp") ;

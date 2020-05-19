@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @author fmoto
- *	@author Macorigh Rudy // getMaxEnchere // getClassement
+ *	@author Macorigh Rudy // getMaxEnchere // set et getClassement
  */
 public class Vente implements Serializable {
 	/**
@@ -28,6 +28,8 @@ public class Vente implements Serializable {
 	private Utilisateur vendeur;
 	private Retrait retrait;
 
+	private Integer classement;
+	
 	private List<Enchere> listeEncheres;
 
 	public Vente() {
@@ -204,7 +206,11 @@ public class Vente implements Serializable {
 		return derniereEnchere;
 	}
 
-	public Integer getClassement(Utilisateur utilisateurConnecte) {
+	public Integer getClassement() {
+		return classement;
+	}
+
+	public void setClassement(Utilisateur utilisateurConnecte) {
 		Integer classement = 0;
 		// avec une requete SQL en DESC
 		for (Enchere enchere : this.listeEncheres) {
@@ -213,9 +219,8 @@ public class Vente implements Serializable {
 				break;
 			}
 		}
-		return classement;
+		this.classement = classement;
 	}
-
 	
 	@Override
 	public String toString() {
