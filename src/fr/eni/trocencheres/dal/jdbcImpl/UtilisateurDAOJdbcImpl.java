@@ -26,7 +26,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static String DELETE_UN_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE no_utilisateur= ?";
 	private static String IS_TELEPHONE_EXIST = "SELECT * FROM UTILISATEURS WHERE telephone=?";
 	private static String SELECT_BY_LOGIN = "SELECT * FROM UTILISATEURS WHERE pseudo= ? OR email= ? ";
-
+	private static String IS_PSEUDO_EXIST = "SELECT * FROM UTILISATEURS WHERE pseudo= ? ";
+	private static String IS_EMAIL_EXIST = "SELECT * FROM UTILISATEURS WHERE email= ? ";
 	@Override
 	public List<Utilisateur> getAll() throws BusinessException {
 
@@ -233,6 +234,57 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 		return isTelephoneExist;
 	}
+	
+	
+	public boolean isPseudoExist(String pseudo) throws BusinessException {
+		Connection cnx;
+		boolean isPseudoExist = false;
+		try {
+			cnx = ConnectionProvider.getConnection();
+			PreparedStatement pstmt = cnx.prepareStatement(IS_PSEUDO_EXIST);
+			pstmt.setString(1, pseudo);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				isPseudoExist = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.ECHEC_LECTURE_PSEUDO);
+			throw businessException;
+		}
+
+		return isPseudoExist;
+	}
+	
+	 
+	 
+	 public boolean isEmailExist(String email) throws BusinessException {
+			Connection cnx;
+			boolean isEmailExist = false;
+			try {
+				cnx = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = cnx.prepareStatement(IS_EMAIL_EXIST);
+				pstmt.setString(1, email);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					isEmailExist = true;
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.ECHEC_LECTURE_EMAIL);
+				throw businessException;
+			}
+
+			return isEmailExist;
+		}
 
 	@Override
 	public Utilisateur selectByLogin(String login) throws BusinessException {
