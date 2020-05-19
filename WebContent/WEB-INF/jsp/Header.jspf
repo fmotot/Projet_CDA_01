@@ -1,14 +1,13 @@
-	<header>
-		<div class="row">
-			<div class="col-4 logo my-auto">
-				<h1><a href="./ListeEnchereServlet">TrocEncheres.org</a></h1>
-			</div>
-			<div class="col-8 my-auto text-right menu d-none d-lg-block">
-				<ul>
-					<li><a href="./NouvelleVenteServlet">Vendre un article</a></li>
-					<li><a href="./ServletMonProfil">Mon profil</a></li>
-					<li><a href="./DeconnexionServlet">Déconnexion</a></li>
-				</ul>
-			</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary menu col-12">
+	<h1><a class="navbar-brand logo col-4" href="./ListeEnchereServlet">TrocEncheres.org</a></h1>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse col-8 justify-content-end" id="navbarNavAltMarkup">
+		<div class="navbar-nav">
+			<a class="nav-item nav-link lien" href="./NouvelleVenteServlet">Vendre un article</a>
+			<a class="nav-item nav-link lien" href="./ServletMonProfil">Mon profil</a>
+			<a class="nav-item nav-link lien" href="./DeconnexionServlet">Déconnexion</a>
 		</div>
-	</header>
+	</div>
+</nav>

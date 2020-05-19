@@ -119,7 +119,7 @@
 								<button type="submit" name="submit" value="publier" class="btn btn-primary">Publier</button>
 							</div>
 							<div class="d-inline mr-2">
-								<button type="submit" name="submit" value="enregistrer" class="btn btn-primary">Enregistrer</button>
+								<button type="submit" name="submit" value="enregistrer" class="btn btn-secondary " disabled>Enregistrer</button>
 							</div>
 							<div class="d-inline">
 								<a class="btn btn-retour btn-primary" href="./ListeEnchereServlet" role="button">Annuler</a>
