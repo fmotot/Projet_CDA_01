@@ -3,7 +3,12 @@ package fr.eni.trocencheres.dal;
 import java.util.List;
 
 import fr.eni.trocencheres.BusinessException;
-
+/**
+ * 
+ * @author jeanr
+ *
+ * @param <T>
+ */
 public interface DAO<T> {
 
 	public List<T> getAll() throws BusinessException;

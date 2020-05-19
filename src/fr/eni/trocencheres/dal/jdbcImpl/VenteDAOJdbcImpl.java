@@ -81,7 +81,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.LECTURE_CATEGORIES_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_VENTES_ECHEC);
 			throw businessException;
 
 		}
@@ -233,9 +233,11 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 
 			listeVentesFiltre = listerVentes(rs);
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_VENTES_ECHEC);
+			throw businessException;
 		}
 
 		return listeVentesFiltre;
@@ -352,7 +354,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.LECTURE_CATEGORIES_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_VENTES_ECHEC);
 			throw businessException;
 		}
 
@@ -427,7 +429,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		Connection cnx = null;
 
 		if (entity == null) {
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_NULL);
 			throw businessException;
 		}
 
@@ -509,12 +511,12 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			} catch (SQLException e1) {
 
 				e1.printStackTrace();
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_ECHEC);
 				throw businessException;
 			}
 
 			e.printStackTrace();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_ECHEC);
 			throw businessException;
 		}
 
@@ -609,7 +611,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.LECTURE_CATEGORIES_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_VENTE_ECHEC);
 			throw businessException;
 		}
 
@@ -659,13 +661,13 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			
 			cnx.commit();
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			try {
 				cnx.rollback();
-			} catch (SQLException e1) {
+			} catch (Exception e1) {
 
 				e1.printStackTrace();
-				businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+				businessException.ajouterErreur(CodesResultatDAL.ROLLBACK_ENCHERE_ECHEC);
 				throw businessException;
 			}
 			
@@ -798,7 +800,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.LECTURE_CATEGORIES_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_VENTES_ECHEC);
 			throw businessException;
 		}
 

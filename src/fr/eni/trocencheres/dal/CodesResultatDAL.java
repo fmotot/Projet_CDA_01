@@ -1,6 +1,7 @@
 package fr.eni.trocencheres.dal;
 
 /**
+ * @author Jean
 * Les codes disponibles sont entre 10000 et 19999
 */
 public abstract class CodesResultatDAL {
@@ -88,6 +89,21 @@ public abstract class CodesResultatDAL {
 	 * Echec lors de la suppresion d'une categorie
 	 */
 	public static final int SUPPRESSION_ENCHERE_ECHEC = 10015;
+	
+	/**
+	 * Echec de la lecture des ventes
+	 */
+	public static final int LECTURE_VENTES_ECHEC = 10016;
+	
+	/**
+	 * Echec de la lecture d'une vente
+	 */
+	public static final int LECTURE_VENTE_ECHEC = 10017;
+	
+	/**
+	 * Echec lors de la suppression d'une enchère 
+	 */
+	public static final int ROLLBACK_ENCHERE_ECHEC = 10018;
 	
 	
 }
