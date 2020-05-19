@@ -58,7 +58,7 @@
 				<div class="form-group row">
 					<label for="staticMeilleureOffre" class="col-5 col-lg-3 label-bold">Meilleure offre :</label>
 					<div class="col-6 col-lg-9">
-						<p>${enchere.mise} de ${enchere.acheteur.pseudo}</p>
+						<p>${vente.maxEnchere.mise} de ${vente.maxEnchere.acheteur.pseudo}</p>
 					</div>
 				</div>
 				<div class="form-group row">

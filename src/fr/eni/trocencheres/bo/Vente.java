@@ -61,7 +61,7 @@ public class Vente implements Serializable {
 	/**
 	 * @return the noVente
 	 */
-	public int getNoVente() {
+	public Integer getNoVente() {
 		return noVente;
 	}
 
@@ -117,7 +117,7 @@ public class Vente implements Serializable {
 	/**
 	 * @return the miseAPrix
 	 */
-	public int getMiseAPrix() {
+	public Integer getMiseAPrix() {
 		return miseAPrix;
 	}
 
@@ -225,8 +225,8 @@ public class Vente implements Serializable {
 		Integer classement = 0;
 		// avec une requete SQL en DESC
 		for (Enchere enchere : this.listeEncheres) {
-			if (enchere.getAcheteur().equals(utilisateurConnecte)) {
-				classement = listeEncheres.indexOf(enchere);
+			if (enchere.getAcheteur().getNoUtilisateur().equals(utilisateurConnecte.getNoUtilisateur())) {
+				classement = listeEncheres.indexOf(enchere) + 1;
 				break;
 			}
 		}
@@ -243,7 +243,7 @@ public class Vente implements Serializable {
 	public boolean equals(Object object) {
 		boolean equal = false;
 
-		if (object instanceof Vente && ((Vente) object).getNoVente() == this.getNoVente()) {
+		if (object instanceof Vente && ((Vente) object).getNoVente().equals(this.getNoVente())) {
 			equal = true;
 		}
 

@@ -7,9 +7,13 @@
 	</button>
 	<div class="collapse navbar-collapse col-8 justify-content-end" id="navbarNavAltMarkup">
 		<div class="navbar-nav">
-			<a class="nav-item nav-link lien" href="./NouvelleVenteServlet">Vendre un article</a>
-			<a class="nav-item nav-link lien" href="./ServletMonProfil">Mon profil</a>
-			<a class="nav-item nav-link lien" href="./DeconnexionServlet">Déconnexion</a>
+			<a class="nav-item nav-link lien" href=${!empty utilisateur ? "./NouvelleVenteServlet" :"./ServletSeConnecter"}>Vendre un article</a>
+			
+			<c:if test="${!empty utilisateur}">
+						<a class="nav-item nav-link lien" href="./ServletMonProfil"> ${utilisateur.pseudo } </a>
+			</c:if>
+			
+			<a class="nav-item nav-link lien" href=${!empty utilisateur ? "./Deconnexion" :"./ServletSeConnecter"}>${!empty utilisateur ? "Deconnexion" : "Connexion"}</a>
 		</div>
 	</div>
 </nav>
