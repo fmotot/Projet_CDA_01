@@ -102,6 +102,7 @@ public class ListeEnchereServlet extends HttpServlet {
 			System.out.println(listeDeVentes);
 			for (Vente vente : listeDeVentes) {
 				vente.setClassement(utilisateurConnecte);
+				System.out.println(vente.getClassement());
 			}
 			
 			request.setAttribute("listeVentes", listeDeVentes);

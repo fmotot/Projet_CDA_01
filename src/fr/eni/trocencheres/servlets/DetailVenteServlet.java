@@ -48,9 +48,8 @@ public class DetailVenteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		List<Enchere> listeEnchere = vente.getListeEncheres();
-		if (listeEnchere != null) {
+		if (listeEnchere.size() > 0) {
 			Enchere derniereEnchere = listeEnchere.get(0);
-			System.out.println(listeEnchere);
 			request.setAttribute("enchere", derniereEnchere);
 		}
 				
