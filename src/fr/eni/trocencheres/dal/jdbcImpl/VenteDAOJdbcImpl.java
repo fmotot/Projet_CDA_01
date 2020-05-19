@@ -216,18 +216,31 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
 			sb.append(SELECT_ALL_VENTES);
 			if (isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
+			if(recherche != null || categorie != null) {
+				sb.append(" WHERE ");
+				if(recherche != null) {
+					sb.append(" ventes.description LIKE '%"+recherche+"%'");
+				}
 				
-			
+				if(recherche != null && categorie != null) {
+					sb.append(" AND ");
+				}
+				
+				if(categorie!=null) {
+					sb.append("ventes.no_categorie = "+ categorie.getNoCategorie());
+				}
+			}
+		
 			}else {
 				sb.append(" WHERE ventes.no_vente IN (?) ");
 				pstmt.setString(1, strVentesAAfficher);
-			}
 			if(recherche != null) {
-				sb.append(" AND ventes.description LIKE '%recherche%");
+				sb.append(" AND ventes.description LIKE '%"+recherche+"%'");
 			}
 			
 			if(categorie!=null) {
 				sb.append(" AND ventes.no_categorie = "+ categorie.getNoCategorie());
+			}
 			}
 			
 			
