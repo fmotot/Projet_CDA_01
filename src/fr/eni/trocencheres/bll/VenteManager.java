@@ -3,11 +3,11 @@
  */
 package fr.eni.trocencheres.bll;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bo.Categorie;
-import fr.eni.trocencheres.bo.Enchere;
 import fr.eni.trocencheres.bo.Utilisateur;
 import fr.eni.trocencheres.bo.Vente;
 
@@ -18,21 +18,29 @@ import fr.eni.trocencheres.bo.Vente;
 public interface VenteManager {
 	/**
 	 * ID 2001	Vendre un article
-	 * Crée une vente 
-	 * @param vente
-	 * @return
+	 * Crée une vente à partir des données fournies
+	 * @param nomArticle
+	 * @param description
+	 * @param dateFinEncheres
+	 * @param miseAPrix
+	 * @param vendeur
+	 * @param rue
+	 * @param ville
+	 * @param codePostal
+	 * @return		la vente créée
 	 * @throws BusinessException
 	 */
-	Vente creerVente(Vente vente) throws BusinessException;
+	Vente creerVente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix, Utilisateur vendeur, String rue, String ville, String codePostal, Categorie categorie) throws BusinessException;
 	
 	/**
 	 * ID 2002	Annuler une vente
-	 * Annule la vente donner en paramètre
+	 * Annule la vente donner en paramètre si l'utilisateur en session en a le droit
 	 * @param vente
-	 * @return		la même vente pour afficher une confirmation avec son nom ?
+	 * @param utilisateurSession
+	 * @return
 	 * @throws BusinessException
 	 */
-	Vente annulerVente(Vente vente) throws BusinessException;
+	Vente annulerVente(Vente vente, Utilisateur utilisateurSession) throws BusinessException;
 	
 	
 	/**
@@ -57,10 +65,10 @@ public interface VenteManager {
 	 * @param acheteur		l'utilisateur enchérissant
 	 * @param vente			la vente sur laquelle l'utilisateur enchérit
 	 * @param mise			la mise de l'utilisateur 
-	 * @return				l'enchère crée
+	 * @return				la vente sur laquelle l'enchère est créé
 	 * @throws BusinessException
 	 */
-	Enchere encherir(Utilisateur acheteur, Vente vente, Integer mise) throws BusinessException;
+	Vente encherir(Utilisateur acheteur, Vente vente, Integer mise) throws BusinessException;
 	
 	
 	/**
@@ -75,11 +83,11 @@ public interface VenteManager {
 	 * @return
 	 * @throws BusinessException
 	 */
-	Enchere annulerEnchere(Enchere enchere) throws BusinessException;
+	Vente annulerEnchere(Vente vente, Utilisateur utilisateurSession) throws BusinessException;
 	
 	/**
 	 * ID 2007	Photo pour la vente
-	 * doit féjà être pris en compte dans la création de la vente
+	 * doit déjà être pris en compte dans la création de la vente
 	 */
 	
 	/**
@@ -89,7 +97,7 @@ public interface VenteManager {
 	 * @return
 	 * @throws BusinessException
 	 */
-	Vente afficherVente(Vente vente) throws BusinessException;
+	Vente afficherVente(Integer noVente) throws BusinessException;
 	
 	
 }

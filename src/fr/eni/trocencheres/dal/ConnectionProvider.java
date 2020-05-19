@@ -6,7 +6,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
+/**
+ * 
+ * @author jeanr
+ *
+ */
 public abstract class ConnectionProvider {
 	private static DataSource dataSource;
 // a remettre en package a terme

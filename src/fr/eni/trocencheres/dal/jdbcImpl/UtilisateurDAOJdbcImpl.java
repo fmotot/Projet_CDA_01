@@ -12,7 +12,11 @@ import fr.eni.trocencheres.bo.Utilisateur;
 import fr.eni.trocencheres.dal.CodesResultatDAL;
 import fr.eni.trocencheres.dal.ConnectionProvider;
 import fr.eni.trocencheres.dal.UtilisateurDAO;
-
+/**
+ * 
+ * @author Jean
+ *
+ */
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	private static String SELECT_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
@@ -73,7 +77,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT_UN_UTILISATEUR,
-					PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement.RETURN_GENERATED_KEYS);
 
 			// code_postal,credit,email,mot_de_passe,nom,prenom,pseudo,rue,telephone,ville
 			pstmt.setString(1, entity.getCodePostal());

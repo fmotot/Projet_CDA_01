@@ -22,7 +22,9 @@
 </head>
 <body>
 
-	<h1>TrocEncheres.org</h1>
+	<%@ include file="Header.jspf" %>
+	
+	<%@ include file="Alerte.jspf" %>
 
 	<h2 class="text-center">enchere.etat</h2>
 	<h2 class="text-center">${ !empty enchere.etat ? enchere.etat : '' }</h2>
@@ -30,7 +32,7 @@
 	<div class="container">
 
 		<div class="row col-12 mx-auto d-lg-none">
-			<h3>PC GAMER POUR TRAVAILLER</h3>
+			<h3>${vente.nomArticle} </h3>
 			<div class="image mb-3"></div>
 		</div>
 
@@ -42,61 +44,55 @@
 
 			<div class="content-vente col-12 col-lg-7">
 				<div class="d-none d-lg-block">
-					<h3>PC GAMER POUR TRAVAILLER</h3>
+					<h3>${vente.nomArticle}</h3>
 				</div>
 
-				<div class="d-none d-lg-block">
 					<div class="form-group row">
-						<label for="staticMeilleureOffre"
-							class="col-5 col-lg-3 col-form-label-sm my-auto">Description :</label>
+						<label for="staticMeilleureOffre" class="col-5 col-lg-3">Description :</label>
 						<div class="col-6 col-lg-9">
-							<input type="text" readonly class="form-control-plaintext my-auto" id="staticMeilleureOffre" value="#">
+							<p>${vente.description}</p>
 						</div>
 					</div>
-				</div>
 
 				<div class="form-group row">
-					<label for="staticMeilleureOffre"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Meilleure offre :</label>
+					<label for="staticMeilleureOffre" class="col-5 col-lg-3 ">Meilleure offre :</label>
 					<div class="col-6 col-lg-9">
-						<input type="text" readonly class="form-control-plaintext my-auto" id="staticMeilleureOffre" value="#">
+						<p>${vente.maxEnchere} de ${vente.vendeur}</p>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="staticMiseAPrix"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Mise à Prix :</label>
+					<label for="staticMiseAPrix" class="col-5 col-lg-3">Mise à Prix :</label>
 					<div class="col-6 col-lg-4">
-						<input type="text" readonly class="form-control-plaintext my-auto" id="staticMiseAPrix" value="#">
+						<p> ${vente.miseAPrix} </p>		
+				</div>
+				</div>
+				<div class="form-group row">
+					<label for="staticFinEnchere" class="col-5 col-lg-3">Fin de l'enchère :</label>
+					<div class="col-6 col-lg-4">
+						<p>${vente.dateFinEncheres}</p>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="staticFinEnchere"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Fin de l'enchère :</label>
+					<label for="staticRetrait" class="col-5 col-lg-3">Retrait :</label>
 					<div class="col-6 col-lg-4">
-						<input type="text" readonly class="form-control-plaintext my-auto" id="staticFinEnchere" value="#">
+						<p>${vente.retrait.rue}<p>
+						<p>${vente.retrait.codePostal} ${vente.retrait.ville}<p>
+						
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="staticRetrait"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Retrait :</label>
+					<label for="staticVendeur" class="col-5 col-lg-3 ">Vendeur :</label>
 					<div class="col-6 col-lg-4">
-						<input type="text" readonly class="form-control-plaintext my-auto" id="staticRetrait" value="#">
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="staticVendeur"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Vendeur :</label>
-					<div class="col-6 col-lg-4">
-						<a href="./ProfilUtilsateurServlet?pseudo=${vente.vendeur.pseudo}">#</a>
+						<a href="./ProfilUtilsateurServlet?pseudo=${vente.vendeur.pseudo}">${vente.vendeur.pseudo}</a>
 					</div>
 				</div>
 
 				<form action="./DetailVenteServlet" method="post">
 
 					<div class="form-group row">
-						<label for="inputMaProposition" class="col-5 col-lg-3 col-form-label-sm">Ma proposition :</label>
+						<label for="inputMaProposition" class="col-5 col-lg-3 my-auto">Ma proposition :</label>
 						<div class="col-3 col-lg-4">
-							<input type="text" class="form-control" id="inputMaProposition">
+							<input type="text" class="form-control" name="inputMaProposition" id="inputMaProposition">
 						</div>
 						<div class="col-3 col-lg-4">
 							<button type="submit" class="btn btn-encherir btn-primary my-auto">Enchérir</button>
@@ -112,7 +108,7 @@
 					</div> -->
 				
 					<div class="col-4 col-lg-4 text-left">
-						<a class="btn btn-back btn-primary" href="./ServletCreationCompte" role="button">Back</a>
+						<a class="btn btn-back btn-primary" href="./ListeEnchereServlet" role="button">Back</a>
 					</div>
 				</div>
 
@@ -122,6 +118,8 @@
 		</div>
 
 	</div>
+	
+	<%@ include file="Footer.jspf" %>
 
 
 	<!-- Optional JavaScript -->

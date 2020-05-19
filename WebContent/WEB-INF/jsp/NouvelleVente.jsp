@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -16,23 +16,19 @@
 	crossorigin="anonymous">
 
 <link rel="stylesheet" type="text/css" href="./css/style.css">
-<link rel="stylesheet" type="text/css" href="./css/detailvente.css">
+<link rel="stylesheet" type="text/css" href="./css/nouvellevente.css">
 
 <title>TrocEncheres - Nouvelle vente</title>
 </head>
 <body>
 
-	<h1>TrocEncheres.org</h1>
+	<%@ include file="Header.jspf" %>
+	
+	<%@ include file="Alerte.jspf" %>
 
-	<h2 class="text-center">enchere.etat</h2>
-	<h2 class="text-center">${ !empty enchere.etat ? enchere.etat : '' }</h2>
+	<h2 class="text-center">Nouvelle vente</h2>
 
 	<div class="container">
-
-		<div class="row col-12 mx-auto d-lg-none">
-			<h3>PC GAMER POUR TRAVAILLER</h3>
-			<div class="image mb-3"></div>
-		</div>
 
 		<div class="row">
 
@@ -41,87 +37,101 @@
 			</div>
 
 			<div class="content-vente col-12 col-lg-7">
-				<div class="d-none d-lg-block">
-					<h3>PC GAMER POUR TRAVAILLER</h3>
-				</div>
 
-				<div class="d-none d-lg-block">
-					<div class="form-group row">
-						<label for="staticMeilleureOffre"
-							class="col-5 col-lg-3 col-form-label-sm my-auto">Description :</label>
-						<div class="col-6 col-lg-9">
-							<input type="text" readonly class="form-control-plaintext my-auto" id="staticMeilleureOffre" value="#">
+				<form action="./NouvelleVenteServlet" method="post">
+
+					<div class="form-group row ">
+						<label for="inputArticle" class="col-5 col-form-label-sm">Article
+							:</label>
+						<div class="col-7 col-lg-7">
+							<input value="" name="inputArticle" type="text"
+								class="form-control form-control-sm" id="inputArticle">
 						</div>
 					</div>
-				</div>
-
-				<div class="form-group row">
-					<label for="staticMeilleureOffre"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Meilleure offre :</label>
-					<div class="col-6 col-lg-9">
-						<input type="text" readonly class="form-control-plaintext my-auto" id="staticMeilleureOffre" value="#">
+					<div class="form-group row">
+						<label for="inputDescription" class="col-5 col-form-label-sm">Description:</label>
+						<div class="col-7 col-lg-7">
+							<textarea class="form-control" name="inputDescription" id="inputDescription" rows="3"></textarea>
+						</div>
 					</div>
-				</div>
-				<div class="form-group row">
-					<label for="staticMiseAPrix"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Mise à Prix :</label>
-					<div class="col-6 col-lg-4">
-						<input type="text" readonly class="form-control-plaintext my-auto" id="staticMiseAPrix" value="#">
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="staticFinEnchere"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Fin de l'enchère :</label>
-					<div class="col-6 col-lg-4">
-						<input type="text" readonly class="form-control-plaintext my-auto" id="staticFinEnchere" value="#">
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="staticRetrait"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Retrait :</label>
-					<div class="col-6 col-lg-4">
-						<input type="text" readonly class="form-control-plaintext my-auto" id="staticRetrait" value="#">
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="staticVendeur"
-						class="col-5 col-lg-3 col-form-label-sm my-auto">Vendeur :</label>
-					<div class="col-6 col-lg-4">
-						<a href="./ProfilUtilsateurServlet/profil?pseudo=${vente.vendeur.pseudo}">#</a>
-					</div>
-				</div>
-
-				<form action="./DetailVenteServlet" method="post">
+					
+					<div class="form-group row">
+    					<label for="selectCategories" class="col-5 col-form-label-sm">Catégories :</label>
+    					<div class="col-7 col-lg-7">
+	    					<select class="form-control form-control-sm" name="selectCategories" id="selectCategories">
+	    					<c:forEach var="categorie" items="${listeCategorie}">>
+						    	<option value="${categorie.noCategorie}">${categorie.libelle}</option>
+						    	</c:forEach>
+	    					</select>
+    					</div>
+  					</div>
 
 					<div class="form-group row">
-						<label for="inputMaProposition" class="col-5 col-lg-3 col-form-label-sm">Ma proposition :</label>
-						<div class="col-3 col-lg-4">
-							<input type="text" class="form-control" id="inputMaProposition">
-						</div>
-						<div class="col-3 col-lg-4">
-							<button type="submit" class="btn btn-encherir btn-primary my-auto">Enchérir</button>
-						</div>
+						<label class="col-3 col-form-label-sm my-auto" for="uploadImage">Photo de l'article</label> <label class="btn btn-sm btn-primary my-auto"
+						for="my-file-selector"> <input id="my-file-selector" type="file" class="d-none">Uploader</label>
 					</div>
 
+					<div class="row col-12 mx-auto d-lg-none">
+						<div class="image mb-3"></div>
+					</div>
+
+					<div class="form-group row">
+						<label for="inputPrixDeBase" class="col-5 col-form-label-sm">Prix initial :</label>
+						<div class="col-7 col-lg-7">
+							<input value="${utilisateur.credit}" name="inputPrixDeBase" type="number" class="form-control form-control-sm" id="inputPrixDeBase" placeholder="Crédit">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="inputFinEnchere" class="col-5 col-form-label-sm">Fin de l'enchère :</label>
+						<div class="col-7 col-lg-7">
+							<input value="#" type="date" name="inputFinEnchere" id="inputFinEnchere" max="3000-12-31" min="1000-01-01" class="form-control form-control-sm">
+						</div>
+					</div>
+					
+					<fieldset class="border pr-2 pl-2">
+	   					<legend class="col-4 col-lg-3 my-auto">Retrait</legend>
+	   					<div class="form-group row justify-content-center ">
+							<label for="inputRue" class="col-5 col-form-label-sm">Rue :</label>
+							<div class="col-7 col-lg-4">
+								<input value="#" name="inputRue" type="text" class="form-control form-control-sm" id="inputRue">
+							</div>
+						</div>
+						
+						<div class="form-group row justify-content-center ">
+							<label for="inputCodePostal" class="col-5 col-form-label-sm">Code Postal :</label>
+							<div class="col-7 col-lg-4">
+								<input value="#" name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
+							</div>
+						</div>
+						
+						<div class="form-group row justify-content-center ">
+							<label for="inputVille" class="col-5 col-form-label-sm">Ville :</label>
+							<div class="col-7 col-lg-4">
+								<input value="#" name="inputVille" type="text" class="form-control form-control-sm" id="inputVille">
+							</div>
+						</div>
+					</fieldset>		
+
+					<div class="row justify-content-around connexion text-center mt-3 mb-3">
+
+						<div class="col-12">
+							<div class="d-inline mr-2">
+								<button type="submit" name="submit" value="publier" class="btn btn-primary">Publier</button>
+							</div>
+							<div class="d-inline mr-2">
+								<button type="submit" name="submit" value="enregistrer" class="btn btn-primary">Enregistrer</button>
+							</div>
+							<div class="d-inline">
+								<a class="btn btn-retour btn-primary" href="./ListeEnchereServlet" role="button">Annuler</a>
+							</div>
+						</div>
+					</div>
 				</form>
-
-				<div class="row mt-3">
-				<!-- EXPRESSION LANGAGE POUR LE BOUTON ANNULER DERNIERE ENCHERE SOUS CONDITION
-					<div class="col-8 col-lg-7 text-left">
-						<a class="btn btn-back btn-primary" href="./ServletCreationCompte" role="button">Annuler ma dernière enchère</a>
-					</div> -->
-				
-					<div class="col-4 col-lg-4 text-left">
-						<a class="btn btn-back btn-primary" href="./ServletCreationCompte" role="button">Back</a>
-					</div>
-				</div>
-
 			</div>
-
-
 		</div>
-
 	</div>
+	
+	<%@ include file="Footer.jspf" %>
 
 
 	<!-- Optional JavaScript -->

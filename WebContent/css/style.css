@@ -1,3 +1,120 @@
 @charset "ISO-8859-1";
 
+html {
+ 	position: relative;
+	min-height: 100%;
+}
 
+body {
+  	margin-bottom: 20vw;
+}
+
+header{
+	background-color: #007bff;
+	color : white;
+	padding:12px;
+}
+
+h1{
+	font-size: 6vw;
+	margin: 0;
+}
+
+h2{
+	font-size: 5vw;
+}
+
+.logo a , .logo a:hover{
+	color: white;
+	text-decoration: none;
+	font-size: 6vw;
+	font-weight: 600;
+}
+
+label, p, h3{
+	font-size:4vw;
+}
+
+a{
+	margin:0;
+	font-size:3vw;
+}
+
+ul{
+	list-style: none;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding:10px;
+	background-color: #007bff;
+	color: white;
+}
+
+.container-fluid{
+	padding: 0;
+}
+
+@media (min-width: 1200px) { 
+
+	h1{
+		font-size:2.5vw;
+		text-align:justify;
+		margin-left:120px;
+		line-height: 0;
+	}
+	
+	h2{
+		font-size:1.5vw;
+		margin-bottom:30px;
+	}
+	
+	label, p, h3{
+		font-size:.8vw;
+		margin:0;
+	}
+	
+	ul{
+		margin-top:15px;
+	}
+	
+	li{
+	display:inline;
+	color:white;
+	margin-right:16px;
+	}
+	
+	.logo a , .logo a:hover{
+		color: white;
+		text-decoration: none;
+		font-size: 2.5vw;
+	}
+	
+	.menu a , .menu a:hover{
+		color:white;
+		font-size: .8vw;
+	}
+	
+	header{
+		background-color: #007bff;
+		color : white;
+		padding:20px;
+	}
+	
+	body {
+  		margin-bottom: 100px;
+	}
+	
+	.footer {
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  padding:20px;
+	  background-color: #007bff;
+	  color: white;
+	}
+	
+	
+}

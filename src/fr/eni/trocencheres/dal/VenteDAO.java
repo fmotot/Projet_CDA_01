@@ -1,12 +1,17 @@
 package fr.eni.trocencheres.dal;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bo.Categorie;
 import fr.eni.trocencheres.bo.Utilisateur;
 import fr.eni.trocencheres.bo.Vente;
-
+/**
+ * 
+ * @author jeanr
+ *
+ */
 public interface VenteDAO  extends DAO<Vente>{
 
 	
@@ -26,7 +31,13 @@ public interface VenteDAO  extends DAO<Vente>{
 	 */
 	public List<Vente> getVentesFiltered(Utilisateur utilisateur,boolean isMesVentes, boolean isMesEncheres, boolean isMesAcquisitions, boolean isAutresEncheres, String recherche, Categorie categorie)throws BusinessException;
 	
-	
+	/**
+	 * Effectue une recherche pour récupérer les Ventes à une date donnée
+	 * @param dateFinEnchere
+	 * @return
+	 * @throws BusinessException
+	 */
+	public List<Vente> getVentesByDateFinEnchere(LocalDateTime dateFinEnchere) throws BusinessException;
 	
 	
 }

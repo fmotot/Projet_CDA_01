@@ -1,7 +1,11 @@
 package fr.eni.trocencheres.bo;
 
 import java.io.Serializable;
-
+/**
+ * 
+ * @author Macorigh Rudy
+ *
+ */
 public class Utilisateur implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -236,5 +240,15 @@ public class Utilisateur implements Serializable {
 				+ administrateur + "]";
 	}
 
+	@Override
+	public boolean equals(Object object) {
+		boolean equal = false;
+		
+		if (object instanceof Utilisateur && ((Utilisateur)object).getNoUtilisateur() == this.getNoUtilisateur()) {
+			equal = true;
+		}
+		
+		return equal;
+	}
 	
 }

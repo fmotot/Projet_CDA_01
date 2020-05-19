@@ -1,15 +1,22 @@
 package fr.eni.trocencheres.dal;
 
+import fr.eni.trocencheres.dal.jdbcImpl.CategorieDAOJdbcImpl;
+import fr.eni.trocencheres.dal.jdbcImpl.EnchereDAOJdbcImpl;
 import fr.eni.trocencheres.dal.jdbcImpl.UtilisateurDAOJdbcImpl;
-
+import fr.eni.trocencheres.dal.jdbcImpl.VenteDAOJdbcImpl;
+/**
+ * 
+ * @author jeanr
+ *
+ */
 public abstract class DAOFactory {
 
 	public static CategorieDAO getCategorieDAO() {
-		return null;
+		return new CategorieDAOJdbcImpl();
 	}
 	
 	public static EnchereDAO getEnchereDAO() {
-		return null;
+		return new EnchereDAOJdbcImpl();
 	}
 	
 	public static UtilisateurDAO getUtilisateurDAO() {
@@ -17,7 +24,7 @@ public abstract class DAOFactory {
 	}
 	
 	public static VenteDAO getVenteDAO() {
-		return null;
+		return new VenteDAOJdbcImpl();
 	}
 }
 	

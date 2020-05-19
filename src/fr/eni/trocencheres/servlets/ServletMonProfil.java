@@ -13,7 +13,11 @@ import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bll.BLLFactory;
 import fr.eni.trocencheres.bll.UtilisateurManager;
 import fr.eni.trocencheres.bo.Utilisateur;
-
+/**
+ * 
+ * @author Macorigh Rudy
+ *
+ */
 @WebServlet("/ServletMonProfil")
 public class ServletMonProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -53,7 +57,9 @@ public class ServletMonProfil extends HttpServlet {
 			// Verification au prealable que les champs MDP et Confirmation soit identiques
 			if ((request.getParameter("inputMotDePasse")).equals(request.getParameter("inputConfirmation"))) {
 				// Reaffectation des données dans l'utilisateur
+				System.out.println("remise des valeurs dans le new user");
 				utilisateurData.setPseudo(request.getParameter("inputPseudo"));
+				System.out.println(utilisateurData.getPseudo());
 				utilisateurData.setNom(request.getParameter("inputNom"));
 				utilisateurData.setPrenom(request.getParameter("inputPrenom"));
 				utilisateurData.setEmail(request.getParameter("inputEmail"));
@@ -62,6 +68,23 @@ public class ServletMonProfil extends HttpServlet {
 				utilisateurData.setCodePostal(request.getParameter("inputCodePostal"));
 				utilisateurData.setVille(request.getParameter("inputVille"));
 				utilisateurData.setMotDePasse(request.getParameter("inputMotDePasse"));
+
+				try {
+					// Mise a jour de l'utilisateur en BDD et recuperation de l'utilisateur mis a
+					// jour
+					Utilisateur utilisateurUpdate = utilisateurManager.modifierMonCompte(utilisateurConnecte,
+							utilisateurData);
+
+					// Affectation de l'utilisateur mis a jour en session
+					session.setAttribute("utilisateur", utilisateurUpdate);
+					// renvoi sur la JSP
+					RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
+					requestDispatcher.forward(request, response);
+				} catch (BusinessException e) {
+					System.err.println(e.getListeCodesErreur());
+					// erreur a gérer si probleme lors de l'update
+					e.printStackTrace();
+				}
 			} else {
 				// Si mot de passe et confirmation differents, retour sur la page de profil
 				System.out.println("erreur de mot de passe");
@@ -70,20 +93,6 @@ public class ServletMonProfil extends HttpServlet {
 				requestDispatcher.forward(request, response);
 			}
 
-		}
-		try {
-			// Mise a jour de l'utilisateur en BDD et recuperation de l'utilisateur mis a jour
-			Utilisateur utilisateurUpdate = utilisateurManager.modifierMonCompte(utilisateurConnecte, utilisateurData);
-
-			// Affectation de l'utilisateur mis a jour en session
-			session.setAttribute("utilisateur", utilisateurUpdate);
-			// renvoi sur la JSP
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
-			requestDispatcher.forward(request, response);
-		} catch (BusinessException e) {
-			System.err.println(e.getListeCodesErreur());
-			// erreur a gérer si probleme lors de l'update
-			e.printStackTrace();
 		}
 
 	}

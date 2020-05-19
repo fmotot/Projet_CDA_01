@@ -22,175 +22,93 @@
 </head>
 <body>
 
-	<h1>TrocEncheres.org</h1>
+	<%@ include file="Header.jspf" %>
+	
+	<%@ include file="Alerte.jspf" %>
 
 	<div class="container">
 
 		<div class="center-content">
 
 			<h2>Creer un compte</h2>
+			
+			<form action="./ServletCreationCompte" method="post">
 
-			<form class="d-none d-lg-block" action="./ServletCreationCompte" method="post">
-				<div class="form-row">
-					<div class="form-group col-8 col-lg-6 mx-auto">
-						<label for="inputPseudo">Pseudo :</label>
-						<input name="inputPseudo" type="text" class="form-control" id="inputPseudo">
-					</div>
-					<div class="form-group col-8 col-lg-6 mx-auto">
-						<label for="inputNom">Nom :</label> 
-						<input name="inputNom" type="text" class="form-control" id="inputNom">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-8 col-lg-6 mx-auto">
-						<label for="inputPrenom">Prenom :</label>
-						<input name="inputPrenom" type="text" class="form-control" id="inputPrenom">
-					</div>
-					<div class="form-group col-8 col-lg-6 mx-auto">
-						<label for="inputEmail">Email :</label> 
-						<input name="inputEmail" type="email" class="form-control" id="inputEmail">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-8 col-lg-6 mx-auto">
-						<label for="inputTelephone">Téléphone :</label>
-						<input name="inputTelephone" type="tel" class="form-control" id="inputTelephone">
-					</div>
-					<div class="form-group col-8 col-lg-6 mx-auto">
-						<label for="inputRue">Rue :</label> 
-						<input name="inputRue" type="text" class="form-control" id="inputRue">
-					</div>
-				</div>	
-				<div class="form-row">
-					<div class="form-group col-8 col-lg-6 mx-auto">
-						<label for="inputCodePostal">Code Postal :</label>
-						<input name="inputCodePostal" type="text" class="form-control" id="inputCodePostal">
-					</div>
-					<div class="form-group col-8 col-lg-6 mx-auto">
-						<label for="inputVille">Ville :</label> 
-						<input name="inputVille" type="text" class="form-control" id="inputVille">
-					</div>
-				</div>	
-				<div class="form-row">
-					<div class="form-group col-8 col-lg-6 mx-auto">
-						<label for="inputMotDePasse">Mot de passe :</label>
-						<input name="inputMotDePasse" type="password" class="form-control" id="inputMotDePasse">
-					</div>
-					<div class="form-group col-8 col-lg-6 mx-auto">
-						<label for="inputConfirmation">Confirmation :</label> 
-						<input name="inputConfirmation" type="password" class="form-control" id="inputConfirmation">
-					</div>
-				</div>
-				
-				<div class="row justify-content-around connexion text-center">
-
-				<div class="col-10 ">
-					<div class="d-inline">
-						<button class="btn btn-creation btn-primary" type="submit">Créer</button>
-					</div>
-					<div class="d-inline">
-						<a class="btn btn-annulation btn-primary"
-							href="./ServletSeConnecter" role="button">Annuler</a>
-					</div>
-				</div>
-
-			</div>
-			
-			</form>
-			
-			<!-- Formulaire pour mobile -->
-			
-			<form class="d-lg-none"  action="./ServletCreationCompte" method="post">
-			
 				<div class="form-group row justify-content-center">
-				    <label for="inputPseudo" class="col-4 col-form-label-sm ">Pseudo :</label>
-				    <div class="col-6">
+				    <label for="inputPseudo" class="col-4 col-lg-2 col-form-label-sm ">Pseudo :</label>
+				    <div class="col-6 col-lg-3">
 				    	<input name="inputPseudo" type="text" class="form-control form-control-sm" id="inputPseudo">
 				    </div>
-				</div>
-				  	
-				<div class="form-group row justify-content-center ">
-					<label for="inputNom" class="col-4 col-form-label-sm">Nom :</label>
-					<div class="col-6">
+				    <label for="inputNom" class="col-4 col-lg-2 col-form-label-sm ">Nom :</label>
+				    <div class="col-6 col-lg-3">
 				    	<input name="inputNom" type="text" class="form-control form-control-sm" id="inputNom">
-				   	</div>
+				    </div>
 				</div>
 				
-				<div class="form-group row justify-content-center ">
-					<label for="inputPrenom" class="col-4 col-form-label-sm">Prénom :</label>
-					<div class="col-6">
+				<div class="form-group row justify-content-center">
+				    <label for="inputPrenom" class="col-4 col-lg-2 col-form-label-sm ">Prénom :</label>
+				    <div class="col-6 col-lg-3">
 				    	<input name="inputPrenom" type="text" class="form-control form-control-sm" id="inputPrenom">
-				   	</div>
-				</div>
-				
-				<div class="form-group row justify-content-center ">
-					<label for="inputEmail" class="col-4 col-form-label-sm">Email :</label>
-					<div class="col-6">
+				    </div>
+				    <label for="inputEmail" class="col-4 col-lg-2 col-form-label-sm ">Email :</label>
+				    <div class="col-6 col-lg-3">
 				    	<input name="inputEmail" type="email" class="form-control form-control-sm" id="inputEmail">
-				   	</div>
+				    </div>
 				</div>
 				
-				<div class="form-group row justify-content-center ">
-					<label for="inputTelephone" class="col-4 col-form-label-sm">Téléphone :</label>
-					<div class="col-6">
-				    	<input name="inputTelephone" type="tel" class="form-control form-control-sm" id="inputTelephone">
-				   	</div>
-				</div>
-				
-				<div class="form-group row justify-content-center ">
-					<label for="inputRue" class="col-4 col-form-label-sm">Rue :</label>
-					<div class="col-6">
+				<div class="form-group row justify-content-center">
+				    <label for="inputTelephone" class="col-4 col-lg-2 col-form-label-sm ">Téléphone :</label>
+				    <div class="col-6 col-lg-3">
+				    	<input name="inputTelephone" type="text" class="form-control form-control-sm" id="inputTelephone">
+				    </div>
+				    <label for="inputRue" class="col-4 col-lg-2 col-form-label-sm ">Rue :</label>
+				    <div class="col-6 col-lg-3">
 				    	<input name="inputRue" type="text" class="form-control form-control-sm" id="inputRue">
-				   	</div>
+				    </div>
 				</div>
 				
-				<div class="form-group row justify-content-center ">
-					<label for="inputCodePostal" class="col-4 col-form-label-sm">Code postal :</label>
-					<div class="col-6">
+				<div class="form-group row justify-content-center">
+				    <label for="inputCodePostal" class="col-4 col-lg-2 col-form-label-sm ">Code postal :</label>
+				    <div class="col-6 col-lg-3">
 				    	<input name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
-				   	</div>
-				</div>
-				
-				<div class="form-group row justify-content-center ">
-					<label for="inputVille" class="col-4 col-form-label-sm">Ville :</label>
-					<div class="col-6">
+				    </div>
+				    <label for="inputVille" class="col-4 col-lg-2 col-form-label-sm ">Ville :</label>
+				    <div class="col-6 col-lg-3">
 				    	<input name="inputVille" type="text" class="form-control form-control-sm" id="inputVille">
-				   	</div>
+				    </div>
 				</div>
 				
-				<div class="form-group row justify-content-center ">
-					<label for="inputMotDePasse" class="col-4 col-form-label-sm">Mot de passe :</label>
-					<div class="col-6">
+				<div class="form-group row justify-content-center">
+				    <label for="inputMotDePasse" class="col-4 col-lg-2 col-form-label-sm ">Mot de passe :</label>
+				    <div class="col-6 col-lg-3">
 				    	<input name="inputMotDePasse" type="password" class="form-control form-control-sm" id="inputMotDePasse">
-				   	</div>
-				</div>
-				
-				<div class="form-group row justify-content-center ">
-					<label for="inputConfirmation" class="col-4 col-form-label-sm">Confirmation :</label>
-					<div class="col-6">
+				    </div>
+				    <label for="inputConfirmation" class="col-4 col-lg-2 col-form-label-sm ">Confirmation :</label>
+				    <div class="col-6 col-lg-3">
 				    	<input name="inputConfirmation" type="password" class="form-control form-control-sm" id="inputConfirmation">
-				   	</div>
+				    </div>
 				</div>
 				
 				<div class="row justify-content-around connexion text-center">
 
-				<div class="col-10 ">
-					<div class="d-inline">
-						<button class="btn btn-creation btn-primary" type="submit">Créer</button>
+					<div class="col-10 ">
+						<div class="d-inline">
+							<button class="btn btn-creation btn-primary" type="submit">Créer</button>
+						</div>
+						<div class="d-inline">
+							<a class="btn btn-annulation btn-primary" href="./ServletSeConnecter" role="button">Annuler</a>
+						</div>
 					</div>
-					<div class="d-inline">
-						<a class="btn btn-annulation btn-primary"
-							href="./ServletSeConnecter" role="button">Annuler</a>
-					</div>
-				</div>
 
-			</div>
-				
+				</div>
+			
 			</form>
 
 		</div>
 
 	</div>
+	
+	<%@ include file="Footer.jspf" %>
 
 
 	<!-- Optional JavaScript -->

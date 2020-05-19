@@ -1,5 +1,10 @@
 package fr.eni.trocencheres.bll;
 
+/**
+ * 
+ * @author fmoto
+ *
+ */
 public abstract class BLLFactory {
 
 	public static AdministrationManager getAdministrationManager() {
@@ -7,10 +12,14 @@ public abstract class BLLFactory {
 	}
 	
 	public static VenteManager getVenteManager() {
-		return null;
+		return new VenteManagerImpl();
 	}
 	
 	public static UtilisateurManager getUtilisateurManager() {
 		return new UtilisateurManagerImpl();
+	}
+	
+	public static CategorieManager getCategorieManager() {
+		return new CategorieManagerImpl();
 	}
 }
