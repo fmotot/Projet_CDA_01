@@ -117,6 +117,13 @@ public abstract class CodesResultatBLL {
 
 	
 	
+	/**
+	 * Echec lors de la selection de l'encodage
+	 * 
+	 */
+	public static final int ERREUR_SELECTION_ENCODAGE = 22001;
+	
+	
 	
 	// Codes résultat pour les Ventes 
 
