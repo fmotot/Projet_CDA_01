@@ -26,9 +26,7 @@
 	
 	<%@ include file="Alerte.jspf" %>
 
-	<h2 class="text-center">Nouvelle vente</h2>
-
-	<div class="container">
+	<div class="container mt-3">
 
 		<div class="row">
 
@@ -37,6 +35,8 @@
 			</div>
 
 			<div class="content-vente col-12 col-lg-7">
+			
+				<h2 class="text-center mb-3">Nouvelle vente</h2>
 
 				<form action="./NouvelleVenteServlet" method="post">
 

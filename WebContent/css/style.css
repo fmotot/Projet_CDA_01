@@ -10,16 +10,17 @@ body {
 }
 
 h2{
-	font-size: 5vw;
+	font-size: 18px;
+	font-weight: 600;
 }
 
 label, p, h3{
-	font-size:4vw;
+	font-size: 12px;
 }
 
 a{
 	margin:0;
-	font-size:3vw;
+	font-size: 12px;
 }
 
 ul{
@@ -37,7 +38,7 @@ ul{
 }
 
 .menu .logo {
-	font-size: 6vw;
+	font-size: 28px;
 	font-weight: 600;
 }
 	
@@ -57,6 +58,23 @@ ul{
 	padding: 0;
 }
 
+@media (min-width: 992px){
+	
+	h2{
+		font-size: 30px;
+		font-weight: 600;
+	}
+
+	label, p, h3, .menu .lien{
+		font-size:16px;
+	}
+
+	a{
+		font-size:1vw;
+	}
+	
+}
+
 @media (min-width: 1200px) { 
 	
 	h2{
@@ -65,7 +83,7 @@ ul{
 	}
 	
 	label, p, h3, .menu .lien{
-		font-size:.8vw;
+		font-size:1vw;
 		margin:0;
 	}
 	
