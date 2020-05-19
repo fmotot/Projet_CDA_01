@@ -28,63 +28,62 @@
 	
 	<%@ include file="Alerte.jspf" %>
 
-	<h2 class="text-center">enchere.etat</h2>
-	<h2 class="text-center"> En cours ou terminé a ajouter</h2>
+	<h2 class="text-center">En cours ou terminé a ajouter</h2>
 
 	<div class="container">
 
 		<div class="row col-12 mx-auto d-lg-none">
-			<h3>${vente.nomArticle} </h3>
+			<h3 class="nomArticle">${vente.nomArticle}</h3>
 			<div class="image mb-3"></div>
 		</div>
 
 		<div class="row">
 
-			<div class="col-lg-4 d-none d-lg-block">
+			<div class="col-lg-4 d-none d-lg-block my-auto">
 				<div class="image"></div>
 			</div>
 
 			<div class="content-vente col-12 col-lg-7">
-				<div class="d-none d-lg-block">
-					<h3>${vente.nomArticle}</h3>
+				<div class="d-none d-lg-block mb-3">
+					<h3 class="nomArticle">${vente.nomArticle}</h3>
 				</div>
 
 					<div class="form-group row">
-						<label for="staticMeilleureOffre" class="col-5 col-lg-3">Description :</label>
-						<div class="col-6 col-lg-9">
+						<label for="staticMeilleureOffre" class="col-5 col-lg-3 label-bold">Description :</label>
+						<div class="col-6 col-lg-9 my-auto">
 							<p>${vente.description}</p>
 						</div>
 					</div>
 
 				<div class="form-group row">
-					<label for="staticMeilleureOffre" class="col-5 col-lg-3 ">Meilleure offre :</label>
-					<div class="col-6 col-lg-9">
+					<label for="staticMeilleureOffre" class="col-5 col-lg-3 label-bold">Meilleure offre :</label>
+					<div class="col-6 col-lg-9 my-auto">
 						<p>${enchere.mise} de ${enchere.acheteur.pseudo}</p>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="staticMiseAPrix" class="col-5 col-lg-3">Mise à Prix :</label>
-					<div class="col-6 col-lg-4">
+					<label for="staticMiseAPrix" class="col-5 col-lg-3 label-bold">Mise à Prix :</label>
+					<div class="col-6 col-lg-4 my-auto">
 						<p> ${vente.miseAPrix} </p>		
 				</div>
 				</div>
 				<div class="form-group row">
-					<label for="staticFinEnchere" class="col-5 col-lg-3">Fin de l'enchère :</label>
-					<div class="col-6 col-lg-4">
+					<label for="staticFinEnchere" class="col-5 col-lg-3 label-bold">Fin de l'enchère :</label>
+					<div class="col-6 col-lg-4 my-auto">
 						<p>${vente.dateFinEncheres}</p>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="staticRetrait" class="col-5 col-lg-3">Retrait :</label>
-					<div class="col-6 col-lg-4">
+					<label for="staticRetrait" class="col-5 col-lg-3 label-bold">Retrait :</label>
+					<div class="col-6 col-lg-4 my-auto">
 						<p>${vente.retrait.rue}<p>
 						<p>${vente.retrait.codePostal} ${vente.retrait.ville}<p>
 						
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="staticVendeur" class="col-5 col-lg-3 ">Vendeur :</label>
-					<div class="col-6 col-lg-4">
+					<label for="staticVendeur" class="col-5 col-lg-3 label-bold">Vendeur :</label>
+					<div class="col-6 col-lg-4 my-auto">
 						<a href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}">${vente.vendeur.pseudo}</a>
 					</div>
 				</div>
@@ -92,12 +91,12 @@
 				<form action="./DetailVenteServlet?noVente=${vente.noVente}" method="post">
 
 					<div class="form-group row">
-						<label for="inputMaProposition" class="col-5 col-lg-3 my-auto">Ma proposition :</label>
-						<div class="col-3 col-lg-4">
+						<label for="inputMaProposition" class="col-5 col-lg-3 my-auto label-bold">Ma proposition :</label>
+						<div class="col-3 col-lg-4 ">
 							<input type="text" class="form-control" name="inputMaProposition" id="inputMaProposition">
 						</div>
 						<div class="col-3 col-lg-4">
-							<button type="submit" class="btn btn-encherir btn-primary my-auto">Enchérir</button>
+							<button type="submit" class="btn btn-encherir btn-primary my-auto ">Enchérir</button>
 						</div>
 					</div>
 

@@ -43,11 +43,9 @@
 				<form action="./NouvelleVenteServlet" method="post">
 
 					<div class="form-group row ">
-						<label for="inputArticle" class="col-5 col-form-label-sm">Article
-							:</label>
+						<label for="inputArticle" class="col-5 col-form-label-sm">Article:</label>
 						<div class="col-7 col-lg-7">
-							<input value="" name="inputArticle" type="text"
-								class="form-control form-control-sm" id="inputArticle">
+							<input value="" name="inputArticle" type="text" class="form-control form-control-sm" id="inputArticle">
 						</div>
 					</div>
 					<div class="form-group row">
@@ -69,8 +67,10 @@
   					</div>
 
 					<div class="form-group row">
-						<label class="col-3 col-form-label-sm my-auto" for="uploadImage">Photo de l'article</label> <label class="btn btn-sm btn-primary my-auto"
-						for="my-file-selector"> <input id="my-file-selector" type="file" class="d-none">Uploader</label>
+						<label class="col-3 col-form-label-sm my-auto" for="uploadImage">Photo de l'article</label> 
+<!-- 						<label class="btn btn-sm my-auto"for="my-file-selector"> -->
+<!-- 						<input id="my-file-selector" type="submit" class="d-none" disabled>Uploader </label> -->
+							<button type="submit" name="submit" value="uploader" class="btn btn-secondary " disabled>Uploader</button>
 					</div>
 
 					<div class="row col-12 mx-auto d-lg-none">
