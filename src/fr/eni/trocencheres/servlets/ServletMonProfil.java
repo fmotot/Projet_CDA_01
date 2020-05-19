@@ -73,7 +73,7 @@ public class ServletMonProfil extends HttpServlet {
 					// Mise a jour de l'utilisateur en BDD et recuperation de l'utilisateur mis a
 					// jour
 					Utilisateur utilisateurUpdate = utilisateurManager.modifierMonCompte(utilisateurConnecte,
-							utilisateurData);
+							utilisateurData, request.getParameter("inputConfirmation"));
 
 					// Affectation de l'utilisateur mis a jour en session
 					session.setAttribute("utilisateur", utilisateurUpdate);

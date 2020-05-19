@@ -55,7 +55,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	@Override
-	public Utilisateur modifierMonCompte(Utilisateur utilisateurSession, Utilisateur utilisateurData)
+	public Utilisateur modifierMonCompte(Utilisateur utilisateurSession, Utilisateur utilisateurData, String confirmationMDP)
 			throws BusinessException {
 		BusinessException businessException = new BusinessException();
 
@@ -78,7 +78,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		if (utilisateurData.getMotDePasse() != null && !utilisateurData.getMotDePasse().equals("")
 				&& !utilisateurData.getMotDePasse().equals(utilisateurSession.getMotDePasse())) {
 			utilisateurSession
-					.setMotDePasse(this.validerMotDePasse(utilisateurData.getMotDePasse(), businessException));
+					.setMotDePasse(this.validerMotDePasse(utilisateurData.getMotDePasse(), confirmationMDP, businessException));
 			isPasswordToBeChanged = true;
 		}
 
@@ -98,7 +98,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 
 	@Override
 	public Utilisateur creerCompteUtilisateur(String telephone, String codePostal, String pseudo, String nom,
-			String prenom, String email, String rue, String ville, String motDePasse) throws BusinessException {
+			String prenom, String email, String rue, String ville, String motDePasse, String confirmationMDP) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		Utilisateur utilisateur = null;
 
@@ -111,7 +111,8 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		email = this.validerEmail(email, businessException);
 		rue = this.validerRue(rue, businessException);
 		ville = this.validerVille(ville, businessException);
-		motDePasse = this.validerMotDePasse(motDePasse, businessException);
+		
+		motDePasse = this.validerMotDePasse(motDePasse, confirmationMDP, businessException);
 
 		if (!businessException.hasErreurs()) {
 			String hashMotDePasse = this.encryptMDP(motDePasse);
@@ -153,11 +154,15 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		return sb.toString();
 	}
 
-	private String validerMotDePasse(String motDePasse, BusinessException businessException) {
-		if (motDePasse == null || motDePasse.length() < 8) {
+	private String validerMotDePasse(String motDePasse, String confirmationMDP, BusinessException businessException) {
+		if (motDePasse == null) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_MOT_DE_PASSE_TROP_COURT);
-		} else {
-
+		}
+		else if (motDePasse.length() < 8) {
+				businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_MOT_DE_PASSE_TROP_COURT);
+		}
+		 else if (!motDePasse.equals(confirmationMDP)) {
+			 businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_MOT_DE_PASSE_CONFIRMATION_NE_CORRESPONDENT_PAS);
 		}
 
 		return motDePasse;
