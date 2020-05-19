@@ -219,7 +219,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 				
 			
 			}else {
-				sb.append(" WHERE no_vente IN (?) ");
+				sb.append(" WHERE ventes.no_vente IN (?) ");
 				pstmt.setString(1, strVentesAAfficher);
 			}
 			if(recherche != null) {
