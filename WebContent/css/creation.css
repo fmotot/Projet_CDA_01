@@ -1,7 +1,11 @@
 @charset "ISO-8859-1";
 
 .form-group{
-	margin-bottom:5px;
+	margin-bottom: 0vw;
+}
+
+label{
+	margin-bottom: 2vw;
 }
 
 .connexion{

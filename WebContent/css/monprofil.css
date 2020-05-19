@@ -1,14 +1,18 @@
 @charset "ISO-8859-1";
 
-.form-group{
-	margin-bottom:5px;
-}
-
 .btn-enregistrer,
 .btn-supprimer,
 .btn-retour{
 	font-size:3vw;
 	padding:10px 10px 10px 10px;
+}
+
+.form-group{
+	margin-bottom: 0vw;
+}
+
+label{
+	margin-bottom: 2vw;
 }
 
 .btn-enregistrer{
