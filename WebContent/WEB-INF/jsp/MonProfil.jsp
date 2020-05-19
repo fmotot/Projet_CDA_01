@@ -34,7 +34,7 @@
 
 		<div class="center-content">
 
-			<h2>Mon Profil</h2>
+			<h2 class="text-center mt-5 mb-5">Mon Profil</h2>
 			
 			<form class="" action="./ServletMonProfil" method="post">
 			
