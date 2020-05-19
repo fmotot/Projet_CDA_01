@@ -122,7 +122,9 @@ public class VenteManagerImpl implements VenteManager {
 			}
 			
 			// récupération ancienne enchère de l'utilisateur pour en connaître le montant ou vérif si existante
+			enchere = new Enchere(acheteur, vente, mise);
 			Enchere oldEnchere = enchereDAO.getOne(enchere);
+			
 			int miseMaximum = acheteur.getCredit();
 			if (oldEnchere != null) {
 				miseMaximum += oldEnchere.getMise();
@@ -132,7 +134,6 @@ public class VenteManagerImpl implements VenteManager {
 			if (mise <= miseMaximum) {
 				// refuser une enchère plus basse que l'enchère la plus haute en cours
 				if (mise > miseMinimum) {
-					enchere = new Enchere(acheteur, vente, mise);
 					
 					
 					// update si Enchere existante dans la liste
