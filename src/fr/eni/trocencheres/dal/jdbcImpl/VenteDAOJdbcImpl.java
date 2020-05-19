@@ -104,7 +104,6 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 
 			if (isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
 				
-
 			} else {
 				PreparedStatement ps = null;
 				if (isMesVentes) {
@@ -214,9 +213,15 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			}
 
 			String strVentesAAfficher = String.join(",", NoVentesFiltered);
+			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
 			sb.append(SELECT_ALL_VENTES);
-			sb.append(" WHERE no_vente IN (?) ");
+			if (isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
+				
 			
+			}else {
+				sb.append(" WHERE no_vente IN (?) ");
+				pstmt.setString(1, strVentesAAfficher);
+			}
 			if(recherche != null) {
 				sb.append(" AND ventes.description LIKE '%recherche%");
 			}
@@ -227,8 +232,8 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			
 			
 			sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
-			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
-			pstmt.setString(1, strVentesAAfficher);
+			
+			
 			rs = pstmt.executeQuery();
 
 			listeVentesFiltre = listerVentes(rs);
