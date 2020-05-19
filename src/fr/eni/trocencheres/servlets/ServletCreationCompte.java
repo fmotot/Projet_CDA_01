@@ -19,7 +19,7 @@ import fr.eni.trocencheres.bo.Utilisateur;
 /**
  * 
  * @author Macorigh Rudy
- * @author fmoto modifications 
+ * @author fmoto modifications pour gestion erreur
  *
  */
 @WebServlet("/ServletCreationCompte")

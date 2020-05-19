@@ -2,6 +2,8 @@ package fr.eni.trocencheres.bll;
 
 /**
  * Les codes disponibles sont entre 20000 et 29999
+ * @author fmoto
+ *
  */
 public abstract class CodesResultatBLL {
 	
