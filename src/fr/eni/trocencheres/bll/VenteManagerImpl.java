@@ -109,36 +109,62 @@ public class VenteManagerImpl implements VenteManager {
 		acheteur = this.validerUtilisateur(acheteur, businessException);
 		vente = this.validerVente(vente, businessException);
 		
+		if (acheteur.equals(vente.getVendeur())) {
+			businessException.ajouterErreur(CodesResultatBLL.ENCHERE_IMPOSSIBLE_PAR_VENDEUR);
+			throw businessException;
+		}
+		
 		if (!businessException.hasErreurs()) {
-			// refuser une enchère plus basse que l'enchère la plus haute en cours
-			if (mise > vente.getMaxEnchere().getMise()) {
-				enchere = new Enchere(acheteur, vente, mise);
-				
-				// récupération ancienne enchère pour en connaître le montant ou vérif si existante
-				Enchere oldEnchere = enchereDAO.getOne(enchere);
-				
-				// update si Enchere existante dans la liste
-				if (oldEnchere != null) {
+			
+			int miseMinimum = vente.getMiseAPrix();
+			if (vente.getMaxEnchere() != null) {
+				miseMinimum = vente.getMaxEnchere().getMise();
+			}
+			
+			// récupération ancienne enchère de l'utilisateur pour en connaître le montant ou vérif si existante
+			Enchere oldEnchere = enchereDAO.getOne(enchere);
+			int miseMaximum = acheteur.getCredit();
+			if (oldEnchere != null) {
+				miseMaximum += oldEnchere.getMise();
+			}
+			
+			// refuser une enchère plus haute que le crédit utilisateur (additionné de la mise éventuelle)
+			if (mise <= miseMaximum) {
+				// refuser une enchère plus basse que l'enchère la plus haute en cours
+				if (mise > miseMinimum) {
+					enchere = new Enchere(acheteur, vente, mise);
 					
-					// MAJ des points utilisateur
-					acheteur.setCredit(acheteur.getCredit() - mise + oldEnchere.getMise());
 					
-					enchere = enchereDAO.updateOne(enchere);
+					// update si Enchere existante dans la liste
+					if (oldEnchere != null) {
+						
+						// MAJ des points utilisateur
+						acheteur.setCredit(acheteur.getCredit() - mise + oldEnchere.getMise());
+						
+						enchere = enchereDAO.updateOne(enchere);
+					}
+					// sinon insert
+					else {
+						
+						// MAJ des points utilisateur
+						acheteur.setCredit(acheteur.getCredit() - mise);
+						
+						enchere = enchereDAO.insertOne(enchere);
+					}
+					
+					// récupération de la vente
+					vente = venteDAO.getOne(vente);
 				}
-				// sinon insert
 				else {
-					
-					// MAJ des points utilisateur
-					acheteur.setCredit(acheteur.getCredit() - mise);
-					
-					enchere = enchereDAO.insertOne(enchere);
+					businessException.ajouterErreur(CodesResultatBLL.ENCHERE_MISE_TROP_BASSE);
+					throw businessException;
 				}
-				vente = venteDAO.getOne(vente);
 			}
 			else {
-				businessException.ajouterErreur(CodesResultatBLL.ENCHERE_MISE_REFUSEE);
+				businessException.ajouterErreur(CodesResultatBLL.ENCHERE_MISE_TROP_HAUTE);
 				throw businessException;
 			}
+			
 		}
 		else {
 			throw businessException;
