@@ -1,11 +1,10 @@
 <c:if test="${!empty listeCodesErreur}">
-	${listeCodesErreur }
 	<div class="container mt-5 text-center">
 		<div class="alert alert-danger" role="alert">
-			<strong>Erreur${listeCodesErreur.size() > 1 ? 's' : '' }!</strong>
+			<strong>Erreur${listeCodesErreur.size() > 1 ? 's' : '' } !</strong>
 			<ul>
 				<c:forEach var="code" items="${listeCodesErreur}">
-					<li>${LecteurMessage.getMessageErreur(code)}</li>
+					<li>${LecteurMessages.getMessageErreur(code)}</li>
 				</c:forEach>
 			</ul>
 		</div>

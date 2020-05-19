@@ -19,6 +19,7 @@ import fr.eni.trocencheres.bo.Utilisateur;
 /**
  * 
  * @author Macorigh Rudy
+ * @author fmoto modifications 
  *
  */
 @WebServlet("/ServletCreationCompte")
@@ -82,7 +83,6 @@ public class ServletCreationCompte extends HttpServlet {
 			{
 				request.setAttribute("listeCodesErreur",listeCodesErreur);
 			}
-			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/CreationCompte.jsp");
 			requestDispatcher.forward(request, response);
