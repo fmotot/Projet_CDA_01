@@ -151,10 +151,17 @@
 								</c:choose>
 								
 								<p>Fin de l'ench�re : <fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
-								
-								<p>Retrait : ${vente.retrait.rue}</p>
-								<p>			 ${vente.retrait.codePostal} ${vente.retrait.ville}</p>
-								<p>
+								<c:choose>
+    								<c:when test="${empty vente.retrait}">
+    									<p>Retrait : ${vente.vendeur.rue}</p>
+      									<p>${vente.vendeur.codePostal} ${vente.vendeur.ville}</p>
+      								</c:when>
+    								<c:otherwise>
+    									<p>Retrait : ${vente.retrait.rue}</p>
+      									<p>${vente.retrait.codePostal} ${vente.retrait.ville}</p>
+      								</c:otherwise>
+    							</c:choose>
+    							
 								<c:choose>
 								<c:when test="${vente.vendeur.pseudo != utilisateur.pseudo}">
 								<p>Vendeur :<a href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}"> ${vente.vendeur.pseudo}</a></p>
