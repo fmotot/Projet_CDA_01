@@ -2,7 +2,7 @@
 <!-- Rudy / EL  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -32,27 +32,37 @@
 
 		<div class="center-content">
 
-			<h2>${utilisateurChoisi.pseudo}</h2>
+			<h2>${vente.vendeur.pseudo}</h2>
 
 				<div class="form-group row justify-content-center">
    					<label for="staticPseudo" class="col-4 col-lg-2">Pseudo :</label>
     				<div class="col-6 col-lg-4">
-      					<p>${utilisateurChoisi.pseudo}</p>
+      					<p>${vente.vendeur.pseudo}</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
    					<label for="staticRue" class="col-4 col-lg-2">Adresse :</label>
     				<div class="col-6 col-lg-4">
-      					<p>${utilisateurChoisi.rue}</p>
-      					<p>${utilisateurChoisi.codePostal}</p>
-      					<p>${utilisateurChoisi.ville}</p>
+    				<c:choose>
+    				<c:when test="${empty vente.retrait}">
+    					<p>${vente.vendeur.rue}</p>
+      					<p>${vente.vendeur.codePostal}</p>
+      					<p>${vente.vendeur.ville}</p>
+    					</c:when>
+    				<c:otherwise>
+    					<p>${vente.retrait.rue}</p>
+      					<p>${vente.retrait.codePostal}</p>
+      					<p>${vente.retrait.ville}</p>
+    				</c:otherwise>
+    				</c:choose>
+      					
     				</div>
  			    </div>
 
  			    <div class="form-group row justify-content-center">
    					<label for="staticTelephone" class="col-4 col-lg-2">Téléphone :</label>
     				<div class="col-6 col-lg-4">
-      					<p>${utilisateurChoisi.telephone}</p>
+      					<p>${vente.vendeur.telephone}</p>
     				</div>
  			    </div>
  			    

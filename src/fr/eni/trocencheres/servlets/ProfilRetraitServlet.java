@@ -9,11 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bll.BLLFactory;
-import fr.eni.trocencheres.bll.UtilisateurManager;
-import fr.eni.trocencheres.bo.Utilisateur;
+import fr.eni.trocencheres.bll.VenteManager;
+import fr.eni.trocencheres.bo.Vente;
 
 /**
  * 
@@ -27,12 +26,15 @@ public class ProfilRetraitServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager();
-
+		
+		VenteManager venteManager = BLLFactory.getVenteManager();
+		
 		try {
-			Utilisateur utilisateurChoisi = utilisateurManager.afficherUtilisateur(request.getParameter("pseudo"));
-			request.setAttribute("utilisateurChoisi", utilisateurChoisi);
-
+			//recuperation du noVente pour avoir l'adresse de retrait
+			Integer noVente = Integer.parseInt(request.getParameter("noVente"));
+			Vente vente = venteManager.afficherVente(noVente);
+			request.setAttribute("vente", vente);
+			
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			List<Integer> listeCodesErreur = e.getListeCodesErreur();
