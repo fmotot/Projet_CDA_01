@@ -45,8 +45,7 @@
 				<form action="./NouvelleVenteServlet" method="post">
 
 					<div class="form-group row ">
-						<label for="inputArticle" class="col-5 col-form-label-sm">Article
-							:</label>
+						<label for="inputArticle" class="col-5 col-form-label-sm">Article:</label>
 						<div class="col-7 col-lg-7">
 							<input value="${!empty vente.nomArticle ? vente.nomArticle : '' }" name="inputArticle" type="text"
 								class="form-control form-control-sm" id="inputArticle" placeholder="Le nom qui s'affichera dans le titre de la vente" required>
