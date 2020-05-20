@@ -134,7 +134,17 @@
 							</div>
 
 							<div class="col-8 ml-3">
-								<a href="./DetailVenteServlet?noVente=${vente.noVente} ">${vente.nomArticle}</a><a href="a remplir avec la servlet vente gagné"> En cours</a>
+								<jsp:useBean id="now" class="java.util.Date"/>
+								<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
+								<c:choose>
+								<c:when test="${myParseDate < now }">
+								<a href="./FinDeVenteServlet?noVente=${vente.noVente}">${vente.nomArticle}</a>
+								</c:when>
+								<c:otherwise>
+								<a href="./DetailVenteServlet?noVente=${vente.noVente}">${vente.nomArticle}</a>
+								</c:otherwise>
+								</c:choose>
+								
 								<p>Prix : ${!empty vente.maxEnchere.mise ? vente.maxEnchere.mise : vente.miseAPrix} points 
 								<c:choose>
 								<c:when test="${vente.classement != 0 }">
@@ -144,8 +154,7 @@
 								</p>
 								</c:otherwise>
 								</c:choose>
-																
-								<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
+								
 								<p>Fin de l'enchère : <fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
 								
 								<p>Retrait : ${vente.retrait.rue}</p>
