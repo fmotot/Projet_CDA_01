@@ -48,7 +48,7 @@ public class ListeEnchereServlet extends HttpServlet {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
+			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
 		}
 	}
