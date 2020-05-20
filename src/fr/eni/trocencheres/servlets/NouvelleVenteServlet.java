@@ -80,6 +80,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
+			// TODO gérer les erreurs et renvoyer sur la page de création de vente
 		}
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
