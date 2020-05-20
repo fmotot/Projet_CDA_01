@@ -21,7 +21,7 @@
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 <link rel="stylesheet" type="text/css" href="./css/listeenchere.css">
 
-<title>TrocEncheres - Liste Enchï¿½re</title>
+<title>TrocEncheres - Liste Enchères</title>
 </head>
 <body>
 
@@ -62,7 +62,7 @@
 						<c:if test="${empty utilisateur}">
 							<input class="form-check-input" type="checkbox"name="mesEncheres" id="mesEncheres" disabled>
 						</c:if> 	
-							<label class="form-check-label" for="mesEncheres">Mes enchï¿½res en cours</label>
+							<label class="form-check-label" for="mesEncheres">Mes enchères en cours</label>
 						</div>
 					</div>
 					<div class="form-group">
@@ -84,7 +84,7 @@
 						<c:if test="${empty utilisateur}">
 							<input class="form-check-input" type="checkbox" name="autresEncheres" id="autresEncheres" checked> 
 						</c:if>
-							<label class="form-check-label" for="autresEncheres">Autres enchï¿½res</label>
+							<label class="form-check-label" for="autresEncheres">Autres enchères</label>
 						</div>
 					</div>
 				</div>
@@ -98,7 +98,7 @@
 						<input type="text" class="form-control" id="inlineFormInputGroup" name="recherche" placeholder="Le nom de l'article contient">
 					</div>
 					<div class="form-group row col-lg-11">
-						<label class="col-lg-4 my-auto" for="inputCategories">Catï¿½gories :</label> 
+						<label class="col-lg-4 my-auto" for="inputCategories">Catégories :</label> 
 						<select id="inputCategories" name="categorie" class="form-control col-lg-8">
 							<option value="toutes">Toutes</option>
 							<c:forEach var="categorie" items="${listeCategorie}">>
@@ -150,7 +150,7 @@
 									</c:otherwise>
 								</c:choose>
 								
-								<p>Fin de l'enchï¿½re : <fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
+								<p>Fin de l'enchère : <fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
 								
 								<p>Retrait : ${vente.retrait.rue}</p>
 								<p>			 ${vente.retrait.codePostal} ${vente.retrait.ville}</p>
