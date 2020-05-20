@@ -42,7 +42,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 	private static String ORDER_BY_VENTE_ENCHERE_DESC = "    ORDER BY ventes.no_vente,  encheres.mise DESC";
 
 	private static String INSERT_UNE_VENTE = "INSERT INTO ventes (nom_article, description, date_fin_encheres, prix_initial, no_utilisateur, no_categorie) VALUES (?,?,?,?,?,?);";
-	private static String UPDATE_UNE_VENTE = "UPDATE ventes SET nom_article=?, description=?, date_fin_encheres=?, prix_initial=?, no_categories=? WHERE no_categorie=?;";
+	private static String UPDATE_UNE_VENTE = "UPDATE ventes SET nom_article=?, description=?, date_fin_encheres=?, prix_initial=?, no_categories=?, retrait_article=? WHERE no_vente=?;";
 	private static String SELECT_UNE_VENTE = "SELECT ventes.no_vente,ventes.nom_article,ventes.description,ventes.date_fin_encheres,prix_initial,ventes.no_utilisateur AS vendeur, ventes.no_categorie,c.libelle, ventes.retrait_article,u.pseudo AS pseudo_vendeur,u.nom AS nom_vendeur,u.prenom AS prenom_vendeur, u.email AS email_vendeur,u.telephone AS tel_vendeur, u.rue AS rue_vendeur, u.code_postal AS cp_vendeur, u.ville AS ville_vendeur,u.mot_de_passe AS mdp_vendeur, u.credit AS credit_vendeur,u.isActif AS isActif_vendeur, u.administrateur AS admin_vendeur, encheres.date_enchere, encheres.no_utilisateur AS acheteur,encheres.mise,t.pseudo AS pseudo_acheteur, t.nom AS nom_acheteur, t.prenom AS prenom_acheteur, t.email AS email_acheteur, t.telephone AS tel_acheteur,t.rue AS rue_acheteur, t.code_postal AS cp_acheteur,t.ville AS ville_acheteur,t.mot_de_passe AS mdp_acheteur,t.credit AS credit_acheteur, t.isActif AS isActif_acheteur, t.administrateur AS admin_acheteur,retraits.no_vente AS no_vente_rtr, retraits.rue AS rue_rtr, retraits.code_postal AS cp_rtr,retraits.ville AS ville_rtr FROM VENTES "
 			+ "	INNER JOIN utilisateurs as u" + "    ON u.no_utilisateur = ventes.no_utilisateur "
 			+ "	 LEFT JOIN encheres " + "    ON ventes.no_vente = encheres.no_vente "
@@ -205,9 +205,11 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 						} else {
 							String[] no_acheteurs = str.split(",");
 							boolean isAutreEnchere = true;
-							for (String string : no_acheteurs) {
-								if (string.equals(utilisateur.getNoUtilisateur() + "")) {
-									isAutreEnchere = false;
+							if (utilisateur != null) {
+								for (String string : no_acheteurs) {
+									if (string.equals(utilisateur.getNoUtilisateur() + "")) {
+										isAutreEnchere = false;
+									}
 								}
 							}
 							if (isAutreEnchere) {
@@ -473,8 +475,9 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			pstmt.setString(2, entity.getDescription());
 			pstmt.setDate(3, java.sql.Date.valueOf(entity.getDateFinEncheres().toLocalDate()));
 			pstmt.setInt(4, entity.getMiseAPrix());
-			pstmt.setInt(5, entity.getVendeur().getNoUtilisateur());
-			pstmt.setInt(6, entity.getCategorie().getNoCategorie());
+			pstmt.setInt(5, entity.getCategorie().getNoCategorie());
+			pstmt.setBoolean(6, entity.isRetraitArticle());
+			pstmt.setInt(7, entity.getNoVente());
 
 			pstmt.executeUpdate();
 

@@ -32,8 +32,6 @@ public class ListeEnchereServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		
-		
 		HttpSession session = request.getSession();
 		VenteManager venteManager = BLLFactory.getVenteManager();
 		Utilisateur utilisateurConnecte = (Utilisateur) session.getAttribute("utilisateur");
@@ -41,8 +39,8 @@ public class ListeEnchereServlet extends HttpServlet {
 		Categorie categorie = null;
 		List<Categorie> listeCategorie = getListeCategorie();
 		try {
-			List<Vente>listeDeVentes = venteManager.listerVentes(utilisateurConnecte, false, false,
-					false, true, recherche, categorie);
+			List<Vente> listeDeVentes = venteManager.listerVentes(utilisateurConnecte, false, false, false, true,
+					recherche, categorie);
 			request.setAttribute("listeVentes", listeDeVentes);
 			request.setAttribute("listeCategorie", listeCategorie);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
@@ -106,27 +104,38 @@ public class ListeEnchereServlet extends HttpServlet {
 		} else {
 			categorie = new Categorie(Integer.parseInt(request.getParameter("categorie")));
 		}
+		
 		try {
 			
 			if(utilisateurConnecte==null) {
 				listeDeVentes = venteManager.listerVentes(utilisateurConnecte, false, false,
 						false, true, recherche, categorie);
-			
 			}
-				
 			else {
 				// recupere la liste des ventes associée a la recherche utilisateur
 				listeDeVentes = venteManager.listerVentes(utilisateurConnecte, isMesVentes, isMesEncheres,
 						isMesAcquisitions, isAutresEncheres, recherche, categorie);
 			}	
 			
-			
+			if(utilisateurConnecte!=null) {
 			for (Vente vente : listeDeVentes) {
 				vente.setClassement(utilisateurConnecte);
 			}
+			}
+			
 			List<Categorie> listeCategorie = getListeCategorie();
 			request.setAttribute("listeCategorie", listeCategorie);
 			request.setAttribute("listeVentes", listeDeVentes);
+			
+			// les informations de la recherche effectuée
+			request.setAttribute("isMesVentes", isMesVentes);
+			request.setAttribute("isMesEncheres", isMesEncheres);
+			request.setAttribute("isMesAcquisitions", isMesAcquisitions);
+			request.setAttribute("isAutresEncheres", isAutresEncheres);
+			request.setAttribute("recherche", recherche);
+			request.setAttribute("categorieSelected", categorie);
+			
+			
 
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
 			requestDispatcher.forward(request, response);
