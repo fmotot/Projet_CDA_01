@@ -44,25 +44,46 @@
 				<div class="col-12 col-lg-3">
 					<div class="form-group">
 						<div class="form-check">
+						<c:if test="${!empty utilisateur}">
 							<input class="form-check-input" type="checkbox" name="mesVentes"id="mesVentes"> 
+						</c:if>	
+						<c:if test="${empty utilisateur}">
+							<input class="form-check-input" type="checkbox" name="mesVentes"id="mesVentes" disabled> 
+						</c:if>	
 								<label class="form-check-label" for="mesVentes">Mes ventes</label>
+								
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-check">
+						<c:if test="${!empty utilisateur}">
 							<input class="form-check-input" type="checkbox"name="mesEncheres" id="mesEncheres"> 
+						</c:if>	
+						<c:if test="${empty utilisateur}">
+							<input class="form-check-input" type="checkbox"name="mesEncheres" id="mesEncheres" disabled>
+						</c:if> 	
 							<label class="form-check-label" for="mesEncheres">Mes enchères en cours</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-check">
+						<c:if test="${!empty utilisateur}">
 							<input class="form-check-input" type="checkbox" name="mesAcquisitions" id="mesAcquisitions">
+						</c:if>	
+						<c:if test="${empty utilisateur}">
+							<input class="form-check-input" type="checkbox" name="mesAcquisitions" id="mesAcquisitions" disabled>
+						</c:if>			
 							<label class="form-check-label" for="mesAcquisitions">Mes acquisitions</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" name="autresEncheres" id="autresEncheres"> 
+						<c:if test="${!empty utilisateur}">
+							<input class="form-check-input" type="checkbox" name="autresEncheres" id="autresEncheres" > 
+						</c:if>
+						<c:if test="${empty utilisateur}">
+							<input class="form-check-input" type="checkbox" name="autresEncheres" id="autresEncheres" checked> 
+						</c:if>
 							<label class="form-check-label" for="autresEncheres">Autres enchères</label>
 						</div>
 					</div>
