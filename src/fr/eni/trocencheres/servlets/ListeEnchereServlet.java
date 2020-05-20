@@ -32,10 +32,25 @@ public class ListeEnchereServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		
+		
+		HttpSession session = request.getSession();
+		VenteManager venteManager = BLLFactory.getVenteManager();
+		Utilisateur utilisateurConnecte = (Utilisateur) session.getAttribute("utilisateur");
+		String recherche = null;
+		Categorie categorie = null;
 		List<Categorie> listeCategorie = getListeCategorie();
-		request.setAttribute("listeCategorie", listeCategorie);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
-		requestDispatcher.forward(request, response);
+		try {
+			List<Vente>listeDeVentes = venteManager.listerVentes(utilisateurConnecte, false, false,
+					false, true, recherche, categorie);
+			request.setAttribute("listeVentes", listeDeVentes);
+			request.setAttribute("listeCategorie", listeCategorie);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
+			requestDispatcher.forward(request, response);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -92,9 +107,20 @@ public class ListeEnchereServlet extends HttpServlet {
 			categorie = new Categorie(Integer.parseInt(request.getParameter("categorie")));
 		}
 		try {
-			// recupere la liste des ventes associée a la recherche utilisateur
-			listeDeVentes = venteManager.listerVentes(utilisateurConnecte, isMesVentes, isMesEncheres,
-					isMesAcquisitions, isAutresEncheres, recherche, categorie);
+			
+			if(utilisateurConnecte==null) {
+				listeDeVentes = venteManager.listerVentes(utilisateurConnecte, false, false,
+						false, true, recherche, categorie);
+			
+			}
+				
+			else {
+				// recupere la liste des ventes associée a la recherche utilisateur
+				listeDeVentes = venteManager.listerVentes(utilisateurConnecte, isMesVentes, isMesEncheres,
+						isMesAcquisitions, isAutresEncheres, recherche, categorie);
+			}	
+			
+			
 			for (Vente vente : listeDeVentes) {
 				vente.setClassement(utilisateurConnecte);
 			}
