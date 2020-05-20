@@ -12,6 +12,9 @@
 			<c:if test="${!empty utilisateur}">
 						<a class="nav-item nav-link lien" href="./ServletMonProfil"> ${utilisateur.pseudo } </a>
 			</c:if>
+			<c:if test="${!empty utilisateur}">
+						<a class="nav-item nav-link lien"> ${utilisateur.credit} C </a>
+			</c:if>
 			
 			<a class="nav-item nav-link lien" href=${!empty utilisateur ? "./Deconnexion" :"./ServletSeConnecter"}>${!empty utilisateur ? "Deconnexion" : "Connexion"}</a>
 		</div>

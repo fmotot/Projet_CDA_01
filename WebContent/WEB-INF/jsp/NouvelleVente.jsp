@@ -74,11 +74,10 @@
   					</div>
 
 					<div class="form-group row">
-						<label class="col-5 col-form-label-sm my-auto" for="uploadImage">Photo de l'article</label> 
-						<div class="col-7 col-lg-7">
-							<label class="btn btn-sm btn-secondary my-auto"
-						for="my-file-selector" disabled> <input id="my-file-selector" type="file" class="d-none" disabled>Uploader</label>
-						</div>
+						<label class="col-3 col-form-label-sm my-auto" for="uploadImage">Photo de l'article</label>  
+<!-- 						<label class="btn btn-sm my-auto"for="my-file-selector"> --> 
+<!-- 						<input id="my-file-selector" type="submit" class="d-none" disabled>Uploader </label> --> 
+						<button type="submit" name="submit" value="uploader" class="btn btn-secondary btn-sm" disabled>Uploader</button> 
 					</div>
 
 					<div class="row col-12 mx-auto d-lg-none">
