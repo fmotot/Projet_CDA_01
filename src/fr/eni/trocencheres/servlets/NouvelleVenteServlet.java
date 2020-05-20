@@ -64,21 +64,9 @@ public class NouvelleVenteServlet extends HttpServlet {
 			LocalDateTime dateFinEncheres = LocalDateTime.of(ld, LocalDateTime.now().toLocalTime());
 
 			Integer miseAPrix = Integer.parseInt(request.getParameter("inputPrixDeBase"));
-			
-			// Verification si retrait est complété, sinon le remplace par l'adresse de l'utilisateur
 			String rue = request.getParameter("inputRue");
-			if (rue.trim().equals("")) {
-				rue = vendeur.getRue();
-			}
-			String ville = request.getParameter("inputVille");
-			if (ville.trim().equals("")) {
-				ville = vendeur.getVille();
-			}
-			String codePostal = request.getParameter("inputCodePostal");
-			if (codePostal.trim().equals("")) {
-				codePostal = vendeur.getCodePostal();
-			}
-			
+			String ville = request.getParameter("inputCodePostal");
+			String codePostal = request.getParameter("inputVille");
 			Integer noCategorie = Integer.parseInt(request.getParameter("selectCategories"));
 
 			Categorie categorie = new Categorie(noCategorie);
