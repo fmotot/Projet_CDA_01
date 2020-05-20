@@ -3,6 +3,7 @@ package fr.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bo.Utilisateur;
 import fr.eni.trocencheres.dal.UtilisateurDAO;
 
@@ -65,6 +66,18 @@ public class TestMockUtilisateur implements UtilisateurDAO{
 		}
 		
 		return user;
+	}
+
+	@Override
+	public boolean isPseudoExist(String pseudo) throws BusinessException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEmailExist(String email) throws BusinessException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
