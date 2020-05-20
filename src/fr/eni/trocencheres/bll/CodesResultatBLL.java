@@ -116,11 +116,30 @@ public abstract class CodesResultatBLL {
 	public static final int REGLE_UTILISATEUR_MOT_DE_PASSE_CONFIRMATION_NE_CORRESPONDENT_PAS = 21019;
 
 	/**
+	 * Echec Pseudo déjà utilisé
+	 */
+	public static final int REGLE_UTILISATEUR_PSEUDO_DOUBLON = 21020;
+	
+	/**
+	 * Echec email déjà utilisé
+	 */
+	public static final int REGLE_UTILISATEUR_EMAIL_DOUBLON = 21021;
+	
+	
+	/**
 	 * Echec lors de la selection de l'encodage
 	 * 
 	 */
 	public static final int ERREUR_SELECTION_ENCODAGE = 22001;
 
+	
+	
+	
+	
+	
+	
+	
+	
 	// Codes résultat pour les Ventes
 
 	/**
@@ -227,6 +246,8 @@ public abstract class CodesResultatBLL {
 	/**
 	 * Echec categorie inconnue
 	 */
-	public static final int CATEGORIE_INCONNUE = 23020;
+	public static final int CATEGORIE_INCONNUE = 23022;
+
+
 
 }
