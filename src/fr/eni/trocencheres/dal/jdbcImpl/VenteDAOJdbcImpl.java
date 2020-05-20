@@ -205,9 +205,11 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 						} else {
 							String[] no_acheteurs = str.split(",");
 							boolean isAutreEnchere = true;
-							for (String string : no_acheteurs) {
-								if (string.equals(utilisateur.getNoUtilisateur() + "")) {
-									isAutreEnchere = false;
+							if (utilisateur != null) {
+								for (String string : no_acheteurs) {
+									if (string.equals(utilisateur.getNoUtilisateur() + "")) {
+										isAutreEnchere = false;
+									}
 								}
 							}
 							if (isAutreEnchere) {
