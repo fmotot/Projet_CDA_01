@@ -69,7 +69,7 @@ public class ServletSeConnecter extends HttpServlet {
 			// Mise de l'utilisateur en session si OK
 			session.setAttribute("utilisateur", utilisateur);
 			// Renvoi sur la page de profil
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
 			requestDispatcher.forward(request, response);
 
 		} catch (BusinessException e) {

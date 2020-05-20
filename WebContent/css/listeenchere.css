@@ -22,6 +22,21 @@
 	background: black;
 }
 
+.jumbotron-bold-title{
+	font-size:18px;
+	font-weight: 600;
+}
+
+.jumbotron-bold{
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.jumbotron p{
+	font-size: 12px;
+	margin:0;
+}
+
 @media (min-width: 1200px) { 
 	
 	#liste-enchere{
@@ -32,13 +47,23 @@
 		margin-top:50px;
 	}
 	
-	.jumbotron a{
-		font-size:.8vw;
+	.jumbotron-bold-title{
+		font-size:22px;
+	}
+	
+	.jumbotron-bold{
+		font-size: 16px;
+		font-weight: 600;
+	}
+	
+	.jumbotron p{
+		font-size: 14px;
 	}
 	
 	.image{
 		width: 100px;
 		height: 120px;
 		background: black;
-	}	
+	}
+	
 }
