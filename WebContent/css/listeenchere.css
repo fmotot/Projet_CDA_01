@@ -49,12 +49,14 @@
 	
 	.jumbotron-bold-title{
 		font-size:22px;
-	.tabulation {
+	}
+	
+	.jumbotron .tabulation {
 	margin-left:62px;
-}
+	}
+	
 	.jumbotron a{
 		font-size:.8vw;
-	
 	}
 	
 	.jumbotron-bold{

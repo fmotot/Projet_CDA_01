@@ -43,6 +43,8 @@ public class DetailVenteServlet extends HttpServlet {
 		
 		try {
 			vente = venteManager.afficherVente(noVente);
+			vente.setClassement(utilisateur);
+			System.out.println(vente.getClassement());
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
@@ -81,7 +83,7 @@ public class DetailVenteServlet extends HttpServlet {
 				}
 			}
 			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchereServlet.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
 			requestDispatcher.forward(request, response);
 		}
 		

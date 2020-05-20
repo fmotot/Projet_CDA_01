@@ -28,8 +28,12 @@
 	<%@ include file="Header.jspf" %>
 	
 	<%@ include file="Alerte.jspf" %>
+	
+<jsp:useBean id="now" class="java.util.Date"/>
+<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
 
-	<h2 class="text-center"> En cours ou terminé a ajouter</h2>
+	<br>
+	<h2 class="text-center"> ${myParseDate < now ? 'Enchère Terminée' : 'Enchère en cours'}</h2>
 
 	<div class="container">
 
@@ -59,7 +63,14 @@
 				<div class="form-group row">
 					<label for="staticMeilleureOffre" class="col-5 col-lg-3 label-bold">Meilleure offre :</label>
 					<div class="col-6 col-lg-9">
-						<p>${vente.maxEnchere.mise} de ${vente.maxEnchere.acheteur.pseudo}</p>
+					<c:choose>
+						<c:when test="${!empty vente.listeEncheres}">
+							<p>${vente.maxEnchere.mise} de ${vente.maxEnchere.acheteur.pseudo}</p>
+						</c:when>
+						<c:otherwise>
+							<p> Pas encore d'enchérisseur. </p>
+						</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -112,11 +123,11 @@
 				</form>
 
 				<div class="row mt-3">
-				<!-- EXPRESSION LANGAGE POUR LE BOUTON ANNULER DERNIERE ENCHERE SOUS CONDITION
+				<c:if test="${vente.classement != 0 }">
 					<div class="col-8 col-lg-7 text-left">
-						<a class="btn btn-back btn-primary" href="./ServletCreationCompte" role="button">Annuler ma derniï¿½re enchï¿½re</a>
-					</div> -->
-				
+						<a class="btn btn-back btn-primary" href="./AnnulerEnchere?noVente=${vente.noVente}" role="button">Annuler ma dernière enchère</a>
+					</div> 
+				</c:if>
 					<div class="col-4 col-lg-4 text-left">
 						<a class="btn btn-back btn-primary" href="./ListeEnchereServlet" role="button">Back</a>
 					</div>
