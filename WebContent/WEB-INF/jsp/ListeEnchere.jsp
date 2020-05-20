@@ -2,7 +2,8 @@
 <!-- Rudy / EL  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="fr.eni.trocencheres.messages.LecteurMessages" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="fr">
@@ -136,6 +137,7 @@
 							<div class="col-8 ml-4">
 								<jsp:useBean id="now" class="java.util.Date"/>
 								<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
+								
 								<c:choose>
 								<c:when test="${myParseDate < now }">
 								<a class="jumbotron-bold-title" href="./FinDeVenteServlet?noVente=${vente.noVente}">${vente.nomArticle}</a>
@@ -146,6 +148,7 @@
 								</c:choose>
 								
 								<p><span class="jumbotron-bold">Prix :</span> ${!empty vente.maxEnchere.mise ? vente.maxEnchere.mise : vente.miseAPrix} points 
+								
 								<c:choose>
 									<c:when test="${vente.classement != 0 }">
 									Classement : ${vente.classement}
@@ -153,6 +156,17 @@
 									<c:otherwise>
 										</p>
 									</c:otherwise>
+								</c:choose>
+								
+								
+								
+								<c:choose>
+								<c:when test="${myParseDate < now}">
+								<p><span class="jumbotron-bold">Fin de l'enchère : </span>Enchère terminée.</p>
+								</c:when>
+								<c:otherwise>
+								<p><span class="jumbotron-bold">Fin de l'enchère : </span><fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
+								</c:otherwise>
 								</c:choose>
 								
 								<c:choose>
