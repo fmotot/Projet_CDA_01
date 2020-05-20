@@ -133,6 +133,11 @@ public class ListeEnchereServlet extends HttpServlet {
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
+			List<Integer> listeCodesErreur = e.getListeCodesErreur();
+			if(listeCodesErreur.size()>0)
+			{
+				request.setAttribute("listeCodesErreur",listeCodesErreur);
+			}
 		}
 
 	}

@@ -13,6 +13,12 @@ legend{
 	font-weight: 600;
 }
 
+/* pour les boutons désactivés */
+.btn-secondary {
+	opacity: .65;
+}
+
+
 @media (min-width: 992px){
 	
 	.image{
