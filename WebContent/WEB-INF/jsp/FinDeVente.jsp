@@ -2,7 +2,7 @@
 <!-- Rudy / EL  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -18,9 +18,9 @@
 	crossorigin="anonymous">
 
 <link rel="stylesheet" type="text/css" href="./css/style.css">
-<link rel="stylesheet" type="text/css" href="./css/detailvente.css">
+<link rel="stylesheet" type="text/css" href="./css/findevente.css">
 
-<title>TrocEncheres - Détail Vente</title>
+<title>TrocEncheres - Fin de vente</title>
 </head>
 <body>
 
@@ -28,7 +28,7 @@
 	
 	<%@ include file="Alerte.jspf" %>
 
-	<h2 class="text-center"> En cours ou terminé a ajouter</h2>
+	<h2 class="text-center">Vous avez remporté la vente</h2>
 
 	<div class="container">
 
@@ -58,20 +58,19 @@
 				<div class="form-group row">
 					<label for="staticMeilleureOffre" class="col-5 col-lg-3 label-bold">Meilleure offre :</label>
 					<div class="col-6 col-lg-9">
-						<p>${vente.maxEnchere.mise} de ${vente.maxEnchere.acheteur.pseudo}</p>
+						<p>${vente.maxEnchere.mise}</p>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="staticMiseAPrix" class="col-5 col-lg-3 label-bold">Mise à Prix :</label>
 					<div class="col-6 col-lg-4">
 						<p> ${vente.miseAPrix} </p>		
-				</div>
+					</div>
 				</div>
 				<div class="form-group row">
 					<label for="staticFinEnchere" class="col-5 col-lg-3 label-bold">Fin de l'enchère :</label>
 					<div class="col-6 col-lg-4">
-						<p><fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
-						<fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
+						<p>${vente.dateFinEncheres}</p>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -88,30 +87,29 @@
 						<a href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}">${vente.vendeur.pseudo}</a>
 					</div>
 				</div>
-
-				<form action="./DetailVenteServlet?noVente=${vente.noVente}" method="post">
-
-					<div class="form-group row">
-						<label for="inputMaProposition" class="col-5 col-lg-3 my-auto label-bold">Ma proposition :</label>
-						<div class="col-3 col-lg-4 ">
-							<input type="text" class="form-control" name="inputMaProposition" id="inputMaProposition">
-						</div>
-						<div class="col-3 col-lg-4">
-							<button type="submit" class="btn btn-encherir btn-primary my-auto ">Enchérir</button>
-						</div>
+				<div class="form-group row">
+					<label for="staticFinEnchere" class="col-5 col-lg-3 label-bold">Téléphone :</label>
+					<div class="col-6 col-lg-4">
+						<p>${vente.vendeur.telephone}</p>
 					</div>
-
-				</form>
-
-				<div class="row mt-3">
-				<!-- EXPRESSION LANGAGE POUR LE BOUTON ANNULER DERNIERE ENCHERE SOUS CONDITION
-					<div class="col-8 col-lg-7 text-left">
-						<a class="btn btn-back btn-primary" href="./ServletCreationCompte" role="button">Annuler ma derniï¿½re enchï¿½re</a>
-					</div> -->
+				</div>
 				
-					<div class="col-4 col-lg-4 text-left">
-						<a class="btn btn-back btn-primary" href="./ListeEnchereServlet" role="button">Back</a>
+				<div class="row text-center text-lg-left connexion mt-3 mb-3">
+
+					<div class="col-12">
+
+						<div class="d-inline">
+							<a class="btn btn-retrait btn-primary" href="./ListeEnchereServlet" role="button">Retrait effectué</a>
+						</div>
+						<div class="d-inline">
+							<a class="btn btn-contacter btn-primary" href="./ProfilRetraitServlet" role="button">Contacter</a>
+						</div>
+						<div class="d-inline">
+							<a class="btn btn-back btn-primary" href="./ListeEnchereServlet" role="button">Back</a>
+						</div>
+					
 					</div>
+
 				</div>
 
 			</div>

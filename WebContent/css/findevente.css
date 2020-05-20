@@ -22,6 +22,12 @@ p{
 	font-size: 12px;
 }
 
+.btn-back,
+.btn-retrait,
+.btn-contacter{
+	font-size:10px;
+}
+
 
 @media (min-width: 1200px) { 
 	
@@ -39,10 +45,6 @@ p{
 		font-size: 24px;
 	}
 	
-	.btn-back{
-		padding: 15px 30px 15px 30px;
-	}
-	
 	.label-bold{
 		font-weight: 600;
 		font-size: 16px;
@@ -50,6 +52,13 @@ p{
 	
 	p{
 		font-size: 14px;
+	}
+	
+	.btn-back,
+	.btn-retrait,
+	.btn-contacter
+	{
+		font-size:16px;
 	}
 	
 }

@@ -21,7 +21,7 @@
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 <link rel="stylesheet" type="text/css" href="./css/listeenchere.css">
 
-<title>TrocEncheres - Liste Enchère</title>
+<title>TrocEncheres - Liste Enchères</title>
 </head>
 <body>
 
@@ -51,7 +51,6 @@
 							<input class="form-check-input" type="checkbox" name="mesVentes"id="mesVentes" disabled> 
 						</c:if>	
 								<label class="form-check-label" for="mesVentes">Mes ventes</label>
-								
 						</div>
 					</div>
 					<div class="form-group">
@@ -130,23 +129,23 @@
 				<c:forEach var="vente" items="${listeVentes}">
 					<div class="jumbotron col-12 col-lg-5 mx-auto">
 						<div class="row">
-							<div class="col-3 ">
+							<div class="col-3 my-auto">
 								<div class="image"></div>
 							</div>
 
-							<div class="col-8 ml-3">
+							<div class="col-8 ml-4">
 								<jsp:useBean id="now" class="java.util.Date"/>
 								<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
 								<c:choose>
 								<c:when test="${myParseDate < now }">
-								<a href="./FinDeVenteServlet?noVente=${vente.noVente}">${vente.nomArticle}</a>
+								<a class="jumbotron-bold-title" href="./FinDeVenteServlet?noVente=${vente.noVente}">${vente.nomArticle}</a>
 								</c:when>
 								<c:otherwise>
-								<a href="./DetailVenteServlet?noVente=${vente.noVente}">${vente.nomArticle}</a>
+								<a class="jumbotron-bold-title" href="./DetailVenteServlet?noVente=${vente.noVente}">${vente.nomArticle}</a>
 								</c:otherwise>
 								</c:choose>
 								
-								<p>Prix : ${!empty vente.maxEnchere.mise ? vente.maxEnchere.mise : vente.miseAPrix} points 
+								<p><span class="jumbotron-bold">Prix :</span> ${!empty vente.maxEnchere.mise ? vente.maxEnchere.mise : vente.miseAPrix} points 
 								<c:choose>
 									<c:when test="${vente.classement != 0 }"></c:when>
 									<c:otherwise>
@@ -154,17 +153,17 @@
 									</c:otherwise>
 								</c:choose>
 								
-								<p>Fin de l'enchère : <fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
+								<p><span class="jumbotron-bold">Fin de l'enchère : </span><fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
 								
-								<p>Retrait : ${vente.retrait.rue}</p>
+								<p><span class="jumbotron-bold">Retrait :</span> ${vente.retrait.rue}</p>
 								<p>			 ${vente.retrait.codePostal} ${vente.retrait.ville}</p>
 								<p>
 								<c:choose>
 								<c:when test="${vente.vendeur.pseudo != utilisateur.pseudo}">
-								<p>Vendeur :<a href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}"> ${vente.vendeur.pseudo}</a></p>
+								<p><span class="jumbotron-bold">Vendeur :</span><a href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}"> ${vente.vendeur.pseudo}</a></p>
 								</c:when>
 								<c:otherwise>
-								<p>Vendeur : ${vente.vendeur.pseudo}</p>
+								<p><span class="jumbotron-bold">Vendeur :</span> ${vente.vendeur.pseudo}</p>
 								</c:otherwise>
 								</c:choose>
 							</div>
