@@ -66,7 +66,7 @@ public class DetailVenteServlet extends HttpServlet {
 		}
 				
 		if(request.getServletPath().equals("/DetailVenteServlet")) {
-
+			System.out.println("classement" + vente.getClassement());
 		request.setAttribute("vente", vente);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/DetailVente.jsp");
 		requestDispatcher.forward(request, response);
@@ -77,7 +77,15 @@ public class DetailVenteServlet extends HttpServlet {
 			//annulation de l'enchere
 			try {
 				venteManager.annulerEnchere(vente, utilisateur);
+				Vente venteApresAnnulation = venteManager.afficherVente(noVente);
+				vente = venteManager.afficherVente(noVente);
+				if (utilisateur != null) {
+					vente.setClassement(utilisateur);
+					System.out.println("ici " + vente.getClassement());
+				}
 				session.setAttribute("utilisateur", utilisateurManager.afficherUtilisateur(utilisateur.getPseudo()));
+				request.setAttribute("vente", venteApresAnnulation);
+			
 			} catch (BusinessException e) {
 				System.err.println(e.getListeCodesErreur());
 				e.printStackTrace();
@@ -88,7 +96,7 @@ public class DetailVenteServlet extends HttpServlet {
 				}
 			}
 			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/DetailVente.jsp");
 			requestDispatcher.forward(request, response);
 		}
 		
@@ -123,12 +131,12 @@ public class DetailVenteServlet extends HttpServlet {
 			vente = venteManager.afficherVente(noVente);
 			if (utilisateur != null) {
 				vente.setClassement(utilisateur);
-				System.out.println(vente.getClassement());
 			}
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("classement" + vente.getClassement());
 		request.setAttribute("vente", vente);
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/DetailVente.jsp");

@@ -69,10 +69,12 @@ public class NouvelleVenteServlet extends HttpServlet {
 //		System.out.println(nomArticle + " " + description + " " + dateFinEncheres + " " + miseAPrix + " " + vendeur
 //				+ " " + rue + " " + ville + " " + codePostal + " " + categorie);
 		try {
-			venteManager.creerVente(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, rue, ville,
+			Vente venteCree = venteManager.creerVente(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, rue, ville,
 					codePostal, categorie);
-
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
+			
+			request.setAttribute("vente", venteCree);
+			
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/DetailVente.jsp");
 			requestDispatcher.forward(request, response);
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());

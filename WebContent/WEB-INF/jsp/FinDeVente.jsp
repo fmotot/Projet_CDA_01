@@ -87,8 +87,16 @@
 				<div class="form-group row">
 					<label for="staticRetrait" class="col-5 col-lg-3 label-bold">Retrait :</label>
 					<div class="col-6 col-lg-4">
-						<p>${vente.retrait.rue}<p>
-						<p>${vente.retrait.codePostal} ${vente.retrait.ville}<p>
+						<c:choose>
+    					<c:when test="${empty vente.retrait}">
+    						<p>${vente.vendeur.rue}</p>
+      						<p>${vente.vendeur.codePostal} ${vente.vendeur.ville}</p>
+      					</c:when>
+    					<c:otherwise>
+    						<p>${vente.retrait.rue}</p>
+      						<p>${vente.retrait.codePostal} ${vente.retrait.ville}</p>
+      					</c:otherwise>
+    				</c:choose>
 						
 					</div>
 				</div>
@@ -110,13 +118,15 @@
 					<div class="col-12">
 
 					<c:if test="${utilisateur.noUtilisateur == vente.vendeur.noUtilisateur}">
+						<c:if test="${!vente.retraitArticle}">
 						<div class="d-inline">
 							<a class="btn btn-retrait btn-primary" href="./RetraitEffectue?noVente=${vente.noVente}" role="button">Retrait effectué</a>
 						</div>
-						<div class="d-inline">
-							<a class="btn btn-contacter btn-primary" href="./ProfilRetraitServlet?noVente=${vente.noVente}" role="button">Contacter ${vente.maxEnchere.acheteur.noUtilisateur}</a>
-						</div>
 						</c:if>
+						<div class="d-inline">
+							<a class="btn btn-contacter btn-primary" href="./ProfilRetraitServlet?noVente=${vente.noVente}" role="button">Contacter ${vente.maxEnchere.acheteur.pseudo}</a>
+						</div>
+					</c:if>
 						
 						<div class="d-inline">
 							<a class="btn btn-back btn-primary" href="./ListeEnchereServlet" role="button">Back</a>

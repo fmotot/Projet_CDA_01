@@ -32,35 +32,27 @@
 
 		<div class="center-content">
 
-			<h2>${vente.vendeur.pseudo}</h2>
+			<h2>${vente.maxEnchere.acheteur.pseudo}</h2>
 
 				<div class="form-group row justify-content-center">
    					<label for="staticPseudo" class="col-4 col-lg-2">Pseudo :</label>
     				<div class="col-6 col-lg-4">
-      					<p>${vente.vendeur.pseudo}</p>
+      					<p>${vente.maxEnchere.acheteur.pseudo}</p>
     				</div>
  			    </div>
  			    <div class="form-group row justify-content-center">
    					<label for="staticRue" class="col-4 col-lg-2">Adresse :</label>
     				<div class="col-6 col-lg-4">
-    				<c:choose>
-    					<c:when test="${empty vente.retrait}">
-    						<p>${vente.vendeur.rue}</p>
-      						<p>${vente.vendeur.codePostal} ${vente.vendeur.ville}</p>
-      					</c:when>
-    					<c:otherwise>
-    						<p>${vente.retrait.rue}</p>
-      						<p>${vente.retrait.codePostal} ${vente.retrait.ville}</p>
-      					</c:otherwise>
-    				</c:choose>
-      					
+    						<p>${vente.maxEnchere.acheteur.rue}</p>
+      						<p>${vente.maxEnchere.acheteur.codePostal} ${vente.maxEnchere.acheteur.ville}</p>
+      					   					
     				</div>
  			    </div>
 
  			    <div class="form-group row justify-content-center">
    					<label for="staticTelephone" class="col-4 col-lg-2">Téléphone :</label>
     				<div class="col-6 col-lg-4">
-      					<p>${vente.vendeur.telephone}</p>
+      					<p>${vente.maxEnchere.acheteur.telephone}</p>
     				</div>
  			    </div>
  			    
@@ -69,7 +61,7 @@
 
 				<div class="col-10">
 					<div class="d-inline">
-						<a class="btn btn-retour btn-primary" href="./ListeEnchereServlet" role="button">Back</a>
+						<a class="btn btn-retour btn-primary" href="./FinDeVenteServlet?noVente=${vente.noVente}" role="button">Back</a>
 					</div>
 				</div>
 
