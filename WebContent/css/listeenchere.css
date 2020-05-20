@@ -32,6 +32,10 @@
 		margin-top:50px;
 	}
 	
+	.tabulation {
+	margin-left:62px;
+}
+	
 	.jumbotron a{
 		font-size:.8vw;
 	}
@@ -42,3 +46,4 @@
 		background: black;
 	}	
 }
+

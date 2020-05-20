@@ -144,7 +144,9 @@
 								
 								<p>Prix : ${!empty vente.maxEnchere.mise ? vente.maxEnchere.mise : vente.miseAPrix} points 
 								<c:choose>
-									<c:when test="${vente.classement != 0 }"></c:when>
+									<c:when test="${vente.classement != 0 }">
+									Classement : ${vente.classement}
+									</c:when>
 									<c:otherwise>
 										</p>
 									</c:otherwise>
@@ -154,11 +156,11 @@
 								<c:choose>
     								<c:when test="${empty vente.retrait}">
     									<p>Retrait : ${vente.vendeur.rue}</p>
-      									<p>${vente.vendeur.codePostal} ${vente.vendeur.ville}</p>
+      									<p class="tabulation">${vente.vendeur.codePostal} ${vente.vendeur.ville}</p>
       								</c:when>
     								<c:otherwise>
     									<p>Retrait : ${vente.retrait.rue}</p>
-      									<p>${vente.retrait.codePostal} ${vente.retrait.ville}</p>
+      									<p class="tabulation">${vente.retrait.codePostal} ${vente.retrait.ville}</p>
       								</c:otherwise>
     							</c:choose>
     							

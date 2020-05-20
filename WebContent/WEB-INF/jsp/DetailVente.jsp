@@ -78,18 +78,16 @@
 				<div class="form-group row">
 					<label for="staticRetrait" class="col-5 col-lg-3 label-bold">Retrait :</label>
 					<div class="col-6 col-lg-4">
-						<c:choose>
-    				<c:when test="${empty vente.retrait}">
-    					<p>${vente.vendeur.rue}</p>
-      					<p>${vente.vendeur.codePostal}</p>
-      					<p>${vente.vendeur.ville}</p>
-    					</c:when>
-    				<c:otherwise>
-    					<p>${vente.retrait.rue}</p>
-      					<p>${vente.retrait.codePostal}</p>
-      					<p>${vente.retrait.ville}</p>
-    				</c:otherwise>
-    				</c:choose>
+    				<c:choose>
+    					<c:when test="${empty vente.retrait}">
+    						<p>${vente.vendeur.rue}</p>
+      						<p>${vente.vendeur.codePostal} ${vente.vendeur.ville}</p>
+      					</c:when>
+    					<c:otherwise>
+    						<p>${vente.retrait.rue}</p>
+      						<p>${vente.retrait.codePostal} ${vente.retrait.ville}</p>
+      					</c:otherwise>
+    					</c:choose>
 					</div>
 				</div>
 				<div class="form-group row">
