@@ -46,6 +46,11 @@ public class DetailVenteServlet extends HttpServlet {
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
+			List<Integer> listeCodesErreur = e.getListeCodesErreur();
+			if(listeCodesErreur.size()>0)
+			{
+				request.setAttribute("listeCodesErreur",listeCodesErreur);
+			}
 		}
 		List<Enchere> listeEnchere = vente.getListeEncheres();
 		if (listeEnchere.size() > 0) {
@@ -69,6 +74,11 @@ public class DetailVenteServlet extends HttpServlet {
 			} catch (BusinessException e) {
 				System.err.println(e.getListeCodesErreur());
 				e.printStackTrace();
+				List<Integer> listeCodesErreur = e.getListeCodesErreur();
+				if(listeCodesErreur.size()>0)
+				{
+					request.setAttribute("listeCodesErreur",listeCodesErreur);
+				}
 			}
 			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchereServlet.jsp");
@@ -90,6 +100,11 @@ public class DetailVenteServlet extends HttpServlet {
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
+			List<Integer> listeCodesErreur = e.getListeCodesErreur();
+			if(listeCodesErreur.size()>0)
+			{
+				request.setAttribute("listeCodesErreur",listeCodesErreur);
+			}
 		}
 		
 		Integer mise = Integer.parseInt(request.getParameter("inputMaProposition"));
@@ -99,6 +114,11 @@ public class DetailVenteServlet extends HttpServlet {
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
+			List<Integer> listeCodesErreur = e.getListeCodesErreur();
+			if(listeCodesErreur.size()>0)
+			{
+				request.setAttribute("listeCodesErreur",listeCodesErreur);
+			}
 		}
 		
 		request.setAttribute("vente", venteUpdate);
