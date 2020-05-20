@@ -5,6 +5,8 @@
 <%@ page import="fr.eni.trocencheres.messages.LecteurMessages" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="fr.eni.trocencheres.messages.LecteurMessages" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -116,7 +118,7 @@
 					<div class="form-group row">
 						<label for="inputMaProposition" class="col-5 col-lg-3 my-auto label-bold">Ma proposition :</label>
 						<div class="col-3 col-lg-4 ">
-							<input type="text" class="form-control" name="inputMaProposition" id="inputMaProposition">
+							<input type="number" pattern="[0-9]" class="form-control" name="inputMaProposition" id="inputMaProposition">
 						</div>
 						<div class="col-3 col-lg-4">
 							<button type="submit" class="btn btn-encherir btn-primary my-auto ">Enchérir</button>

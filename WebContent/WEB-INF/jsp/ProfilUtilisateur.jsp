@@ -25,8 +25,6 @@
 <body>
 
 	<%@ include file="Header.jspf" %>
-	
-	<%@ include file="Alerte.jspf" %>
 
 	<div class="container">
 
