@@ -45,26 +45,26 @@
 					<div class="form-group">
 						<div class="form-check">
 							<input class="form-check-input" type="checkbox" name="mesVentes"
-								id="gridCheck"> <label class="form-check-label"
-								for="gridCheck">Mes ventes</label>
+								id="mesVentes"> <label class="form-check-label"
+								for="mesVentes">Mes ventes</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox"name="mesEncheres" id="gridCheck"> 
-							<label class="form-check-label" for="gridCheck">Mes enchères en cours</label>
+							<input class="form-check-input" type="checkbox"name="mesEncheres" id="mesEncheres"> 
+							<label class="form-check-label" for="mesEncheres">Mes enchères en cours</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" name="mesAcquisitions" id="gridCheck">
-							<label class="form-check-label" for="gridCheck">Mes acquisitions</label>
+							<input class="form-check-input" type="checkbox" name="mesAcquisitions" id="mesAcquisitions">
+							<label class="form-check-label" for="mesAcquisitions">Mes acquisitions</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" name="autresEncheres" id="gridCheck"> 
-							<label class="form-check-label" for="gridCheck">Autres enchères</label>
+							<input class="form-check-input" type="checkbox" name="autresEncheres" id="autresEncheres"> 
+							<label class="form-check-label" for="autresEncheres">Autres enchères</label>
 						</div>
 					</div>
 				</div>
