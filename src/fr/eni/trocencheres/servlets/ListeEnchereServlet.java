@@ -117,8 +117,10 @@ public class ListeEnchereServlet extends HttpServlet {
 						isMesAcquisitions, isAutresEncheres, recherche, categorie);
 			}	
 			
+			if(utilisateurConnecte!=null) {
 			for (Vente vente : listeDeVentes) {
 				vente.setClassement(utilisateurConnecte);
+			}
 			}
 			
 			List<Categorie> listeCategorie = getListeCategorie();
