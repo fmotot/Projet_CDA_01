@@ -16,7 +16,5 @@ public interface UtilisateurDAO extends DAO<Utilisateur> {
 	 *  
 	**/
 	public boolean isTelephoneExist(String telephone) throws BusinessException;
-	public boolean isPseudoExist(String pseudo) throws BusinessException;
-	public boolean isEmailExist(String email) throws BusinessException;
 	public Utilisateur selectByLogin(String login)throws BusinessException;
 }

@@ -215,7 +215,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		return codePostal;
 	}
 
-	private String validerPseudo(String pseudo, BusinessException businessException) throws BusinessException {
+	private String validerPseudo(String pseudo, BusinessException businessException) {
 
 		if (pseudo == null) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_PSEUDO_VIDE);
@@ -226,9 +226,6 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 			} else {
 				if (pseudo.length() > 30) {
 					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_PSEUDO_TROP_LONG);
-				}
-				else if (utilisateurDAO.isPseudoExist(pseudo)) {
-					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_PSEUDO_DOUBLON);
 				}
 			}
 		}
@@ -272,7 +269,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 		return prenom;
 	}
 
-	private String validerEmail(String email, BusinessException businessException) throws BusinessException {
+	private String validerEmail(String email, BusinessException businessException) {
 
 		if (email == null) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_EMAIL_VIDE);
@@ -288,9 +285,6 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 
 				if (email == null || !matcher.matches()) {
 					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_EMAIL_NON_VALIDE);
-				}
-				else if (utilisateurDAO.isPseudoExist(email)) {
-					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_EMAIL_DOUBLON);
 				}
 			}
 
