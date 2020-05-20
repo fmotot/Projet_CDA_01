@@ -1,6 +1,7 @@
 package fr.eni.trocencheres.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,6 +34,11 @@ public class ProfilUtilisateurServlet extends HttpServlet {
 			
 		} catch (BusinessException e) {
 			e.printStackTrace();
+			List<Integer> listeCodesErreur = e.getListeCodesErreur();
+			if(listeCodesErreur.size()>0)
+			{
+				request.setAttribute("listeCodesErreur",listeCodesErreur);
+			}
 		}
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ProfilUtilisateur.jsp") ;

@@ -32,18 +32,25 @@ public class ListeEnchereServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		CategorieManager categorieManager = BLLFactory.getCategorieManager();
-
-		List<Categorie> listeCategorie = null;
+		
+		
+		HttpSession session = request.getSession();
+		VenteManager venteManager = BLLFactory.getVenteManager();
+		Utilisateur utilisateurConnecte = (Utilisateur) session.getAttribute("utilisateur");
+		String recherche = null;
+		Categorie categorie = null;
+		List<Categorie> listeCategorie = getListeCategorie();
 		try {
-			listeCategorie = categorieManager.getListeCategorie();
+			List<Vente>listeDeVentes = venteManager.listerVentes(utilisateurConnecte, false, false,
+					false, true, recherche, categorie);
+			request.setAttribute("listeVentes", listeDeVentes);
+			request.setAttribute("listeCategorie", listeCategorie);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
+			requestDispatcher.forward(request, response);
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
 		}
-		request.setAttribute("listeCategorie", listeCategorie);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
-		requestDispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -100,16 +107,25 @@ public class ListeEnchereServlet extends HttpServlet {
 			categorie = new Categorie(Integer.parseInt(request.getParameter("categorie")));
 		}
 		try {
-			// recupere la liste des ventes associée a la recherche utilisateur
-			System.out.println("categorie " + categorie);
-			listeDeVentes = venteManager.listerVentes(utilisateurConnecte, isMesVentes, isMesEncheres,
-					isMesAcquisitions, isAutresEncheres, recherche, categorie);
-			System.out.println(listeDeVentes);
+			
+			if(utilisateurConnecte==null) {
+				listeDeVentes = venteManager.listerVentes(utilisateurConnecte, false, false,
+						false, true, recherche, categorie);
+			
+			}
+				
+			else {
+				// recupere la liste des ventes associée a la recherche utilisateur
+				listeDeVentes = venteManager.listerVentes(utilisateurConnecte, isMesVentes, isMesEncheres,
+						isMesAcquisitions, isAutresEncheres, recherche, categorie);
+			}	
+			
+			
 			for (Vente vente : listeDeVentes) {
 				vente.setClassement(utilisateurConnecte);
-				System.out.println("classement" + vente.getClassement());
 			}
-
+			List<Categorie> listeCategorie = getListeCategorie();
+			request.setAttribute("listeCategorie", listeCategorie);
 			request.setAttribute("listeVentes", listeDeVentes);
 
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
@@ -117,8 +133,26 @@ public class ListeEnchereServlet extends HttpServlet {
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
+			List<Integer> listeCodesErreur = e.getListeCodesErreur();
+			if(listeCodesErreur.size()>0)
+			{
+				request.setAttribute("listeCodesErreur",listeCodesErreur);
+			}
 		}
 
+	}
+
+	private static List<Categorie> getListeCategorie() {
+		CategorieManager categorieManager = BLLFactory.getCategorieManager();
+
+		List<Categorie> listeCategorie = null;
+		try {
+			listeCategorie = categorieManager.getListeCategorie();
+		} catch (BusinessException e) {
+			System.err.println(e.getListeCodesErreur());
+			e.printStackTrace();
+		}
+		return listeCategorie;
 	}
 
 }

@@ -21,7 +21,7 @@
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 <link rel="stylesheet" type="text/css" href="./css/listeenchere.css">
 
-<title>TrocEncheres - Liste Enchère</title>
+<title>TrocEncheres - Liste Enchï¿½re</title>
 </head>
 <body>
 
@@ -44,32 +44,52 @@
 				<div class="col-12 col-lg-3">
 					<div class="form-group">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" name="mesVentes" id="checkMesVentes">
-							<label class="form-check-label" for="checkMesVentes">Mes ventes</label>
+						<c:if test="${!empty utilisateur}">
+							<input class="form-check-input" type="checkbox" name="mesVentes"id="mesVentes"> 
+						</c:if>	
+						<c:if test="${empty utilisateur}">
+							<input class="form-check-input" type="checkbox" name="mesVentes"id="mesVentes" disabled> 
+						</c:if>	
+								<label class="form-check-label" for="mesVentes">Mes ventes</label>
+								
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox"name="mesEncheres" id="checkEncheresEnCours"> 
-							<label class="form-check-label" for="checkEncheresEnCours">Mes enchères en cours</label>
+						<c:if test="${!empty utilisateur}">
+							<input class="form-check-input" type="checkbox"name="mesEncheres" id="mesEncheres"> 
+						</c:if>	
+						<c:if test="${empty utilisateur}">
+							<input class="form-check-input" type="checkbox"name="mesEncheres" id="mesEncheres" disabled>
+						</c:if> 	
+							<label class="form-check-label" for="mesEncheres">Mes enchï¿½res en cours</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" name="mesAcquisitions" id="checkMesAcquisitions">
-							<label class="form-check-label" for="checkMesAcquisitions">Mes acquisitions</label>
+						<c:if test="${!empty utilisateur}">
+							<input class="form-check-input" type="checkbox" name="mesAcquisitions" id="mesAcquisitions">
+						</c:if>	
+						<c:if test="${empty utilisateur}">
+							<input class="form-check-input" type="checkbox" name="mesAcquisitions" id="mesAcquisitions" disabled>
+						</c:if>			
+							<label class="form-check-label" for="mesAcquisitions">Mes acquisitions</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" name="autresEncheres" id="checkAutresEncheres"> 
-							<label class="form-check-label" for="checkAutresEncheres">Autres enchères</label>
+						<c:if test="${!empty utilisateur}">
+							<input class="form-check-input" type="checkbox" name="autresEncheres" id="autresEncheres" > 
+						</c:if>
+						<c:if test="${empty utilisateur}">
+							<input class="form-check-input" type="checkbox" name="autresEncheres" id="autresEncheres" checked> 
+						</c:if>
+							<label class="form-check-label" for="autresEncheres">Autres enchï¿½res</label>
 						</div>
 					</div>
 				</div>
 
-				<!--	Recherche pour le desktop	-->
-				<div class="col-lg-7 d-none d-lg-block my-auto">
+				<div class="col-lg-7 my-auto">
 				
 					<div class="input-group row col-lg-11 mb-3">
 						<div class="input-group-prepend">
@@ -78,41 +98,19 @@
 						<input type="text" class="form-control" id="inlineFormInputGroup" name="recherche" placeholder="Le nom de l'article contient">
 					</div>
 					<div class="form-group row col-lg-11">
-						<label class="col-lg-4 my-auto" for="inputCategories">Catégories :</label> 
+						<label class="col-lg-4 my-auto" for="inputCategories">Catï¿½gories :</label> 
 						<select id="inputCategories" name="categorie" class="form-control col-lg-8">
 							<option value="toutes">Toutes</option>
 							<c:forEach var="categorie" items="${listeCategorie}">>
 						    	<option value="${categorie.noCategorie}">${categorie.libelle}</option>
-						    	</c:forEach>
+						    </c:forEach>
 						</select>
 					</div>
 				</div>
 
-				<!--	Recherche pour le mobile	-->
-				<div class="col-12 d-lg-none">
-					<div class="form-group mt-3 row col-12">
-						<label class="my-auto col-4" for="inputCategories">Catégories</label>
-						<select id="inputCategories" name="categorie"
-							class="form-control col-8 my-auto">
-							<option selected>truite</option>
-						</select>
-					</div>
-
-					<div class="input-group mt-3 row col-12 mx-auto">
-						<div class="input-group-prepend">
-							<div class="input-group-text">0-</div>
-						</div>
-						<input type="text" class="form-control" id="inlineFormInputGroup" name="recherche" placeholder="Le nom de l'article contient">
-					</div>
-				</div>
-				
 			</div>
 
-				<div class="row col-lg-4 d-none d-lg-block mt-3">
-					<button class="btn btn-rechercher btn-primary" type="submit">Rechercher</button>
-				</div>
-
-				<div class="row col-10 d-lg-none mx-auto mt-3">
+				<div class="row col-10 col-lg-4 mx-auto mt-3">
 					<button class="btn btn-rechercher btn-primary" type="submit">Rechercher</button>
 				</div>
 
@@ -133,19 +131,26 @@
 							</div>
 
 							<div class="col-8 ml-3">
-								<a href="./DetailVenteServlet?noVente=${vente.noVente} ">${vente.nomArticle}</a><a href="a remplir avec la servlet vente gagné"> En cours</a>
-								<p>Prix : ${!empty vente.maxEnchere.mise ? vente.maxEnchere.mise : vente.miseAPrix} points 
+								<jsp:useBean id="now" class="java.util.Date"/>
+								<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
 								<c:choose>
-								<c:when test="${vente.classement != 0 }">
-								Classement : ${vente.classement} </p>
+								<c:when test="${myParseDate < now }">
+								<a href="./FinDeVenteServlet?noVente=${vente.noVente}">${vente.nomArticle}</a>
 								</c:when>
 								<c:otherwise>
-								</p>
+								<a href="./DetailVenteServlet?noVente=${vente.noVente}">${vente.nomArticle}</a>
 								</c:otherwise>
 								</c:choose>
-																
-								<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
-								<p>Fin de l'enchère : <fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
+								
+								<p>Prix : ${!empty vente.maxEnchere.mise ? vente.maxEnchere.mise : vente.miseAPrix} points 
+								<c:choose>
+									<c:when test="${vente.classement != 0 }"></c:when>
+									<c:otherwise>
+										</p>
+									</c:otherwise>
+								</c:choose>
+								
+								<p>Fin de l'enchï¿½re : <fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
 								
 								<p>Retrait : ${vente.retrait.rue}</p>
 								<p>			 ${vente.retrait.codePostal} ${vente.retrait.ville}</p>

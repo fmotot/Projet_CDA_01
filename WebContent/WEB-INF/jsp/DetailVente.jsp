@@ -2,7 +2,7 @@
 <!-- Rudy / EL  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -20,7 +20,7 @@
 <link rel="stylesheet" type="text/css" href="./css/style.css">
 <link rel="stylesheet" type="text/css" href="./css/detailvente.css">
 
-<title>TrocEncheres - Détail Vente</title>
+<title>TrocEncheres - Dï¿½tail Vente</title>
 </head>
 <body>
 
@@ -28,7 +28,7 @@
 	
 	<%@ include file="Alerte.jspf" %>
 
-	<h2 class="text-center">En cours ou terminé a ajouter</h2>
+	<h2 class="text-center"> En cours ou terminï¿½ a ajouter</h2>
 
 	<div class="container">
 
@@ -62,15 +62,16 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="staticMiseAPrix" class="col-5 col-lg-3 label-bold">Mise à Prix :</label>
+					<label for="staticMiseAPrix" class="col-5 col-lg-3 label-bold">Mise ï¿½ Prix :</label>
 					<div class="col-6 col-lg-4">
 						<p> ${vente.miseAPrix} </p>		
 				</div>
 				</div>
 				<div class="form-group row">
-					<label for="staticFinEnchere" class="col-5 col-lg-3 label-bold">Fin de l'enchère :</label>
+					<label for="staticFinEnchere" class="col-5 col-lg-3 label-bold">Fin de l'enchï¿½re :</label>
 					<div class="col-6 col-lg-4">
-						<p>${vente.dateFinEncheres}</p>
+						<p><fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
+						<fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -96,7 +97,7 @@
 							<input type="text" class="form-control" name="inputMaProposition" id="inputMaProposition">
 						</div>
 						<div class="col-3 col-lg-4">
-							<button type="submit" class="btn btn-encherir btn-primary my-auto ">Enchérir</button>
+							<button type="submit" class="btn btn-encherir btn-primary my-auto ">Enchï¿½rir</button>
 						</div>
 					</div>
 
@@ -105,7 +106,7 @@
 				<div class="row mt-3">
 				<!-- EXPRESSION LANGAGE POUR LE BOUTON ANNULER DERNIERE ENCHERE SOUS CONDITION
 					<div class="col-8 col-lg-7 text-left">
-						<a class="btn btn-back btn-primary" href="./ServletCreationCompte" role="button">Annuler ma dernière enchère</a>
+						<a class="btn btn-back btn-primary" href="./ServletCreationCompte" role="button">Annuler ma derniï¿½re enchï¿½re</a>
 					</div> -->
 				
 					<div class="col-4 col-lg-4 text-left">
