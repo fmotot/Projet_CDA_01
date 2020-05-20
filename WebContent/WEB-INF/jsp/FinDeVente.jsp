@@ -2,7 +2,7 @@
 <!-- Rudy / EL  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -70,7 +70,8 @@
 				<div class="form-group row">
 					<label for="staticFinEnchere" class="col-5 col-lg-3 label-bold">Fin de l'enchère :</label>
 					<div class="col-6 col-lg-4">
-						<p>${vente.dateFinEncheres}</p>
+					<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
+					<p><fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -102,7 +103,7 @@
 							<a class="btn btn-retrait btn-primary" href="./ListeEnchereServlet" role="button">Retrait effectué</a>
 						</div>
 						<div class="d-inline">
-							<a class="btn btn-contacter btn-primary" href="./ProfilRetraitServlet" role="button">Contacter</a>
+							<a class="btn btn-contacter btn-primary" href="./ProfilRetraitServlet?noVente=${vente.noVente}" role="button">Contacter</a>
 						</div>
 						<div class="d-inline">
 							<a class="btn btn-back btn-primary" href="./ListeEnchereServlet" role="button">Back</a>
