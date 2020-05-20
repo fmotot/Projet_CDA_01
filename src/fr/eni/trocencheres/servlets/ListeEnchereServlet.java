@@ -32,15 +32,7 @@ public class ListeEnchereServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		CategorieManager categorieManager = BLLFactory.getCategorieManager();
-
-		List<Categorie> listeCategorie = null;
-		try {
-			listeCategorie = categorieManager.getListeCategorie();
-		} catch (BusinessException e) {
-			System.err.println(e.getListeCodesErreur());
-			e.printStackTrace();
-		}
+		List<Categorie> listeCategorie = getListeCategorie();
 		request.setAttribute("listeCategorie", listeCategorie);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
 		requestDispatcher.forward(request, response);
@@ -101,15 +93,13 @@ public class ListeEnchereServlet extends HttpServlet {
 		}
 		try {
 			// recupere la liste des ventes associée a la recherche utilisateur
-			System.out.println("categorie " + categorie);
 			listeDeVentes = venteManager.listerVentes(utilisateurConnecte, isMesVentes, isMesEncheres,
 					isMesAcquisitions, isAutresEncheres, recherche, categorie);
-			System.out.println(listeDeVentes);
 			for (Vente vente : listeDeVentes) {
 				vente.setClassement(utilisateurConnecte);
-				System.out.println("classement" + vente.getClassement());
 			}
-
+			List<Categorie> listeCategorie = getListeCategorie();
+			request.setAttribute("listeCategorie", listeCategorie);
 			request.setAttribute("listeVentes", listeDeVentes);
 
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
@@ -119,6 +109,19 @@ public class ListeEnchereServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
+	}
+
+	private static List<Categorie> getListeCategorie() {
+		CategorieManager categorieManager = BLLFactory.getCategorieManager();
+
+		List<Categorie> listeCategorie = null;
+		try {
+			listeCategorie = categorieManager.getListeCategorie();
+		} catch (BusinessException e) {
+			System.err.println(e.getListeCodesErreur());
+			e.printStackTrace();
+		}
+		return listeCategorie;
 	}
 
 }
