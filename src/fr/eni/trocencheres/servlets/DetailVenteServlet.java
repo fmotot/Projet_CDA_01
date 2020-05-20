@@ -101,11 +101,6 @@ public class DetailVenteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		List<Enchere> listeEnchere = vente.getListeEncheres();
-		if (listeEnchere != null) {
-			Enchere derniereEnchere = listeEnchere.get(0);
-			request.setAttribute("enchere", derniereEnchere);
-		}
 		request.setAttribute("vente", venteUpdate);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/DetailVente.jsp");
 		requestDispatcher.forward(request, response);

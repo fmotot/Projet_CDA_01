@@ -18,6 +18,7 @@ import fr.eni.trocencheres.bll.VenteManager;
 import fr.eni.trocencheres.bo.Categorie;
 import fr.eni.trocencheres.bo.Utilisateur;
 import fr.eni.trocencheres.bo.Vente;
+
 /**
  * 
  * @author Macorigh Rudy
@@ -28,9 +29,9 @@ import fr.eni.trocencheres.bo.Vente;
 public class ListeEnchereServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		CategorieManager categorieManager = BLLFactory.getCategorieManager();
 
 		List<Categorie> listeCategorie = null;
@@ -41,11 +42,12 @@ public class ListeEnchereServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("listeCategorie", listeCategorie);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp") ;
-	    requestDispatcher.forward(request, response) ;
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
 		VenteManager venteManager = BLLFactory.getVenteManager();
@@ -57,63 +59,66 @@ public class ListeEnchereServlet extends HttpServlet {
 		String recherche = null;
 		Categorie categorie = null;
 		List<Vente> listeDeVentes;
-		
-		// requete les checkbox , si coché, retourne on si vide retourne null et donne la valeur booléenne en fonction
+
+		// requete les checkbox , si coché, retourne on si vide retourne null et donne
+		// la valeur booléenne en fonction
 		if (request.getParameter("mesVentes") == null) {
 			isMesVentes = false;
 		} else {
 			isMesVentes = true;
 		}
-		
+
 		if (request.getParameter("mesEncheres") == null) {
 			isMesEncheres = false;
 		} else {
 			isMesEncheres = true;
 		}
-		
+
 		if (request.getParameter("mesAcquisitions") == null) {
 			isMesAcquisitions = false;
 		} else {
 			isMesAcquisitions = true;
 		}
-		
+
 		if (request.getParameter("autresEncheres") == null) {
 			isAutresEncheres = false;
 		} else {
 			isAutresEncheres = true;
 		}
-		
+
 		// requete de la recherche dans la textbox
 		recherche = request.getParameter("recherche");
 		if (recherche.equals("")) {
 			recherche = null;
 		}
-		
-		// requete la categorie dans la droplist et crée une categorie pour l'ajoutée au constructeur de la fonction
+
+		// requete la categorie dans la droplist et crée une categorie pour l'ajoutée au
+		// constructeur de la fonction
 		if (request.getParameter("categorie").equals("toutes")) {
 			categorie = null;
 		} else {
-		categorie = new Categorie(Integer.parseInt(request.getParameter("categorie")));
+			categorie = new Categorie(Integer.parseInt(request.getParameter("categorie")));
 		}
 		try {
 			// recupere la liste des ventes associée a la recherche utilisateur
-			System.out.println(categorie);
-			listeDeVentes = venteManager.listerVentes(utilisateurConnecte, isMesVentes, isMesEncheres, isMesAcquisitions, isAutresEncheres, recherche, categorie);
+			System.out.println("categorie " + categorie);
+			listeDeVentes = venteManager.listerVentes(utilisateurConnecte, isMesVentes, isMesEncheres,
+					isMesAcquisitions, isAutresEncheres, recherche, categorie);
 			System.out.println(listeDeVentes);
 			for (Vente vente : listeDeVentes) {
 				vente.setClassement(utilisateurConnecte);
-				System.out.println(vente.getClassement());
+				System.out.println("classement" + vente.getClassement());
 			}
-			
+
 			request.setAttribute("listeVentes", listeDeVentes);
-						
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp") ;
-		    requestDispatcher.forward(request, response) ;
+
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
+			requestDispatcher.forward(request, response);
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

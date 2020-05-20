@@ -107,14 +107,14 @@ public class Enchere implements Serializable{
 	/**
 	 * @return the mise
 	 */
-	public int getMise() {
+	public Integer getMise() {
 		return mise;
 	}
 	
 	/**
 	 * @param mise the mise to set
 	 */
-	public void setMise(int mise) {
+	public void setMise(Integer mise) {
 		this.mise = mise;
 	}
 	
