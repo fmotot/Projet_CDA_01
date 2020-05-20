@@ -2,7 +2,7 @@
 <!-- Rudy / EL  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -28,7 +28,6 @@
 	
 	<%@ include file="Alerte.jspf" %>
 
-	<h2 class="text-center">enchere.etat</h2>
 	<h2 class="text-center"> En cours ou terminé a ajouter</h2>
 
 	<div class="container">
@@ -71,7 +70,8 @@
 				<div class="form-group row">
 					<label for="staticFinEnchere" class="col-5 col-lg-3">Fin de l'enchère :</label>
 					<div class="col-6 col-lg-4">
-						<p>${vente.dateFinEncheres}</p>
+						<p><fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
+						<fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
 					</div>
 				</div>
 				<div class="form-group row">
