@@ -91,6 +91,8 @@ public class ServletMonProfil extends HttpServlet {
 				// Affectation de l'utilisateur mis a jour en session
 				session.setAttribute("utilisateur", utilisateurUpdate);
 				
+				request.setAttribute("saved", true);
+				System.out.println("Nouveau pb");
 				// renvoi sur la JSP
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/MonProfil.jsp");
 				requestDispatcher.forward(request, response);

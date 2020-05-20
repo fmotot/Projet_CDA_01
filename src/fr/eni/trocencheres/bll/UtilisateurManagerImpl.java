@@ -302,10 +302,10 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 
 				if (email == null || !matcher.matches()) {
 					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_EMAIL_NON_VALIDE);
-				} else if (utilisateurDAO.isPseudoExist(email)) {
+				} else if (utilisateurDAO.isEmailExist(email)) {
 					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_EMAIL_DOUBLON);
 				}
-				else if (utilisateurDAO.isPseudoExist(email)) {
+				else if (utilisateurDAO.isEmailExist(email)) {
 					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_EMAIL_DOUBLON);
 				}
 			}
