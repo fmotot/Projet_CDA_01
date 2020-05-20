@@ -80,13 +80,13 @@
 					<div class="form-group row">
 						<label for="inputPrixDeBase" class="col-5 col-form-label-sm">Prix initial :</label>
 						<div class="col-7 col-lg-7">
-							<input value="${utilisateur.credit}" name="inputPrixDeBase" type="number" class="form-control form-control-sm" id="inputPrixDeBase" placeholder="Crédit">
+							<input value="0" name="inputPrixDeBase" type="number" class="form-control form-control-sm" id="inputPrixDeBase" placeholder="Crédit">
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="inputFinEnchere" class="col-5 col-form-label-sm">Fin de l'enchère :</label>
 						<div class="col-7 col-lg-7">
-							<input value="#" type="date" name="inputFinEnchere" id="inputFinEnchere" max="3000-12-31" min="1000-01-01" class="form-control form-control-sm">
+							<input value="" type="date" name="inputFinEnchere" id="inputFinEnchere" max="3000-12-31" min="1000-01-01" class="form-control form-control-sm">
 						</div>
 					</div>
 					
@@ -95,21 +95,21 @@
 	   					<div class="form-group row justify-content-center ">
 							<label for="inputRue" class="col-5 col-form-label-sm">Rue :</label>
 							<div class="col-7 col-lg-4">
-								<input value="#" name="inputRue" type="text" class="form-control form-control-sm" id="inputRue">
+								<input value="" name="inputRue" type="text" class="form-control form-control-sm" id="inputRue">
 							</div>
 						</div>
 						
 						<div class="form-group row justify-content-center ">
 							<label for="inputCodePostal" class="col-5 col-form-label-sm">Code Postal :</label>
 							<div class="col-7 col-lg-4">
-								<input value="#" name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
+								<input value="" name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
 							</div>
 						</div>
 						
 						<div class="form-group row justify-content-center ">
 							<label for="inputVille" class="col-5 col-form-label-sm">Ville :</label>
 							<div class="col-7 col-lg-4">
-								<input value="#" name="inputVille" type="text" class="form-control form-control-sm" id="inputVille">
+								<input value="" name="inputVille" type="text" class="form-control form-control-sm" id="inputVille">
 							</div>
 						</div>
 					</fieldset>		
