@@ -2,7 +2,9 @@
 <!-- Rudy / EL  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="fr.eni.trocencheres.messages.LecteurMessages" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -46,31 +48,38 @@
 						<label for="inputArticle" class="col-5 col-form-label-sm">Article
 							:</label>
 						<div class="col-7 col-lg-7">
-							<input value="" name="inputArticle" type="text"
-								class="form-control form-control-sm" id="inputArticle">
+							<input value="${!empty vente.nomArticle ? vente.nomArticle : '' }" name="inputArticle" type="text"
+								class="form-control form-control-sm" id="inputArticle" placeholder="Le nom qui s'affichera dans le titre de la vente" required>
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="inputDescription" class="col-5 col-form-label-sm">Description:</label>
 						<div class="col-7 col-lg-7">
-							<textarea class="form-control" name="inputDescription" id="inputDescription" rows="3"></textarea>
+							<textarea class="form-control" name="inputDescription" id="inputDescription" rows="3" placeholder="Une description de votre article" required>${!empty vente.description ? vente.description : '' }</textarea>
 						</div>
 					</div>
 					
 					<div class="form-group row">
-    					<label for="selectCategories" class="col-5 col-form-label-sm">Catégories :</label>
+    					<label for="selectCategories" class="col-5 col-form-label-sm">Catï¿½gories :</label>
     					<div class="col-7 col-lg-7">
-	    					<select class="form-control form-control-sm" name="selectCategories" id="selectCategories">
-	    					<c:forEach var="categorie" items="${listeCategorie}">>
-						    	<option value="${categorie.noCategorie}">${categorie.libelle}</option>
+	    					<select class="form-control form-control-sm" name="selectCategories" id="selectCategories" required>
+	    					<c:forEach var="categorie" items="${listeCategorie}">
+						    	<option value="${categorie.noCategorie}" 
+						    	<c:if test="${categorie.noCategorie == vente.categorie.noCategorie }">
+						    		selected="selected"
+						    	</c:if>
+						    	>${categorie.libelle}</option>
 						    	</c:forEach>
 	    					</select>
     					</div>
   					</div>
 
 					<div class="form-group row">
-						<label class="col-3 col-form-label-sm my-auto" for="uploadImage">Photo de l'article</label> <label class="btn btn-sm btn-primary my-auto"
-						for="my-file-selector"> <input id="my-file-selector" type="file" class="d-none">Uploader</label>
+						<label class="col-5 col-form-label-sm my-auto" for="uploadImage">Photo de l'article</label> 
+						<div class="col-7 col-lg-7">
+							<label class="btn btn-sm btn-secondary my-auto"
+						for="my-file-selector" disabled> <input id="my-file-selector" type="file" class="d-none" disabled>Uploader</label>
+						</div>
 					</div>
 
 					<div class="row col-12 mx-auto d-lg-none">
@@ -80,13 +89,14 @@
 					<div class="form-group row">
 						<label for="inputPrixDeBase" class="col-5 col-form-label-sm">Prix initial :</label>
 						<div class="col-7 col-lg-7">
-							<input value="0" name="inputPrixDeBase" type="number" class="form-control form-control-sm" id="inputPrixDeBase" placeholder="Crédit">
+							<input value="${!empty vente.miseAPrix ? vente.miseAPrix : '' }" name="inputPrixDeBase" type="number" class="form-control form-control-sm" id="inputPrixDeBase" placeholder="Mise ï¿½ prix" required>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="inputFinEnchere" class="col-5 col-form-label-sm">Fin de l'enchère :</label>
+						<label for="inputFinEnchere" class="col-5 col-form-label-sm">Fin de l'enchï¿½re :</label>
 						<div class="col-7 col-lg-7">
-							<input value="" type="date" name="inputFinEnchere" id="inputFinEnchere" max="3000-12-31" min="1000-01-01" class="form-control form-control-sm">
+    					<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate>
+							<input value="<fmt:formatDate value="${myParseDate}"  pattern="yyyy-MM-dd"></fmt:formatDate>" type="date" name="inputFinEnchere" id="inputFinEnchere" max="3000-12-31" min="1000-01-01" class="form-control form-control-sm" required>
 						</div>
 					</div>
 					
@@ -95,21 +105,21 @@
 	   					<div class="form-group row justify-content-center ">
 							<label for="inputRue" class="col-5 col-form-label-sm">Rue :</label>
 							<div class="col-7 col-lg-4">
-								<input value="" name="inputRue" type="text" class="form-control form-control-sm" id="inputRue">
+								<input value="${!empty vente.retrait.rue ? vente.retrait.rue : '' }" name="inputRue" type="text" class="form-control form-control-sm" id="inputRue">
 							</div>
 						</div>
 						
 						<div class="form-group row justify-content-center ">
 							<label for="inputCodePostal" class="col-5 col-form-label-sm">Code Postal :</label>
 							<div class="col-7 col-lg-4">
-								<input value="" name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
+								<input value="${!empty vente.retrait.codePostal ? vente.retrait.codePostal : '' }" name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
 							</div>
 						</div>
 						
 						<div class="form-group row justify-content-center ">
 							<label for="inputVille" class="col-5 col-form-label-sm">Ville :</label>
 							<div class="col-7 col-lg-4">
-								<input value="" name="inputVille" type="text" class="form-control form-control-sm" id="inputVille">
+								<input value="${!empty vente.retrait.ville ? vente.retrait.ville : '' }" name="inputVille" type="text" class="form-control form-control-sm" id="inputVille">
 							</div>
 						</div>
 					</fieldset>		
