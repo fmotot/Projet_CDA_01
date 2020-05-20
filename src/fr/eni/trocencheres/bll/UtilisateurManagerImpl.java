@@ -46,6 +46,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 
 	@Override
 	public Utilisateur supprimerMonCompte(Utilisateur utilisateurConnecte) throws BusinessException {
+		// TODO supprimer les ventes liées
 		return this.utilisateurDAO.deleteOne(utilisateurConnecte);
 	}
 
@@ -55,36 +56,48 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 	}
 
 	@Override
-	public Utilisateur modifierMonCompte(Utilisateur utilisateurSession, Utilisateur utilisateurData, String confirmationMDP) throws BusinessException {
+	public Utilisateur modifierMonCompte(Utilisateur utilisateurSession, Utilisateur utilisateurData,
+			String confirmationMDP) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		Utilisateur utilisateurUpdate = new Utilisateur();
-		
+
 		// Validation des éléments
 		utilisateurUpdate.setNoUtilisateur(utilisateurSession.getNoUtilisateur());
 		utilisateurUpdate.setCredit(utilisateurSession.getCredit());
 		utilisateurUpdate.setAdministrateur(utilisateurSession.isAdministrateur());
 		utilisateurUpdate.setActif(utilisateurSession.isActif());
-		
+
 		utilisateurUpdate.setCodePostal(this.validerCodePostal(utilisateurData.getCodePostal(), businessException));
-		utilisateurUpdate.setPseudo(this.validerPseudo(utilisateurData.getPseudo(), businessException));
 		utilisateurUpdate.setNom(this.validerNom(utilisateurData.getNom(), businessException));
 		utilisateurUpdate.setPrenom(this.validerPrenom(utilisateurData.getPrenom(), businessException));
-		utilisateurUpdate.setEmail(this.validerEmail(utilisateurData.getEmail(), businessException));
 		utilisateurUpdate.setRue(this.validerRue(utilisateurData.getRue(), businessException));
 		utilisateurUpdate.setVille(this.validerVille(utilisateurData.getVille(), businessException));
 
-		// test du téléphone si changé uniquement
+		// test des pseudo, email et téléphone si changé uniquement
+		if (!utilisateurData.getEmail().equals(utilisateurSession.getEmail())) {
+			utilisateurUpdate.setEmail(this.validerEmail(utilisateurData.getEmail(), businessException));
+		} else {
+			utilisateurUpdate.setEmail(utilisateurSession.getEmail());
+		}
+
+		if (!utilisateurData.getPseudo().equals(utilisateurSession.getPseudo())) {
+			utilisateurUpdate.setPseudo(this.validerPseudo(utilisateurData.getPseudo(), businessException));
+		} else {
+			utilisateurUpdate.setPseudo(utilisateurSession.getPseudo());
+		}
+
 		if (!utilisateurData.getTelephone().equals(utilisateurSession.getTelephone())) {
 			utilisateurUpdate.setTelephone(this.validerTelephone(utilisateurData.getTelephone(), businessException));
-		}
-		else {
+		} else {
 			utilisateurUpdate.setTelephone(utilisateurSession.getTelephone());
 		}
 
 		// Validation du mot de passe si nouveau
 		boolean isPasswordToBeChanged = false;
-		if (utilisateurData.getMotDePasse() != null && !utilisateurData.getMotDePasse().equals("") && !utilisateurData.getMotDePasse().equals(utilisateurSession.getMotDePasse())) {
-			utilisateurUpdate.setMotDePasse(this.validerMotDePasse(utilisateurData.getMotDePasse(), confirmationMDP, businessException));
+		if (utilisateurData.getMotDePasse() != null && !utilisateurData.getMotDePasse().equals("")
+				&& !utilisateurData.getMotDePasse().equals(utilisateurSession.getMotDePasse())) {
+			utilisateurUpdate.setMotDePasse(
+					this.validerMotDePasse(utilisateurData.getMotDePasse(), confirmationMDP, businessException));
 			isPasswordToBeChanged = true;
 		}
 
@@ -92,8 +105,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 			// Cryptage du mot de passe si nouveau ou si changement du Pseudo (pour salage)
 			if (isPasswordToBeChanged) {
 				utilisateurUpdate.setMotDePasse(this.encryptMDP(utilisateurData.getMotDePasse()));
-			}
-			else {
+			} else {
 				utilisateurUpdate.setMotDePasse(utilisateurSession.getMotDePasse());
 			}
 
@@ -226,8 +238,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 			} else {
 				if (pseudo.length() > 30) {
 					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_PSEUDO_TROP_LONG);
-				}
-				else if (utilisateurDAO.isPseudoExist(pseudo)) {
+				} else if (utilisateurDAO.isPseudoExist(pseudo)) {
 					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_PSEUDO_DOUBLON);
 				}
 			}
@@ -288,8 +299,7 @@ class UtilisateurManagerImpl implements UtilisateurManager {
 
 				if (email == null || !matcher.matches()) {
 					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_EMAIL_NON_VALIDE);
-				}
-				else if (utilisateurDAO.isPseudoExist(email)) {
+				} else if (utilisateurDAO.isPseudoExist(email)) {
 					businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_EMAIL_DOUBLON);
 				}
 			}
