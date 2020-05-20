@@ -150,11 +150,11 @@
 								<p><span class="jumbotron-bold">Prix :</span> ${!empty vente.maxEnchere.mise ? vente.maxEnchere.mise : vente.miseAPrix} points 
 								
 								<c:choose>
-									<c:when test="${vente.classement != 0 }">
-									Classement : ${vente.classement}
+									<c:when test="${empty vente.classement || vente.classement == 0 }">
+									</p>
 									</c:when>
 									<c:otherwise>
-										</p>
+										Classement : ${vente.classement}</p>
 									</c:otherwise>
 								</c:choose>
 								

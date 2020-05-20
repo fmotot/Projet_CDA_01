@@ -66,7 +66,7 @@
 					<div class="col-6 col-lg-9">
 					<c:choose>
 						<c:when test="${!empty vente.listeEncheres}">
-							<p>${vente.maxEnchere.mise} de ${vente.maxEnchere.acheteur.pseudo}</p>
+							<p>${vente.maxEnchere.mise} de <a href="./ProfilUtilisateurServlet?pseudo=${vente.maxEnchere.acheteur.pseudo}"> ${vente.maxEnchere.acheteur.pseudo}</a></p>
 						</c:when>
 						<c:otherwise>
 							<p> Pas encore d'enchérisseur. </p>
@@ -111,6 +111,8 @@
 
 				<form action="./DetailVenteServlet?noVente=${vente.noVente}" method="post">
 
+
+			<c:if test="${vente.vendeur.noUtilisateur != utilisateur.noUtilisateur }">
 					<div class="form-group row">
 						<label for="inputMaProposition" class="col-5 col-lg-3 my-auto label-bold">Ma proposition :</label>
 						<div class="col-3 col-lg-4 ">
@@ -120,7 +122,8 @@
 							<button type="submit" class="btn btn-encherir btn-primary my-auto ">Enchérir</button>
 						</div>
 					</div>
-
+			</c:if>
+			
 				</form>
 
 				<div class="row mt-3">

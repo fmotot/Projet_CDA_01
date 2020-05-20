@@ -45,8 +45,11 @@ public class DetailVenteServlet extends HttpServlet {
 		
 		try {
 			vente = venteManager.afficherVente(noVente);
-			vente.setClassement(utilisateur);
-			System.out.println(vente.getClassement());
+			if (utilisateur != null) {
+				vente.setClassement(utilisateur);
+				System.out.println(vente.getClassement());
+			}
+			
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
@@ -111,11 +114,10 @@ public class DetailVenteServlet extends HttpServlet {
 			}
 		}
 		
-		Integer mise = Integer.parseInt(request.getParameter("inputMaProposition"));
 		Vente venteUpdate = null;
 		try {
+			Integer mise = Integer.parseInt(request.getParameter("inputMaProposition"));
 			venteUpdate = venteManager.encherir(utilisateur, vente, mise);
-			
 			request.setAttribute("vente", venteUpdate);
 			
 		} catch (BusinessException e) {
