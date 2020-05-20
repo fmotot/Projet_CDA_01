@@ -102,23 +102,11 @@ public class DetailVenteServlet extends HttpServlet {
 		VenteManager venteManager = BLLFactory.getVenteManager();
 		Vente vente = null;
 		
-		try {
-			vente = venteManager.afficherVente(noVente);
-		} catch (BusinessException e) {
-			System.err.println(e.getListeCodesErreur());
-			e.printStackTrace();
-			List<Integer> listeCodesErreur = e.getListeCodesErreur();
-			if(listeCodesErreur.size()>0)
-			{
-				request.setAttribute("listeCodesErreur",listeCodesErreur);
-			}
-		}
 		
-		Vente venteUpdate = null;
 		try {
 			Integer mise = Integer.parseInt(request.getParameter("inputMaProposition"));
-			venteUpdate = venteManager.encherir(utilisateur, vente, mise);
-			request.setAttribute("vente", venteUpdate);
+			vente = venteManager.afficherVente(noVente);
+			venteManager.encherir(utilisateur, vente, mise);
 			
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
@@ -128,8 +116,20 @@ public class DetailVenteServlet extends HttpServlet {
 			{
 				request.setAttribute("listeCodesErreur",listeCodesErreur);
 			}
-			request.setAttribute("vente", vente);
+		
 		}
+		try {
+			
+			vente = venteManager.afficherVente(noVente);
+			if (utilisateur != null) {
+				vente.setClassement(utilisateur);
+				System.out.println(vente.getClassement());
+			}
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("vente", vente);
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/DetailVente.jsp");
 		requestDispatcher.forward(request, response);
