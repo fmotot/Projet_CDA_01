@@ -99,5 +99,5 @@ public interface VenteManager {
 	 */
 	Vente afficherVente(Integer noVente) throws BusinessException;
 	
-	
+	Vente modifierVente(Vente vente, Utilisateur utilisateurSession) throws BusinessException;
 }

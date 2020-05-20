@@ -248,6 +248,11 @@ public abstract class CodesResultatBLL {
 	 */
 	public static final int CATEGORIE_INCONNUE = 23022;
 
+	/**
+	 * Echec l'utilisateur n'a pas le droit de modifier cette vente
+	 */
+	public static final int VENTE_MODIFICATION_REFUSEE = 23023;
+
 
 
 }

@@ -2,7 +2,8 @@
 <!-- Rudy / EL  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -28,7 +29,16 @@
 	
 	<%@ include file="Alerte.jspf" %>
 
-	<h2 class="text-center">Vous avez remporté la vente</h2>
+	<h2 class="text-center">
+		<c:choose>
+		<c:when test="${utilisateur.noUtilisateur == vente.maxEnchere.acheteur.noUtilisateur}">
+		<p> Vous avez remporté la vente.</p>
+		</c:when>
+		<c:otherwise>
+		<p> ${vente.maxEnchere.acheteur.pseudo} a remporté la vente</p>
+		</c:otherwise>
+		</c:choose>
+	</h2>
 
 	<div class="container">
 
@@ -70,7 +80,8 @@
 				<div class="form-group row">
 					<label for="staticFinEnchere" class="col-5 col-lg-3 label-bold">Fin de l'enchère :</label>
 					<div class="col-6 col-lg-4">
-						<p>${vente.dateFinEncheres}</p>
+					<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
+					<p><fmt:formatDate value="${myParseDate}"  pattern="dd/MM/yyyy"></fmt:formatDate></p>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -98,12 +109,15 @@
 
 					<div class="col-12">
 
+					<c:if test="${utilisateur.noUtilisateur == vente.vendeur.noUtilisateur}">
 						<div class="d-inline">
-							<a class="btn btn-retrait btn-primary" href="./ListeEnchereServlet" role="button">Retrait effectué</a>
+							<a class="btn btn-retrait btn-primary" href="./RetraitEffectue?noVente=${vente.noVente}" role="button">Retrait effectué</a>
 						</div>
 						<div class="d-inline">
-							<a class="btn btn-contacter btn-primary" href="./ProfilRetraitServlet" role="button">Contacter</a>
+							<a class="btn btn-contacter btn-primary" href="./ProfilRetraitServlet?noVente=${vente.noVente}" role="button">Contacter ${vente.maxEnchere.acheteur.noUtilisateur}</a>
 						</div>
+						</c:if>
+						
 						<div class="d-inline">
 							<a class="btn btn-back btn-primary" href="./ListeEnchereServlet" role="button">Back</a>
 						</div>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bll.BLLFactory;
+import fr.eni.trocencheres.bll.UtilisateurManager;
 import fr.eni.trocencheres.bll.VenteManager;
 import fr.eni.trocencheres.bo.Enchere;
 import fr.eni.trocencheres.bo.Utilisateur;
@@ -35,6 +36,7 @@ public class DetailVenteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager();
 		
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		Integer noVente = Integer.parseInt(request.getParameter("noVente"));
@@ -43,6 +45,11 @@ public class DetailVenteServlet extends HttpServlet {
 		
 		try {
 			vente = venteManager.afficherVente(noVente);
+			if (utilisateur != null) {
+				vente.setClassement(utilisateur);
+				System.out.println(vente.getClassement());
+			}
+			
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
@@ -67,10 +74,10 @@ public class DetailVenteServlet extends HttpServlet {
 		
 		if(request.getServletPath().equals("/AnnulerEnchere")) {
 			
-			
 			//annulation de l'enchere
 			try {
 				venteManager.annulerEnchere(vente, utilisateur);
+				session.setAttribute("utilisateur", utilisateurManager.afficherUtilisateur(utilisateur.getPseudo()));
 			} catch (BusinessException e) {
 				System.err.println(e.getListeCodesErreur());
 				e.printStackTrace();
@@ -81,7 +88,7 @@ public class DetailVenteServlet extends HttpServlet {
 				}
 			}
 			
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchereServlet.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
 			requestDispatcher.forward(request, response);
 		}
 		
@@ -107,10 +114,12 @@ public class DetailVenteServlet extends HttpServlet {
 			}
 		}
 		
-		Integer mise = Integer.parseInt(request.getParameter("inputMaProposition"));
 		Vente venteUpdate = null;
 		try {
+			Integer mise = Integer.parseInt(request.getParameter("inputMaProposition"));
 			venteUpdate = venteManager.encherir(utilisateur, vente, mise);
+			request.setAttribute("vente", venteUpdate);
+			
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
@@ -119,9 +128,9 @@ public class DetailVenteServlet extends HttpServlet {
 			{
 				request.setAttribute("listeCodesErreur",listeCodesErreur);
 			}
+			request.setAttribute("vente", vente);
 		}
 		
-		request.setAttribute("vente", venteUpdate);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/DetailVente.jsp");
 		requestDispatcher.forward(request, response);
 		}

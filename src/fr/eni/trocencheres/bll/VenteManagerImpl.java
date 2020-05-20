@@ -34,62 +34,61 @@ public class VenteManagerImpl implements VenteManager {
 
 	@Override
 	public Vente creerVente(String nomArticle, String description, LocalDateTime dateFinEncheres, Integer miseAPrix,
-			Utilisateur vendeur, String rue, String ville, String codePostal, Categorie categorie) throws BusinessException {
+			Utilisateur vendeur, String rue, String ville, String codePostal, Categorie categorie)
+			throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		Vente vente = null;
-		
+
 		nomArticle = this.validerNomArticle(nomArticle, businessException);
 		description = this.validerDescription(description, businessException);
 		dateFinEncheres = this.validerDateFinEnchere(dateFinEncheres, businessException);
 		miseAPrix = this.validerPrixInitial(miseAPrix, businessException);
 		vendeur = this.validerUtilisateur(vendeur, businessException);
 		Retrait retrait = this.validerRetrait(rue, ville, codePostal, businessException);
-		
+
 		System.out.println(categorie);
-		
+
 		categorie = this.validerCategorie(categorie, businessException);
 		System.out.println(categorie);
 		if (!businessException.hasErreurs()) {
-			vente = new Vente(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, false, categorie, null);
+			vente = new Vente(nomArticle, description, dateFinEncheres, miseAPrix, vendeur, retrait, false, categorie,
+					null);
 			System.out.println(vente.getCategorie());
 			vente = this.venteDAO.insertOne(vente);
-		}
-		else {
+		} else {
 			throw businessException;
 		}
-		
+
 		return vente;
 	}
 
 	@Override
 	public Vente annulerVente(Vente vente, Utilisateur utilisateurSession) throws BusinessException {
-		
-		
+
 		BusinessException businessException = new BusinessException();
-		
+
 		utilisateurSession = this.validerUtilisateur(utilisateurSession, businessException);
 		vente = this.validerVente(vente, businessException);
-		
+
 		if (!businessException.hasErreurs()) {
-			
+
 			if (utilisateurSession.equals(vente.getVendeur())) {
 				// créditer les comptes utilisateurs des mises
 				for (Enchere enchere : vente.getListeEncheres()) {
 					enchere.getAcheteur().setCredit(enchere.getAcheteur().getCredit() + enchere.getMise());
-				}			
-				
-				// pour annuler une vente il faut supprimer la vente de la BDD ainsi que les enchères qui la concernent et mettre à jour les utilisateurs liés
+				}
+
+				// pour annuler une vente il faut supprimer la vente de la BDD ainsi que les
+				// enchères qui la concernent et mettre à jour les utilisateurs liés
 				vente = venteDAO.deleteOne(vente);
-			}
-			else {
+			} else {
 				businessException.ajouterErreur(CodesResultatBLL.VENTE_ANNULATION_REFUSEE);
 				throw businessException;
 			}
-		}
-		else {
+		} else {
 			throw businessException;
 		}
-		
+
 		return vente;
 	}
 
@@ -97,92 +96,94 @@ public class VenteManagerImpl implements VenteManager {
 	public List<Vente> listerVentes(Utilisateur utilisateur, boolean isMesVentes, boolean isMesEncheres,
 			boolean isMesAcquisitions, boolean isAutresEncheres, String recherche, Categorie categorie)
 			throws BusinessException {
-		
-		return venteDAO.getVentesFiltered(utilisateur, isMesVentes, isMesEncheres, isMesAcquisitions, isAutresEncheres, recherche, categorie);
+
+		return venteDAO.getVentesFiltered(utilisateur, isMesVentes, isMesEncheres, isMesAcquisitions, isAutresEncheres,
+				recherche, categorie);
 	}
 
 	@Override
 	public Vente encherir(Utilisateur acheteur, Vente vente, Integer mise) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		Enchere enchere = null;
-		
+
 		acheteur = this.validerUtilisateur(acheteur, businessException);
 		vente = this.validerVente(vente, businessException);
-		
+
 		if (acheteur.equals(vente.getVendeur())) {
 			businessException.ajouterErreur(CodesResultatBLL.ENCHERE_IMPOSSIBLE_PAR_VENDEUR);
 			throw businessException;
 		}
-		
+
 		if (!businessException.hasErreurs()) {
-			
+
 			int miseMinimum = vente.getMiseAPrix();
 			if (vente.getMaxEnchere() != null) {
 				miseMinimum = vente.getMaxEnchere().getMise();
 			}
-			
-			// récupération ancienne enchère de l'utilisateur pour en connaître le montant ou vérif si existante
+
+			// récupération ancienne enchère de l'utilisateur pour en connaître le montant
+			// ou vérif si existante
 			enchere = new Enchere(acheteur, vente, mise);
 			Enchere oldEnchere = enchereDAO.getOne(enchere);
-			
+
 			int miseMaximum = acheteur.getCredit();
 			if (oldEnchere != null) {
 				miseMaximum += oldEnchere.getMise();
 			}
-			
-			// refuser une enchère plus haute que le crédit utilisateur (additionné de la mise éventuelle)
+
+			// refuser une enchère plus haute que le crédit utilisateur (additionné de la
+			// mise éventuelle)
 			if (mise <= miseMaximum) {
 				// refuser une enchère plus basse que l'enchère la plus haute en cours
 				if (mise > miseMinimum) {
-					
-					
+
 					// update si Enchere existante dans la liste
 					if (oldEnchere != null) {
-						
+
 						// MAJ des points utilisateur
 						acheteur.setCredit(acheteur.getCredit() - mise + oldEnchere.getMise());
-						
+
 						enchere = enchereDAO.updateOne(enchere);
 					}
 					// sinon insert
 					else {
-						
+
 						// MAJ des points utilisateur
 						acheteur.setCredit(acheteur.getCredit() - mise);
-						
+
 						enchere = enchereDAO.insertOne(enchere);
 					}
-					
+
 					// récupération de la vente
 					vente = venteDAO.getOne(vente);
-				}
-				else {
+				} else {
 					businessException.ajouterErreur(CodesResultatBLL.ENCHERE_MISE_TROP_BASSE);
 					throw businessException;
 				}
-			}
-			else {
+			} else {
 				businessException.ajouterErreur(CodesResultatBLL.ENCHERE_MISE_TROP_HAUTE);
 				throw businessException;
 			}
-			
-		}
-		else {
+
+		} else {
 			throw businessException;
 		}
-		
+
 		return vente;
 	}
 
 	public List<Vente> terminerVentes() throws BusinessException {
 
-		// TODO NOUVEAU SELECT lister toutes les ventes dont la date dépasse la date du jour
+		// TODO NOUVEAU SELECT lister toutes les ventes dont la date dépasse la date du
+		// jour
 		// SELECT * FROM VENTE WHERE dateFinEnchere = hier
-		
-		LocalDateTime hier = LocalDateTime.of(LocalDate.now(ZoneId.of("Europe/Paris")).minusDays(1),LocalTime.MIDNIGHT);
+
+		LocalDateTime hier = LocalDateTime.of(LocalDate.now(ZoneId.of("Europe/Paris")).minusDays(1),
+				LocalTime.MIDNIGHT);
 		List<Vente> venteTerminees = venteDAO.getAll();
-		
-		// pour toutes les ventes terminées, supprimer les enchères dont qui ne sont pas la dernière et recréditer l'utilisateur lié
+
+		// pour toutes les ventes terminées, supprimer les enchères dont qui ne sont pas
+		// la dernière et recréditer l'utilisateur lié
 		for (Vente vente : venteTerminees) {
 			for (Enchere enchere : vente.getListeEncheres()) {
 				if (!enchere.equals(vente.getMaxEnchere())) {
@@ -192,7 +193,7 @@ public class VenteManagerImpl implements VenteManager {
 				}
 			}
 		}
-		
+
 		return venteTerminees;
 	}
 
@@ -202,23 +203,22 @@ public class VenteManagerImpl implements VenteManager {
 
 		utilisateurSession = this.validerUtilisateur(utilisateurSession, businessException);
 		vente = this.validerVente(vente, businessException);
-		
-		
+
 		if (!businessException.hasErreurs()) {
-			
-			Enchere enchere = null; 
+
+			Enchere enchere = null;
 			for (Enchere e : vente.getListeEncheres()) {
 				if (e.getAcheteur().equals(utilisateurSession)) {
 					enchere = e;
 					break;
 				}
 			}
-			
+
 			if (enchere != null) {
-				
+
 				// créditer l'utilisateur
 				enchere.getAcheteur().setCredit(enchere.getAcheteur().getCredit() + enchere.getMise());
-				
+
 				enchere = enchereDAO.deleteOne(enchere);
 			} else {
 				businessException.ajouterErreur(CodesResultatBLL.ENCHERE_SUPPRESSION_REFUSEE);
@@ -249,6 +249,27 @@ public class VenteManagerImpl implements VenteManager {
 		return vente;
 	}
 
+	@Override
+	public Vente modifierVente(Vente vente, Utilisateur utilisateurSession) throws BusinessException {
+
+		BusinessException businessException = new BusinessException();
+
+		utilisateurSession = this.validerUtilisateur(utilisateurSession, businessException);
+		vente = this.validerVente(vente, businessException);
+
+		if (!businessException.hasErreurs()) {
+			if (utilisateurSession.equals(vente.getVendeur())) {
+				vente = venteDAO.updateOne(vente);
+			} else {
+				businessException.ajouterErreur(CodesResultatBLL.VENTE_MODIFICATION_REFUSEE);
+				throw businessException;
+			}
+		} else {
+			throw businessException;
+		}
+		return vente;
+	}
+	
 	private String validerNomArticle(String nomArticle, BusinessException businessException) {
 		if (nomArticle == null) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_VENTE_NOM_ARTICLE_VIDE);
@@ -288,7 +309,8 @@ public class VenteManagerImpl implements VenteManager {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_VENTE_DATE_FIN_ENCHERE_VIDE);
 		} else {
 			// si date inférieur à aujourd'hui erreur
-			if (dateFinEncheres.isBefore(LocalDateTime.of(LocalDate.now(ZoneId.of("Europe/Paris")),LocalTime.MIDNIGHT))) {
+			if (dateFinEncheres
+					.isBefore(LocalDateTime.of(LocalDate.now(ZoneId.of("Europe/Paris")), LocalTime.MIDNIGHT))) {
 				businessException.ajouterErreur(CodesResultatBLL.REGLE_VENTE_DATE_FIN_ENCHERE_IMPOSSIBLE);
 			}
 		}
@@ -328,13 +350,13 @@ public class VenteManagerImpl implements VenteManager {
 		if (vente == null) {
 			businessException.ajouterErreur(CodesResultatBLL.VENTE_INCONNUE);
 		}
-		
+
 		return vente;
 	}
-	
+
 	private Retrait validerRetrait(String rue, String ville, String codePostal, BusinessException businessException) {
 		Retrait retrait = null;
-		
+
 		if (rue != null) {
 			rue = rue.trim();
 		}
@@ -344,16 +366,17 @@ public class VenteManagerImpl implements VenteManager {
 		if (codePostal != null) {
 			codePostal = codePostal.trim();
 		}
-		
-		// si tous les champs sont null ou vide 
-		if (((rue == null || rue.length() < 1) && (ville == null || ville.length() < 1) && (codePostal == null || codePostal.length() < 1))) {
+
+		// si tous les champs sont null ou vide
+		if (((rue == null || rue.length() < 1) && (ville == null || ville.length() < 1)
+				&& (codePostal == null || codePostal.length() < 1))) {
 			retrait = null;
 		} else {
 			// si un des champs reste null ou vide
-			if ((rue == null || rue.length() < 1) || (ville == null || ville.length() < 1) || (codePostal == null || codePostal.length() < 1)) {
+			if ((rue == null || rue.length() < 1) || (ville == null || ville.length() < 1)
+					|| (codePostal == null || codePostal.length() < 1)) {
 				businessException.ajouterErreur(CodesResultatBLL.REGLE_RETRAIT_INCOMPLET);
-			}
-			else {
+			} else {
 				if (rue.length() > 30) {
 					businessException.ajouterErreur(CodesResultatBLL.REGLE_RETRAIT_RUE_TROP_LONG);
 				}
@@ -363,7 +386,7 @@ public class VenteManagerImpl implements VenteManager {
 				if (codePostal.length() > 15) {
 					businessException.ajouterErreur(CodesResultatBLL.REGLE_RETRAIT_CODE_POSTAL_TROP_LONG);
 				}
-				
+
 				if (!businessException.hasErreurs()) {
 					retrait = new Retrait(rue, ville, codePostal);
 				}
@@ -372,13 +395,14 @@ public class VenteManagerImpl implements VenteManager {
 
 		return retrait;
 	}
-	
+
 	private Categorie validerCategorie(Categorie categorie, BusinessException businessException) {
 		if (categorie == null) {
 			businessException.ajouterErreur(CodesResultatBLL.CATEGORIE_INCONNUE);
 		}
-		
+
 		return categorie;
 	}
 
+	
 }

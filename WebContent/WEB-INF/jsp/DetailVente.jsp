@@ -2,6 +2,8 @@
 <!-- Rudy / EL  -->
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="fr.eni.trocencheres.messages.LecteurMessages" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="fr">
@@ -27,8 +29,12 @@
 	<%@ include file="Header.jspf" %>
 	
 	<%@ include file="Alerte.jspf" %>
+	
+<jsp:useBean id="now" class="java.util.Date"/>
+<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
 
-	<h2 class="text-center"> En cours ou terminé a ajouter</h2>
+	<br>
+	<h2 class="text-center"> ${myParseDate < now ? 'Enchère Terminée' : 'Enchère en cours'}</h2>
 
 	<div class="container">
 
@@ -58,7 +64,14 @@
 				<div class="form-group row">
 					<label for="staticMeilleureOffre" class="col-5 col-lg-3 label-bold">Meilleure offre :</label>
 					<div class="col-6 col-lg-9">
-						<p>${vente.maxEnchere.mise} de ${vente.maxEnchere.acheteur.pseudo}</p>
+					<c:choose>
+						<c:when test="${!empty vente.listeEncheres}">
+							<p>${vente.maxEnchere.mise} de <a href="./ProfilUtilisateurServlet?pseudo=${vente.maxEnchere.acheteur.pseudo}"> ${vente.maxEnchere.acheteur.pseudo}</a></p>
+						</c:when>
+						<c:otherwise>
+							<p> Pas encore d'enchérisseur. </p>
+						</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -77,9 +90,16 @@
 				<div class="form-group row">
 					<label for="staticRetrait" class="col-5 col-lg-3 label-bold">Retrait :</label>
 					<div class="col-6 col-lg-4">
-						<p>${vente.retrait.rue}<p>
-						<p>${vente.retrait.codePostal} ${vente.retrait.ville}<p>
-						
+    				<c:choose>
+    					<c:when test="${empty vente.retrait}">
+    						<p>${vente.vendeur.rue}</p>
+      						<p>${vente.vendeur.codePostal} ${vente.vendeur.ville}</p>
+      					</c:when>
+    					<c:otherwise>
+    						<p>${vente.retrait.rue}</p>
+      						<p>${vente.retrait.codePostal} ${vente.retrait.ville}</p>
+      					</c:otherwise>
+    					</c:choose>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -91,6 +111,8 @@
 
 				<form action="./DetailVenteServlet?noVente=${vente.noVente}" method="post">
 
+
+			<c:if test="${vente.vendeur.noUtilisateur != utilisateur.noUtilisateur }">
 					<div class="form-group row">
 						<label for="inputMaProposition" class="col-5 col-lg-3 my-auto label-bold">Ma proposition :</label>
 						<div class="col-3 col-lg-4 ">
@@ -100,15 +122,16 @@
 							<button type="submit" class="btn btn-encherir btn-primary my-auto ">Enchérir</button>
 						</div>
 					</div>
-
+			</c:if>
+			
 				</form>
 
 				<div class="row mt-3">
-				<!-- EXPRESSION LANGAGE POUR LE BOUTON ANNULER DERNIERE ENCHERE SOUS CONDITION
+				<c:if test="${vente.classement != 0 }">
 					<div class="col-8 col-lg-7 text-left">
-						<a class="btn btn-back btn-primary" href="./ServletCreationCompte" role="button">Annuler ma derniï¿½re enchï¿½re</a>
-					</div> -->
-				
+						<a class="btn btn-back btn-primary" href="./AnnulerEnchere?noVente=${vente.noVente}" role="button">Annuler ma dernière enchère</a>
+					</div> 
+				</c:if>
 					<div class="col-4 col-lg-4 text-left">
 						<a class="btn btn-back btn-primary" href="./ListeEnchereServlet" role="button">Back</a>
 					</div>

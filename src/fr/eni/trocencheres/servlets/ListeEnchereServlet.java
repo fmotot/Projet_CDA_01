@@ -135,10 +135,6 @@ public class ListeEnchereServlet extends HttpServlet {
 			request.setAttribute("recherche", recherche);
 			request.setAttribute("categorieSelected", categorie);
 			
-			
-
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
-			requestDispatcher.forward(request, response);
 		} catch (BusinessException e) {
 			System.err.println(e.getListeCodesErreur());
 			e.printStackTrace();
@@ -148,7 +144,9 @@ public class ListeEnchereServlet extends HttpServlet {
 				request.setAttribute("listeCodesErreur",listeCodesErreur);
 			}
 		}
-
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 	private static List<Categorie> getListeCategorie() {
