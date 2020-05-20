@@ -89,11 +89,17 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		return listeVentes;
 	}
 
-	
 	@Override
 	public List<Vente> getVentesFiltered(Utilisateur utilisateur, boolean isMesVentes, boolean isMesEncheres,
 			boolean isMesAcquisitions, boolean isAutresEncheres, String recherche, Categorie categorie)
 			throws BusinessException {
+
+		System.out.println("recherche : " + recherche + " \n categorie : " + categorie);
+		System.out.println(utilisateur);
+		System.out.println("IsMesVentes " + isMesVentes);
+		System.out.println("IsMesEncheres " + isMesEncheres);
+		System.out.println("IsMesAcquiisitions " + isMesAcquisitions);
+		System.out.println("IsAutresEncheres " + isAutresEncheres);
 		List<Vente> listeVentesFiltre = new ArrayList<Vente>();
 		StringBuffer sb = new StringBuffer();
 		Connection cnx;
@@ -103,7 +109,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			ResultSet rs = null;
 
 			if (isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
-				
+
 			} else {
 				PreparedStatement ps = null;
 				if (isMesVentes) {
@@ -112,6 +118,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 					rs = ps.executeQuery();
 					while (rs.next()) {
 						NoVentesFiltered.add(rs.getInt(1) + "");
+
 					}
 				}
 
@@ -156,9 +163,10 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 					ps = cnx.prepareStatement(
 							"SELECT ventes.no_vente, GROUP_CONCAT(encheres.no_utilisateur ORDER BY encheres.mise DESC)AS acheteurs FROM ventes"
 									+ "	LEFT JOIN encheres " + "	ON ventes.no_vente = encheres.no_vente"
-									+ " WHERE date_fin_encheres <= ? " + "	GROUP BY ventes.no_vente");
+									+ " WHERE date_fin_encheres <= ? AND ventes.no_utilisateur != ?" + "	GROUP BY ventes.no_vente");
 
 					ps.setDate(1, date);
+					ps.setInt(2, utilisateur.getNoUtilisateur());
 					rs = ps.executeQuery();
 					while (rs.next()) {
 						String str = rs.getString("acheteurs");
@@ -166,13 +174,13 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 
 						} else {
 							String[] no_acheteurs = str.split(",");
-							boolean isAutreEnchere = true;
+							boolean isUneAcquisition = false;
 
 							if (no_acheteurs[0].equals(utilisateur.getNoUtilisateur() + "")) {
-								isAutreEnchere = false;
+								isUneAcquisition = true;
 							}
 
-							if (isAutreEnchere) {
+							if (isUneAcquisition) {
 								NoVentesFiltered.add(rs.getInt("no_vente") + "");
 							}
 
@@ -197,9 +205,11 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 						} else {
 							String[] no_acheteurs = str.split(",");
 							boolean isAutreEnchere = true;
-							for (String string : no_acheteurs) {
-								if (string.equals(utilisateur.getNoUtilisateur() + "")) {
-									isAutreEnchere = false;
+							if (utilisateur != null) {
+								for (String string : no_acheteurs) {
+									if (string.equals(utilisateur.getNoUtilisateur() + "")) {
+										isAutreEnchere = false;
+									}
 								}
 							}
 							if (isAutreEnchere) {
@@ -214,45 +224,44 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 
 			String strVentesAAfficher = String.join(",", NoVentesFiltered);
 			sb.append(SELECT_ALL_VENTES);
-			
-			
+
 			if (isMesVentes && isMesEncheres && isMesAcquisitions && isAutresEncheres) {
 
-			if(recherche != null || categorie != null) {
-				sb.append(" WHERE ");
-				if(recherche != null) {
-					sb.append(" ventes.description LIKE '%"+recherche+"%'");
+				if (recherche != null || categorie != null) {
+					sb.append(" WHERE ");
+					if (recherche != null) {
+						sb.append(" ventes.description LIKE '%" + recherche + "%'");
+					}
+
+					if (recherche != null && categorie != null) {
+						sb.append(" AND ");
+					}
+
+					if (categorie != null) {
+						sb.append(" ventes.no_categorie = " + categorie.getNoCategorie());
+					}
 				}
-				
-				if(recherche != null && categorie != null) {
-					sb.append(" AND ");
-				}
-				
-				if(categorie!=null) {
-					sb.append(" ventes.no_categorie = "+ categorie.getNoCategorie());
-				}
-			}
-			sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
-			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
-			rs = pstmt.executeQuery();
-			}else {
-				
+				sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
+				PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
+				rs = pstmt.executeQuery();
+			} else {
+
 				sb.append(" WHERE ventes.no_vente IN (?) ");
-				
-			if(recherche != null) {
-				sb.append(" AND ventes.description LIKE '%"+recherche+"%'");
+
+				if (recherche != null) {
+					sb.append(" AND ventes.description LIKE '%" + recherche + "%'");
+				}
+
+				if (categorie != null) {
+					sb.append(" AND ventes.no_categorie = " + categorie.getNoCategorie());
+				}
+
+				sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
+				PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
+				pstmt.setString(1, strVentesAAfficher);
+				rs = pstmt.executeQuery();
 			}
-			
-			if(categorie!=null) {
-				sb.append(" AND ventes.no_categorie = "+ categorie.getNoCategorie());
-			}
-			
-			sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
-			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
-			pstmt.setString(1, strVentesAAfficher);
-			rs = pstmt.executeQuery();
-			}
-			
+
 			listeVentesFiltre = listerVentes(rs);
 
 		} catch (Exception e) {
@@ -557,78 +566,52 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				
-				if(vente == null ) {
-				// Creation nouvelle objet vente
-				vente = new Vente();
-				vente.setNoVente(rs.getInt("no_vente"));
-				vente.setNomArticle(rs.getString("nom_article"));
-				vente.setDescription(rs.getString("description"));
-				vente.setMiseAPrix(rs.getInt("prix_initial"));
-				vente.setRetraitArticle(rs.getBoolean("retrait_article"));
-				vente.setDateFinEncheres(
-						new java.sql.Timestamp(rs.getDate("date_fin_encheres").getTime()).toLocalDateTime());
 
-				// creation et set du vendeur
-				Utilisateur vendeur = new Utilisateur();
-				vendeur.setAdministrateur(rs.getBoolean("admin_vendeur"));
-				vendeur.setCodePostal(rs.getString("cp_vendeur"));
-				vendeur.setPseudo(rs.getString("pseudo_vendeur"));
-				vendeur.setNom(rs.getString("nom_vendeur"));
-				vendeur.setPrenom(rs.getString("prenom_vendeur"));
-				vendeur.setEmail(rs.getString("email_vendeur"));
-				vendeur.setTelephone(rs.getString("tel_vendeur"));
-				vendeur.setCredit(rs.getInt("credit_vendeur"));
-				vendeur.setMotDePasse(rs.getString("mdp_vendeur"));
-				vendeur.setRue(rs.getString("rue_vendeur"));
-				vendeur.setVille(rs.getString("ville_vendeur"));
-				vendeur.setNoUtilisateur(rs.getInt("vendeur"));
-				vendeur.setActif(rs.getBoolean("isActif_vendeur"));
+				if (vente == null) {
+					// Creation nouvelle objet vente
+					vente = new Vente();
+					vente.setNoVente(rs.getInt("no_vente"));
+					vente.setNomArticle(rs.getString("nom_article"));
+					vente.setDescription(rs.getString("description"));
+					vente.setMiseAPrix(rs.getInt("prix_initial"));
+					vente.setRetraitArticle(rs.getBoolean("retrait_article"));
+					vente.setDateFinEncheres(
+							new java.sql.Timestamp(rs.getDate("date_fin_encheres").getTime()).toLocalDateTime());
 
-				vente.setVendeur(vendeur);
+					// creation et set du vendeur
+					Utilisateur vendeur = new Utilisateur();
+					vendeur.setAdministrateur(rs.getBoolean("admin_vendeur"));
+					vendeur.setCodePostal(rs.getString("cp_vendeur"));
+					vendeur.setPseudo(rs.getString("pseudo_vendeur"));
+					vendeur.setNom(rs.getString("nom_vendeur"));
+					vendeur.setPrenom(rs.getString("prenom_vendeur"));
+					vendeur.setEmail(rs.getString("email_vendeur"));
+					vendeur.setTelephone(rs.getString("tel_vendeur"));
+					vendeur.setCredit(rs.getInt("credit_vendeur"));
+					vendeur.setMotDePasse(rs.getString("mdp_vendeur"));
+					vendeur.setRue(rs.getString("rue_vendeur"));
+					vendeur.setVille(rs.getString("ville_vendeur"));
+					vendeur.setNoUtilisateur(rs.getInt("vendeur"));
+					vendeur.setActif(rs.getBoolean("isActif_vendeur"));
 
-				Categorie categorie = new Categorie();
-				categorie.setLibelle(rs.getString("libelle"));
-				categorie.setNoCategorie(rs.getInt("no_categorie"));
+					vente.setVendeur(vendeur);
 
-				vente.setCategorie(categorie);
+					Categorie categorie = new Categorie();
+					categorie.setLibelle(rs.getString("libelle"));
+					categorie.setNoCategorie(rs.getInt("no_categorie"));
 
-				if (rs.getString("rue_rtr") != null && rs.getInt("no_vente_rtr") == vente.getNoVente()) {
-					Retrait retrait = new Retrait();
-					retrait.setRue(rs.getString("rue_rtr"));
-					retrait.setCodePostal(rs.getString("cp_rtr"));
-					retrait.setVille(rs.getString("ville_rtr"));
+					vente.setCategorie(categorie);
 
-					vente.setRetrait(retrait);
-				}
+					if (rs.getString("rue_rtr") != null && rs.getInt("no_vente_rtr") == vente.getNoVente()) {
+						Retrait retrait = new Retrait();
+						retrait.setRue(rs.getString("rue_rtr"));
+						retrait.setCodePostal(rs.getString("cp_rtr"));
+						retrait.setVille(rs.getString("ville_rtr"));
 
-				// Creation enchère + addEnchere() s'il y en a :
-				if (rs.getDate("date_enchere") != null) {
+						vente.setRetrait(retrait);
+					}
 
-					Enchere enchere = new Enchere();
-					Utilisateur acheteur = new Utilisateur();
-					acheteur.setAdministrateur(rs.getBoolean("admin_acheteur"));
-					acheteur.setCodePostal(rs.getString("cp_acheteur"));
-					acheteur.setPseudo(rs.getString("pseudo_acheteur"));
-					acheteur.setNom(rs.getString("nom_acheteur"));
-					acheteur.setPrenom(rs.getString("prenom_acheteur"));
-					acheteur.setEmail(rs.getString("email_acheteur"));
-					acheteur.setTelephone(rs.getString("tel_acheteur"));
-					acheteur.setCredit(rs.getInt("credit_acheteur"));
-					acheteur.setMotDePasse(rs.getString("mdp_acheteur"));
-					acheteur.setRue(rs.getString("rue_acheteur"));
-					acheteur.setVille(rs.getString("ville_acheteur"));
-					acheteur.setNoUtilisateur(rs.getInt("acheteur"));
-					acheteur.setActif(rs.getBoolean("isActif_acheteur"));
-
-					enchere.setAcheteur(acheteur);
-					enchere.setDateEnchere(
-							new java.sql.Timestamp(rs.getDate("date_enchere").getTime()).toLocalDateTime());
-					enchere.setMise(rs.getInt("mise"));
-
-					enchere.setVente(vente);
-				}
-				}else {
+					// Creation enchère + addEnchere() s'il y en a :
 					if (rs.getDate("date_enchere") != null) {
 
 						Enchere enchere = new Enchere();
@@ -653,7 +636,33 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 						enchere.setMise(rs.getInt("mise"));
 
 						enchere.setVente(vente);
-				}
+					}
+				} else {
+					if (rs.getDate("date_enchere") != null) {
+
+						Enchere enchere = new Enchere();
+						Utilisateur acheteur = new Utilisateur();
+						acheteur.setAdministrateur(rs.getBoolean("admin_acheteur"));
+						acheteur.setCodePostal(rs.getString("cp_acheteur"));
+						acheteur.setPseudo(rs.getString("pseudo_acheteur"));
+						acheteur.setNom(rs.getString("nom_acheteur"));
+						acheteur.setPrenom(rs.getString("prenom_acheteur"));
+						acheteur.setEmail(rs.getString("email_acheteur"));
+						acheteur.setTelephone(rs.getString("tel_acheteur"));
+						acheteur.setCredit(rs.getInt("credit_acheteur"));
+						acheteur.setMotDePasse(rs.getString("mdp_acheteur"));
+						acheteur.setRue(rs.getString("rue_acheteur"));
+						acheteur.setVille(rs.getString("ville_acheteur"));
+						acheteur.setNoUtilisateur(rs.getInt("acheteur"));
+						acheteur.setActif(rs.getBoolean("isActif_acheteur"));
+
+						enchere.setAcheteur(acheteur);
+						enchere.setDateEnchere(
+								new java.sql.Timestamp(rs.getDate("date_enchere").getTime()).toLocalDateTime());
+						enchere.setMise(rs.getInt("mise"));
+
+						enchere.setVente(vente);
+					}
 				}
 			}
 
@@ -701,13 +710,13 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			// update du crédit des utilisateurs liés aux enchères sur la vente
 			for (Enchere e : entity.getListeEncheres()) {
 				pstmt = cnx.prepareStatement(UPDATE_CREDIT_UTILISATEUR);
-				
+
 				pstmt.setInt(1, e.getAcheteur().getCredit());
 				pstmt.setInt(2, e.getAcheteur().getNoUtilisateur());
-				
+
 				pstmt.executeUpdate();
 			}
-			
+
 			cnx.commit();
 
 		} catch (Exception e) {
@@ -719,7 +728,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 				businessException.ajouterErreur(CodesResultatDAL.ROLLBACK_ENCHERE_ECHEC);
 				throw businessException;
 			}
-			
+
 			e.printStackTrace();
 			businessException.ajouterErreur(CodesResultatDAL.SUPPRESSION_ENCHERE_ECHEC);
 			throw businessException;
@@ -728,17 +737,16 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 		return entity;
 	}
 
-
-
 	@Override
 	public List<Vente> getVentesByDateFinEnchere(LocalDateTime dateFinEnchere) throws BusinessException {
 		List<Vente> listeVentes = new ArrayList<Vente>();
 		try {
 			Connection cnx = ConnectionProvider.getConnection();
-			PreparedStatement pstmt = cnx.prepareStatement(SELECT_UNE_VENTE_BY_DATE_FIN_ENCHERE + ORDER_BY_VENTE_ENCHERE_DESC);
-			
+			PreparedStatement pstmt = cnx
+					.prepareStatement(SELECT_UNE_VENTE_BY_DATE_FIN_ENCHERE + ORDER_BY_VENTE_ENCHERE_DESC);
+
 			pstmt.setDate(1, (java.sql.Date.valueOf(dateFinEnchere.toLocalDate())));
-			
+
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {

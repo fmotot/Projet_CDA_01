@@ -45,7 +45,7 @@
 					<div class="form-group">
 						<div class="form-check">
 						<c:if test="${!empty utilisateur}">
-							<input class="form-check-input" type="checkbox" name="mesVentes"id="mesVentes"> 
+							<input class="form-check-input" type="checkbox" name="mesVentes" id="mesVentes" ${isMesVentes ? 'checked':'' }> 
 						</c:if>	
 						<c:if test="${empty utilisateur}">
 							<input class="form-check-input" type="checkbox" name="mesVentes"id="mesVentes" disabled> 
@@ -56,7 +56,7 @@
 					<div class="form-group">
 						<div class="form-check">
 						<c:if test="${!empty utilisateur}">
-							<input class="form-check-input" type="checkbox"name="mesEncheres" id="mesEncheres"> 
+							<input class="form-check-input" type="checkbox"name="mesEncheres" id="mesEncheres" ${isMesEncheres ? 'checked':'' }> 
 						</c:if>	
 						<c:if test="${empty utilisateur}">
 							<input class="form-check-input" type="checkbox"name="mesEncheres" id="mesEncheres" disabled>
@@ -67,7 +67,7 @@
 					<div class="form-group">
 						<div class="form-check">
 						<c:if test="${!empty utilisateur}">
-							<input class="form-check-input" type="checkbox" name="mesAcquisitions" id="mesAcquisitions">
+							<input class="form-check-input" type="checkbox" name="mesAcquisitions" id="mesAcquisitions" ${isMesAcquisitions ? 'checked':'' }>
 						</c:if>	
 						<c:if test="${empty utilisateur}">
 							<input class="form-check-input" type="checkbox" name="mesAcquisitions" id="mesAcquisitions" disabled>
@@ -78,7 +78,7 @@
 					<div class="form-group">
 						<div class="form-check">
 						<c:if test="${!empty utilisateur}">
-							<input class="form-check-input" type="checkbox" name="autresEncheres" id="autresEncheres" > 
+							<input class="form-check-input" type="checkbox" name="autresEncheres" id="autresEncheres" ${isAutresEncheres ? 'checked':'' }> 
 						</c:if>
 						<c:if test="${empty utilisateur}">
 							<input class="form-check-input" type="checkbox" name="autresEncheres" id="autresEncheres" checked> 
@@ -94,16 +94,20 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text">0-</div>
 						</div>
-						<input type="text" class="form-control" id="inlineFormInputGroup" name="recherche" placeholder="Le nom de l'article contient">
+						<input type="text" class="form-control" id="inlineFormInputGroup" name="recherche" placeholder="Le nom de l'article contient" value="${recherche }">
 					</div>
 					<div class="form-group row col-lg-11">
 						<label class="col-lg-4 my-auto" for="inputCategories">Catégories :</label> 
 						<select id="inputCategories" name="categorie" class="form-control col-lg-8">
 							<option value="toutes">Toutes</option>
-							<c:forEach var="categorie" items="${listeCategorie}">>
-						    	<option value="${categorie.noCategorie}">${categorie.libelle}</option>
-						    </c:forEach>
-						</select>
+							<c:forEach var="categorie" items="${listeCategorie}">
+						    	<option value="${categorie.noCategorie}" 
+						    	<c:if test="${categorie.noCategorie == categorieSelected.noCategorie }">
+						    		selected="selected"
+						    	</c:if>
+						    	>${categorie.libelle}</option>
+					    	</c:forEach>
+    					</select>
 					</div>
 				</div>
 
