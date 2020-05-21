@@ -248,7 +248,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			sb.append(stmt);
 
 			if (recherche != null) {
-				sb.append(" AND ventes.description LIKE '%" + recherche + "%'");
+				sb.append(" AND ventes.nom_article LIKE '%" + recherche + "%'");
 			}
 
 			if (categorie != null) {
