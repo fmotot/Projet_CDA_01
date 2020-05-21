@@ -30,10 +30,6 @@ public class ProfilUtilisateurServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		
-		if (utilisateur == null) {
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp") ;
-		    requestDispatcher.forward(request, response) ;
-		}
 		
 		UtilisateurManager utilisateurManager = BLLFactory.getUtilisateurManager();
 		
