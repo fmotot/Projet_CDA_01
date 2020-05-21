@@ -66,12 +66,21 @@
 					<div class="col-6 col-lg-9">
 					<c:choose>
 						<c:when test="${!empty vente.listeEncheres}">
-							<p>${vente.maxEnchere.mise} de <a href="./ProfilUtilisateurServlet?pseudo=${vente.maxEnchere.acheteur.pseudo}"> ${vente.maxEnchere.acheteur.pseudo}</a></p>
+							<p>${vente.maxEnchere.mise} de
+							
+								
+									<c:if test="${empty utilisateur}">
+										${vente.maxEnchere.acheteur.pseudo}
+									</c:if>
+									<c:if test="${!empty utilisateur}">
+										<a href="./ProfilUtilisateurServlet?pseudo=${vente.maxEnchere.acheteur.pseudo}">${vente.maxEnchere.acheteur.pseudo}</a>
+									</c:if>
+						
 						</c:when>
 						<c:otherwise>
 							<p> Pas encore d'enchérisseur. </p>
 						</c:otherwise>
-						</c:choose>
+					</c:choose>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -105,7 +114,15 @@
 				<div class="form-group row">
 					<label for="staticVendeur" class="col-5 col-lg-3 label-bold">Vendeur :</label>
 					<div class="col-6 col-lg-4">
-						<a href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}">${vente.vendeur.pseudo}</a>
+					<c:choose>
+						<c:when test="${empty utilisateur}">
+							${vente.vendeur.pseudo}
+						</c:when>
+						<c:otherwise>
+							<a href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}">${vente.vendeur.pseudo}</a>
+						</c:otherwise>
+					</c:choose>
+						
 					</div>
 				</div>
 
