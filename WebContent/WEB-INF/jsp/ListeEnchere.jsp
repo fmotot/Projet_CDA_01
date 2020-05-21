@@ -185,8 +185,8 @@
 								<c:if test="${!empty utilisateur }">
 								<p><span class="jumbotron-bold">Vendeur :</span><a href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}"> ${vente.vendeur.pseudo}</a></p>
 								</c:if>
-								<p><span class="jumbotron-bold">Vendeur :</span> ${vente.vendeur.pseudo}</p>
 								<c:if test="${empty utilisateur }">
+								<p><span class="jumbotron-bold">Vendeur :</span> ${vente.vendeur.pseudo}</p>
 								</c:if>
 								
 								</c:when>
