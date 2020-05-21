@@ -57,7 +57,6 @@ public class ServletSeConnecter extends HttpServlet {
 			// Recuperation du login et mot de passe
 			String login = request.getParameter("inputId");
 			String motDePasse = request.getParameter("inputPassword");
-			System.out.println(login + motDePasse);
 			String souvenir = request.getParameter("souvenir");
 			if (souvenir != null || login != null) {
 				Cookie cookie = new Cookie("login", login);

@@ -60,8 +60,8 @@ public class NouvelleVenteServlet extends HttpServlet {
 
 		Integer miseAPrix = Integer.parseInt(request.getParameter("inputPrixDeBase"));
 		String rue = request.getParameter("inputRue");
-		String ville = request.getParameter("inputCodePostal");
-		String codePostal = request.getParameter("inputVille");
+		String ville = request.getParameter("inputVille");
+		String codePostal = request.getParameter("inputCodePostal");
 		Integer noCategorie = Integer.parseInt(request.getParameter("selectCategories"));
 
 		Categorie categorie = new Categorie(noCategorie);

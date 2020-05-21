@@ -86,7 +86,7 @@
 
 				<div class="col-10">
 					<div class="d-inline">
-						<a class="btn btn-retour btn-primary" href="./ServletMonProfil" role="button">Retour</a>
+						<a class="btn btn-retour btn-primary" href="./ListeEnchereServlet" role="button">Retour</a>
 					</div>
 				</div>
 
