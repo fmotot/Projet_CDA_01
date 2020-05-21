@@ -33,24 +33,20 @@
 <jsp:useBean id="now" class="java.util.Date"/>
 <fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
 
-	<br>
-	<h2 class="text-center"> ${myParseDate < now ? 'Enchère Terminée' : 'Enchère en cours'}</h2>
+	<h2 class="text-center titre"> ${myParseDate < now ? 'Enchère Terminée' : 'Enchère en cours'}</h2>
 
 	<div class="container">
-
-		<div class="row col-12 mx-auto d-lg-none">
-			<h3 class="nomArticle">${vente.nomArticle}</h3>
-			<div class="image mb-3"></div>
-		</div>
+	
+		<div class="image row align-items-center justify-content-center mx-auto d-lg-none">Image</div>
 
 		<div class="row">
 
 			<div class="col-lg-4 d-none d-lg-block my-auto">
-				<div class="image"></div>
+				<div class="image row align-items-center justify-content-center">Image</div>
 			</div>
 
 			<div class="content-vente col-12 col-lg-7">
-				<div class="d-none d-lg-block mb-3">
+				<div class="mb-5">
 					<h3 class="nomArticle">${vente.nomArticle}</h3>
 				</div>
 
@@ -72,7 +68,7 @@
 										${vente.maxEnchere.acheteur.pseudo}
 									</c:if>
 									<c:if test="${!empty utilisateur}">
-										<a href="./ProfilUtilisateurServlet?pseudo=${vente.maxEnchere.acheteur.pseudo}">${vente.maxEnchere.acheteur.pseudo}</a>
+										<a class="lien-pseudo" href="./ProfilUtilisateurServlet?pseudo=${vente.maxEnchere.acheteur.pseudo}">${vente.maxEnchere.acheteur.pseudo}</a>
 									</c:if>
 						
 						</c:when>
@@ -118,7 +114,7 @@
 							${vente.vendeur.pseudo}
 						</c:when>
 						<c:otherwise>
-							<a href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}">${vente.vendeur.pseudo}</a>
+							<a class="lien-pseudo" href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}">${vente.vendeur.pseudo}</a>
 						</c:otherwise>
 					</c:choose>
 						
@@ -135,21 +131,24 @@
 							<input type="text" class="form-control" name="inputMaProposition" id="inputMaProposition">
 						</div>
 						<div class="col-3 col-lg-4">
-							<button type="submit" class="btn btn-encherir btn-primary my-auto ">Enchérir</button>
+							<button type="submit" class="btn btn-site btn-primary my-auto ">Enchérir</button>
 						</div>
 					</div>
 			</c:if>
 			
 				</form>
 
-				<div class="row mt-3">
+				<div class="row mt-5 text-center">
 				<c:if test="${!empty utilisateur && vente.classement != 0 && utilisateur != vente.vendeur && !empty vente.classement}">
-					<div class="col-8 col-lg-7 text-left">
-						<a class="btn btn-back btn-primary" href="./AnnulerEnchere?noVente=${vente.noVente}" role="button">Annuler ma dernière enchère</a>
+					<div class="col-4">
+						<a class="btn btn-site btn-primary" href="./AnnulerEnchere?noVente=${vente.noVente}" role="button">Annuler ma dernière enchère</a>
 					</div> 
 				</c:if>
-					<div class="col-4 col-lg-4 text-left">
-						<a class="btn btn-back btn-primary" href="./ListeEnchereServlet" role="button">Back</a>
+					<div class="col-8">
+						<c:if test="${!empty utilisateur && vente.vendeur.noUtilisateur == utilisateur.noUtilisateur }">
+							<button class="btn btn-site btn-secondary" role="button" disabled>Annuler la vente</button>
+						</c:if>
+						<a class="btn btn-site btn-primary" href="./ListeEnchereServlet" role="button">Back</a>
 					</div>
 				</div>
 

@@ -32,7 +32,7 @@
 
 	<div id="liste-enchere" class="container">
 
-		<h2>Filtres :</h2>
+		<h2 class="titre">Filtres :</h2>
 		
 		<div class="row">
 		
@@ -51,7 +51,7 @@
 						<c:if test="${empty utilisateur}">
 							<input class="form-check-input" type="checkbox" name="mesVentes"id="mesVentes" disabled> 
 						</c:if>	
-								<label class="form-check-label" for="mesVentes">Mes ventes</label>
+							<label class="form-check-label" for="mesVentes">Mes ventes</label>
 						</div>
 					</div>
 					<div class="form-group">
@@ -91,15 +91,15 @@
 
 				<div class="col-lg-7 my-auto">
 				
-					<div class="input-group row col-lg-11 mb-3">
+					<div class="input-group row col-lg-11 mb-3 mt-3">
 						<div class="input-group-prepend">
-							<div class="input-group-text">0-</div>
+							<div class="input-group-text"><img src="./img/search.png" height="16px" width="16px"></div>
 						</div>
 						<input type="text" class="form-control" id="inlineFormInputGroup" name="recherche" placeholder="Le nom de l'article contient" value="${recherche }">
 					</div>
-					<div class="form-group row col-lg-11">
-						<label class="col-lg-4 my-auto" for="inputCategories">Catégories :</label> 
-						<select id="inputCategories" name="categorie" class="form-control col-lg-8">
+					<div class="form-group row col-11 col-lg-11">
+						<label class="col-4 col-lg-4 my-auto" for="inputCategories">Catégories :</label> 
+						<select id="inputCategories" name="categorie" class="form-control col-8 col-lg-8">
 							<option value="toutes">Toutes</option>
 							<c:forEach var="categorie" items="${listeCategorie}">
 						    	<option value="${categorie.noCategorie}" 
@@ -130,11 +130,11 @@
 				<c:forEach var="vente" items="${listeVentes}">
 					<div class="jumbotron col-12 col-lg-5 mx-auto">
 						<div class="row">
-							<div class="col-3 my-auto">
-								<div class="image"></div>
+							<div class="col-4 my-auto">
+								<div class="image row align-items-center justify-content-center">Image</div>
 							</div>
 
-							<div class="col-8 ml-4">
+							<div class="col-8">
 								<jsp:useBean id="now" class="java.util.Date"/>
 								<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate> 
 								
@@ -154,7 +154,7 @@
 									</p>
 									</c:when>
 									<c:otherwise>
-										Classement : ${vente.classement}</p>
+										<p><span class="jumbotron-bold">Classement :</span> ${vente.classement}</p>
 									</c:otherwise>
 								</c:choose>
 								

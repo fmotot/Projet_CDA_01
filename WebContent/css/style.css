@@ -8,7 +8,7 @@ html {
 }
 
 body {
-  	margin-bottom: 20vw;
+  	margin-bottom: 80px;
 }
 
 h2{
@@ -16,8 +16,13 @@ h2{
 	font-weight: 600;
 }
 
-label, p, h3{
-	font-size: 12px;
+label, p{
+	font-size: 14px;
+}
+
+h3{
+	font-size: 14px;
+	margin:0;
 }
 
 a{
@@ -28,15 +33,6 @@ a{
 ul{
 	list-style: none;
 	padding-left: 0;
-}
-
-.footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	padding:10px;
-	background-color: #007bff;
-	color: white;
 }
 
 .menu .logo {
@@ -56,8 +52,37 @@ ul{
 	font-size: 16px;
 }
 
+.titre{
+	margin:32px 0 32px 0;
+	font-size:26px;
+}
+
+.lien-pseudo{
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.label-bold{
+	font-weight:600;
+	font-size:14px;
+}
+
 .container-fluid{
 	padding: 0;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding:10px;
+	background-color: #007bff;
+	color: white;
+}
+
+.btn-site{
+	font-size:14px;
+	padding:10px 20px 10px 20px;
 }
 
 @media (min-width: 992px){
@@ -90,13 +115,18 @@ ul{
 		margin:0;
 	}
 	
-	body {
-  		margin-bottom: 100px;
-	}
-	
 	.menu .logo {
 		font-size: 2.5vw;
 		padding: 20px;
+	}
+	
+	.titre{
+		margin:48px 0 48px 0;
+		font-size:28px;
+	}
+	
+	.label-bold{
+		font-size:16px;
 	}
 	
 	.footer {
@@ -106,6 +136,11 @@ ul{
 		padding:20px;
 		background-color: #007bff;
 		color: white;
+	}
+	
+	.btn-site{
+		padding:10px 40px 10px 40px;
+		font-size:16px;
 	}
 	
 }

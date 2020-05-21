@@ -61,7 +61,7 @@
 
 				<div class="col-10">
 					<div class="d-inline">
-						<a class="btn btn-retour btn-primary" href="./FinDeVenteServlet?noVente=${vente.noVente}" role="button">Back</a>
+						<a class="btn btn-site btn-primary" href="./FinDeVenteServlet?noVente=${vente.noVente}" role="button">Back</a>
 					</div>
 				</div>
 

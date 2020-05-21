@@ -1,7 +1,6 @@
 <!-- Antony / code -->
 <!-- Rudy / EL  -->
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="fr.eni.trocencheres.messages.LecteurMessages" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -32,42 +31,42 @@
 
 	<div class="container">
 		
-		<div class="center-content justify-content-center">
+		<div class="col-12 col-lg-4 mx-auto center-content">
 	
 			<form action="./ServletSeConnecter" method="post">
-				<div class="form-group row justify-content-center">
-				    <label for="inputId" class="col-4 col-form-label-sm ">Identifiant :</label>
-				    <div class="col-6">
+				<div class="form-group row mx-auto">
+				    <label for="inputId" class="col-5 col-form-label-sm ">Identifiant :</label>
+				    <div class="col-7">
 				    	<input type="text" class="form-control form-control-sm" value="${!empty login? login : ''}" name="inputId" id="inputId">
 				    </div>
 				</div>
 				  	
-				<div class="form-group row justify-content-center ">
-					<label for="inputPassword" class="col-4 col-form-label-sm">Mot de passe :</label>
-					<div class="col-6">
+				<div class="form-group row mx-auto">
+					<label for="inputPassword" class="col-5 col-form-label-sm">Mot de passe :</label>
+					<div class="col-7">
 				    	<input type="password" class="form-control form-control-sm" name="inputPassword" id="inputPassword">
 				   	</div>
 				</div>
 				
-				<div class="row justify-content-center connexion mb-5 text-center">
+				<div class="row col-12 justify-content-center mb-5">
 				
-					<div class="col-5">
-						<button type="submit" class="btn btn-primary">Connexion</button>
+					<div class="col-5 ">
+						<button type="submit" class="btn btn-connexion btn-primary">Connexion</button>
 					</div>
 					
-					  <div class="custom-control custom-checkbox my-1 mr-sm-2">
-    					<input type="checkbox" class="custom-control-input" name="souvenir" id="souvenir">
-    					<label class="custom-control-label" for="souvenir">Se souvenir de moi</label>
- 					  </div>
+					<div class="custom-control custom-checkbox my-auto mx-auto mr-sm-2 souvenir">
+	    				<input type="checkbox" class="custom-control-input" name="souvenir" id="souvenir">
+	    				<label class="custom-control-label" for="souvenir">Se souvenir de moi</label>
+ 					</div>
 				
 				</div>
 				
 			</form>
 			
-			<div class="row justify-content-center connexion text-center">
+			<div class="row justify-content-center text-center">
 			
-				<div class="col-10 text-center">
-					<a class="btn btn-creation btn-primary" href="./ServletCreationCompte" role="button">Créer un compte</a>
+				<div class="col-10 text-center mt-5">
+					<a class="btn btn-site btn-primary" href="./ServletCreationCompte" role="button">Créer un compte</a>
 				</div>
 				
 			</div>
