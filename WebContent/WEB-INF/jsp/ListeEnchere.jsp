@@ -182,7 +182,13 @@
     							
 								<c:choose>
 								<c:when test="${vente.vendeur.pseudo != utilisateur.pseudo}">
+								<c:if test="${!empty utilisateur }">
 								<p><span class="jumbotron-bold">Vendeur :</span><a href="./ProfilUtilisateurServlet?pseudo=${vente.vendeur.pseudo}"> ${vente.vendeur.pseudo}</a></p>
+								</c:if>
+								<p><span class="jumbotron-bold">Vendeur :</span> ${vente.vendeur.pseudo}</p>
+								<c:if test="${empty utilisateur }">
+								</c:if>
+								
 								</c:when>
 								<c:otherwise>
 								<p><span class="jumbotron-bold">Vendeur :</span> ${vente.vendeur.pseudo}</p>
