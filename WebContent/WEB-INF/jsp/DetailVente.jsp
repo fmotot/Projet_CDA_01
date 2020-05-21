@@ -68,7 +68,6 @@
 						<c:when test="${!empty vente.listeEncheres}">
 							<p>${vente.maxEnchere.mise} de
 							
-								
 									<c:if test="${empty utilisateur}">
 										${vente.maxEnchere.acheteur.pseudo}
 									</c:if>

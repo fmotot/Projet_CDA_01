@@ -59,7 +59,7 @@
 					</div>
 					
 					<div class="form-group row">
-    					<label for="selectCategories" class="col-5 col-form-label-sm">Catï¿½gories :</label>
+    					<label for="selectCategories" class="col-5 col-form-label-sm">Catégories :</label>
     					<div class="col-7 col-lg-7">
 	    					<select class="form-control form-control-sm" name="selectCategories" id="selectCategories" required>
 	    					<c:forEach var="categorie" items="${listeCategorie}">
@@ -87,11 +87,11 @@
 					<div class="form-group row">
 						<label for="inputPrixDeBase" class="col-5 col-form-label-sm">Prix initial :</label>
 						<div class="col-7 col-lg-7">
-							<input value="${!empty vente.miseAPrix ? vente.miseAPrix : '' }" name="inputPrixDeBase" type="number" class="form-control form-control-sm" id="inputPrixDeBase" placeholder="Mise ï¿½ prix" required>
+							<input value="${!empty vente.miseAPrix ? vente.miseAPrix : '' }" name="inputPrixDeBase" type="number" class="form-control form-control-sm" id="inputPrixDeBase" placeholder="Mise à prix" required>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="inputFinEnchere" class="col-5 col-form-label-sm">Fin de l'enchï¿½re :</label>
+						<label for="inputFinEnchere" class="col-5 col-form-label-sm">Fin de l'enchère :</label>
 						<div class="col-7 col-lg-7">
     					<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate>
 							<input value="<fmt:formatDate value="${myParseDate}"  pattern="yyyy-MM-dd"></fmt:formatDate>" type="date" name="inputFinEnchere" id="inputFinEnchere" max="3000-12-31" min="1000-01-01" class="form-control form-control-sm" required>
