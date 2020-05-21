@@ -30,36 +30,36 @@
 	
 	<%@ include file="Alerte.jspf" %>
 
-	<div class="container mt-3">
+	<div class="container">
 
 		<div class="row">
 
 			<div class="col-lg-4 d-none d-lg-block">
-				<div class="image"></div>
+				<div class="image row align-items-center justify-content-center">Image</div>
 			</div>
 
 			<div class="content-vente col-12 col-lg-7">
 			
-				<h2 class="text-center mb-3">Nouvelle vente</h2>
+				<h2 class="titre text-center">Nouvelle vente</h2>
 
 				<form action="./NouvelleVenteServlet" method="post">
 
 					<div class="form-group row ">
-						<label for="inputArticle" class="col-5 col-form-label-sm">Article:</label>
+						<label for="inputArticle" class="col-5 col-form-label-sm label-bold">Article:</label>
 						<div class="col-7 col-lg-7">
 							<input value="${!empty vente.nomArticle ? vente.nomArticle : '' }" name="inputArticle" type="text"
 								class="form-control form-control-sm" id="inputArticle" placeholder="Le nom qui s'affichera dans le titre de la vente" required>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="inputDescription" class="col-5 col-form-label-sm">Description:</label>
+						<label for="inputDescription" class="col-5 col-form-label-sm label-bold">Description:</label>
 						<div class="col-7 col-lg-7">
 							<textarea class="form-control" name="inputDescription" id="inputDescription" rows="3" placeholder="Une description de votre article" required>${!empty vente.description ? vente.description : '' }</textarea>
 						</div>
 					</div>
 					
 					<div class="form-group row">
-    					<label for="selectCategories" class="col-5 col-form-label-sm">Catégories :</label>
+    					<label for="selectCategories" class="col-5 col-form-label-sm label-bold">Catégories :</label>
     					<div class="col-7 col-lg-7">
 	    					<select class="form-control form-control-sm" name="selectCategories" id="selectCategories" required>
 	    					<c:forEach var="categorie" items="${listeCategorie}">
@@ -74,24 +74,22 @@
   					</div>
 
 					<div class="form-group row">
-						<label class="col-3 col-form-label-sm my-auto" for="uploadImage">Photo de l'article</label>  
+						<label class="col-7 col-lg3 col-form-label-sm my-auto label-bold" for="uploadImage">Photo de l'article :</label>  
 <!-- 						<label class="btn btn-sm my-auto"for="my-file-selector"> --> 
 <!-- 						<input id="my-file-selector" type="submit" class="d-none" disabled>Uploader </label> --> 
 						<button type="submit" name="submit" value="uploader" class="btn btn-secondary btn-sm" disabled>Uploader</button> 
 					</div>
 
-					<div class="row col-12 mx-auto d-lg-none">
-						<div class="image mb-3"></div>
-					</div>
+					<div class="image row col-12 mx-auto d-lg-none align-items-center justify-content-center">Image</div>
 
 					<div class="form-group row">
-						<label for="inputPrixDeBase" class="col-5 col-form-label-sm">Prix initial :</label>
+						<label for="inputPrixDeBase" class="col-5 col-form-label-sm label-bold">Prix initial :</label>
 						<div class="col-7 col-lg-7">
 							<input value="${!empty vente.miseAPrix ? vente.miseAPrix : '' }" name="inputPrixDeBase" type="number" class="form-control form-control-sm" id="inputPrixDeBase" placeholder="Mise à prix" required>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="inputFinEnchere" class="col-5 col-form-label-sm">Fin de l'enchère :</label>
+						<label for="inputFinEnchere" class="col-5 col-form-label-sm label-bold">Fin de l'enchère :</label>
 						<div class="col-7 col-lg-7">
     					<fmt:parseDate value="${vente.dateFinEncheres}" pattern="yyyy-MM-dd'T'HH:mm" var="myParseDate"></fmt:parseDate>
 							<input value="<fmt:formatDate value="${myParseDate}"  pattern="yyyy-MM-dd"></fmt:formatDate>" type="date" name="inputFinEnchere" id="inputFinEnchere" max="3000-12-31" min="1000-01-01" class="form-control form-control-sm" required>
@@ -101,28 +99,28 @@
 					<fieldset class="border pr-2 pl-2">
 	   					<legend class="col-4 col-lg-3 my-auto">Retrait</legend>
 	   					<div class="form-group row justify-content-center ">
-							<label for="inputRue" class="col-5 col-form-label-sm">Rue :</label>
+							<label for="inputRue" class="col-5 col-form-label-sm label-bold">Rue :</label>
 							<div class="col-7 col-lg-4">
 								<input value="${!empty vente.retrait.rue ? vente.retrait.rue : '' }" name="inputRue" type="text" class="form-control form-control-sm" id="inputRue">
 							</div>
 						</div>
 						
 						<div class="form-group row justify-content-center ">
-							<label for="inputCodePostal" class="col-5 col-form-label-sm">Code Postal :</label>
+							<label for="inputCodePostal" class="col-5 col-form-label-sm label-bold">Code Postal :</label>
 							<div class="col-7 col-lg-4">
 								<input value="${!empty vente.retrait.codePostal ? vente.retrait.codePostal : '' }" name="inputCodePostal" type="text" class="form-control form-control-sm" id="inputCodePostal">
 							</div>
 						</div>
 						
 						<div class="form-group row justify-content-center ">
-							<label for="inputVille" class="col-5 col-form-label-sm">Ville :</label>
+							<label for="inputVille" class="col-5 col-form-label-sm label-bold">Ville :</label>
 							<div class="col-7 col-lg-4">
 								<input value="${!empty vente.retrait.ville ? vente.retrait.ville : '' }" name="inputVille" type="text" class="form-control form-control-sm" id="inputVille">
 							</div>
 						</div>
 					</fieldset>		
 
-					<div class="row justify-content-around connexion text-center mt-3 mb-3">
+					<div class="row justify-content-around connexion text-center">
 
 						<div class="col-12">
 							<div class="d-inline mr-2">

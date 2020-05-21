@@ -8,7 +8,7 @@ html {
 }
 
 body {
-  	margin-bottom: 20vw;
+  	margin-bottom: 15vw;
 }
 
 h2{
@@ -50,6 +50,16 @@ ul{
 	
 .menu .lien {
 	font-size: 16px;
+}
+
+.titre{
+	margin:32px 0 32px 0;
+	font-size:26px;
+}
+
+.label-bold{
+	font-weight:600;
+	font-size:16px;
 }
 
 .container-fluid{
@@ -102,6 +112,15 @@ ul{
 	.menu .logo {
 		font-size: 2.5vw;
 		padding: 20px;
+	}
+	
+	.titre{
+		margin:48px 0 48px 0;
+		font-size:28px;
+	}
+	
+	.label-bold{
+		font-size:16px;
 	}
 	
 	.footer {
