@@ -2,6 +2,10 @@
 
 @charset "ISO-8859-1";
 
+body{
+	margin-bottom: 100px;
+}
+
 .image{
 	width: 100%;
 	height: 150px;

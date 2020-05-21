@@ -48,25 +48,25 @@
 				   	</div>
 				</div>
 				
-				<div class="row justify-content-center connexion mb-5 text-center">
+				<div class="row col-12 justify-content-center mb-5">
 				
-					<div class="col-5">
-						<button type="submit" class="btn btn-primary">Connexion</button>
+					<div class="col-5 ">
+						<button type="submit" class="btn btn-connexion btn-primary">Connexion</button>
 					</div>
 					
-					  <div class="custom-control custom-checkbox my-1 mr-sm-2">
-    					<input type="checkbox" class="custom-control-input" name="souvenir" id="souvenir">
-    					<label class="custom-control-label" for="souvenir">Se souvenir de moi</label>
- 					  </div>
+					<div class="custom-control custom-checkbox my-auto mx-auto mr-sm-2 souvenir">
+	    				<input type="checkbox" class="custom-control-input" name="souvenir" id="souvenir">
+	    				<label class="custom-control-label" for="souvenir">Se souvenir de moi</label>
+ 					</div>
 				
 				</div>
 				
 			</form>
 			
-			<div class="row justify-content-center connexion text-center">
+			<div class="row justify-content-center text-center">
 			
-				<div class="col-10 text-center">
-					<a class="btn btn-creation btn-primary" href="./ServletCreationCompte" role="button">Créer un compte</a>
+				<div class="col-10 text-center mt-5">
+					<a class="btn btn-site btn-primary" href="./ServletCreationCompte" role="button">Créer un compte</a>
 				</div>
 				
 			</div>

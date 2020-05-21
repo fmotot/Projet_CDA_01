@@ -2,27 +2,11 @@
 
 @charset "ISO-8859-1";
 
-.label-bold{
-	font-weight:600;
-	font-size:16px;
-}
-
 .utilisateur-info p{
 	font-size:16px;
 }
 
-.btn-retour{
-	font-size:12px;
-	padding:10px 10px 10px 10px;
-}
-
 @media (min-width: 1200px) { 
-	
-	.btn-retour{
-	margin-top:64px;
-	padding:15px 40px 15px 40px;
-	font-size:14px;
-	}
 	
 	.form-control{
 		width:80%;

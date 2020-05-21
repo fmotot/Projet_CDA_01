@@ -7,9 +7,7 @@
 }
 
 .btn-rechercher{
-	margin-top:16px;
-	width:100%;
-	padding:20px 0 20px 0;
+	width: 100%;
 }
 
 .jumbotron{
@@ -17,9 +15,13 @@
 }
 
 .image{
-	width: 80px;
-	height: 100px;
-	background: black;
+	margin-left:10px;
+	width: 100px;
+	height: 120px;
+	background: #adadad;
+	font-size:16px;
+	font-weight: 600;
+	color: white;
 }
 
 .jumbotron-bold-title{
@@ -28,12 +30,16 @@
 }
 
 .jumbotron-bold{
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 600;
 }
 
+.jumbotron .tabulation {
+	margin-left:62px;
+}
+
 .jumbotron p{
-	font-size: 12px;
+	font-size: 14px;
 	margin:0;
 }
 
@@ -51,10 +57,6 @@
 		font-size:24px;
 	}
 	
-	.jumbotron .tabulation {
-	margin-left:62px;
-	}
-	
 	.jumbotron-bold{
 		font-size: 16px;
 		font-weight: 600;
@@ -67,7 +69,6 @@
 	.image{
 		width: 100px;
 		height: 120px;
-		background: black;
 	}
 	
 }

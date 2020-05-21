@@ -8,7 +8,7 @@ html {
 }
 
 body {
-  	margin-bottom: 15vw;
+  	margin-bottom: 80px;
 }
 
 h2{
@@ -17,7 +17,7 @@ h2{
 }
 
 label, p{
-	font-size: 12px;
+	font-size: 14px;
 }
 
 h3{
@@ -57,9 +57,14 @@ ul{
 	font-size:26px;
 }
 
+.lien-pseudo{
+	font-size: 14px;
+	font-weight: 600;
+}
+
 .label-bold{
 	font-weight:600;
-	font-size:16px;
+	font-size:14px;
 }
 
 .container-fluid{
@@ -73,6 +78,11 @@ ul{
 	padding:10px;
 	background-color: #007bff;
 	color: white;
+}
+
+.btn-site{
+	font-size:14px;
+	padding:10px 20px 10px 20px;
 }
 
 @media (min-width: 992px){
@@ -105,10 +115,6 @@ ul{
 		margin:0;
 	}
 	
-	body {
-  		margin-bottom: 100px;
-	}
-	
 	.menu .logo {
 		font-size: 2.5vw;
 		padding: 20px;
@@ -130,6 +136,11 @@ ul{
 		padding:20px;
 		background-color: #007bff;
 		color: white;
+	}
+	
+	.btn-site{
+		padding:10px 40px 10px 40px;
+		font-size:16px;
 	}
 	
 }
