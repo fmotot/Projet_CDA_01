@@ -2,26 +2,48 @@
 
 @charset "ISO-8859-1";
 
+.titre{
+	margin:32px 0 32px 0;
+	font-size:26px;
+}
+
+.label-bold{
+	font-weight:600;
+	font-size:16px;
+}
+
+.utilisateur-info p{
+	font-size:16px;
+}
+
 .btn-retour{
-	font-size:3vw;
-	margin-top:15px;
+	font-size:12px;
 	padding:10px 10px 10px 10px;
 }
 
 @media (min-width: 1200px) { 
 	
-	.center-content{
-		margin-top:100px;
+	.titre{
+	margin:64px 0 64px 0;
+	font-size:28px;
 	}
 	
 	.btn-retour{
-	margin-top:50px;
+	margin-top:64px;
 	padding:15px 40px 15px 40px;
-	font-size:.8vw;
+	font-size:14px;
 	}
 	
 	.form-control{
 		width:80%;
+	}
+	
+	.label-bold{
+		font-size:18px;
+	}
+	
+	.utilisateur-info p{
+	font-size:18px;
 	}
 	
 }
