@@ -1,7 +1,6 @@
 <!-- Antony / code -->
 <!-- Rudy / EL  -->
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="fr.eni.trocencheres.messages.LecteurMessages" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -32,19 +31,19 @@
 
 	<div class="container">
 		
-		<div class="center-content justify-content-center">
+		<div class="col-12 col-lg-4 mx-auto center-content">
 	
 			<form action="./ServletSeConnecter" method="post">
-				<div class="form-group row justify-content-center">
-				    <label for="inputId" class="col-4 col-form-label-sm ">Identifiant :</label>
-				    <div class="col-6">
+				<div class="form-group row mx-auto">
+				    <label for="inputId" class="col-5 col-form-label-sm ">Identifiant :</label>
+				    <div class="col-7">
 				    	<input type="text" class="form-control form-control-sm" value="${!empty login? login : ''}" name="inputId" id="inputId">
 				    </div>
 				</div>
 				  	
-				<div class="form-group row justify-content-center ">
-					<label for="inputPassword" class="col-4 col-form-label-sm">Mot de passe :</label>
-					<div class="col-6">
+				<div class="form-group row mx-auto">
+					<label for="inputPassword" class="col-5 col-form-label-sm">Mot de passe :</label>
+					<div class="col-7">
 				    	<input type="password" class="form-control form-control-sm" name="inputPassword" id="inputPassword">
 				   	</div>
 				</div>

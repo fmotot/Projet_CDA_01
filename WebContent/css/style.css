@@ -16,8 +16,13 @@ h2{
 	font-weight: 600;
 }
 
-label, p, h3{
+label, p{
 	font-size: 12px;
+}
+
+h3{
+	font-size: 14px;
+	margin:0;
 }
 
 a{
