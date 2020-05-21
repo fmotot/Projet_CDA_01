@@ -138,13 +138,16 @@
 			
 				</form>
 
-				<div class="row mt-5">
+				<div class="row mt-5 text-center">
 				<c:if test="${!empty utilisateur && vente.classement != 0 && utilisateur != vente.vendeur && !empty vente.classement}">
-					<div class="col-8 col-lg-7 text-left">
+					<div class="col-4">
 						<a class="btn btn-site btn-primary" href="./AnnulerEnchere?noVente=${vente.noVente}" role="button">Annuler ma dernière enchère</a>
 					</div> 
 				</c:if>
-					<div class="col-4 col-lg-4 text-left">
+					<div class="col-8">
+						<c:if test="${!empty utilisateur && vente.vendeur.noUtilisateur == utilisateur.noUtilisateur }">
+							<button class="btn btn-site btn-secondary" role="button" disabled>Annuler la vente</button>
+						</c:if>
 						<a class="btn btn-site btn-primary" href="./ListeEnchereServlet" role="button">Back</a>
 					</div>
 				</div>
