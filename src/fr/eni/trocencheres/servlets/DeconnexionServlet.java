@@ -1,6 +1,7 @@
 package fr.eni.trocencheres.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import fr.eni.trocencheres.bo.Categorie;
 
 /**
  * Servlet implementation class DeconnexionServlet
@@ -25,7 +28,12 @@ public class DeconnexionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.setAttribute("utilisateur", null);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/jsp/ListeEnchere.jsp");
+		if(session != null) {
+			session.invalidate();
+		}
+	
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("./ListeEnchereServlet");
 		requestDispatcher.forward(request, response);
 		
 	}

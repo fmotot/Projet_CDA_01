@@ -28,6 +28,14 @@
 	<%@ include file="Header.jspf" %>
 	
 	<%@ include file="Alerte.jspf" %>
+	
+	<c:if test="${saved}">
+		<div class="container mt-5 text-center" id="success-alert">
+			<div class="alert alert-success" role="alert" >
+				<strong>Le retrait de l'article a été pris en compte</strong>
+			</div>
+		</div>
+	</c:if>
 
 	<h2 class="text-center">
 		<c:choose>
@@ -159,5 +167,10 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+		<script>
+		$("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+		    $("#success-alert").slideUp(500);
+		});
+	</script>
 </body>
 </html>

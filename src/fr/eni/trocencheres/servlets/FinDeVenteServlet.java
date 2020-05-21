@@ -49,6 +49,7 @@ public class FinDeVenteServlet extends HttpServlet {
 			if(request.getServletPath().equals("/RetraitEffectue")) {
 				vente.setRetraitArticle(true);
 				venteManager.modifierVente(vente,utilisateurConnecte);
+				request.setAttribute("saved", true);
 			}
 			
 		} catch (BusinessException e) {
