@@ -16,6 +16,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.tomcat.dbcp.dbcp2.PStmtKey;
+
 import fr.eni.trocencheres.BusinessException;
 import fr.eni.trocencheres.bo.Categorie;
 import fr.eni.trocencheres.bo.Enchere;
@@ -78,14 +80,16 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			ResultSet rs = pstmt.executeQuery();
 
 			listeVentes = listerVentes(rs);
+			
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.LECTURE_VENTES_ECHEC);
 			throw businessException;
-
 		}
+		
 
 		return listeVentes;
 	}
@@ -226,52 +230,56 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 
 					}
 				}
-				
+
 			}
 			// La liste des numéro des vente est construite. Requête générale
-			
+
 			if (noVentesFiltered.size() > 0) {
 
-			sb.append(SELECT_ALL_VENTES);
+				sb.append(SELECT_ALL_VENTES);
+				sb.append(" WHERE ventes.no_vente IN  ");
 
+				StringBuilder builder = new StringBuilder();
 
-			
-			sb.append(" WHERE ventes.no_vente IN  ");
+				for (int i = 0; i < noVentesFiltered.size(); i++) {
+					builder.append("?,");
+				}
 
-			StringBuilder builder = new StringBuilder();
+				String stmt = "(" + builder.deleteCharAt(builder.length() - 1).toString() + ")";
+				sb.append(stmt);
 
-			for (int i = 0; i < noVentesFiltered.size(); i++) {
-				builder.append("?,");
-			}
+				if (recherche != null) {
+					sb.append(" AND ventes.nom_article LIKE '%" + recherche + "%'");
+				}
 
-			String stmt = "(" + builder.deleteCharAt(builder.length() - 1).toString() + ")";
-			sb.append(stmt);
+				if (categorie != null) {
+					sb.append(" AND ventes.no_categorie = " + categorie.getNoCategorie());
+				}
 
-			if (recherche != null) {
-				sb.append(" AND ventes.nom_article LIKE '%" + recherche + "%'");
-			}
+				sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
+				PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
+				
+				int index = 1;
+				for (int i : noVentesFiltered) {
+					pstmt.setInt(index++, i);
+				}
 
-			if (categorie != null) {
-				sb.append(" AND ventes.no_categorie = " + categorie.getNoCategorie());
-			}
+				rs = pstmt.executeQuery();
+				System.out.println(rs);
 
-			sb.append(ORDER_BY_VENTE_ENCHERE_DESC);
-			PreparedStatement pstmt = cnx.prepareStatement(sb.toString());
+				listeVentesFiltre = listerVentes(rs);
+				System.out.println(listeVentesFiltre);
+				pstmt.close();
+				rs.close();
+				
+				
 
-			int index = 1;
-			for (int i : noVentesFiltered) {
-				pstmt.setInt(index++, i);
-			}
-
-			rs = pstmt.executeQuery();
-			System.out.println(rs);
-
-			listeVentesFiltre = listerVentes(rs);
-			System.out.println(listeVentesFiltre);
-			
-			}else {
+			} else {
 				listeVentesFiltre = new ArrayList<Vente>();
 			}
+			
+			
+			cnx.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
@@ -443,6 +451,9 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			}
 
 			cnx.commit();
+			
+			pstmt.close();
+			cnx.close();
 		} catch (Exception e) {
 
 			try {
@@ -458,7 +469,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
 			throw businessException;
 		}
-
+		
 		return entity;
 	}
 
@@ -544,6 +555,8 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			}
 
 			cnx.commit();
+			pstmt.close();
+			cnx.close();
 		} catch (Exception e) {
 
 			try {
@@ -559,7 +572,7 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_ECHEC);
 			throw businessException;
 		}
-
+		
 		return entity;
 	}
 
@@ -727,6 +740,8 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 			}
 
 			cnx.commit();
+			pstmt.close();
+			cnx.close();
 
 		} catch (Exception e) {
 			try {
@@ -862,6 +877,8 @@ public class VenteDAOJdbcImpl implements VenteDAO {
 				}
 
 			}
+			pstmt.close();
+			cnx.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();

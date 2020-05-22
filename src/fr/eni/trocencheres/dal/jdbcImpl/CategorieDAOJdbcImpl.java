@@ -42,7 +42,9 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 				
 				listeCategories.add(categorie);
 			}
-			
+			pstmt.close();
+			cnx.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
@@ -74,7 +76,9 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 			if (rs.next()) {
 				entity.setNoCategorie(rs.getInt(1));
 			}
-			
+			pstmt.close();
+			cnx.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
@@ -100,6 +104,9 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 			pstmt.setInt(2, entity.getNoCategorie());
 			
 			pstmt.executeUpdate();
+			pstmt.close();
+			cnx.close();
+
 			
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -128,6 +135,10 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 				categorie.setNoCategorie(rs.getInt("no_categorie"));
 			}
 			
+			pstmt.close();
+			cnx.close();
+
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
@@ -151,6 +162,9 @@ public class CategorieDAOJdbcImpl implements CategorieDAO{
 			pstmt.setInt(1, entity.getNoCategorie());
 
 			pstmt.executeUpdate();
+			pstmt.close();
+			cnx.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();

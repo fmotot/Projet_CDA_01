@@ -56,7 +56,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 				listUtilisateurs.add(user);
 			}
-
+			
+			pstmt.close();
+			cnx.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
@@ -97,6 +99,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			if (rs.next()) {
 				entity.setNoUtilisateur(rs.getInt(1));
 			}
+			pstmt.close();
+			cnx.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -135,6 +139,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pstmt.setInt(13, entity.getNoUtilisateur());
 
 			pstmt.executeUpdate();
+			
+			pstmt.close();
+			cnx.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -199,6 +206,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				pstmt.setInt(1, entity.getNoUtilisateur());
 
 				pstmt.executeUpdate();
+				pstmt.close();
+				cnx.close();
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -207,6 +216,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				throw businessException;
 			}
 		}
+		
 		return entity;
 	}
 
@@ -224,6 +234,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			if (rs.next()) {
 				isTelephoneExist = true;
 			}
+			
+			pstmt.close();
+			cnx.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -249,6 +262,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			if (rs.next()) {
 				isPseudoExist = true;
 			}
+			pstmt.close();
+			cnx.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -275,6 +290,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				if (rs.next()) {
 					isEmailExist = true;
 				}
+				pstmt.close();
+				cnx.close();
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -318,7 +335,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				user.setNoUtilisateur(rs.getInt("no_utilisateur"));
 
 			}
-			
+			pstmt.close();
+			cnx.close();
 
 		} catch (Exception e) {
 			
