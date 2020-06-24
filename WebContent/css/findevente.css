@@ -10,31 +10,17 @@
 .image{
 	width: 100%;
 	height: 150px;
-	background: black;
-}
-
-.label-bold{
+	background: #adadad;
+	font-size:36px;
 	font-weight: 600;
-	font-size: 14px;
+	color: white;
+	margin-bottom:16px;
 }
-
-p{
-	font-size: 12px;
-}
-
-.btn-back,
-.btn-retrait,
-.btn-contacter{
-	font-size:10px;
-}
-
 
 @media (min-width: 1200px) { 
 	
 	.image{
-		width: 100%;
 		height: 300px;
-		background: black;
 	}
 	
 	.content-vente{
@@ -43,22 +29,6 @@ p{
 	
 	.nomArticle{
 		font-size: 24px;
-	}
-	
-	.label-bold{
-		font-weight: 600;
-		font-size: 16px;
-	}
-	
-	p{
-		font-size: 14px;
-	}
-	
-	.btn-back,
-	.btn-retrait,
-	.btn-contacter
-	{
-		font-size:16px;
 	}
 	
 }

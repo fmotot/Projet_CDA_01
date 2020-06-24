@@ -37,7 +37,7 @@
 		</div>
 	</c:if>
 
-	<h2 class="text-center">
+	<h2 class="titre text-center">
 		<c:choose>
 			<c:when
 				test="${utilisateur.noUtilisateur == vente.maxEnchere.acheteur.noUtilisateur}">
@@ -51,19 +51,16 @@
 
 	<div class="container">
 
-		<div class="row col-12 mx-auto d-lg-none">
-			<h3 class="nomArticle">${vente.nomArticle}</h3>
-			<div class="image mb-3"></div>
-		</div>
+		<div class="image row align-items-center justify-content-center mx-auto d-lg-none">Image</div>
 
 		<div class="row">
 
 			<div class="col-lg-4 d-none d-lg-block my-auto">
-				<div class="image"></div>
+				<div class="image row align-items-center justify-content-center">Image</div>
 			</div>
 
 			<div class="content-vente col-12 col-lg-7">
-				<div class="d-none d-lg-block mb-3">
+				<div class="mb-5">
 					<h3 class="nomArticle">${vente.nomArticle}</h3>
 				</div>
 
@@ -135,13 +132,13 @@
 							test="${utilisateur.noUtilisateur == vente.vendeur.noUtilisateur}">
 							<c:if test="${!vente.retraitArticle}">
 								<div class="d-inline">
-									<a class="btn btn-retrait btn-primary"
+									<a class="btn btn-site btn-primary"
 										href="./RetraitEffectue?noVente=${vente.noVente}"
 										role="button">Retrait effectué</a>
 								</div>
 							</c:if>
 							<div class="d-inline">
-								<a class="btn btn-contacter btn-primary"
+								<a class="btn btn-site btn-primary"
 									href="./ProfilRetraitServlet?noVente=${vente.noVente}"
 									role="button">Contacter ${vente.maxEnchere.acheteur.pseudo}</a>
 							</div>
