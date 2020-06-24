@@ -15,7 +15,7 @@ public class test extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private int test;
-       
+       	private float testquivamarcher;
 	private String test2;
     /**
      * @see HttpServlet#HttpServlet()
