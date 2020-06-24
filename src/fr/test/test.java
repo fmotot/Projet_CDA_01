@@ -16,6 +16,7 @@ public class test extends HttpServlet {
 	
 	private int test;
     private double caVaMerder;
+    private float testquivamarcher;
 	private String test2;
     /**
      * @see HttpServlet#HttpServlet()
